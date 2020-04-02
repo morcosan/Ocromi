@@ -1,0 +1,9 @@
+{
+   "name": "ocromi",
+   "version": "0.0.2",
+   "description": "A little design system",
+   "scripts": {
+   },
+   "author": "Morco",
+   "license": "MIT"
+}
