@@ -12,7 +12,7 @@ Vue.use(Quasar, { config: {}, directives: {} });
 
 // @ts-ignore
 export const i18n = new VueI18n({
-	locale: 'en-us',
-	fallbackLocale: 'en-us',
-	messages,
+   locale: 'en-us',
+   fallbackLocale: 'en-us',
+   messages,
 });

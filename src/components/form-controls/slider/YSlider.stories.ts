@@ -5,28 +5,28 @@ import { withKnobs } from '@storybook/addon-knobs';
 
 
 const vue = {
-	components: {
-		YSlider,
-	},
-	props: formSliderProps,
-	data() {
-		return {
-			value: 50,
-		};
-	},
-	methods: {
-		onClick() {
-			// @ts-ignore
-			this.$refs.slider.validate();
-		},
-	},
+   components: {
+      YSlider,
+   },
+   props: formSliderProps,
+   data() {
+      return {
+         value: 50,
+      };
+   },
+   methods: {
+      onClick() {
+         // @ts-ignore
+         this.$refs.slider.validate();
+      },
+   },
 };
 
 
 const storyLines: StoryLine[] = [
-	{
-		title: 'Default',
-		template: `
+   {
+      title: 'Default',
+      template: `
 			<YSlider
 				v-model="value"
 				:label="label"
@@ -45,13 +45,13 @@ const storyLines: StoryLine[] = [
 			<br/>
 			<button class="story-button" @click="onClick">Validate</button>
 		`,
-		states: ['value'],
-	},
+      states: ['value'],
+   },
 ];
 
 
 export default {
-	title: 'Form Controls / Other / Slider',
-	decorators: [withKnobs],
+   title: 'Form Controls / Other / Slider',
+   decorators: [withKnobs],
 };
 export const default_ = createStory(vue, storyLines);

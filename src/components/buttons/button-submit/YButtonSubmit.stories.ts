@@ -1,29 +1,29 @@
 import YButtonSubmit from './YButtonSubmit.vue';
 import { createStory, StoryLine } from '.storybook/story-utils/custom-story';
 import { buttonProps } from '.storybook/story-utils/knob-props';
-import { number, boolean, withKnobs } from '@storybook/addon-knobs';
+import { boolean, number, withKnobs } from '@storybook/addon-knobs';
 
 
 const vue = {
-	components: {
-		YButtonSubmit,
-	},
-	props: {
-		...buttonProps,
-		isLoading: {
-			default: () => boolean('Is Loading', false),
-		},
-		loadingTime: {
-			default: () => number('Loading Time', 3000),
-		},
-	},
+   components: {
+      YButtonSubmit,
+   },
+   props: {
+      ...buttonProps,
+      isLoading: {
+         default: () => boolean('Is Loading', false),
+      },
+      loadingTime: {
+         default: () => number('Loading Time', 3000),
+      },
+   },
 };
 
 
 const storyLines: StoryLine[] = [
-	{
-		title: 'Default',
-		template: `
+   {
+      title: 'Default',
+      template: `
 			<YButtonSubmit
 				:label="label"
 				:is-disabled="isDisabled"
@@ -31,13 +31,13 @@ const storyLines: StoryLine[] = [
 				:loading-time="loadingTime"
 			/>
 		`,
-		states: [],
-	},
+      states: [],
+   },
 ];
 
 
 export default {
-	title: 'Buttons / Button Submit',
-	decorators: [withKnobs],
+   title: 'Buttons / Button Submit',
+   decorators: [withKnobs],
 };
 export const default_ = createStory(vue, storyLines);

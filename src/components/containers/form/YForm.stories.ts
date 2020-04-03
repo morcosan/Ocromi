@@ -26,90 +26,90 @@ const hobbyList: object[] = randomOptions(10, 'commerce', 'department');
 
 
 const vue = {
-	components: {
-		YForm,
-		YCheckbox,
-		YFieldText,
-		YFieldEmail,
-		YFieldPassword,
-		YFieldTextArea,
-		YFieldSelect,
-		YFieldMultiselect,
-		YGroupCheckbox,
-		YGroupRadio,
-		YFieldCipher,
-		YFieldHyperlink,
-		YFieldNumber,
-		YSlider,
-		YSliderRange,
-		YFieldDate,
-		YFieldFileUpload,
-		YButtonSubmit,
-	},
-	data() {
-		return {
-			value: null,
-			email: '',
-			fullName: '',
-			password: '',
-			password2: '',
-			description: '',
-			jobTitle: '',
-			website: '',
-			hobbies: [],
-			jobTypes: [],
-			jobTypeList: [
-				{
-					label: 'Full-time',
-					value: 'full_time',
-				},
-				{
-					label: 'Part-time',
-					value: 'part_time',
-				},
-				{
-					label: 'Contract',
-					value: 'contract',
-				},
-				{
-					label: 'Project',
-					value: 'project',
-				},
-			],
-			gender: null,
-			genderList: [
-				{
-					value: 'male',
-					label: 'Male',
-				},
-				{
-					value: 'female',
-					label: 'Female',
-				},
-				{
-					value: 'other',
-					label: 'Other',
-				},
-			],
-			cardNumber: '',
-			budget: '',
-			successRange: {
-				min: 40,
-				max: 60,
-			},
-			termOfService: false,
-			successRate: 50,
-			meetingDate: '',
-			documents: [],
-			jobTitleList,
-			hobbyList,
-		};
-	},
-	methods: {
-		onSubmit(event: Event) {
-			console.log('form submitted');
-		},
-	},
+   components: {
+      YForm,
+      YCheckbox,
+      YFieldText,
+      YFieldEmail,
+      YFieldPassword,
+      YFieldTextArea,
+      YFieldSelect,
+      YFieldMultiselect,
+      YGroupCheckbox,
+      YGroupRadio,
+      YFieldCipher,
+      YFieldHyperlink,
+      YFieldNumber,
+      YSlider,
+      YSliderRange,
+      YFieldDate,
+      YFieldFileUpload,
+      YButtonSubmit,
+   },
+   data() {
+      return {
+         value: null,
+         email: '',
+         fullName: '',
+         password: '',
+         password2: '',
+         description: '',
+         jobTitle: '',
+         website: '',
+         hobbies: [],
+         jobTypes: [],
+         jobTypeList: [
+            {
+               label: 'Full-time',
+               value: 'full_time',
+            },
+            {
+               label: 'Part-time',
+               value: 'part_time',
+            },
+            {
+               label: 'Contract',
+               value: 'contract',
+            },
+            {
+               label: 'Project',
+               value: 'project',
+            },
+         ],
+         gender: null,
+         genderList: [
+            {
+               value: 'male',
+               label: 'Male',
+            },
+            {
+               value: 'female',
+               label: 'Female',
+            },
+            {
+               value: 'other',
+               label: 'Other',
+            },
+         ],
+         cardNumber: '',
+         budget: '',
+         successRange: {
+            min: 40,
+            max: 60,
+         },
+         termOfService: false,
+         successRate: 50,
+         meetingDate: '',
+         documents: [],
+         jobTitleList,
+         hobbyList,
+      };
+   },
+   methods: {
+      onSubmit(event: Event) {
+         console.log('form submitted');
+      },
+   },
 };
 
 
@@ -269,6 +269,6 @@ const basicFormTemplate = `
 
 
 export default {
-	title: 'Containers / Form',
+   title: 'Containers / Form',
 };
 export const default_ = createBasicStory(vue, basicFormTemplate);

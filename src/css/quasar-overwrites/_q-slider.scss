@@ -7,12 +7,12 @@ $newHeight: 4px;
 
 // make the track bigger
 .q-slider__track-container {
-	height: $newHeight;
-	margin-top: - $newHeight / 2;
+   height: $newHeight;
+   margin-top: - $newHeight / 2;
 }
 
 // always show thumb
 .q-slider--active .q-slider__focus-ring,
 .q-slider--active.q-slider--label .q-slider__thumb {
-	transform: scale(1) !important;
+   transform: scale(1) !important;
 }

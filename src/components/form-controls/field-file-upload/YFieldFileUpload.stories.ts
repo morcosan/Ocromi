@@ -1,68 +1,68 @@
 import YFieldFileUpload from './YFieldFileUpload.vue';
 import { createStory, StoryLine } from '.storybook/story-utils/custom-story';
 import { formFieldProps } from '.storybook/story-utils/knob-props';
-import { number, boolean, withKnobs, array } from '@storybook/addon-knobs';
+import { array, boolean, number, withKnobs } from '@storybook/addon-knobs';
 
 
 const vue = {
-	components: {
-		YFieldFileUpload,
-	},
-	props: {
-		...formFieldProps,
-		placeholder: undefined,
-		isMultiple: {
-			default: () => boolean('Is Multiple', false),
-		},
-		maxFileSize: {
-			default: () => number('Max File Size (KB)', 0),
-		},
-		maxTotalSize: {
-			default: () => number('Max Total Size (KB)', 0),
-		},
-		maxNumFiles: {
-			default: () => number('Max Num Files', 0),
-		},
-		fileFormats: {
-			default: () => array('File Formats', [], '\n'),
-		},
-	},
-	data() {
-		return {
-			value: [],
-			value1: [],
-			rules: [
-				(value: object[]) => {
-					let passed = true;
-					value.forEach((file: object) => {
-						// @ts-ignore
-						if (file.name.length <= 15) {
-							passed = false;
-						}
-					});
-					return (passed || 'File name must be longer than 15');
-				},
-			],
-		};
-	},
-	methods: {
-		onClick() {
-			// @ts-ignore
-			this.$refs.fieldFileUpload.validate();
-		},
+   components: {
+      YFieldFileUpload,
+   },
+   props: {
+      ...formFieldProps,
+      placeholder: undefined,
+      isMultiple: {
+         default: () => boolean('Is Multiple', false),
+      },
+      maxFileSize: {
+         default: () => number('Max File Size (KB)', 0),
+      },
+      maxTotalSize: {
+         default: () => number('Max Total Size (KB)', 0),
+      },
+      maxNumFiles: {
+         default: () => number('Max Num Files', 0),
+      },
+      fileFormats: {
+         default: () => array('File Formats', [], '\n'),
+      },
+   },
+   data() {
+      return {
+         value: [],
+         value1: [],
+         rules: [
+            (value: object[]) => {
+               let passed = true;
+               value.forEach((file: object) => {
+                  // @ts-ignore
+                  if (file.name.length <= 15) {
+                     passed = false;
+                  }
+               });
+               return (passed || 'File name must be longer than 15');
+            },
+         ],
+      };
+   },
+   methods: {
+      onClick() {
+         // @ts-ignore
+         this.$refs.fieldFileUpload.validate();
+      },
 
-		onClick2() {
-			// @ts-ignore
-			this.$refs.fieldFileUpload2.validate();
-		},
-	},
+      onClick2() {
+         // @ts-ignore
+         this.$refs.fieldFileUpload2.validate();
+      },
+   },
 };
 
 
 const storyLines: StoryLine[] = [
-	{
-		title: 'Default',
-		template: `
+   {
+      title: 'Default',
+      template: `
 			<YFieldFileUpload
 				v-model="value"
 				:label="label"
@@ -81,11 +81,11 @@ const storyLines: StoryLine[] = [
 			<br/>
 			<button class="story-button" @click="onClick">Validate</button>
 		`,
-		states: ['value', 'typeof value', 'fileFormats'],
-	},
-	{
-		title: 'With rules (name.length > 15)',
-		template: `
+      states: ['value', 'typeof value', 'fileFormats'],
+   },
+   {
+      title: 'With rules (name.length > 15)',
+      template: `
 			<YFieldFileUpload
 				v-model="value1"
 				:label="label"
@@ -104,13 +104,13 @@ const storyLines: StoryLine[] = [
 			<br/>
 			<button class="story-button" @click="onClick2">Validate</button>
 		`,
-		states: ['value1'],
-	},
+      states: ['value1'],
+   },
 ];
 
 
 export default {
-	title: 'Form Controls / Fields / Field File Upload',
-	decorators: [withKnobs],
+   title: 'Form Controls / Fields / Field File Upload',
+   decorators: [withKnobs],
 };
 export const default_ = createStory(vue, storyLines);

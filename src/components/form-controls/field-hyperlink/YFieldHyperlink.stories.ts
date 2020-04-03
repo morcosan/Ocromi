@@ -5,22 +5,22 @@ import { withKnobs } from '@storybook/addon-knobs';
 
 
 const vue = {
-	components: {
-		YFieldHyperlink,
-	},
-	props: formFieldProps,
-	data() {
-		return {
-			value: '',
-		};
-	},
+   components: {
+      YFieldHyperlink,
+   },
+   props: formFieldProps,
+   data() {
+      return {
+         value: '',
+      };
+   },
 };
 
 
 const storyLines: StoryLine[] = [
-	{
-		title: 'Default',
-		template: `
+   {
+      title: 'Default',
+      template: `
 			<YFieldHyperlink
 				v-model="value"
 				:label="label"
@@ -32,13 +32,13 @@ const storyLines: StoryLine[] = [
 				:error="error"
 			/>
 		`,
-		states: ['value'],
-	},
+      states: ['value'],
+   },
 ];
 
 
 export default {
-	title: 'Form Controls / Fields / Field Hyperlink',
-	decorators: [withKnobs],
+   title: 'Form Controls / Fields / Field Hyperlink',
+   decorators: [withKnobs],
 };
 export const default_ = createStory(vue, storyLines);

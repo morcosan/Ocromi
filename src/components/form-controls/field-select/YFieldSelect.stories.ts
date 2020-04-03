@@ -1,27 +1,27 @@
 import YFieldSelect from './YFieldSelect.vue';
-import { createStory, StoryLine, selectOptions } from '.storybook/story-utils/custom-story';
+import { createStory, selectOptions, StoryLine } from '.storybook/story-utils/custom-story';
 import { formSelectProps } from '.storybook/story-utils/knob-props';
 import { withKnobs } from '@storybook/addon-knobs';
 
 
 const vue = {
-	components: {
-		YFieldSelect,
-	},
-	props: formSelectProps,
-	data() {
-		return {
-			value: null,
-			options: selectOptions,
-		};
-	},
+   components: {
+      YFieldSelect,
+   },
+   props: formSelectProps,
+   data() {
+      return {
+         value: null,
+         options: selectOptions,
+      };
+   },
 };
 
 
 const storyLines: StoryLine[] = [
-	{
-		title: 'Default',
-		template: `
+   {
+      title: 'Default',
+      template: `
 			<YFieldSelect
 				v-model="value"
 				:options="options"
@@ -34,13 +34,13 @@ const storyLines: StoryLine[] = [
 				:error="error"
 			/>
 		`,
-		states: ['value'],
-	},
+      states: ['value'],
+   },
 ];
 
 
 export default {
-	title: 'Form Controls / Fields / Field Select',
-	decorators: [withKnobs],
+   title: 'Form Controls / Fields / Field Select',
+   decorators: [withKnobs],
 };
 export const default_ = createStory(vue, storyLines);

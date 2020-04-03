@@ -5,15 +5,15 @@ import { i18n } from '.jest/vue-setup';
 
 describe('YCheckbox', () => {
 
-	test('creates component - shallow', () => {
-		const wrapper = shallowMount(YCheckbox, { i18n });
-		expect(wrapper.is(YCheckbox)).toBe(true);
-	});
+   test('creates component - shallow', () => {
+      const wrapper = shallowMount(YCheckbox, { i18n });
+      expect(wrapper.is(YCheckbox)).toBe(true);
+   });
 
-	test('creates component - full', () => {
-		const wrapper = mount(YCheckbox, { i18n });
-		expect(wrapper.is(YCheckbox)).toBe(true);
-	});
+   test('creates component - full', () => {
+      const wrapper = mount(YCheckbox, { i18n });
+      expect(wrapper.is(YCheckbox)).toBe(true);
+   });
 
 });
 

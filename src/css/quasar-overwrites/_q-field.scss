@@ -13,43 +13,43 @@ $newHeight: 56px - (24px - $newPaddingTop);
 
 // remove empty space
 .q-field--labeled .q-field__native {
-	padding: $newPaddingTop 0;
+   padding: $newPaddingTop 0;
 
-	// make it look like a placeholder
-	&::placeholder {
-		color: #999999;
-	}
+   // make it look like a placeholder
+   &::placeholder {
+      color: #999999;
+   }
 }
 
 // remove space from prefix
 .q-field--labeled .q-field__prefix {
-	padding: $newPaddingTop 5px $newPaddingTop 0;
-	color: #999999;
+   padding: $newPaddingTop 5px $newPaddingTop 0;
+   color: #999999;
 }
 
 // remove empty space
 .q-field__marginal,
 .q-field__control {
-	height: $newHeight;
+   height: $newHeight;
 }
 
 // place the label over the input border
 .q-field__label {
-	top: $newTop;
-	left: -6px;
-	z-index: 2;
+   top: $newTop;
+   left: -6px;
+   z-index: 2;
 
-	width: fit-content;
-	padding: 3px 8px;
+   width: fit-content;
+   padding: 3px 8px;
 
-	color: #555;
+   color: #555;
 
-	background-color: inherit;
-	border-radius: 3px 3px 0 0;
+   background-color: inherit;
+   border-radius: 3px 3px 0 0;
 
-	&:empty {
-		padding: 0;
-	}
+   &:empty {
+      padding: 0;
+   }
 }
 
 // make sure the label has the right background
@@ -57,35 +57,35 @@ $newHeight: 56px - (24px - $newPaddingTop);
 .q-field__inner,
 .q-field__control,
 .q-field__control-container {
-	background-color: inherit;
+   background-color: inherit;
 }
 
 // place the label on top of border, even when animating
 .q-field--float .q-field__label {
-	transform: translateY(calc(-40% - #{$newTop})) scale(0.75);
+   transform: translateY(calc(-40% - #{$newTop})) scale(0.75);
 }
 
 // always show the border
 .q-field--outlined .q-field__control:before,
 .q-field--outlined .q-field__control:after {
-	z-index: 1;
+   z-index: 1;
 }
 
 // make the icon on right align correctly
 .q-field .q-field__append {
-	padding: 0 6px;
+   padding: 0 6px;
 }
 
 // when disabled, let the label background opaque
 .q-field--disabled .q-field__control > div {
-	opacity: 1 !important;
+   opacity: 1 !important;
 }
 .q-field--disabled .q-field__control:before,
 .q-field--disabled .q-placeholder {
-	opacity: 0.6 !important;
+   opacity: 0.6 !important;
 }
 .q-field--disabled .q-field__label {
-	color: rgba(85, 85, 85, 0.6);
+   color: rgba(85, 85, 85, 0.6);
 }
 
 
@@ -98,32 +98,32 @@ $newHeight: 56px - (24px - $newPaddingTop);
 
 // make the icon on right align correctly
 .q-textarea .q-field__append {
-	padding: 0 6px;
+   padding: 0 6px;
 }
 
 // make textarea look nice
 .q-textarea.q-field--labeled .q-field__control-container {
-	padding-top: 8px;
-	padding-bottom: 0;
+   padding-top: 8px;
+   padding-bottom: 0;
 }
 .q-field--outlined .q-field__control {
-	padding-right: 0;
+   padding-right: 0;
 }
 .q-textarea.q-field--labeled .q-field__native {
-	padding-right: 12px;
-	padding-bottom: 6px;
+   padding-right: 12px;
+   padding-bottom: 6px;
 }
 .q-textarea.q-field--error .q-field__native {
-	padding-right: 36px;
+   padding-right: 36px;
 }
 // place the icon before the scrollbar
 .q-textarea .q-field__append {
-	position: absolute;
-	right: 0;
+   position: absolute;
+   right: 0;
 }
 // place the icon with javascript
 .y-field-text-area--scrollbar.q-textarea .q-field__append {
-	right: 12px;
+   right: 12px;
 }
 
 
@@ -135,9 +135,9 @@ $newHeight: 56px - (24px - $newPaddingTop);
 
 // place the error icon before the date icon
 .y-field-password.q-field .q-field__append.q-anchor--skip {
-	position: absolute;
-	right: 36px;
-	padding-right: 0;
+   position: absolute;
+   right: 36px;
+   padding-right: 0;
 }
 
 
@@ -150,9 +150,9 @@ $newHeight: 56px - (24px - $newPaddingTop);
 
 // place the error icon before the arrows
 .y-field-number.q-field .q-field__append.q-anchor--skip {
-	position: absolute;
-	right: 26px;
-	padding-right: 0;
+   position: absolute;
+   right: 26px;
+   padding-right: 0;
 }
 
 
@@ -164,7 +164,7 @@ $newHeight: 56px - (24px - $newPaddingTop);
 
 // place the error icon before the date icon
 .y-field-date.q-field .q-field__append.q-anchor--skip {
-	position: absolute;
-	right: 34px;
-	padding-right: 0;
+   position: absolute;
+   right: 34px;
+   padding-right: 0;
 }

@@ -4,33 +4,33 @@ import { withKnobs } from '@storybook/addon-knobs';
 
 
 const vue = {
-	components: {
-		YButton,
-	},
-	props: {},
-	data() {
-		return {
-			value: [],
-		};
-	},
+   components: {
+      YButton,
+   },
+   props: {},
+   data() {
+      return {
+         value: [],
+      };
+   },
 };
 
 
 const storyLines: StoryLine[] = [
-	{
-		title: 'Default',
-		template: `
+   {
+      title: 'Default',
+      template: `
 			<YButton
 				
 			/>
 		`,
-		states: ['value'],
-	},
+      states: ['value'],
+   },
 ];
 
 
 export default {
-	title: 'Buttons / Button',
-	decorators: [withKnobs],
+   title: 'Buttons / Button',
+   decorators: [withKnobs],
 };
 export const default_ = createStory(vue, storyLines);

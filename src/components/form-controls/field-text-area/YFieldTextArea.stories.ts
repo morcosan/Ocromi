@@ -5,27 +5,27 @@ import { boolean, withKnobs } from '@storybook/addon-knobs';
 
 
 const vue = {
-	components: {
-		YFieldTextArea,
-	},
-	props: {
-		...formFieldProps,
-		isDynamic: {
-			default: () => boolean('Is Dynamic', false),
-		},
-	},
-	data() {
-		return {
-			value: '',
-		};
-	},
+   components: {
+      YFieldTextArea,
+   },
+   props: {
+      ...formFieldProps,
+      isDynamic: {
+         default: () => boolean('Is Dynamic', false),
+      },
+   },
+   data() {
+      return {
+         value: '',
+      };
+   },
 };
 
 
 const storyLines: StoryLine[] = [
-	{
-		title: 'Default',
-		template: `
+   {
+      title: 'Default',
+      template: `
 			<YFieldTextArea
 				v-model="value"
 				:label="label"
@@ -38,13 +38,13 @@ const storyLines: StoryLine[] = [
 				:is-dynamic="isDynamic"
 			/>
 		`,
-		states: ['value'],
-	},
+      states: ['value'],
+   },
 ];
 
 
 export default {
-	title: 'Form Controls / Fields / Field Text Area',
-	decorators: [withKnobs],
+   title: 'Form Controls / Fields / Field Text Area',
+   decorators: [withKnobs],
 };
 export const default_ = createStory(vue, storyLines);

@@ -11,10 +11,10 @@ export const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)
 
 /** Validate characters for email address */
 export const emailCharRegex = VerEx()
-	.range('0', '9', 'a', 'z')
-	.or()
-	.anyOf(['!#$%&\'*+-/=?^_`{|}~', '.@'])
-	.removeModifier('g');
+   .range('0', '9', 'a', 'z')
+   .or()
+   .anyOf(['!#$%&\'*+-/=?^_`{|}~', '.@'])
+   .removeModifier('g');
 
 
 /** Validate IP address */
@@ -23,14 +23,14 @@ export const ipRegex = /^(?!0)(?!.*\.$)((1?\d?\d|25[0-5]|2[0-4]\d)(\.|$)){4}$/;
 
 /** Validate URL without http */
 export const hyperlinkRegex = VerEx()
-	.find(
-		VerEx()
-			.find(/^localhost/)
-			.or(/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/)
-			.or(/^[a-z0-9]+([\-.]{1}[a-z0-9]+)*\.[a-z]{2,5}/i),
-	)
-	.then(/(:[0-9]{1,5})?(\/[^\s]*)?$/)
-	.removeModifier('g');
+   .find(
+      VerEx()
+         .find(/^localhost/)
+         .or(/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/)
+         .or(/^[a-z0-9]+([\-.]{1}[a-z0-9]+)*\.[a-z]{2,5}/i),
+   )
+   .then(/(:[0-9]{1,5})?(\/[^\s]*)?$/)
+   .removeModifier('g');
 
 
 /** Validate number */

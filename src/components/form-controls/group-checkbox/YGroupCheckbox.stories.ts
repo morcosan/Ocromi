@@ -1,33 +1,33 @@
 import YGroupCheckbox from './YGroupCheckbox.vue';
-import { createStory, StoryLine, selectOptions } from '.storybook/story-utils/custom-story';
+import { createStory, selectOptions, StoryLine } from '.storybook/story-utils/custom-story';
 import { formGroupProps } from '.storybook/story-utils/knob-props';
 import { withKnobs } from '@storybook/addon-knobs';
 
 
 const vue = {
-	components: {
-		YGroupCheckbox,
-	},
-	props: formGroupProps,
-	data() {
-		return {
-			value: [],
-			options: selectOptions.splice(0, 4),
-		};
-	},
-	methods: {
-		onClick() {
-			// @ts-ignore
-			this.$refs.groupCheckbox.validate();
-		},
-	},
+   components: {
+      YGroupCheckbox,
+   },
+   props: formGroupProps,
+   data() {
+      return {
+         value: [],
+         options: selectOptions.splice(0, 4),
+      };
+   },
+   methods: {
+      onClick() {
+         // @ts-ignore
+         this.$refs.groupCheckbox.validate();
+      },
+   },
 };
 
 
 const storyLines: StoryLine[] = [
-	{
-		title: 'Default',
-		template: `
+   {
+      title: 'Default',
+      template: `
 			<YGroupCheckbox
 				v-model="value"
 				:options="options"
@@ -41,13 +41,13 @@ const storyLines: StoryLine[] = [
 			<br/>
 			<button class="story-button" @click="onClick">Validate</button>
 		`,
-		states: ['value'],
-	},
+      states: ['value'],
+   },
 ];
 
 
 export default {
-	title: 'Form Controls / Other / Group Checkbox',
-	decorators: [withKnobs],
+   title: 'Form Controls / Other / Group Checkbox',
+   decorators: [withKnobs],
 };
 export const default_ = createStory(vue, storyLines);
