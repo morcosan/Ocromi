@@ -18,3 +18,9 @@ yarn-error.log*
 
 # Remove additional files from npm package
 .editorconfig
+.editorconfig.xml
+.storybook
+tsconfig.json
+*.stories.*
+*.test.*
+.eslintrc.js
