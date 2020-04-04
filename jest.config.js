@@ -1,6 +1,5 @@
 module.exports = {
    moduleNameMapper: {
-      'src/(.*)$': '<rootDir>/src/$1',
       '.jest/(.*)$': '<rootDir>/.jest/$1',
    },
    moduleFileExtensions: [

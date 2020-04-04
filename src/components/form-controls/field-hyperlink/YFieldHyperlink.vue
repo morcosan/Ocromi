@@ -6,7 +6,7 @@
    import { Component, Mixins, Prop, Watch } from 'vue-property-decorator';
    import YBaseFormField from '../../mixins/YBaseFormField';
    import { QIcon, QInput, QTooltip } from 'quasar';
-   import { hyperlinkRegex } from 'src/utils/regex';
+   import { hyperlinkRegex } from '../../../utils/regex';
 
 
    @Component({
@@ -187,5 +187,5 @@
 
 
 <style scoped lang="scss">
-   // @import 'src/css/variables';
+   // @import '../../../css/variables';
 </style>

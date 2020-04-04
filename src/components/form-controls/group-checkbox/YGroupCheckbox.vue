@@ -6,7 +6,7 @@
 
    import { Component, Mixins, Prop } from 'vue-property-decorator';
    import { QOptionGroup } from 'quasar';
-   import YBaseFormGroup from 'src/components/mixins/YBaseFormGroup';
+   import YBaseFormGroup from '../../mixins/YBaseFormGroup';
 
 
    @Component({
@@ -79,7 +79,7 @@
 
 
 <style scoped lang="scss">
-   // @import 'src/css/variables';
+   // @import '../../../css/variables';
 
    .y-group-checkbox .y-form-box__label {
       left: -8px;

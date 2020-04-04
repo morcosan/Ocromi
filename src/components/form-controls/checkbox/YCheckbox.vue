@@ -5,7 +5,7 @@
 
    import { Component, Mixins, Prop } from 'vue-property-decorator';
    import { QCheckbox } from 'quasar';
-   import YBaseFormControl from 'src/components/mixins/YBaseFormControl';
+   import YBaseFormControl from '../../mixins/YBaseFormControl';
 
 
    @Component({
@@ -80,7 +80,7 @@
 
 
 <style scoped lang="scss">
-   @import 'src/css/variables';
+   //@import '../../../css/variables';
 
    .y-checkbox {
       margin-left: -10px;

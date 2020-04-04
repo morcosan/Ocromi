@@ -4,7 +4,7 @@
     */
 
    import { Component, Mixins, Prop, Watch } from 'vue-property-decorator';
-   import YBaseButton from 'src/components/mixins/YBaseButton';
+   import YBaseButton from '../../mixins/YBaseButton';
    import { QBtn, QSpinnerHourglass } from 'quasar';
 
 
@@ -90,7 +90,7 @@
 
 
 <style scoped lang="scss">
-   // @import 'src/css/variables';
+   // @import '../../../css/variables';
 
    .y-button-submit {
       min-width: 120px;

@@ -6,8 +6,8 @@
    import { Component, Mixins, Prop } from 'vue-property-decorator';
    import YBaseFormField from '../../mixins/YBaseFormField';
    import { QInput } from 'quasar';
-   import { emailCharRegex, emailRegex } from 'src/utils/regex';
-   import { isSpecialKey } from 'src/utils';
+   import { emailCharRegex, emailRegex } from '../../../utils/regex';
+   import { isSpecialKey } from '../../../utils';
 
 
    @Component({
@@ -78,5 +78,5 @@
 
 
 <style scoped lang="scss">
-   // @import 'src/css/variables';
+   // @import '../../../css/variables';
 </style>

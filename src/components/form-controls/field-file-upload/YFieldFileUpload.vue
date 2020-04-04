@@ -204,7 +204,7 @@
 
 
 <style scoped lang="scss">
-   @import 'src/css/variables';
+   @import '../../../css/variables';
 
    .y-chip__button.cursor-pointer:hover {
       background-color: $grey-4;

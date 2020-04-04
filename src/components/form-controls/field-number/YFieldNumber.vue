@@ -6,8 +6,8 @@
    import { Component, Mixins, Prop } from 'vue-property-decorator';
    import YBaseFormField from '../../mixins/YBaseFormField';
    import { QInput, QTooltip } from 'quasar';
-   import { numberRegex } from 'src/utils/regex';
-   import { insertInString, isSpecialKey } from 'src/utils';
+   import { numberRegex } from '../../../utils/regex';
+   import { insertInString, isSpecialKey } from '../../../utils';
 
 
    @Component({
@@ -222,7 +222,7 @@
 
 
 <style scoped lang="scss">
-   @import 'src/css/variables';
+   @import '../../../css/variables';
 
    .y-field-number__control {
       height: 100%;

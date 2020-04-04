@@ -3,7 +3,7 @@
  */
 
 import { Component, Mixins, Prop, Watch } from 'vue-property-decorator';
-import YBaseFormControl from 'src/components/mixins/YBaseFormControl';
+import YBaseFormControl from './YBaseFormControl';
 
 
 export interface Option {

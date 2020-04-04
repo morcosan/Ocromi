@@ -17,6 +17,14 @@ import YFieldDate from './components/form-controls/field-date/YFieldDate.vue';
 import YFieldFileUpload from './components/form-controls/field-file-upload/YFieldFileUpload.vue';
 import YButtonSubmit from './components/buttons/button-submit/YButtonSubmit.vue';
 
+import Vue from 'vue';
+import Quasar from 'quasar';
+import '@quasar/extras/roboto-font/roboto-font.css';
+import '@quasar/extras/material-icons/material-icons.css';
+import 'quasar/dist/quasar.css';
+
+// @ts-ignore
+Vue.use(Quasar);
 
 export {
    YForm,

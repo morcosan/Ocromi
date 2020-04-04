@@ -5,7 +5,7 @@
     */
 
    import { Component, Mixins, Prop } from 'vue-property-decorator';
-   import YBaseButton from 'src/components/mixins/YBaseButton';
+   import YBaseButton from '../../mixins/YBaseButton';
    import { QBtn } from 'quasar';
 
 
@@ -40,5 +40,5 @@
 
 
 <style scoped lang="scss">
-   // @import 'src/css/variables';
+   // @import '../../../css/variables';
 </style>

@@ -42,5 +42,7 @@ module.exports = {
    ignorePatterns: [
       'docs/',
       '*.js',
+      'src/main.ts',
+      'src/main.d.ts',
    ],
 };

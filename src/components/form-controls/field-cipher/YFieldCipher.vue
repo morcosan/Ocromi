@@ -14,7 +14,7 @@
    import { Component, Mixins, Prop, Watch } from 'vue-property-decorator';
    import YBaseFormField from '../../mixins/YBaseFormField';
    import { QInput } from 'quasar';
-   import { countChar } from 'src/utils';
+   import { countChar } from '../../../utils';
 
 
    @Component({
@@ -98,5 +98,5 @@
 
 
 <style scoped lang="scss">
-   // @import 'src/css/variables';
+   // @import '../../../css/variables';
 </style>

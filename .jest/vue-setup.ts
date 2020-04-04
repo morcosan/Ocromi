@@ -1,7 +1,7 @@
 import * as Vue from 'vue';
 import * as Quasar from 'quasar';
 import * as VueI18n from 'vue-i18n';
-import enUS from 'src/i18n/en-us';
+import enUS from '../src/i18n/en-us';
 
 
 // @ts-ignore
