@@ -4,6 +4,8 @@
    "description": "A little design system",
    "author": "Morco",
    "license": "MIT",
+   "main": "src/main.ts",
+   "typings": "src/main.d.ts",
    "scripts": {
       "storybook": "start-storybook",
       "build:storybook": "build-storybook -c .storybook -o dist/storybook",
