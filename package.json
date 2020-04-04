@@ -10,6 +10,7 @@
       "lint": "eslint ./ --ext .js,.ts,.vue",
       "test": "jest",
       "test:file": "jest --",
+      "test:clear": "jest --clearCache",
       "publish:dry": "npm publish --dry-run"
    },
    "dependencies": {
