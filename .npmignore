@@ -33,3 +33,4 @@ babel.config.js
 jest.config.js
 tsconfig.js
 docs
+.guides
