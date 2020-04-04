@@ -1,16 +1,17 @@
 {
    "compilerOptions": {
+      "target": "esnext",
+      "module": "esnext",
       "allowJs": true,
+      "allowSyntheticDefaultImports": true,
       "sourceMap": true,
+      "experimentalDecorators": true,
+      "strict": true,
       "lib": [
          "es6",
          "dom",
          "es2017"
       ],
-      "target": "es6",
-      "strict": true,
-      "experimentalDecorators": true,
-      "module": "esnext",
       "moduleResolution": "node",
       "baseUrl": ".",
       "paths": {
@@ -22,7 +23,6 @@
          "quasar",
          "jest"
       ],
-      "allowSyntheticDefaultImports": true
    },
    "include": [
       "src/**/*"

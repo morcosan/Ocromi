@@ -55,5 +55,8 @@
       "vue-loader": "^15.9.0",
       "vue-property-decorator": "^8.4.0",
       "vue-template-compiler": "^2.6.11"
-   }
+   },
+   "browserslist": [
+      "last 1 version, not dead, ie >= 11"
+   ]
 }
