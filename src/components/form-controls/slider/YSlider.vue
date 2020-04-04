@@ -83,5 +83,5 @@
 
 
 <style scoped lang="scss">
-   //@import 'src/css/variables';
+   //@import '../../../css/variables';
 </style>

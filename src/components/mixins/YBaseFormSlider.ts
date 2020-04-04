@@ -3,7 +3,7 @@
  */
 
 import { Component, Mixins, Prop, Watch } from 'vue-property-decorator';
-import YBaseFormControl from 'src/components/mixins/YBaseFormControl';
+import YBaseFormControl from './YBaseFormControl';
 
 
 export interface Range {
@@ -40,7 +40,7 @@ export default class YBaseFormSlider extends Mixins(YBaseFormControl) {
    public validate() {
       // check if required
       if (this.isRequired) {
-         this.innerError = (this.isDirty ? '' : this.$text.all.required);
+         this.innerError = (this.isDirty ? '' : this.$locale.all.required);
       }
       return !this.innerError;
    }

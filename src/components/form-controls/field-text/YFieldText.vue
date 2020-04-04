@@ -22,7 +22,7 @@
          const rules = [...this.rules];
          // add required rule
          if (this.isRequired) {
-            rules.push((value: string) => (!!value || this.$text.all.requiredField));
+            rules.push((value: string) => (!!value || this.$locale.all.requiredField));
          }
          return rules;
       }
@@ -54,5 +54,5 @@
 
 
 <style scoped lang="scss">
-   // @import 'src/css/variables';
+   // @import '../../../css/variables';
 </style>

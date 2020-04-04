@@ -1,23 +1,23 @@
 import { createBasicStory, randomOptions } from '.storybook/story-utils/custom-story';
 import '.storybook/story-utils/custom-story.scss';
 import YForm from './YForm.vue';
-import YCheckbox from 'src/components/form-controls/checkbox/YCheckbox.vue';
-import YFieldText from 'src/components/form-controls/field-text/YFieldText.vue';
-import YFieldEmail from 'src/components/form-controls/field-email/YFieldEmail.vue';
-import YFieldPassword from 'src/components/form-controls/field-password/YFieldPassword.vue';
-import YFieldTextArea from 'src/components/form-controls/field-text-area/YFieldTextArea.vue';
-import YFieldSelect from 'src/components/form-controls/field-select/YFieldSelect.vue';
-import YFieldMultiselect from 'src/components/form-controls/field-multiselect/YFieldMultiselect.vue';
-import YGroupCheckbox from 'src/components/form-controls/group-checkbox/YGroupCheckbox.vue';
-import YGroupRadio from 'src/components/form-controls/group-radio/YGroupRadio.vue';
-import YFieldCipher from 'src/components/form-controls/field-cipher/YFieldCipher.vue';
-import YFieldHyperlink from 'src/components/form-controls/field-hyperlink/YFieldHyperlink.vue';
-import YFieldNumber from 'src/components/form-controls/field-number/YFieldNumber.vue';
-import YSlider from 'src/components/form-controls/slider/YSlider.vue';
-import YSliderRange from 'src/components/form-controls/slider-range/YSliderRange.vue';
-import YFieldDate from 'src/components/form-controls/field-date/YFieldDate.vue';
-import YFieldFileUpload from 'src/components/form-controls/field-file-upload/YFieldFileUpload.vue';
-import YButtonSubmit from 'src/components/buttons/button-submit/YButtonSubmit.vue';
+import YCheckbox from '../../form-controls/checkbox/YCheckbox.vue';
+import YFieldText from '../../form-controls/field-text/YFieldText.vue';
+import YFieldEmail from '../../form-controls/field-email/YFieldEmail.vue';
+import YFieldPassword from '../../form-controls/field-password/YFieldPassword.vue';
+import YFieldTextArea from '../../form-controls/field-text-area/YFieldTextArea.vue';
+import YFieldSelect from '../../form-controls/field-select/YFieldSelect.vue';
+import YFieldMultiselect from '../../form-controls/field-multiselect/YFieldMultiselect.vue';
+import YGroupCheckbox from '../../form-controls/group-checkbox/YGroupCheckbox.vue';
+import YGroupRadio from '../../form-controls/group-radio/YGroupRadio.vue';
+import YFieldCipher from '../../form-controls/field-cipher/YFieldCipher.vue';
+import YFieldHyperlink from '../../form-controls/field-hyperlink/YFieldHyperlink.vue';
+import YFieldNumber from '../../form-controls/field-number/YFieldNumber.vue';
+import YSlider from '../../form-controls/slider/YSlider.vue';
+import YSliderRange from '../../form-controls/slider-range/YSliderRange.vue';
+import YFieldDate from '../../form-controls/field-date/YFieldDate.vue';
+import YFieldFileUpload from '../../form-controls/field-file-upload/YFieldFileUpload.vue';
+import YButtonSubmit from '../../buttons/button-submit/YButtonSubmit.vue';
 
 
 // generate random lists

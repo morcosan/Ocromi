@@ -6,8 +6,8 @@
    import { Component, Mixins, Prop } from 'vue-property-decorator';
    import YBaseFormField from '../../mixins/YBaseFormField';
    import { QInput, QTooltip } from 'quasar';
-   import { numberRegex } from 'src/utils/regex';
-   import { insertInString, isSpecialKey } from 'src/utils';
+   import { numberRegex } from '../../../utils/regex';
+   import { insertInString, isSpecialKey } from '../../../utils';
 
 
    @Component({
@@ -31,7 +31,7 @@
 
          // add required rule
          if (this.isRequired) {
-            rules.push((value: string | number) => (value !== '' || this.$text.all.requiredField));
+            rules.push((value: string | number) => (value !== '' || this.$locale.all.requiredField));
          }
 
          // add min/max rule
@@ -39,7 +39,7 @@
             rules.push((value: string | number) => {
                const valueNum: number = Number(value);
                if (valueNum < this.minValue || valueNum > this.maxValue) {
-                  const error: string = this.$text.fieldNumber.minMax;
+                  const error: string = this.$locale.fieldNumber.minMax;
                   return error.replace('${1}', String(this.minValue)).replace('${2}', String(this.maxValue));
                }
                return true;
@@ -49,7 +49,7 @@
             rules.push((value: string | number) => {
                const valueNum: number = Number(value);
                if (valueNum < this.minValue) {
-                  const error: string = this.$text.fieldNumber.min;
+                  const error: string = this.$locale.fieldNumber.min;
                   return error.replace('${1}', String(this.minValue));
                }
                return true;
@@ -59,7 +59,7 @@
             rules.push((value: string | number) => {
                const valueNum: number = Number(value);
                if (valueNum > this.maxValue) {
-                  const error: string = this.$text.fieldNumber.max;
+                  const error: string = this.$locale.fieldNumber.max;
                   return error.replace('${1}', String(this.maxValue));
                }
                return true;
@@ -222,7 +222,7 @@
 
 
 <style scoped lang="scss">
-   @import 'src/css/variables';
+   @import '../../../css/variables';
 
    .y-field-number__control {
       height: 100%;

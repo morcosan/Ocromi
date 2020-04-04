@@ -20,11 +20,6 @@ export default class YBaseFormControl extends Vue {
    /** Special props */
    @Prop({ default: 'white' }) public bgColor!: string;
 
-   /** Shortcut for localization */
-   public get $text(): any {
-      return this.$t('component');
-   }
-
    /**
     * Validate this form control
     * Overwrite this for each type of form control
