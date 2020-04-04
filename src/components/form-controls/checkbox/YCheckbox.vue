@@ -5,7 +5,7 @@
 
    import { Component, Mixins, Prop } from 'vue-property-decorator';
    import { QCheckbox } from 'quasar';
-   import YBaseFormControl from 'src/components/mixins/YBaseFormControl';
+   import YBaseFormControl from '../../mixins/YBaseFormControl';
 
 
    @Component({
@@ -23,7 +23,7 @@
       public onInput(value: boolean) {
          // check if required
          if (this.isRequired) {
-            this.error = (value ? '' : this.$text.all.required);
+            this.error = (value ? '' : this.$locale.all.required);
          }
 
          // change value
@@ -37,7 +37,7 @@
       public validate() {
          // check if required
          if (this.isRequired) {
-            this.error = (this.value ? '' : this.$text.all.required);
+            this.error = (this.value ? '' : this.$locale.all.required);
          }
          return !this.error;
       }
@@ -80,7 +80,7 @@
 
 
 <style scoped lang="scss">
-   @import 'src/css/variables';
+   //@import '../../../css/variables';
 
    .y-checkbox {
       margin-left: -10px;

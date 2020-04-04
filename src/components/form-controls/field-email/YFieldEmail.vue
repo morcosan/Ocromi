@@ -6,8 +6,8 @@
    import { Component, Mixins, Prop } from 'vue-property-decorator';
    import YBaseFormField from '../../mixins/YBaseFormField';
    import { QInput } from 'quasar';
-   import { emailCharRegex, emailRegex } from 'src/utils/regex';
-   import { isSpecialKey } from 'src/utils';
+   import { emailCharRegex, emailRegex } from '../../../utils/regex';
+   import { isSpecialKey } from '../../../utils';
 
 
    @Component({
@@ -24,13 +24,13 @@
 
          // add required rule
          if (this.isRequired) {
-            rules.push((value: string) => (!!value || this.$text.all.requiredField));
+            rules.push((value: string) => (!!value || this.$locale.all.requiredField));
          }
 
          // add email rule
          rules.push((value: string) => {
             if (value) {
-               return (emailRegex.test(value) || this.$text.fieldEmail.maskError);
+               return (emailRegex.test(value) || this.$locale.fieldEmail.maskError);
             }
             return true;
          });
@@ -78,5 +78,5 @@
 
 
 <style scoped lang="scss">
-   // @import 'src/css/variables';
+   // @import '../../../css/variables';
 </style>

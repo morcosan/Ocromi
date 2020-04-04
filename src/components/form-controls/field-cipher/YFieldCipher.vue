@@ -14,7 +14,7 @@
    import { Component, Mixins, Prop, Watch } from 'vue-property-decorator';
    import YBaseFormField from '../../mixins/YBaseFormField';
    import { QInput } from 'quasar';
-   import { countChar } from 'src/utils';
+   import { countChar } from '../../../utils';
 
 
    @Component({
@@ -43,11 +43,11 @@
          const rules = [...this.rules];
          // add required rule
          if (this.isRequired) {
-            rules.push((value: string) => (!!value || this.$text.all.requiredField));
+            rules.push((value: string) => (!!value || this.$locale.all.requiredField));
          }
          // add mask validation rule
          if (this.inputMask !== '') {
-            const error = this.$text.fieldCipher.maskError.replace('${1}', String(this.numChars));
+            const error = this.$locale.fieldCipher.maskError.replace('${1}', String(this.numChars));
             rules.push((value: string) => (value.length === this.numChars || error));
          }
          return rules;
@@ -98,5 +98,5 @@
 
 
 <style scoped lang="scss">
-   // @import 'src/css/variables';
+   // @import '../../../css/variables';
 </style>

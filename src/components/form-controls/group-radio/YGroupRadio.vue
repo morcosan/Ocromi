@@ -6,7 +6,7 @@
 
    import { Component, Mixins, Prop } from 'vue-property-decorator';
    import { QOptionGroup } from 'quasar';
-   import YBaseFormGroup from 'src/components/mixins/YBaseFormGroup';
+   import YBaseFormGroup from '../../mixins/YBaseFormGroup';
 
 
    @Component({
@@ -21,7 +21,7 @@
       public onInput(value: string) {
          // check if required
          if (this.isRequired) {
-            this.innerError = (value ? '' : this.$text.all.required);
+            this.innerError = (value ? '' : this.$locale.all.required);
          }
          // change value
          this.$emit('input', value);
@@ -31,7 +31,7 @@
       public validate() {
          // check if required
          if (this.isRequired) {
-            this.innerError = (this.value ? '' : this.$text.all.required);
+            this.innerError = (this.value ? '' : this.$locale.all.required);
          }
          return !this.innerError;
       }
@@ -79,7 +79,7 @@
 
 
 <style scoped lang="scss">
-   // @import 'src/css/variables';
+   // @import '../../../css/variables';
 
    .y-group-radio .y-form-box__label {
       left: -4px;

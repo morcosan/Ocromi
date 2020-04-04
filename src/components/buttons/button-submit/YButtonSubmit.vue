@@ -4,7 +4,7 @@
     */
 
    import { Component, Mixins, Prop, Watch } from 'vue-property-decorator';
-   import YBaseButton from 'src/components/mixins/YBaseButton';
+   import YBaseButton from '../../mixins/YBaseButton';
    import { QBtn, QSpinnerHourglass } from 'quasar';
 
 
@@ -83,14 +83,14 @@
       <template v-slot:loading>
          <QSpinnerHourglass class="on-left"/>
 
-         {{ $text.buttonSubmit.loading }}
+         {{ $locale.buttonSubmit.loading }}
       </template>
    </QBtn>
 </template>
 
 
 <style scoped lang="scss">
-   // @import 'src/css/variables';
+   // @import '../../../css/variables';
 
    .y-button-submit {
       min-width: 120px;

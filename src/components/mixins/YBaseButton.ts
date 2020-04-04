@@ -15,9 +15,4 @@ export default class YBaseButton extends Vue {
    @Prop({ default: false, type: Boolean }) public isDisabled!: boolean;
    @Prop({ default: 'button' }) public type!: string;	// a, submit, button, reset
 
-   /** Shortcut for localization */
-   public get $text(): any {
-      return this.$t('component');
-   }
-
 }

@@ -4,12 +4,15 @@
    "description": "A little design system",
    "author": "Morco",
    "license": "MIT",
+   "main": "src/main.ts",
+   "typings": "src/main.d.ts",
    "scripts": {
       "storybook": "start-storybook",
       "build:storybook": "build-storybook -c .storybook -o dist/storybook",
       "lint": "eslint ./ --ext .js,.ts,.vue",
       "test": "jest",
       "test:file": "jest --",
+      "test:clear": "jest --clearCache",
       "publish:dry": "npm publish --dry-run"
    },
    "dependencies": {
@@ -55,5 +58,8 @@
       "vue-loader": "^15.9.0",
       "vue-property-decorator": "^8.4.0",
       "vue-template-compiler": "^2.6.11"
-   }
+   },
+   "browserslist": [
+      "last 1 version, not dead, ie >= 11"
+   ]
 }
