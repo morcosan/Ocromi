@@ -21,7 +21,7 @@
       public onInput(value: string[]) {
          // check if required
          if (this.isRequired) {
-            this.innerError = (value.length > 0 ? '' : this.$text.all.required);
+            this.innerError = (value.length > 0 ? '' : this.$locale.all.required);
          }
          // change value
          this.$emit('input', value);
@@ -31,7 +31,7 @@
       public validate() {
          // check if required
          if (this.isRequired) {
-            this.innerError = (this.value.length > 0 ? '' : this.$text.all.required);
+            this.innerError = (this.value.length > 0 ? '' : this.$locale.all.required);
          }
          return !this.innerError;
       }

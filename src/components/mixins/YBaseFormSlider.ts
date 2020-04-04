@@ -40,7 +40,7 @@ export default class YBaseFormSlider extends Mixins(YBaseFormControl) {
    public validate() {
       // check if required
       if (this.isRequired) {
-         this.innerError = (this.isDirty ? '' : this.$text.all.required);
+         this.innerError = (this.isDirty ? '' : this.$locale.all.required);
       }
       return !this.innerError;
    }

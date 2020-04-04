@@ -41,7 +41,7 @@
 
          // add required rule
          if (this.isRequired) {
-            rules.push((value: string) => (!!value || this.$text.all.requiredField));
+            rules.push((value: string) => (!!value || this.$locale.all.requiredField));
          }
 
          // add custom dates rule
@@ -53,7 +53,7 @@
                   if (date.isValid) {
                      const valueISO = date.toFormat(this.dateFormatISO);
                      // @ts-ignore
-                     return (this.customDatesFn(valueISO) || this.$text.fieldDate.customDatesError);
+                     return (this.customDatesFn(valueISO) || this.$locale.fieldDate.customDatesError);
                   }
                   return false;
                }
@@ -65,7 +65,7 @@
          rules.push((value: string) => {
             if (value) {
                const date: DateTime = DateTime.fromFormat(value, this.dateFormatInput);
-               return (date.isValid || this.$text.fieldDate.maskError);
+               return (date.isValid || this.$locale.fieldDate.maskError);
             }
             return true;
          });
@@ -158,7 +158,7 @@
       @blur="() => (hasFocus = false)"
       v-model="inputValue"
       :label="finalLabel"
-      :hint="(isDisabled || isReadonly) ? '' : $text.fieldDate.hint"
+      :hint="(isDisabled || isReadonly) ? '' : $locale.fieldDate.hint"
       :bg-color="bgColor"
       :error-message="error"
       :error="error !== ''"
@@ -194,13 +194,13 @@
                   :value="value"
                   :mask="dateFormatQuasarISO"
                   :options="customDatesAdapter"
-                  :locale="$text.fieldDate.config"
+                  :locale="$locale.fieldDate.config"
                   ref="qDate"
                   today-btn
                />
             </QPopupProxy>
 
-            <QTooltip v-if="!isReadonly">{{ $text.fieldDate.tooltip }}</QTooltip>
+            <QTooltip v-if="!isReadonly">{{ $locale.fieldDate.tooltip }}</QTooltip>
          </QIcon>
       </template>
    </QInput>

@@ -24,13 +24,13 @@
 
          // add required rule
          if (this.isRequired) {
-            rules.push((value: string) => (!!value || this.$text.all.requiredField));
+            rules.push((value: string) => (!!value || this.$locale.all.requiredField));
          }
 
          // add email rule
          rules.push((value: string) => {
             if (value) {
-               return (emailRegex.test(value) || this.$text.fieldEmail.maskError);
+               return (emailRegex.test(value) || this.$locale.fieldEmail.maskError);
             }
             return true;
          });

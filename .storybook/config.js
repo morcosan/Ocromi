@@ -9,8 +9,6 @@ import '../src/css/app.scss';
 
 import Vue from 'vue';
 import Quasar from 'quasar';
-import VueI18n from 'vue-i18n';
 
 
-Vue.use(VueI18n);
 Vue.use(Quasar);

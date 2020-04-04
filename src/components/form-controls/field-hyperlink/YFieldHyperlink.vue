@@ -37,13 +37,13 @@
 
          // add required rule
          if (this.isRequired) {
-            rules.push((value: string) => (!!value || this.$text.all.requiredField));
+            rules.push((value: string) => (!!value || this.$locale.all.requiredField));
          }
 
          // add URL rule
          rules.push((value: string) => {
             if (value) {
-               return (hyperlinkRegex.test(value) || this.$text.fieldHyperlink.maskError);
+               return (hyperlinkRegex.test(value) || this.$locale.fieldHyperlink.maskError);
             }
             return true;
          });
@@ -179,7 +179,7 @@
             :tabindex="isReadonly ? -1 : 0"
             name="open_in_new"
          >
-            <QTooltip v-if="!isReadonly">{{ $text.fieldHyperlink.tooltip }}</QTooltip>
+            <QTooltip v-if="!isReadonly">{{ $locale.fieldHyperlink.tooltip }}</QTooltip>
          </QIcon>
       </template>
    </QInput>

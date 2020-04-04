@@ -23,7 +23,7 @@
       public onInput(value: boolean) {
          // check if required
          if (this.isRequired) {
-            this.error = (value ? '' : this.$text.all.required);
+            this.error = (value ? '' : this.$locale.all.required);
          }
 
          // change value
@@ -37,7 +37,7 @@
       public validate() {
          // check if required
          if (this.isRequired) {
-            this.error = (this.value ? '' : this.$text.all.required);
+            this.error = (this.value ? '' : this.$locale.all.required);
          }
          return !this.error;
       }

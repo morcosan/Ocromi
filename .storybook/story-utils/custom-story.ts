@@ -2,18 +2,9 @@
  * Utilities for stories
  */
 
-import VueI18n from 'vue-i18n';
-import messages from '../../src/i18n';
+import i18n from '../../src/i18n';
 import faker from 'faker';
 import './custom-story.scss';
-
-
-/** Localization setup */
-const i18n = new VueI18n({
-   locale: 'en-us',
-   fallbackLocale: 'en-us',
-   messages,
-});
 
 
 /** Utility options for select */

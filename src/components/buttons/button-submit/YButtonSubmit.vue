@@ -83,7 +83,7 @@
       <template v-slot:loading>
          <QSpinnerHourglass class="on-left"/>
 
-         {{ $text.buttonSubmit.loading }}
+         {{ $locale.buttonSubmit.loading }}
       </template>
    </QBtn>
 </template>

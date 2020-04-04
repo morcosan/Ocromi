@@ -28,7 +28,7 @@
          const rules = [];
          // add required rule
          if (this.isRequired) {
-            rules.push((value: Option[]) => (value.length > 0 || this.$text.all.requiredField));
+            rules.push((value: Option[]) => (value.length > 0 || this.$locale.all.requiredField));
          }
          return rules;
       }

@@ -28,7 +28,7 @@
          const rules = [...this.rules];
          // add required rule
          if (this.isRequired) {
-            rules.push((value: object[]) => (value.length > 0 || this.$text.all.requiredField));
+            rules.push((value: object[]) => (value.length > 0 || this.$locale.all.requiredField));
          }
          return rules;
       }
@@ -160,7 +160,7 @@
             name="attach_file"
             color="grey-8"
          >
-            <QTooltip v-if="!isReadonly">{{ $text.fieldFileUpload.tooltipPickFiles }}</QTooltip>
+            <QTooltip v-if="!isReadonly">{{ $locale.fieldFileUpload.tooltipPickFiles }}</QTooltip>
          </QIcon>
 
          <QIcon
@@ -169,7 +169,7 @@
             :class="(isReadonly ? 'cursor-not-allowed' : 'cursor-pointer')"
             name="clear_all"
          >
-            <QTooltip v-if="!isReadonly">{{ $text.fieldFileUpload.tooltipRemoveFiles }}</QTooltip>
+            <QTooltip v-if="!isReadonly">{{ $locale.fieldFileUpload.tooltipRemoveFiles }}</QTooltip>
          </QIcon>
       </template>
 
@@ -197,7 +197,7 @@
             </QAvatar>
          </QChip>
 
-         <QTooltip v-if="!isReadonly">{{ $text.fieldFileUpload.tooltipPickFiles }}</QTooltip>
+         <QTooltip v-if="!isReadonly">{{ $locale.fieldFileUpload.tooltipPickFiles }}</QTooltip>
       </template>
    </QFile>
 </template>

@@ -38,7 +38,7 @@
          const rules = [...this.rules];
          // add required rule
          if (this.isRequired) {
-            rules.push((value: string) => (!!value || this.$text.all.requiredField));
+            rules.push((value: string) => (!!value || this.$locale.all.requiredField));
          }
          return rules;
       }
@@ -48,34 +48,34 @@
          switch (this.strength) {
             case StrengthLevel.Weak:
                return {
-                  text: this.$text.fieldPassword.strength.weak,
+                  text: this.$locale.fieldPassword.strength.weak,
                   progress: 0.25,
                   color: 'red-13',
                };
 
             case StrengthLevel.Good:
                return {
-                  text: this.$text.fieldPassword.strength.good,
+                  text: this.$locale.fieldPassword.strength.good,
                   progress: 0.5,
                   color: 'amber-14',
                };
 
             case StrengthLevel.Strong:
                return {
-                  text: this.$text.fieldPassword.strength.strong,
+                  text: this.$locale.fieldPassword.strength.strong,
                   progress: 0.75,
                   color: 'light-green-14',
                };
 
             case StrengthLevel.Secure:
                return {
-                  text: this.$text.fieldPassword.strength.secure,
+                  text: this.$locale.fieldPassword.strength.secure,
                   progress: 1,
                   color: 'green-14',
                };
          }
          return {
-            text: this.$text.fieldPassword.strength.none,
+            text: this.$locale.fieldPassword.strength.none,
             progress: 0,
             color: 'red-13',
          };
@@ -149,7 +149,7 @@
             :class="(isReadonly ? 'cursor-not-allowed' : 'cursor-pointer')"
             :tabindex="isReadonly ? -1 : 0"
          >
-            <QTooltip v-if="!isReadonly">{{ $text.fieldPassword.tooltip }}</QTooltip>
+            <QTooltip v-if="!isReadonly">{{ $locale.fieldPassword.tooltip }}</QTooltip>
          </QIcon>
       </template>
 
