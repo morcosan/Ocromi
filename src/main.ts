@@ -22,6 +22,7 @@ import Quasar from 'quasar';
 import '@quasar/extras/roboto-font/roboto-font.css';
 import '@quasar/extras/material-icons/material-icons.css';
 import 'quasar/dist/quasar.css';
+import './css/app.scss';
 
 // @ts-ignore
 Vue.use(Quasar);
