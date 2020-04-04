@@ -1,9 +1,13 @@
 {
    "name": "ocromi",
-   "version": "0.2.0",
+   "version": "0.2.1",
    "description": "A little design system",
    "author": "Morco",
    "license": "MIT",
+   "repository": {
+      "type": "git",
+      "url": "git+https://github.com/morcosan/ocromi.git"
+   },
    "main": "src/main.ts",
    "typings": "src/main.d.ts",
    "scripts": {
