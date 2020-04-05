@@ -1,7 +1,3 @@
-/**
- * Used as base for all form groups (checkbox, radio, etc)
- */
-
 import { Component, Mixins, Prop, Watch } from 'vue-property-decorator';
 import YBaseFormControl from './YBaseFormControl';
 
@@ -11,15 +7,16 @@ export interface Option {
    label: string;
 }
 
+
 @Component
 export default class YBaseFormGroup extends Mixins(YBaseFormControl) {
 
-   /** Content props */
    @Prop({ default: () => [] }) public options!: Option[];
 
-   /** States */
+
    public innerError: string = '';
    public currOptionIndex: number = 0;
+
 
    /** Compute HTML list of group's children */
    public get qOptionGroupChildren() {

@@ -4,7 +4,7 @@
     */
 
    import { Component, Mixins, Prop } from 'vue-property-decorator';
-   import YBaseFormField from '../../mixins/YBaseFormField';
+   import YBaseFormField from '../YBaseFormField';
    import { QInput, QTooltip } from 'quasar';
    import { numberRegex } from '../../../utils/regex';
    import Utils from '../../../utils';

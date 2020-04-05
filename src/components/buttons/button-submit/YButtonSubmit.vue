@@ -4,7 +4,7 @@
     */
 
    import { Component, Mixins, Prop, Watch } from 'vue-property-decorator';
-   import YBaseButton from '../../mixins/YBaseButton';
+   import YBaseButton from '../YBaseButton';
    import { QBtn, QSpinnerHourglass } from 'quasar';
 
 

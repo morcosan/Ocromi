@@ -1,46 +1,67 @@
 <script lang="ts">
-	import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
+   import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
 
 
-	@Component({
-		components: {},
-	})
-	export default class ExampleClass extends Vue {
+   @Component({
+      components: {},
+   })
+   export default class ExampleClass extends Vue {
 
-		/** Custom props */
-		@Prop({ default: 'something' }) public example4!: string;
-		@Prop({ default: false, type: Boolean }) public isRequired!: boolean;
+      @Prop({ default: '' }) public prop1!: string;
+      @Prop({ default: 0 }) public prop2!: number;
+      @Prop({ default: false, type: Boolean }) public prop3!: boolean;
 
-		/** States */
-		public example3!: string;
 
-		/** Prop watcher */
-		@Watch('example4')
-		public onChangeExample4(value: string, oldValue: string) {}
+      public state1!: string;
+      public state2!: string;
+      public state3!: string;
 
-		/** Computed property */
-		public get example1() {
-			return '';
-		}
 
-		/** Method */
-		public example2() {}
+      @Watch('prop1')
+      public onChangeProp1(value: string, oldValue: string) {}
 
-		/** Lifecycle hook */
-		public created() {}
-		public mounted() {}
-		public updated() {}
-		public destroyed() {}
+      @Watch('prop2')
+      public onChangeProp2(value: number, oldValue: number) {}
 
-	}
+      @Watch('prop3')
+      public onChangeProp3(value: boolean, oldValue: boolean) {}
+
+
+      public get computed1() { return ''; }
+
+      public get computed2() { return ''; }
+
+
+      // Override
+      public created() {}
+
+
+      // Override
+      public mounted() {}
+
+
+      // Override
+      public updated() {}
+
+
+      // Override
+      public destroyed() {}
+
+
+      public callMethod1() {}
+
+
+      public callMethod2() {}
+
+   }
 </script>
 
 
 <template>
-	<div>I'm an empty component :)</div>
+   <div>I'm an empty component :)</div>
 </template>
 
 
 <style scoped lang="scss">
-	// @import '../../../css/variables';
+   //@import '../../../css/variables';
 </style>

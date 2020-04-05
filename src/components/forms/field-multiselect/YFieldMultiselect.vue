@@ -4,7 +4,7 @@
     */
 
    import { Component, Mixins, Prop } from 'vue-property-decorator';
-   import YBaseFormSelect, { Option } from '../../mixins/YBaseFormSelect';
+   import YBaseFormSelect, { Option } from '../YBaseFormSelect';
    import { QChip, QSelect } from 'quasar';
 
 

@@ -6,7 +6,7 @@
 
    import { Component, Mixins, Prop } from 'vue-property-decorator';
    import { QOptionGroup } from 'quasar';
-   import YBaseFormGroup from '../../mixins/YBaseFormGroup';
+   import YBaseFormGroup from '../YBaseFormGroup';
 
 
    @Component({

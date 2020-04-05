@@ -5,7 +5,7 @@
 
    import { Component, Mixins, Prop } from 'vue-property-decorator';
    import { QCheckbox } from 'quasar';
-   import YBaseFormControl from '../../mixins/YBaseFormControl';
+   import YBaseFormControl from '../YBaseFormControl';
 
 
    @Component({

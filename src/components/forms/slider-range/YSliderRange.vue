@@ -4,7 +4,7 @@
     */
 
    import { Component, Mixins, Prop } from 'vue-property-decorator';
-   import YBaseFormSlider, { Range } from '../../mixins/YBaseFormSlider';
+   import YBaseFormSlider, { Range } from '../YBaseFormSlider';
    import { QRange } from 'quasar';
 
 

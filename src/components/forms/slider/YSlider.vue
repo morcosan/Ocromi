@@ -4,7 +4,7 @@
     */
 
    import { Component, Mixins, Prop } from 'vue-property-decorator';
-   import YBaseFormSlider from '../../mixins/YBaseFormSlider';
+   import YBaseFormSlider from '../YBaseFormSlider';
    import { QSlider } from 'quasar';
 
 

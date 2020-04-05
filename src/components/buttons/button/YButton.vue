@@ -5,7 +5,7 @@
     */
 
    import { Component, Mixins, Prop } from 'vue-property-decorator';
-   import YBaseButton from '../../mixins/YBaseButton';
+   import YBaseButton from '../YBaseButton';
    import { QBtn } from 'quasar';
 
 

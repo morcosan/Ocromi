@@ -4,7 +4,7 @@
     */
 
    import { Component, Mixins, Prop, Watch } from 'vue-property-decorator';
-   import YBaseFormField from '../../mixins/YBaseFormField';
+   import YBaseFormField from '../YBaseFormField';
    import { QIcon, QInput, QTooltip } from 'quasar';
    import { hyperlinkRegex } from '../../../utils/regex';
 
