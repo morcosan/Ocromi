@@ -1,8 +1,4 @@
 <script lang="ts">
-   /**
-    * Used inside forms (but not only) when the options are true / false
-    */
-
    import { Component, Mixins, Prop } from 'vue-property-decorator';
    import { QCheckbox } from 'quasar';
    import YBaseInput from '../YBaseInput';
@@ -13,39 +9,35 @@
    })
    export default class YCheckbox extends Mixins(YBaseInput) {
 
-      /** Content props */
       @Prop({ default: false }) public value!: boolean | null;
 
-      /** States */
+
       public error: string = '';
 
-      /** Handle value change */
+
+      // Override
+      public validate() {
+         if (this.isRequired) {
+            this.error = (this.value ? '' : this.$locale.all.required);
+         }
+
+         return !this.error;
+      }
+
+
+      // Override
+      public focus() {
+         // @ts-ignore
+         this.$refs.qCheckbox.$el.focus();
+      }
+
+
       public onInput(value: boolean) {
-         // check if required
          if (this.isRequired) {
             this.error = (value ? '' : this.$locale.all.required);
          }
 
-
          this.updateValueProp(value);
-      }
-
-      /**
-       * Public method
-       * Check value and update error
-       */
-      public validate() {
-         // check if required
-         if (this.isRequired) {
-            this.error = (this.value ? '' : this.$locale.all.required);
-         }
-         return !this.error;
-      }
-
-      /** Focus this control */
-      public focus() {
-         // @ts-ignore
-         this.$refs.qCheckbox.$el.focus();
       }
 
    }

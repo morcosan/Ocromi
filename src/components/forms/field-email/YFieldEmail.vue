@@ -1,8 +1,4 @@
 <script lang="ts">
-   /**
-    * Used for asking user email address
-    */
-
    import { Component, Mixins, Prop } from 'vue-property-decorator';
    import YBaseInputField from '../YBaseInputField';
    import { QInput } from 'quasar';
@@ -15,8 +11,8 @@
    })
    export default class YFieldEmail extends Mixins(YBaseInputField) {
 
-      /** Content props */
       @Prop({ default: '' }) public value!: string;
+
 
       // Override
       public get finalRules() {
@@ -38,13 +34,13 @@
          return rules;
       }
 
-      /** Block invalid characters on key down */
+
       public onKeyDown(event: KeyboardEvent) {
-         // check if special key
          if (Utils.isSpecialKey(event)) {
             return;
          }
-         // check if key is allowed
+
+         // check if character is allowed for email
          if (!emailCharRegex.test(event.key)) {
             event.preventDefault();
          }

@@ -1,6 +1,7 @@
 import YFieldMultiselect from './YFieldMultiselect.vue';
-import { createDocs, createStory, selectOptions, StoryLine } from '.storybook/story-utils/custom-story';
-import { formSelectProps } from '.storybook/story-utils/knob-props';
+import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
+import { selectOptions } from '.storybook/custom/utils';
+import { propsInputSelect } from '.storybook/custom/knob-props';
 import { boolean, number, withKnobs } from '@storybook/addon-knobs';
 
 
@@ -18,7 +19,7 @@ const vue = {
       YFieldMultiselect,
    },
    props: {
-      ...formSelectProps,
+      ...propsInputSelect,
       selectionLimit: {
          default: () => number('Selection Limit', 0),
       },
@@ -62,8 +63,8 @@ export default {
    title: 'Forms / Fields / Field Multiselect',
    decorators: [withKnobs],
 };
-export const default_ = createStory(vue, storyLines);
-export const docs = createDocs(`
+export const default_ = StoryBuilder.createStory(vue, storyLines);
+export const docs = StoryBuilder.createDocs(`
 /**
  * Used when the user needs to choose multiple options from a list.
  */

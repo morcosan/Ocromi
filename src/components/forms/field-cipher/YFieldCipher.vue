@@ -1,16 +1,4 @@
 <script lang="ts">
-   /**
-    * Used when user needs to enter a code number or similar.
-    * Mask rules (from Quasar):
-    *   # - Numeric
-    *   S - Letter, a to z, case insensitive
-    *   A - Letter, transformed to uppercase
-    *   a - Letter, transformed to lowercase
-    *   N - Alphanumeric, case insensitive for letters
-    *   X - Alphanumeric, transformed to uppercase for letters
-    *   x - Alphanumeric, transformed to lowercase for letters
-    */
-
    import { Component, Mixins, Prop, Watch } from 'vue-property-decorator';
    import YBaseInputField from '../YBaseInputField';
    import { QInput } from 'quasar';
@@ -22,51 +10,51 @@
    })
    export default class YFieldCipher extends Mixins(YBaseInputField) {
 
-      /** Content props */
       @Prop({ default: '' }) public value!: string;
-
-      /** Config props */
       @Prop({ default: '' }) public inputMask!: string;
 
-      /** States */
+
       public numChars: number = 0;
 
-      /** Prop watcher */
+
       @Watch('inputMask')
       public onChange_inputMask() {
-         // prepare validation
-         this.countChars();
+         this.prepareValidation();
       }
+
+
+      // Override
+      public created() {
+         this.prepareValidation();
+      }
+      
 
       // Override
       public get finalRules() {
          const rules = [...this.rules];
+
          // add required rule
          if (this.isRequired) {
             rules.push((value: string) => (!!value || this.$locale.all.requiredField));
          }
+
          // add mask validation rule
          if (this.inputMask !== '') {
             const error = this.$locale.fieldCipher.maskError.replace('${1}', String(this.numChars));
             rules.push((value: string) => (value.length === this.numChars || error));
          }
+
          return rules;
       }
 
-      /** Calculate number of required chars, used for validation later */
-      private countChars() {
+      private prepareValidation() {
+         // calculate number of required chars
          this.numChars = 0;
          if (this.inputMask !== '') {
             for (const char of ['#', 'S', 'A', 'a', 'N', 'X', 'x']) {
                this.numChars += Utils.countSubstrInString(char, this.inputMask);
             }
          }
-      }
-
-      // Override
-      public created() {
-         // prepare validation
-         this.countChars();
       }
 
    }

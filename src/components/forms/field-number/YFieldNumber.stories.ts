@@ -1,6 +1,6 @@
 import YFieldNumber from './YFieldNumber.vue';
-import { createDocs, createStory, StoryLine } from '.storybook/story-utils/custom-story';
-import { formFieldProps } from '.storybook/story-utils/knob-props';
+import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
+import { propsInputField } from '.storybook/custom/knob-props';
 import { number, withKnobs } from '@storybook/addon-knobs';
 
 
@@ -9,7 +9,7 @@ const vue = {
       YFieldNumber,
    },
    props: {
-      ...formFieldProps,
+      ...propsInputField,
       minValue: {
          default: () => number('Min Value', 0),
       },
@@ -59,8 +59,8 @@ export default {
    title: 'Forms / Fields / Field Number',
    decorators: [withKnobs],
 };
-export const default_ = createStory(vue, storyLines);
-export const docs = createDocs(`
+export const default_ = StoryBuilder.createStory(vue, storyLines);
+export const docs = StoryBuilder.createDocs(`
 /**
  * Used when user needs to enter numeric values (even with decimals).
  */

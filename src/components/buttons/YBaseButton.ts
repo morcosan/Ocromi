@@ -6,6 +6,6 @@ export default class YBaseButton extends Vue {
 
    @Prop({ default: '' }) public label!: string;
    @Prop({ default: false, type: Boolean }) public isDisabled!: boolean;
-   @Prop({ default: 'button' }) public type!: string;	// options: a / submit / button / reset
+   @Prop({ default: 'button' }) public type!: string;	// available options: a / submit / button / reset
 
 }

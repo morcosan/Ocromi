@@ -1,5 +1,6 @@
-import { createBasicStory, createDocs, randomOptions } from '.storybook/story-utils/custom-story';
-import '.storybook/story-utils/custom-story.scss';
+import StoryBuilder from '.storybook/custom/story-builder';
+import { generateRandomOptions } from '.storybook/custom/utils';
+import '.storybook/custom/story-builder.scss';
 import YForm from './YForm.vue';
 import YCheckbox from '../checkbox/YCheckbox.vue';
 import YFieldText from '../field-text/YFieldText.vue';
@@ -21,8 +22,8 @@ import YButtonSubmit from '../../buttons/button-submit/YButtonSubmit.vue';
 
 
 // generate random lists
-const jobTitleList: object[] = randomOptions(10, 'name', 'jobTitle');
-const hobbyList: object[] = randomOptions(10, 'commerce', 'department');
+const jobTitleList: object[] = generateRandomOptions(10, 'name', 'jobTitle');
+const hobbyList: object[] = generateRandomOptions(10, 'commerce', 'department');
 
 
 const vue = {
@@ -271,8 +272,8 @@ const basicFormTemplate = `
 export default {
    title: 'Forms / Form',
 };
-export const default_ = createBasicStory(vue, basicFormTemplate);
-export const docs = createDocs(`
+export const default_ = StoryBuilder.createBasicStory(vue, basicFormTemplate);
+export const docs = StoryBuilder.createDocs(`
 /**
  * Used when displaying form controls.
  */

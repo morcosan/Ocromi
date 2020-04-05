@@ -1,8 +1,4 @@
 <script lang="ts">
-   /**
-    * Used when user needs to take the submit action for certain data.
-    */
-
    import { Component, Mixins, Prop, Watch } from 'vue-property-decorator';
    import YBaseButton from '../YBaseButton';
    import { QBtn, QSpinnerHourglass } from 'quasar';
@@ -13,17 +9,16 @@
    })
    export default class YButtonSubmit extends Mixins(YBaseButton) {
 
-      /** Config props */
       @Prop({ default: false, type: Boolean }) public isLoading!: boolean;
       @Prop({ default: 2000 }) public loadingTime!: number;
 
-      /** States */
+
       public percentage: number = 0;
       public loadingTimeout!: NodeJS.Timeout;
 
-      /** Prop watcher */
+
       @Watch('isLoading')
-      public onChange_isLoading(value: string, oldValue: string) {
+      public onChange_isLoading() {
          if (this.isLoading) {
             this.startLoading();
          }
@@ -32,7 +27,15 @@
          }
       }
 
-      /** Start loading percentage increase */
+
+      // Override
+      public mounted() {
+         if (this.isLoading) {
+            this.startLoading();
+         }
+      }
+
+
       private startLoading() {
          // reset percentage
          this.percentage = 0;
@@ -49,18 +52,9 @@
                console.log(this.percentage);
             }
             else {
-               // stop interval
                clearInterval(this.loadingTimeout);
             }
          }, interval);
-      }
-
-      // Override
-      public mounted() {
-         // if loading is set, start loading
-         if (this.isLoading) {
-            this.startLoading();
-         }
       }
 
    }

@@ -1,6 +1,6 @@
 import YFieldCipher from './YFieldCipher.vue';
-import { createDocs, createStory, StoryLine } from '.storybook/story-utils/custom-story';
-import { formFieldProps } from '.storybook/story-utils/knob-props';
+import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
+import { propsInputField } from '.storybook/custom/knob-props';
 import { text, withKnobs } from '@storybook/addon-knobs';
 
 
@@ -9,17 +9,9 @@ const vue = {
       YFieldCipher,
    },
    props: {
-      ...formFieldProps,
+      ...propsInputField,
       inputMask: {
          default: () => text('Input Mask', '####  ####  ####  ####'),
-         // Mask rules (from Quasar):
-         //   # - Numeric
-         //   S - Letter, a to z, case insensitive
-         //   A - Letter, transformed to uppercase
-         //   a - Letter, transformed to lowercase
-         //   N - Alphanumeric, case insensitive for letters
-         //   X - Alphanumeric, transformed to uppercase for letters
-         //   x - Alphanumeric, transformed to lowercase for letters
       },
    },
    data() {
@@ -55,7 +47,17 @@ export default {
    title: 'Forms / Fields / Field Cipher',
    decorators: [withKnobs],
 };
-export const default_ = createStory(vue, storyLines);
-export const docs = createDocs(`
-
+export const default_ = StoryBuilder.createStory(vue, storyLines);
+export const docs = StoryBuilder.createDocs(`
+/**
+ * Used when user needs to enter a code number or similar.
+ * Mask rules (from Quasar):
+ *   # - Numeric
+ *   S - Letter, a to z, case insensitive
+ *   A - Letter, transformed to uppercase
+ *   a - Letter, transformed to lowercase
+ *   N - Alphanumeric, case insensitive for letters
+ *   X - Alphanumeric, transformed to uppercase for letters
+ *   x - Alphanumeric, transformed to lowercase for letters
+ */
 `);

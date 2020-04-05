@@ -1,6 +1,6 @@
 import YFieldFileUpload from './YFieldFileUpload.vue';
-import { createDocs, createStory, StoryLine } from '.storybook/story-utils/custom-story';
-import { formFieldProps } from '.storybook/story-utils/knob-props';
+import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
+import { propsInputField } from '.storybook/custom/knob-props';
 import { array, boolean, number, withKnobs } from '@storybook/addon-knobs';
 
 
@@ -9,7 +9,7 @@ const vue = {
       YFieldFileUpload,
    },
    props: {
-      ...formFieldProps,
+      ...propsInputField,
       placeholder: undefined,
       isMultiple: {
          default: () => boolean('Is Multiple', false),
@@ -113,7 +113,9 @@ export default {
    title: 'Forms / Fields / Field File Upload',
    decorators: [withKnobs],
 };
-export const default_ = createStory(vue, storyLines);
-export const docs = createDocs(`
-
+export const default_ = StoryBuilder.createStory(vue, storyLines);
+export const docs = StoryBuilder.createDocs(`
+/**
+ * Used when user needs to upload files.
+ */
 `);

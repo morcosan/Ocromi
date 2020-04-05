@@ -1,5 +1,5 @@
 import YButton from './YButton.vue';
-import { createDocs, createStory, StoryLine } from '.storybook/story-utils/custom-story';
+import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
 import { withKnobs } from '@storybook/addon-knobs';
 
 
@@ -33,7 +33,10 @@ export default {
    title: 'Buttons / Button',
    decorators: [withKnobs],
 };
-export const default_ = createStory(vue, storyLines);
-export const docs = createDocs(`
-
+export const default_ = StoryBuilder.createStory(vue, storyLines);
+export const docs = StoryBuilder.createDocs(`
+/**
+ * Used when user needs to take an action.
+ * This type of button is colored and draws attention.
+ */
 `);

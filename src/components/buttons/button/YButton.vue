@@ -1,9 +1,4 @@
 <script lang="ts">
-   /**
-    * Used when user needs to take an action.
-    * This type of button is colored and draws attention.
-    */
-
    import { Component, Mixins, Prop } from 'vue-property-decorator';
    import YBaseButton from '../YBaseButton';
    import { QBtn } from 'quasar';
@@ -14,7 +9,6 @@
    })
    export default class YButtonLv3 extends Mixins(YBaseButton) {
 
-      /** Config props */
       @Prop({ default: false, type: Boolean }) public isStacked!: boolean;
       @Prop({ default: false, type: Boolean }) public isRounded!: boolean;
       @Prop({ default: false, type: Boolean }) public noCaps!: boolean;

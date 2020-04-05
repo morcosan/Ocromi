@@ -1,12 +1,7 @@
-/**
- * List of props for components
- */
-
 import { boolean, number, text } from '@storybook/addon-knobs';
 
 
-/** Basic props for form control */
-export const formControlProps = {
+export const propsInput = {
    label: {
       default: () => text('Label', 'Nice label'),
    },
@@ -24,22 +19,22 @@ export const formControlProps = {
    },
 };
 
-/** Basic props for form select */
-export const formSelectProps = {
-   ...formControlProps,
+
+export const propsInputSelect = {
+   ...propsInput,
    hint: {
       default: () => text('Hint', 'Nice hint'),
    },
 };
 
-/** Basic props for form group */
-export const formGroupProps = {
-   ...formControlProps,
+
+export const propsInputGroup = {
+   ...propsInput,
 };
 
-/** Basic props for form slider */
-export const formSliderProps = {
-   ...formControlProps,
+
+export const propsInputSlider = {
+   ...propsInput,
    thumbSuffix: {
       default: () => text('Thumb Suffix', ' %'),
    },
@@ -60,9 +55,9 @@ export const formSliderProps = {
    },
 };
 
-/** Basic props for form field */
-export const formFieldProps = {
-   ...formControlProps,
+
+export const propsInputField = {
+   ...propsInput,
    placeholder: {
       default: () => text('Placeholder', 'Nice placeholder'),
    },
@@ -71,8 +66,8 @@ export const formFieldProps = {
    },
 };
 
-/** Basic props for button */
-export const buttonProps = {
+
+export const propsButton = {
    label: {
       default: () => text('Label', 'Nice button'),
    },

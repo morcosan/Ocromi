@@ -1,6 +1,6 @@
 import YFieldTextArea from './YFieldTextArea.vue';
-import { createDocs, createStory, StoryLine } from '.storybook/story-utils/custom-story';
-import { formFieldProps } from '.storybook/story-utils/knob-props';
+import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
+import { propsInputField } from '.storybook/custom/knob-props';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
 
 
@@ -9,7 +9,7 @@ const vue = {
       YFieldTextArea,
    },
    props: {
-      ...formFieldProps,
+      ...propsInputField,
       isDynamic: {
          default: () => boolean('Is Dynamic', false),
       },
@@ -47,8 +47,8 @@ export default {
    title: 'Forms / Fields / Field Text Area',
    decorators: [withKnobs],
 };
-export const default_ = createStory(vue, storyLines);
-export const docs = createDocs(`
+export const default_ = StoryBuilder.createStory(vue, storyLines);
+export const docs = StoryBuilder.createDocs(`
 /**
  * Used when user needs to enter multiple lines of text.
  */
