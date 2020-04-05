@@ -273,5 +273,7 @@ export default {
 };
 export const default_ = createBasicStory(vue, basicFormTemplate);
 export const docs = createDocs(`
-
+/**
+ * Used when displaying form controls.
+ */
 `);

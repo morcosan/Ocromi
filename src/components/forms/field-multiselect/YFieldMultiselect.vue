@@ -1,8 +1,4 @@
 <script lang="ts">
-   /**
-    * Used when the user needs to choose multiple options from a list.
-    */
-
    import { Component, Mixins, Prop } from 'vue-property-decorator';
    import YBaseInputSelect, { Option } from '../YBaseInputSelect';
    import { QChip, QSelect } from 'quasar';
@@ -16,47 +12,42 @@
    })
    export default class YFieldMultiselect extends Mixins(YBaseInputSelect) {
 
-      /** Content props */
       @Prop({ default: () => [] }) public value!: Option[];
-
-      /** Config props */
       @Prop({ default: 0 }) public selectionLimit!: number;
       @Prop({ default: false, type: Boolean }) public canAddNew!: boolean;
 
-      /** Compute validation rules */
+
+      // Override
       public get finalRules() {
          const rules = [];
+
          // add required rule
          if (this.isRequired) {
             rules.push((value: Option[]) => (value.length > 0 || this.$locale.all.requiredField));
          }
+
          return rules;
       }
 
-      /** Handle value changes */
+
       public onInput(value: Option[] | null) {
-         // check for null (stupid)
+         // quasar sets null on clear
          if (value === null) {
             value = [];
          }
 
-         // check selection limit
-         if (this.selectionLimit > 0 && value.length > this.selectionLimit) {
-            // remove the rest
+         const isWithinLimits = (this.selectionLimit > 0 && this.selectionLimit < value.length);
+         if (isWithinLimits) {
             value = value.slice(0, this.selectionLimit);
          }
-
 
          this.updateValueProp(value);
       }
 
-      /** Create new options */
+
       public onNewOption(inputValue: string, doneFn: Function) {
-         // check selection limit
-         let canAdd = true;
-         if (this.selectionLimit > 0 && this.value.length >= this.selectionLimit) {
-            canAdd = false;
-         }
+         const isWithinLimits = (this.selectionLimit > 0 && this.selectionLimit <= this.value.length);
+         const canAdd = !isWithinLimits;
 
          // check if option is enabled
          if (this.canAddNew && canAdd) {

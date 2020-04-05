@@ -1,9 +1,4 @@
 <script lang="ts">
-   /**
-    * This is the general input field.
-    * Used when user needs to enter random text.
-    */
-
    import { Component, Mixins, Prop } from 'vue-property-decorator';
    import YBaseInputField from '../YBaseInputField';
    import { QInput } from 'quasar';
@@ -14,16 +9,18 @@
    })
    export default class YFieldText extends Mixins(YBaseInputField) {
 
-      /** Content props */
       @Prop({ default: '' }) public value!: string;
 
-      /** Compute validation rules */
+
+      // Override
       public get finalRules() {
          const rules = [...this.rules];
+
          // add required rule
          if (this.isRequired) {
             rules.push((value: string) => (!!value || this.$locale.all.requiredField));
          }
+
          return rules;
       }
 

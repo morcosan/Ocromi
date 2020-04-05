@@ -24,6 +24,7 @@ export default class YBaseInputGroup extends Mixins(YBaseInput) {
          // @ts-ignore
          return this.$refs.qOptionGroup.$el.children;
       }
+
       return [];
    }
 
@@ -90,7 +91,7 @@ export default class YBaseInputGroup extends Mixins(YBaseInput) {
 
    protected toggleOption(index: number, isEnabled: boolean) {
       // toggle keyboard selection for an option
-      const elem: HTMLElement = this.qOptionGroupChildren[index];
+      const elem: (HTMLElement | undefined) = this.qOptionGroupChildren[index];
       if (elem) {
          const target: (HTMLElement | null) = elem.querySelector('[tabindex]');
          if (target) {
@@ -102,7 +103,7 @@ export default class YBaseInputGroup extends Mixins(YBaseInput) {
 
 
    protected focusOption(index: number) {
-      const elem: HTMLElement = this.qOptionGroupChildren[index];
+      const elem: (HTMLElement | undefined) = this.qOptionGroupChildren[index];
       if (elem) {
          const target: (HTMLElement | null) = elem.querySelector('[tabindex]');
          if (target) {

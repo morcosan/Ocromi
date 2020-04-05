@@ -38,7 +38,7 @@
          this.countChars();
       }
 
-      /** Compute validation rules */
+      // Override
       public get finalRules() {
          const rules = [...this.rules];
          // add required rule

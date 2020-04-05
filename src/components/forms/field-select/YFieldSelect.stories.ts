@@ -45,5 +45,7 @@ export default {
 };
 export const default_ = createStory(vue, storyLines);
 export const docs = createDocs(`
-
+/**
+ * Used when there are 5 or more options for the user to choose from.
+ */
 `);

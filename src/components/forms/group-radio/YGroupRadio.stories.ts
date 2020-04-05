@@ -67,5 +67,8 @@ export default {
 };
 export const default_ = createStory(vue, storyLines);
 export const docs = createDocs(`
-
+/**
+ * Used when user needs to select one option from no more than 5.
+ * If more than 5 options are required, use a select field instead.
+ */
 `);

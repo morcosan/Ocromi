@@ -23,7 +23,7 @@
       @Prop({ default: 0 }) public maxTotalSize!: number; // in KB
       @Prop({ default: 0 }) public maxNumFiles!: number;
 
-      /** Compute validation rules */
+      // Override
       public get finalRules() {
          const rules = [...this.rules];
          // add required rule

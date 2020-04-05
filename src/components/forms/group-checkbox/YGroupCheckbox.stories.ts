@@ -52,5 +52,8 @@ export default {
 };
 export const default_ = createStory(vue, storyLines);
 export const docs = createDocs(`
-
+/**
+ * Used when user needs to select multiple options, no more than 5.
+ * If more than 5 options are required, use a multiselect field instead.
+ */
 `);

@@ -64,5 +64,7 @@ export default {
 };
 export const default_ = createStory(vue, storyLines);
 export const docs = createDocs(`
-
+/**
+ * Used when the user needs to choose multiple options from a list.
+ */
 `);

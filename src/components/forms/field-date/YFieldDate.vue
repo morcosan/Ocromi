@@ -35,7 +35,7 @@
          this.convertToInputValue(value);
       }
 
-      /** Compute validation rules */
+      // Override
       public get finalRules() {
          const rules = [...this.rules];
 

@@ -1,8 +1,4 @@
 <script lang="ts">
-   /**
-    * Used when displaying form controls.
-    */
-
    import { Component, Vue } from 'vue-property-decorator';
    import { QForm } from 'quasar';
 
@@ -10,11 +6,7 @@
    @Component({
       components: { QForm },
    })
-   export default class YForm extends Vue {
-
-      // code here
-
-   }
+   export default class YForm extends Vue {}
 </script>
 
 

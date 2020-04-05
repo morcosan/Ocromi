@@ -1,8 +1,4 @@
 <script lang="ts">
-   /**
-    * Used when user needs to enter numeric values (even with decimals).
-    */
-
    import { Component, Mixins, Prop } from 'vue-property-decorator';
    import YBaseInputField from '../YBaseInputField';
    import { QInput, QTooltip } from 'quasar';
@@ -15,17 +11,20 @@
    })
    export default class YFieldNumber extends Mixins(YBaseInputField) {
 
-      /** Content props */
       @Prop({ default: '' }) public value!: number | string;
-
-      /** Config props */
       @Prop({ default: false, type: Boolean }) public hasDecimals!: boolean;
       @Prop({ default: '' }) public minValue!: number | string;
       @Prop({ default: '' }) public maxValue!: number | string;
       @Prop({ default: 1 }) public valueStep!: number;
       @Prop({ default: -1 }) public decimals!: number;
 
-      /** Compute validation rules */
+
+      public get decimalsHint() {
+         return (this.decimals > 0 ? `Decimals: #.${ '0'.repeat(this.decimals) }` : '');
+      }
+
+
+      // Override
       public get finalRules() {
          const rules = [...this.rules];
 
@@ -37,9 +36,9 @@
          // add min/max rule
          if (this.minValue !== '' && this.maxValue !== '') {
             rules.push((value: string | number) => {
-               const valueNum: number = Number(value);
+               const valueNum = Number(value);
                if (valueNum < this.minValue || valueNum > this.maxValue) {
-                  const error: string = this.$locale.fieldNumber.minMax;
+                  const error = this.$locale.fieldNumber.minMax;
                   return error.replace('${1}', String(this.minValue)).replace('${2}', String(this.maxValue));
                }
                return true;
@@ -47,9 +46,9 @@
          }
          else if (this.minValue !== '') {
             rules.push((value: string | number) => {
-               const valueNum: number = Number(value);
+               const valueNum = Number(value);
                if (valueNum < this.minValue) {
-                  const error: string = this.$locale.fieldNumber.min;
+                  const error = this.$locale.fieldNumber.min;
                   return error.replace('${1}', String(this.minValue));
                }
                return true;
@@ -57,9 +56,9 @@
          }
          else if (this.maxValue !== '') {
             rules.push((value: string | number) => {
-               const valueNum: number = Number(value);
+               const valueNum = Number(value);
                if (valueNum > this.maxValue) {
-                  const error: string = this.$locale.fieldNumber.max;
+                  const error = this.$locale.fieldNumber.max;
                   return error.replace('${1}', String(this.maxValue));
                }
                return true;
@@ -69,20 +68,15 @@
          return rules;
       }
 
-      /** Compute hint display for decimals */
-      public get decimalsHint() {
-         return (this.decimals > 0 ? `Decimals: #.${ '0'.repeat(this.decimals) }` : '');
-      }
 
-      /** Increment or decrement on click arrow buttons */
       public onClickArrow(direction: number) {
+         // increment or decrement on click arrow buttons
          if (!this.isReadonly) {
-            // calculate new value
-            const newValue: number = Number(this.value) + direction * this.valueStep;
-
+            const newValue = Number(this.value) + direction * this.valueStep;
             this.updateValueProp(newValue);
          }
       }
+
 
       /**
        * Use input type=text to avoid label displacement bug.
@@ -95,24 +89,24 @@
             return;
          }
 
-         // increment / decrement by arrow
+         // increment by arrow
          if (event.key === 'ArrowUp') {
             this.onClickArrow(1);
             event.preventDefault();
             return;
          }
+         // decrement by arrow
          if (event.key === 'ArrowDown') {
             this.onClickArrow(-1);
             event.preventDefault();
             return;
          }
 
-         // check if special key
          if (!Utils.isSpecialKey(event)) {
             // @ts-ignore
             const pos = event.target.selectionStart;
-            let newValue: string = Utils.insertSubstrInString(event.key, String(this.value), pos);
-            // if key is dot, add a 0 to validate
+            let newValue = Utils.insertSubstrInString(event.key, String(this.value), pos);
+            // it must end with 0 to validate
             if (event.key === '.') {
                newValue += '0';
             }
@@ -123,7 +117,7 @@
          }
       }
 
-      /** Limit number of decimals on keyup */
+
       public onKeyUp() {
          // ignore if string
          if (typeof this.value === 'string') {
@@ -133,13 +127,12 @@
          }
 
          // check paste event
-         const value: number = Number(this.value);
+         const value = Number(this.value);
          if (isNaN(value)) {
-
             this.updateValueProp(0);
          }
          else {
-            // remove additional decimals
+            // limit number of decimals
             if (this.decimals > -1) {
                const tens = 10 ** this.decimals;
                const newValue = Math.floor(Number(this.value) * tens) / tens;
@@ -149,16 +142,14 @@
          }
       }
 
-      /** Remove empty minus on blur */
+
       public onBlur() {
-         // check if string
+         // remove empty minus on blur
          if (typeof this.value === 'string') {
             if (this.value === '-') {
-
                this.updateValueProp('');
             }
             else if (this.value.slice(-1) === '.') {
-
                this.updateValueProp(Number(this.value));
             }
          }

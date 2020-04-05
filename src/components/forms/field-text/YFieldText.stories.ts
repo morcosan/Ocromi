@@ -61,5 +61,8 @@ export default {
 };
 export const default_ = createStory(vue, storyLines);
 export const docs = createDocs(`
-
+/**
+ * This is the general input field.
+ * Used when user needs to enter random text.
+ */
 `);

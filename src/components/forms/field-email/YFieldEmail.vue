@@ -18,7 +18,7 @@
       /** Content props */
       @Prop({ default: '' }) public value!: string;
 
-      /** Compute validation rules */
+      // Override
       public get finalRules() {
          const rules = [...this.rules];
 

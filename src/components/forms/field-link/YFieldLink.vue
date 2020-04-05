@@ -1,8 +1,4 @@
 <script lang="ts">
-   /**
-    * Used when user needs to enter a URL.
-    */
-
    import { Component, Mixins, Prop, Watch } from 'vue-property-decorator';
    import YBaseInputField from '../YBaseInputField';
    import { QIcon, QInput, QTooltip } from 'quasar';
@@ -14,24 +10,23 @@
    })
    export default class YFieldLink extends Mixins(YBaseInputField) {
 
-      /** Content props */
       @Prop({ default: '' }) public value!: string;
 
-      /** States */
+
       public nativeInput!: HTMLElement;
       public canShowError: boolean = false;
       public innerError: string = '';
 
-      /** Validate when value changes */
+
       @Watch('value')
       public onChange_value() {
-         // validate
          if (this.canShowError) {
             this.validate();
          }
       }
 
-      /** Compute validation rules */
+
+      // Override
       public get finalRules() {
          const rules = [...this.rules];
 
@@ -51,9 +46,9 @@
          return rules;
       }
 
-      /** Validate field (also overrides method) */
+
+      // Override
       public validate() {
-         // validate
          for (let i = 0; i < this.finalRules.length; i++) {
             const result: (boolean | string) = this.finalRules[i](this.value);
             if (result === true) {
@@ -71,20 +66,38 @@
          return !this.innerError;
       }
 
-      /** Validate value on blur */
+
+      // Override
+      public mounted() {
+         // @ts-ignore
+         this.nativeInput = this.$refs.qField.$el.querySelector('.js-native-input');
+         if (this.nativeInput) {
+            this.nativeInput.addEventListener('paste', this.onPaste);
+         }
+      }
+
+
+      // Override
+      public destroyed() {
+         if (this.nativeInput) {
+            this.nativeInput.removeEventListener('paste', this.onPaste);
+         }
+      }
+
+
       public onBlur() {
          this.validate();
       }
 
-      /** Block space character on key down */
+
       public onKeyDown(event: KeyboardEvent) {
-         // check if key is allowed
+         // block space character on key down
          if (event.key === ' ') {
             event.preventDefault();
          }
       }
 
-      /** Remove HTTP:// on paste event */
+
       public onPaste(event: ClipboardEvent) {
          // get pasted url
          // @ts-ignore
@@ -95,7 +108,7 @@
          const https = 'https://';
          const httpIndex = url.indexOf(http);
          const httpsIndex = url.indexOf(https);
-         let value;
+         let value = '';
          if (httpIndex > -1) {
             value = url.substr(http.length);
          }
@@ -103,46 +116,27 @@
             value = url.substr(https.length);
          }
 
-
          this.updateValueProp(value);
+
          // stop paste event
          event.preventDefault();
       }
 
-      /** Accessibility for password visibility */
+
       public onKeyDownIcon(event: KeyboardEvent) {
          // activate button with space or enter
          if (event.key === ' ' || event.key === 'Enter') {
             event.preventDefault();
-            // open url
+
             this.openURL();
          }
       }
 
-      /** Open URL in new tab */
       public openURL() {
          if (!this.isReadonly) {
             const url = 'http://' + this.value;
+            // open URL in new tab
             globalThis.open(url, '_blank');
-         }
-      }
-
-      // Override
-      public mounted() {
-         // get native input element
-         // @ts-ignore
-         this.nativeInput = this.$refs.qField.$el.querySelector('.js-native-input');
-         // add paste listener
-         if (this.nativeInput) {
-            this.nativeInput.addEventListener('paste', this.onPaste);
-         }
-      }
-
-      // Override
-      public destroyed() {
-         // remove paste listener
-         if (this.nativeInput) {
-            this.nativeInput.removeEventListener('paste', this.onPaste);
          }
       }
 

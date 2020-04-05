@@ -1,9 +1,4 @@
 <script lang="ts">
-   /**
-    * Used when user needs to select multiple options, no more than 5.
-    * If more than 5 options are required, use a multiselect field instead.
-    */
-
    import { Component, Mixins, Prop } from 'vue-property-decorator';
    import { QOptionGroup } from 'quasar';
    import YBaseInputGroup from '../YBaseInputGroup';
@@ -14,26 +9,25 @@
    })
    export default class YGroupCheckbox extends Mixins(YBaseInputGroup) {
 
-      /** Content props */
       @Prop({ default: () => [] }) public value!: string[];
 
-      /** Handle value change */
+
+      // Override
+      public validate() {
+         if (this.isRequired) {
+            this.innerError = (this.value.length > 0 ? '' : this.$locale.all.required);
+         }
+
+         return !this.innerError;
+      }
+
+
       public onInput(value: string[]) {
-         // check if required
          if (this.isRequired) {
             this.innerError = (value.length > 0 ? '' : this.$locale.all.required);
          }
 
          this.updateValueProp(value);
-      }
-
-      /** Check value and update error */
-      public validate() {
-         // check if required
-         if (this.isRequired) {
-            this.innerError = (this.value.length > 0 ? '' : this.$locale.all.required);
-         }
-         return !this.innerError;
       }
 
    }

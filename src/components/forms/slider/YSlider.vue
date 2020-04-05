@@ -1,8 +1,4 @@
 <script lang="ts">
-   /**
-    * Used when user needs to choose one value from a spectrum.
-    */
-
    import { Component, Mixins, Prop } from 'vue-property-decorator';
    import YBaseInputSlider from '../YBaseInputSlider';
    import { QSlider } from 'quasar';
@@ -13,23 +9,19 @@
    })
    export default class YSlider extends Mixins(YBaseInputSlider) {
 
-      /** Content props */
       @Prop({ default: 0 }) public value!: number;
 
-      /** Limit the decimals when no steps */
+
       public onInput(value: number) {
-         // limit decimals
+         // limit decimals when no steps
          if (this.valueStep === 0 && this.stepDecimals > 0) {
             const tens = 10 ** this.stepDecimals;
             value = Math.round(value * tens) / tens;
          }
 
-
-         this.updateValueProp(value);
-
-         // mark as dirty and without error
          this.isDirty = true;
          this.innerError = '';
+         this.updateValueProp(value);
       }
 
    }

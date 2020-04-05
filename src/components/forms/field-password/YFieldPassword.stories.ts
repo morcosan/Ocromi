@@ -49,5 +49,7 @@ export default {
 };
 export const default_ = createStory(vue, storyLines);
 export const docs = createDocs(`
-
+/**
+ * Used when the user must enter a custom password.
+ */
 `);

@@ -1,8 +1,4 @@
 <script lang="ts">
-   /**
-    * Used when user needs to enter multiple lines of text.
-    */
-
    import { Component, Mixins, Prop } from 'vue-property-decorator';
    import YBaseInputField from '../YBaseInputField';
    import { QInput } from 'quasar';
@@ -13,36 +9,37 @@
    })
    export default class YFieldTextArea extends Mixins(YBaseInputField) {
 
-      /** Content props */
       @Prop({ default: '' }) public value!: string;
       @Prop({ default: false, type: Boolean }) public isDynamic!: boolean;
 
-      /** States */
+
       public hasScrollbar: boolean = false;
       public nativeElem: (HTMLElement | null) = null;
 
-      /** Compute validation rules */
+
+      // Override
       public get finalRules() {
          const rules = [...this.rules];
+
          // add required rule
          if (this.isRequired) {
             rules.push((value: string) => (!!value || this.$locale.all.requiredField));
          }
+
          return rules;
       }
 
-      /** Handle input changes */
+
       public onInput(event: string) {
-         // check if scrollbar is active
          if (this.nativeElem) {
+            // check if scrollbar is active
             this.hasScrollbar = (this.nativeElem.clientHeight < this.nativeElem.scrollHeight);
          }
-
 
          this.updateValueProp(event);
       }
 
-      /** Capture reference to native element on focus */
+
       public onFocus(event: Event) {
          this.nativeElem = (event.target as HTMLElement);
       }

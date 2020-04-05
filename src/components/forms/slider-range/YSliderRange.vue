@@ -30,7 +30,6 @@
 
       public onInput(value: Range) {
          // limit decimals when no steps
-
          if (this.valueStep === 0 && this.stepDecimals > 0) {
             const tens = 10 ** this.stepDecimals;
             value.min = Math.round(value.min * tens) / tens;

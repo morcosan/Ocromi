@@ -1,8 +1,4 @@
 <script lang="ts">
-   /**
-    * Used when there are 5 or more options for the user to choose from.
-    */
-
    import { Component, Mixins, Prop } from 'vue-property-decorator';
    import YBaseInputSelect, { Option } from '../YBaseInputSelect';
    import { QSelect } from 'quasar';
@@ -13,16 +9,18 @@
    })
    export default class YFieldSelect extends Mixins(YBaseInputSelect) {
 
-      /** Content props */
       @Prop({ default: null }) public value!: Option | null;
 
-      /** Compute validation rules */
+
+      // Override
       public get finalRules() {
          const rules = [];
+
          // add required rule
          if (this.isRequired) {
             rules.push((value: Option | null) => (!!value || this.$locale.all.requiredField));
          }
+
          return rules;
       }
 
