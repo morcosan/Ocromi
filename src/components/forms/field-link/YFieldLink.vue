@@ -1,5 +1,5 @@
 <script lang="ts">
-   import { Component, Mixins, Prop, Watch } from 'vue-property-decorator';
+   import { Component, Mixins, Override, Prop, Watch } from '../../../core/decorators';
    import YBaseInputField from '../YBaseInputField';
    import { QIcon, QInput, QTooltip } from 'quasar';
    import Regex from '../../../utils/regex';
@@ -26,7 +26,7 @@
       }
 
 
-      // Override
+      @Override
       public get finalRules() {
          const rules = [...this.rules];
 
@@ -47,7 +47,7 @@
       }
 
 
-      // Override
+      @Override
       public validate() {
          this.canShowError = true;
 
@@ -66,7 +66,7 @@
       }
 
 
-      // Override
+      @Override
       public mounted() {
          // @ts-ignore
          this.nativeInput = this.$refs.qField.$el.querySelector('.js-native-input');
@@ -76,7 +76,7 @@
       }
 
 
-      // Override
+      @Override
       public destroyed() {
          if (this.nativeInput) {
             this.nativeInput.removeEventListener('paste', this.onPaste);

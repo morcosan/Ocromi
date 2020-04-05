@@ -1,5 +1,5 @@
 <script lang="ts">
-   import { Component, Mixins, Prop } from 'vue-property-decorator';
+   import { Component, Mixins, Prop } from '../../../core/decorators';
    import YBaseInputSlider from '../YBaseInputSlider';
    import { QSlider } from 'quasar';
 

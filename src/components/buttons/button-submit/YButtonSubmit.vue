@@ -1,5 +1,5 @@
 <script lang="ts">
-   import { Component, Mixins, Prop, Watch } from 'vue-property-decorator';
+   import { Component, Mixins, Override, Prop, Watch } from '../../../core/decorators';
    import YBaseButton from '../YBaseButton';
    import { QBtn, QSpinnerHourglass } from 'quasar';
 
@@ -28,7 +28,7 @@
       }
 
 
-      // Override
+      @Override
       public mounted() {
          if (this.isLoading) {
             this.startLoading();

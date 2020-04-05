@@ -1,4 +1,4 @@
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Prop, Vue } from '../../core/decorators';
 
 
 @Component
@@ -12,13 +12,13 @@ export default class YBaseInput extends Vue {
    @Prop({ default: 'white' }) public bgColor!: string;
 
 
-   // override for each type of input
+   // to override for each type of input
    public validate() {
       return true;
    }
 
 
-   // override for each type of input
+   // to override for each type of input
    public focus() {}
 
 

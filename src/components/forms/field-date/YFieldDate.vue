@@ -1,5 +1,5 @@
 <script lang="ts">
-   import { Component, Mixins, Prop, Watch } from 'vue-property-decorator';
+   import { Component, Mixins, Override, Prop, Watch } from '../../../core/decorators';
    import YBaseInputField from '../YBaseInputField';
    import { QDate, QIcon, QInput, QPopupProxy, QTooltip } from 'quasar';
    import { DateTime } from 'luxon';
@@ -28,7 +28,7 @@
       }
 
 
-      // Override
+      @Override
       public get finalRules() {
          const rules = [...this.rules];
 
@@ -66,7 +66,7 @@
       }
 
 
-      // Override
+      @Override
       public created() {
          this.updateInputValue(this.value);
       }

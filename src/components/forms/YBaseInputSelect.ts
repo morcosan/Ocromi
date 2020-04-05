@@ -1,4 +1,4 @@
-import { Component, Mixins, Prop, Watch } from 'vue-property-decorator';
+import { Component, Mixins, Override, Prop, Watch } from '../../core/decorators';
 import YBaseInput from './YBaseInput';
 
 
@@ -31,27 +31,28 @@ export default class YBaseInputSelect extends Mixins(YBaseInput) {
       return (this.isRequired ? (this.label + ' *') : this.label);
    }
 
-   // Override
+
+   @Override
    public get finalRules() {
       return this.rules;
    }
 
 
-   // Override
+   @Override
    public validate() {
       // @ts-ignore
       return this.$refs.qSelect.validate();
    }
 
 
-   // Override
+   @Override
    public focus() {
       // @ts-ignore
       this.$refs.qSelect.focus();
    }
 
 
-   // Override
+   @Override
    public created() {
       // set current options
       this.currOptions = this.options;

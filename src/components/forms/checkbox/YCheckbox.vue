@@ -1,5 +1,5 @@
 <script lang="ts">
-   import { Component, Mixins, Prop } from 'vue-property-decorator';
+   import { Component, Mixins, Override, Prop } from '../../../core/decorators';
    import { QCheckbox } from 'quasar';
    import YBaseInput from '../YBaseInput';
 
@@ -15,7 +15,7 @@
       public error: string = '';
 
 
-      // Override
+      @Override
       public validate() {
          if (this.isRequired) {
             this.error = (this.value ? '' : this.$locale.all.required);
@@ -25,7 +25,7 @@
       }
 
 
-      // Override
+      @Override
       public focus() {
          // @ts-ignore
          this.$refs.qCheckbox.$el.focus();

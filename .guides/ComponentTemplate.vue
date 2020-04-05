@@ -1,11 +1,17 @@
 <script lang="ts">
-   import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
+   import { Component, Mixins, Override, Prop, Vue, Watch } from '../src/core/decorators';
 
 
    @Component({
       components: {},
    })
-   export default class ExampleClass extends Vue {
+   export default class ExampleMixin extends Vue {}
+
+
+   @Component({
+      components: {},
+   })
+   export default class ExampleComponent extends Mixins(ExampleMixin) {
 
       @Prop({ default: '' }) public prop1!: string;
       @Prop({ default: 0 }) public prop2!: number;
@@ -32,19 +38,19 @@
       public get computed2() { return ''; }
 
 
-      // Override
+      @Override
       public created() {}
 
 
-      // Override
+      @Override
       public mounted() {}
 
 
-      // Override
+      @Override
       public updated() {}
 
 
-      // Override
+      @Override
       public destroyed() {}
 
 

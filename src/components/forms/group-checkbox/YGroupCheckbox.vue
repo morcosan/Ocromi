@@ -1,5 +1,5 @@
 <script lang="ts">
-   import { Component, Mixins, Prop } from 'vue-property-decorator';
+   import { Component, Mixins, Override, Prop } from '../../../core/decorators';
    import { QOptionGroup } from 'quasar';
    import YBaseInputGroup from '../YBaseInputGroup';
 
@@ -12,7 +12,7 @@
       @Prop({ default: () => [] }) public value!: string[];
 
 
-      // Override
+      @Override
       public validate() {
          if (this.isRequired) {
             this.innerError = (this.value.length > 0 ? '' : this.$locale.all.required);

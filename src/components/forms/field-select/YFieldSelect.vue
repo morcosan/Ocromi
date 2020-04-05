@@ -1,5 +1,5 @@
 <script lang="ts">
-   import { Component, Mixins, Prop } from 'vue-property-decorator';
+   import { Component, Mixins, Override, Prop } from '../../../core/decorators';
    import YBaseInputSelect, { Option } from '../YBaseInputSelect';
    import { QSelect } from 'quasar';
 
@@ -12,7 +12,7 @@
       @Prop({ default: null }) public value!: Option | null;
 
 
-      // Override
+      @Override
       public get finalRules() {
          const rules = [];
 

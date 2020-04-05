@@ -1,5 +1,5 @@
 <script lang="ts">
-   import { Component, Mixins, Prop } from 'vue-property-decorator';
+   import { Component, Mixins, Override, Prop } from '../../../core/decorators';
    import YBaseInputSlider, { Range } from '../YBaseInputSlider';
    import { QRange } from 'quasar';
 
@@ -16,7 +16,7 @@
       public labelElems: HTMLElement[] = []; // bug: Range labels are different from model
 
 
-      // Override
+      @Override
       public mounted() {
          if (this.$refs.qRange) {
             // @ts-ignore

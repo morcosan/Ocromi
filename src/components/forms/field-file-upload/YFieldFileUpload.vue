@@ -1,5 +1,5 @@
 <script lang="ts">
-   import { Component, Mixins, Prop } from 'vue-property-decorator';
+   import { Component, Mixins, Override, Prop } from '../../../core/decorators';
    import YBaseInputField from '../YBaseInputField';
    import { QAvatar, QChip, QFile, QIcon, QTooltip } from 'quasar';
 
@@ -17,7 +17,7 @@
       @Prop({ default: 0 }) public maxNumFiles!: number;
 
 
-      // Override
+      @Override
       public get finalRules() {
          const rules = [...this.rules];
 

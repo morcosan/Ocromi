@@ -1,5 +1,5 @@
 <script lang="ts">
-   import { Component, Mixins, Prop } from 'vue-property-decorator';
+   import { Component, Mixins, Override, Prop } from '../../../core/decorators';
    import YBaseInputField from '../YBaseInputField';
    import { QInput } from 'quasar';
    import Regex from '../../../utils/regex';
@@ -14,7 +14,7 @@
       @Prop({ default: '' }) public value!: string;
 
 
-      // Override
+      @Override
       public get finalRules() {
          const rules = [...this.rules];
 

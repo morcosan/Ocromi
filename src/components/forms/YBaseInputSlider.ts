@@ -1,4 +1,4 @@
-import { Component, Mixins, Prop, Watch } from 'vue-property-decorator';
+import { Component, Mixins, Override, Prop, Watch } from '../../core/decorators';
 import YBaseInput from './YBaseInput';
 
 
@@ -32,7 +32,7 @@ export default class YBaseInputSlider extends Mixins(YBaseInput) {
    }
 
 
-   // Override
+   @Override
    public validate() {
       if (this.isRequired) {
          this.innerError = (this.isDirty ? '' : this.$locale.all.required);
@@ -42,7 +42,7 @@ export default class YBaseInputSlider extends Mixins(YBaseInput) {
    }
 
 
-   // Override
+   @Override
    public focus() {
       if (this.$refs.qRange) {
          // @ts-ignore

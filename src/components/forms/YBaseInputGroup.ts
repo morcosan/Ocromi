@@ -1,4 +1,4 @@
-import { Component, Mixins, Prop, Watch } from 'vue-property-decorator';
+import { Component, Mixins, Override, Prop, Watch } from '../../core/decorators';
 import YBaseInput from './YBaseInput';
 
 
@@ -38,7 +38,7 @@ export default class YBaseInputGroup extends Mixins(YBaseInput) {
    }
 
 
-   // Override
+   @Override
    public focus() {
       if (this.qOptionGroupChildren[0]) {
          const firstChild = this.qOptionGroupChildren[0].children[0];
@@ -49,7 +49,7 @@ export default class YBaseInputGroup extends Mixins(YBaseInput) {
    }
 
 
-   // Override
+   @Override
    public mounted() {
       // make the options readonly
       [...this.qOptionGroupChildren].forEach((elem: HTMLElement) => {

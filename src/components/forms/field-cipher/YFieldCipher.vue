@@ -1,5 +1,5 @@
 <script lang="ts">
-   import { Component, Mixins, Prop, Watch } from 'vue-property-decorator';
+   import { Component, Mixins, Override, Prop, Watch } from '../../../core/decorators';
    import YBaseInputField from '../YBaseInputField';
    import { QInput } from 'quasar';
    import Utils from '../../../utils';
@@ -23,13 +23,13 @@
       }
 
 
-      // Override
+      @Override
       public created() {
          this.prepareValidation();
       }
 
 
-      // Override
+      @Override
       public get finalRules() {
          const rules = [...this.rules];
 
