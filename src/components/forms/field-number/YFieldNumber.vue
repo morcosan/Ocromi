@@ -13,8 +13,8 @@
 
       @Prop({ default: '' }) public value!: number | string;
       @Prop({ default: false, type: Boolean }) public hasDecimals!: boolean;
-      @Prop({ default: '' }) public minValue!: number | string;
-      @Prop({ default: '' }) public maxValue!: number | string;
+      @Prop({ default: '' }) public minValue!: number | null;
+      @Prop({ default: '' }) public maxValue!: number | null;
       @Prop({ default: 1 }) public valueStep!: number;
       @Prop({ default: -1 }) public decimals!: number;
 
@@ -34,46 +34,37 @@
          }
 
          // add min/max rule
-         if (this.minValue !== '' && this.maxValue !== '') {
-            rules.push((value: string | number) => {
+         rules.push((value: string | number) => {
+            if (value !== '') {
                const valueNum = Number(value);
-               if (valueNum < this.minValue || valueNum > this.maxValue) {
-                  const error = this.$locale.fieldNumber.minMax;
-                  return error.replace('${1}', String(this.minValue)).replace('${2}', String(this.maxValue));
+
+               if (this.minValue && this.maxValue) {
+                  const isOutsideLimits = (valueNum < this.minValue || valueNum > this.maxValue);
+                  if (isOutsideLimits) {
+                     const error = this.$locale.fieldNumber.minMax;
+                     return error.replace('${1}', String(this.minValue)).replace('${2}', String(this.maxValue));
+                  }
                }
-               return true;
-            });
-         }
-         else if (this.minValue !== '') {
-            rules.push((value: string | number) => {
-               const valueNum = Number(value);
-               if (valueNum < this.minValue) {
+               else if (this.minValue && valueNum < this.minValue) {
                   const error = this.$locale.fieldNumber.min;
                   return error.replace('${1}', String(this.minValue));
                }
-               return true;
-            });
-         }
-         else if (this.maxValue !== '') {
-            rules.push((value: string | number) => {
-               const valueNum = Number(value);
-               if (valueNum > this.maxValue) {
+               else if (this.maxValue && valueNum > this.maxValue) {
                   const error = this.$locale.fieldNumber.max;
                   return error.replace('${1}', String(this.maxValue));
                }
-               return true;
-            });
-         }
+            }
+
+            return true;
+         });
 
          return rules;
       }
 
 
       public onClickArrow(direction: number) {
-         // increment or decrement on click arrow buttons
          if (!this.isReadonly) {
-            const newValue = Number(this.value) + direction * this.valueStep;
-            this.updateValueProp(newValue);
+            this.changeValueByDirection(direction);
          }
       }
 
@@ -91,13 +82,13 @@
 
          // increment by arrow
          if (event.key === 'ArrowUp') {
-            this.onClickArrow(1);
+            this.changeValueByDirection(1);
             event.preventDefault();
             return;
          }
          // decrement by arrow
          if (event.key === 'ArrowDown') {
-            this.onClickArrow(-1);
+            this.changeValueByDirection(-1);
             event.preventDefault();
             return;
          }
@@ -121,7 +112,8 @@
       public onKeyUp() {
          // ignore if string
          if (typeof this.value === 'string') {
-            if (this.value === '' || this.value === '-' || this.value.slice(-1) === '.') {
+            const isValueValid = (this.value === '' || this.value === '-' || this.value.slice(-1) === '.');
+            if (isValueValid) {
                return;
             }
          }
@@ -132,8 +124,8 @@
             this.updateValueProp(0);
          }
          else {
-            // limit number of decimals
             if (this.decimals > -1) {
+               // limit number of decimals
                const tens = 10 ** this.decimals;
                const newValue = Math.floor(Number(this.value) * tens) / tens;
 
@@ -144,15 +136,23 @@
 
 
       public onBlur() {
-         // remove empty minus on blur
          if (typeof this.value === 'string') {
             if (this.value === '-') {
+               // remove empty minus
                this.updateValueProp('');
             }
             else if (this.value.slice(-1) === '.') {
+               // remove trailing dot
                this.updateValueProp(Number(this.value));
             }
          }
+      }
+
+
+      private changeValueByDirection(direction: number) {
+         // increment or decrement on click arrow buttons
+         const newValue = Number(this.value) + direction * this.valueStep;
+         this.updateValueProp(newValue);
       }
 
    }

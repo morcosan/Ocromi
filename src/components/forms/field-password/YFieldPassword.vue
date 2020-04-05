@@ -84,14 +84,6 @@
          this.updateStrength();
       }
 
-      public updateStrength() {
-         // test password
-         const performanceCap = 40;
-         const result = zxcvbn(this.value.substr(0, performanceCap));
-
-         this.strength = result.score;
-      }
-
 
       public onKeyUp() {
          this.updateStrength();
@@ -102,7 +94,6 @@
          // activate button with space or enter
          if (event.key === ' ' || event.key === 'Enter') {
             event.preventDefault();
-
             this.showsPassword = !this.showsPassword;
          }
       }
@@ -112,6 +103,14 @@
          if (!this.isReadonly) {
             this.showsPassword = !this.showsPassword;
          }
+      }
+
+
+      private updateStrength() {
+         // test password
+         const performanceCap = 40;
+         const result = zxcvbn(this.value.substr(0, performanceCap));
+         this.strength = result.score;
       }
 
    }

@@ -37,6 +37,7 @@ export default class YBaseInputSlider extends Mixins(YBaseInput) {
       if (this.isRequired) {
          this.innerError = (this.isDirty ? '' : this.$locale.all.required);
       }
+
       return !this.innerError;
    }
 

@@ -49,6 +49,8 @@
 
       // Override
       public validate() {
+         this.canShowError = true;
+
          for (let i = 0; i < this.finalRules.length; i++) {
             const result: (boolean | string) = this.finalRules[i](this.value);
             if (result === true) {
@@ -59,9 +61,6 @@
                break;
             }
          }
-
-         // update flag
-         this.canShowError = true;
 
          return !this.innerError;
       }
@@ -131,6 +130,7 @@
             this.openURL();
          }
       }
+
 
       public openURL() {
          if (!this.isReadonly) {

@@ -31,7 +31,7 @@
 
 
       public onInput(value: Option[] | null) {
-         // quasar sets null on clear
+         // Quasar sets null on clear
          if (value === null) {
             value = [];
          }
@@ -46,11 +46,8 @@
 
 
       public onNewOption(inputValue: string, doneFn: Function) {
-         const isWithinLimits = (this.selectionLimit > 0 && this.selectionLimit <= this.value.length);
-         const canAdd = !isWithinLimits;
-
-         // check if option is enabled
-         if (this.canAddNew && canAdd) {
+         const isFull = (this.selectionLimit > 0 && this.selectionLimit <= this.value.length);
+         if (this.canAddNew && !isFull) {
             // validate
             const newValue = inputValue.toLowerCase();
             const exists = !!this.value.find((e: Option) => (e.value === newValue));

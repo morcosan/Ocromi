@@ -53,63 +53,81 @@ export default class YBaseInputGroup extends Mixins(YBaseInput) {
    public mounted() {
       // make the options readonly
       [...this.qOptionGroupChildren].forEach((elem: HTMLElement) => {
-         // remove tabindex
          const target: (HTMLElement | null) = elem.querySelector('[tabindex]');
          if (target) {
+            // disable option
             target.setAttribute('tabindex', '-1');
          }
       });
 
       if (!this.isReadonly && !this.isDisabled) {
-         // enable the current option
-         this.toggleOption(this.currOptionIndex, true);
+         this.enableCurrOption();
       }
    }
 
 
    public onKeyDown(event: KeyboardEvent) {
-      // use arrows to navigate options
       if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
-         // disable current option
-         this.toggleOption(this.currOptionIndex, false);
-         // enable next option
-         this.currOptionIndex = (this.currOptionIndex + 1) % this.options.length;
-         this.toggleOption(this.currOptionIndex, true);
+         event.preventDefault();
+         this.navigateDown();
       }
       else if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
-         // disable current option
-         this.toggleOption(this.currOptionIndex, false);
-         // enable previous option
-         this.currOptionIndex = (this.options.length + this.currOptionIndex - 1) % this.options.length;
-         this.toggleOption(this.currOptionIndex, true);
+         event.preventDefault();
+         this.navigateUp();
       }
 
-      // focus enabled option
-      this.focusOption(this.currOptionIndex);
+      this.focusCurrOption();
    }
 
 
-   protected toggleOption(index: number, isEnabled: boolean) {
-      // toggle keyboard selection for an option
+   private navigateDown() {
+      this.disableCurrOption();
+      this.currOptionIndex = (this.currOptionIndex + 1) % this.options.length;
+      this.enableCurrOption();
+   }
+
+
+   private navigateUp() {
+      this.disableCurrOption();
+      this.currOptionIndex = (this.options.length + this.currOptionIndex - 1) % this.options.length;
+      this.enableCurrOption();
+   }
+
+
+   private enableCurrOption() {
+      const target: (HTMLElement | null) = this.getTarget(this.currOptionIndex);
+      if (target) {
+         target.setAttribute('tabindex', '0');
+      }
+   }
+
+
+   private disableCurrOption() {
+      const target: (HTMLElement | null) = this.getTarget(this.currOptionIndex);
+      if (target) {
+         target.setAttribute('tabindex', '-1');
+      }
+   }
+
+
+   private focusCurrOption() {
+      const target: (HTMLElement | null) = this.getTarget(this.currOptionIndex);
+      if (target) {
+         target.focus();
+      }
+   }
+
+
+   private getTarget(index: number) {
       const elem: (HTMLElement | undefined) = this.qOptionGroupChildren[index];
       if (elem) {
          const target: (HTMLElement | null) = elem.querySelector('[tabindex]');
          if (target) {
-            const tabindex = (isEnabled ? '0' : '-1');
-            target.setAttribute('tabindex', tabindex);
+            return target;
          }
       }
-   }
 
-
-   protected focusOption(index: number) {
-      const elem: (HTMLElement | undefined) = this.qOptionGroupChildren[index];
-      if (elem) {
-         const target: (HTMLElement | null) = elem.querySelector('[tabindex]');
-         if (target) {
-            target.focus();
-         }
-      }
+      return null;
    }
 
 }

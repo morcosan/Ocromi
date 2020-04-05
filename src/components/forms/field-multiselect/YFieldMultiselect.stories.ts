@@ -44,7 +44,6 @@ const storyLines: StoryLine[] = [
 				v-model="value"
 				:options="options"
 				:label="label"
-				:placeholder="placeholder"
 				:hint="hint"
 				:is-disabled="isDisabled"
 				:is-required="isRequired"
