@@ -25,7 +25,7 @@
       @Watch('isLoading')
       public onChangeIsLoading(value: string, oldValue: string) {
          if (this.isLoading) {
-            this._startLoading();
+            this.startLoading();
          }
          else {
             clearInterval(this.loadingTimeout);
@@ -33,7 +33,7 @@
       }
 
       /** Start loading percentage increase */
-      private _startLoading() {
+      private startLoading() {
          // reset percentage
          this.percentage = 0;
 
@@ -59,7 +59,7 @@
       public mounted() {
          // if loading is set, start loading
          if (this.isLoading) {
-            this._startLoading();
+            this.startLoading();
          }
       }
 

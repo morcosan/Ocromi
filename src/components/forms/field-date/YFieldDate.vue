@@ -32,7 +32,7 @@
       @Watch('value')
       public onChangeValue(value: string, oldValue: string) {
          // update value for input
-         this._convertToInputValue(value);
+         this.convertToInputValue(value);
       }
 
       /** Compute validation rules */
@@ -84,7 +84,7 @@
       }
 
       /** Convert ISO format to input format */
-      private _convertToInputValue(value: string) {
+      private convertToInputValue(value: string) {
          const date: DateTime = DateTime.fromFormat(value, this.dateFormatISO);
          if (date.isValid) {
             this.inputValue = date.toFormat(this.dateFormatInput);
@@ -144,7 +144,7 @@
       /** Lifecycle hook */
       public created() {
          // initialize value for input
-         this._convertToInputValue(this.value);
+         this.convertToInputValue(this.value);
       }
 
    }

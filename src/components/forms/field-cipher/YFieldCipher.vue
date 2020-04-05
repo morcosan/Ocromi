@@ -35,7 +35,7 @@
       @Watch('inputMask')
       public onChangeInputMask(value: string, oldValue: string) {
          // prepare validation
-         this._countChars();
+         this.countChars();
       }
 
       /** Compute validation rules */
@@ -54,7 +54,7 @@
       }
 
       /** Calculate number of required chars, used for validation later */
-      private _countChars() {
+      private countChars() {
          this.numChars = 0;
          if (this.inputMask !== '') {
             for (const char of ['#', 'S', 'A', 'a', 'N', 'X', 'x']) {
@@ -66,7 +66,7 @@
       /** Lifecycle hook */
       public created() {
          // prepare validation
-         this._countChars();
+         this.countChars();
       }
 
    }
