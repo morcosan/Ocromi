@@ -16,16 +16,16 @@
       @Prop({ default: 0 }) public maxTotalSize!: number; // in KB
       @Prop({ default: 0 }) public maxNumFiles!: number;
 
-      
+
       // Override
       public get finalRules() {
          const rules = [...this.rules];
-         
+
          // add required rule
          if (this.isRequired) {
             rules.push((value: object[]) => (value.length > 0 || this.$locale.all.requiredField));
          }
-         
+
          return rules;
       }
 
@@ -40,19 +40,14 @@
 
 
       public getFileIcon(file: object) {
-         // find the appropriate file icon
          // @ts-ignore
-         return file.type.indexOf('video/') === 0
-            ? 'movie'
-            // @ts-ignore
-            : (file.type.indexOf('image/') === 0
-                  ? 'photo'
-                  // @ts-ignore
-                  : (file.type.indexOf('audio/') === 0
-                        ? 'audiotrack'
-                        : 'insert_drive_file'
-                  )
-            );
+         const isVideo = (file.type.indexOf('video/') === 0);
+         // @ts-ignore
+         const isImage = (file.type.indexOf('image/') === 0);
+         // @ts-ignore
+         const isAudio = (file.type.indexOf('audio/') === 0);
+         // find the appropriate file icon
+         return (isVideo ? 'movie' : (isImage ? 'photo' : (isAudio ? 'audiotrack' : 'insert_drive_file')));
       }
 
 
@@ -97,17 +92,18 @@
             // activate button with space or enter
             if (event.key === ' ' || event.key === 'Enter') {
                event.preventDefault();
-
-               // open file picker
-               // @ts-ignore
-               this.$refs.qField.pickFiles();
+               this.openFilePicker();
             }
          }
       }
 
 
       public onClickAttachIcon() {
-         // open file picker
+         this.openFilePicker();
+      }
+
+
+      private openFilePicker() {
          // @ts-ignore
          this.$refs.qField.pickFiles();
       }

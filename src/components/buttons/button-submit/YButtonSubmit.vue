@@ -14,7 +14,7 @@
 
 
       public percentage: number = 0;
-      public loadingTimeout!: NodeJS.Timeout;
+      public intervalID!: number;
 
 
       @Watch('isLoading')
@@ -23,7 +23,7 @@
             this.startLoading();
          }
          else {
-            clearInterval(this.loadingTimeout);
+            clearInterval(this.intervalID);
          }
       }
 
@@ -46,15 +46,17 @@
          const interval = totalTime / 100;
 
          // start loading
-         this.loadingTimeout = setInterval(() => {
-            if (this.percentage < 99) {
-               this.percentage += 1;
-               console.log(this.percentage);
-            }
-            else {
-               clearInterval(this.loadingTimeout);
-            }
-         }, interval);
+         this.intervalID = setInterval(this.onLoading, interval);
+      }
+
+
+      private onLoading() {
+         if (this.percentage < 99) {
+            this.percentage += 1;
+         }
+         else {
+            clearInterval(this.intervalID);
+         }
       }
 
    }

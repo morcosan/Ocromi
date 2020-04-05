@@ -2,7 +2,7 @@
    import { Component, Mixins, Prop } from 'vue-property-decorator';
    import YBaseInputField from '../YBaseInputField';
    import { QInput, QTooltip } from 'quasar';
-   import { numberRegex } from '../../../utils/regex';
+   import Regex from '../../../utils/regex';
    import Utils from '../../../utils';
 
 
@@ -102,7 +102,7 @@
                newValue += '0';
             }
             // check if new value is a number
-            if (!numberRegex.test(newValue)) {
+            if (!Regex.isNumber(newValue)) {
                event.preventDefault();
             }
          }

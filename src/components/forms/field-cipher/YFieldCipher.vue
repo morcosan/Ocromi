@@ -14,7 +14,7 @@
       @Prop({ default: '' }) public inputMask!: string;
 
 
-      public numChars: number = 0;
+      public numCharsRequired: number = 0;
 
 
       @Watch('inputMask')
@@ -27,7 +27,7 @@
       public created() {
          this.prepareValidation();
       }
-      
+
 
       // Override
       public get finalRules() {
@@ -40,19 +40,21 @@
 
          // add mask validation rule
          if (this.inputMask !== '') {
-            const error = this.$locale.fieldCipher.maskError.replace('${1}', String(this.numChars));
-            rules.push((value: string) => (value.length === this.numChars || error));
+            const error = this.$locale.fieldCipher.maskError.replace('${1}', String(this.numCharsRequired));
+            rules.push((value: string) => (value.length === this.numCharsRequired || error));
          }
 
          return rules;
       }
 
+
       private prepareValidation() {
-         // calculate number of required chars
-         this.numChars = 0;
+         const maskOptions = ['#', 'S', 'A', 'a', 'N', 'X', 'x'];
+
+         this.numCharsRequired = 0;
          if (this.inputMask !== '') {
-            for (const char of ['#', 'S', 'A', 'a', 'N', 'X', 'x']) {
-               this.numChars += Utils.countSubstrInString(char, this.inputMask);
+            for (const char of maskOptions) {
+               this.numCharsRequired += Utils.countSubstrInString(char, this.inputMask);
             }
          }
       }

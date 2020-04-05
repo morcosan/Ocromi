@@ -2,7 +2,7 @@
    import { Component, Mixins, Prop } from 'vue-property-decorator';
    import YBaseInputField from '../YBaseInputField';
    import { QInput } from 'quasar';
-   import { emailCharRegex, emailRegex } from '../../../utils/regex';
+   import Regex from '../../../utils/regex';
    import Utils from '../../../utils';
 
 
@@ -26,7 +26,7 @@
          // add email rule
          rules.push((value: string) => {
             if (value) {
-               return (emailRegex.test(value) || this.$locale.fieldEmail.maskError);
+               return (Regex.isEmail(value) || this.$locale.fieldEmail.maskError);
             }
             return true;
          });
@@ -41,7 +41,7 @@
          }
 
          // check if character is allowed for email
-         if (!emailCharRegex.test(event.key)) {
+         if (!Regex.isAllowedInEmail(event.key)) {
             event.preventDefault();
          }
       }

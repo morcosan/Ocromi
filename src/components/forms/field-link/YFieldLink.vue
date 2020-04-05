@@ -2,7 +2,7 @@
    import { Component, Mixins, Prop, Watch } from 'vue-property-decorator';
    import YBaseInputField from '../YBaseInputField';
    import { QIcon, QInput, QTooltip } from 'quasar';
-   import { hyperlinkRegex } from '../../../utils/regex';
+   import Regex from '../../../utils/regex';
 
 
    @Component({
@@ -38,7 +38,7 @@
          // add URL rule
          rules.push((value: string) => {
             if (value) {
-               return (hyperlinkRegex.test(value) || this.$locale.fieldLink.maskError);
+               return (Regex.isSimpleLink(value) || this.$locale.fieldLink.maskError);
             }
             return true;
          });

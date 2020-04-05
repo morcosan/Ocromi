@@ -20,34 +20,34 @@ export default class StoryBuilder {
          });
 
          storyTemplate += `
-         <div class="story">
-            <div class="story_header">
-               <h6 class="story__title">${ story.title }</h6>
-               ${ statesTemplate }
+            <div class="story">
+               <div class="story_header">
+                  <h6 class="story__title">${ story.title }</h6>
+                  ${ statesTemplate }
+               </div>
+               ${ story.template }
             </div>
-            ${ story.template }
-         </div>
-		`;
+         `;
       });
 
       return () => ({
          ...vue,
          i18n,
          template: `
-			<div class="story-display">
-				${ storyTemplate }
-			</div>
-		`,
+            <div class="story-display">
+               ${ storyTemplate }
+            </div>
+         `,
       });
    }
 
 
    public static createDocs(docsStr: string) {
       return () => `
-      <div class="story-display">
-         <pre>${ docsStr }</pre>
-      </div>
-   `;
+         <div class="story-display">
+            <pre>${ docsStr }</pre>
+         </div>
+      `;
    }
 
 

@@ -68,7 +68,6 @@
 
       // Override
       public created() {
-         // initialize value for input
          this.updateInputValue(this.value);
       }
 
