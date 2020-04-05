@@ -1,5 +1,5 @@
 import { Component, Mixins, Prop, Watch } from 'vue-property-decorator';
-import YBaseFormControl from './YBaseFormControl';
+import YBaseInput from './YBaseInput';
 
 
 export interface Option {
@@ -9,7 +9,7 @@ export interface Option {
 
 
 @Component
-export default class YBaseFormGroup extends Mixins(YBaseFormControl) {
+export default class YBaseInputGroup extends Mixins(YBaseInput) {
 
    @Prop({ default: () => [] }) public options!: Option[];
 
@@ -18,8 +18,8 @@ export default class YBaseFormGroup extends Mixins(YBaseFormControl) {
    public currOptionIndex: number = 0;
 
 
-   /** Compute HTML list of group's children */
    public get qOptionGroupChildren() {
+      // compute HTML list of group's children
       if (this.$refs.qOptionGroup) {
          // @ts-ignore
          return this.$refs.qOptionGroup.$el.children;
@@ -27,15 +27,17 @@ export default class YBaseFormGroup extends Mixins(YBaseFormControl) {
       return [];
    }
 
-   /** Reset error if not required */
+
    @Watch('isRequired')
-   public onChangeIsRequired(value: string, oldValue: string) {
+   public onChange_isRequired() {
       if (!this.isRequired) {
+         // reset error
          this.innerError = '';
       }
    }
 
-   /** Focus this control */
+
+   // Override
    public focus() {
       if (this.qOptionGroupChildren[0]) {
          const firstChild = this.qOptionGroupChildren[0].children[0];
@@ -45,8 +47,27 @@ export default class YBaseFormGroup extends Mixins(YBaseFormControl) {
       }
    }
 
-   /** Use arrows to navigate options */
+
+   // Override
+   public mounted() {
+      // make the options readonly
+      [...this.qOptionGroupChildren].forEach((elem: HTMLElement) => {
+         // remove tabindex
+         const target: (HTMLElement | null) = elem.querySelector('[tabindex]');
+         if (target) {
+            target.setAttribute('tabindex', '-1');
+         }
+      });
+
+      if (!this.isReadonly && !this.isDisabled) {
+         // enable the current option
+         this.toggleOption(this.currOptionIndex, true);
+      }
+   }
+
+
    public onKeyDown(event: KeyboardEvent) {
+      // use arrows to navigate options
       if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
          // disable current option
          this.toggleOption(this.currOptionIndex, false);
@@ -66,11 +87,12 @@ export default class YBaseFormGroup extends Mixins(YBaseFormControl) {
       this.focusOption(this.currOptionIndex);
    }
 
-   /** Toggle keyboard selection for an option */
+
    protected toggleOption(index: number, isEnabled: boolean) {
+      // toggle keyboard selection for an option
       const elem: HTMLElement = this.qOptionGroupChildren[index];
       if (elem) {
-         const target: HTMLElement | null = elem.querySelector('[tabindex]');
+         const target: (HTMLElement | null) = elem.querySelector('[tabindex]');
          if (target) {
             const tabindex = (isEnabled ? '0' : '-1');
             target.setAttribute('tabindex', tabindex);
@@ -78,31 +100,14 @@ export default class YBaseFormGroup extends Mixins(YBaseFormControl) {
       }
    }
 
-   /** Focus an option */
+
    protected focusOption(index: number) {
       const elem: HTMLElement = this.qOptionGroupChildren[index];
       if (elem) {
-         const target: HTMLElement | null = elem.querySelector('[tabindex]');
+         const target: (HTMLElement | null) = elem.querySelector('[tabindex]');
          if (target) {
             target.focus();
          }
-      }
-   }
-
-   /** Lifecycle hook */
-   public mounted() {
-      // make the options readonly
-      [...this.qOptionGroupChildren].forEach((elem: HTMLElement) => {
-         // remove tabindex
-         const target: HTMLElement | null = elem.querySelector('[tabindex]');
-         if (target) {
-            target.setAttribute('tabindex', '-1');
-         }
-      });
-
-      if (!this.isReadonly && !this.isDisabled) {
-         // enable the current option
-         this.toggleOption(this.currOptionIndex, true);
       }
    }
 

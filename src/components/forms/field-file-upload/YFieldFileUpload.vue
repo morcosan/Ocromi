@@ -4,14 +4,14 @@
     */
 
    import { Component, Mixins, Prop } from 'vue-property-decorator';
-   import YBaseFormField from '../YBaseFormField';
+   import YBaseInputField from '../YBaseInputField';
    import { QAvatar, QChip, QFile, QIcon, QTooltip } from 'quasar';
 
 
    @Component({
       components: { QFile, QIcon, QChip, QTooltip, QAvatar },
    })
-   export default class YFieldFileUpload extends Mixins(YBaseFormField) {
+   export default class YFieldFileUpload extends Mixins(YBaseInputField) {
 
       /** Content props */
       @Prop({ default: () => [] }) public value!: object[];
@@ -142,7 +142,7 @@
       :bg-color="bgColor"
       :class="{
          'y-field-file-upload': true,
-			'y-form-control-spacing': hasSpacing,
+			'y-input-spacing': hasSpacing,
 			'y-field-file-upload--empty': (value.length === 0),
 		}"
       :counter-label="counterLabel"

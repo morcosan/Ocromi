@@ -4,14 +4,14 @@
     */
 
    import { Component, Mixins, Prop } from 'vue-property-decorator';
-   import YBaseFormSelect, { Option } from '../YBaseFormSelect';
+   import YBaseInputSelect, { Option } from '../YBaseInputSelect';
    import { QSelect } from 'quasar';
 
 
    @Component({
       components: { QSelect },
    })
-   export default class YFieldSelect extends Mixins(YBaseFormSelect) {
+   export default class YFieldSelect extends Mixins(YBaseInputSelect) {
 
       /** Content props */
       @Prop({ default: null }) public value!: Option | null;
@@ -44,7 +44,7 @@
       :error="error !== ''"
       :rules="finalRules"
       :bg-color="bgColor"
-      :class="{ 'y-field-select': true, 'y-form-control-spacing': hasSpacing }"
+      :class="{ 'y-field-select': true, 'y-input-spacing': hasSpacing }"
       input-debounce="0"
       ref="qSelect"
       outlined

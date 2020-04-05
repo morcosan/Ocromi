@@ -23,7 +23,7 @@
 
       /** Prop watcher */
       @Watch('isLoading')
-      public onChangeIsLoading(value: string, oldValue: string) {
+      public onChange_isLoading(value: string, oldValue: string) {
          if (this.isLoading) {
             this.startLoading();
          }
@@ -55,7 +55,7 @@
          }, interval);
       }
 
-      /** Lifecycle hook */
+      // Override
       public mounted() {
          // if loading is set, start loading
          if (this.isLoading) {

@@ -2,7 +2,7 @@
  * Form controls
  */
 
-.y-form-control-spacing {
+.y-input-spacing {
    margin-bottom: 25px;
 }
 
@@ -11,13 +11,13 @@
 
 
 /**
- * Form control box
+ * Form input box
  */
 
-.y-form-box {
+.y-input-box {
    position: relative;
 
-   &.y-form-box--required {
+   &.y-input-box--required {
       position: relative;
       padding-bottom: 25px;
    }

@@ -5,13 +5,13 @@
 
    import { Component, Mixins, Prop } from 'vue-property-decorator';
    import { QCheckbox } from 'quasar';
-   import YBaseFormControl from '../YBaseFormControl';
+   import YBaseInput from '../YBaseInput';
 
 
    @Component({
       components: { QCheckbox },
    })
-   export default class YCheckbox extends Mixins(YBaseFormControl) {
+   export default class YCheckbox extends Mixins(YBaseInput) {
 
       /** Content props */
       @Prop({ default: false }) public value!: boolean | null;
@@ -56,7 +56,7 @@
    <div :class="{
 		'y-checkbox': true,
 		'y-checkbox--required': isRequired,
-		'y-form-control-spacing': hasSpacing,
+		'y-input-spacing': hasSpacing,
 	}">
       <QCheckbox
          @input="onInput"

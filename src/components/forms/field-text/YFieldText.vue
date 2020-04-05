@@ -5,14 +5,14 @@
     */
 
    import { Component, Mixins, Prop } from 'vue-property-decorator';
-   import YBaseFormField from '../YBaseFormField';
+   import YBaseInputField from '../YBaseInputField';
    import { QInput } from 'quasar';
 
 
    @Component({
       components: { QInput },
    })
-   export default class YFieldText extends Mixins(YBaseFormField) {
+   export default class YFieldText extends Mixins(YBaseInputField) {
 
       /** Content props */
       @Prop({ default: '' }) public value!: string;
@@ -44,7 +44,7 @@
       :readonly="isReadonly"
       :disable="isDisabled"
       :bg-color="bgColor"
-      :class="{ 'y-field-text': true, 'y-form-control-spacing': hasSpacing }"
+      :class="{ 'y-field-text': true, 'y-input-spacing': hasSpacing }"
       type="text"
       ref="qField"
       outlined

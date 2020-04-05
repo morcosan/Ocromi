@@ -4,7 +4,7 @@
     */
 
    import { Component, Mixins, Prop } from 'vue-property-decorator';
-   import YBaseFormField from '../YBaseFormField';
+   import YBaseInputField from '../YBaseInputField';
    import { QIcon, QInput, QLinearProgress, QTooltip } from 'quasar';
    import zxcvbn from 'zxcvbn';
 
@@ -21,7 +21,7 @@
    @Component({
       components: { QInput, QTooltip, QIcon, QLinearProgress },
    })
-   export default class YFieldPassword extends Mixins(YBaseFormField) {
+   export default class YFieldPassword extends Mixins(YBaseInputField) {
 
       /** Content props */
       @Prop({ default: '' }) public value!: string;
@@ -106,7 +106,7 @@
          }
       }
 
-      /** Lifecycle hook */
+      // Override
       public mounted() {
          // update strength
          this.onKeyUp();
@@ -135,7 +135,7 @@
       :class="{
 			'y-field-password': true,
 			'y-field-password--has-meter': hasMeter,
-			'y-form-control-spacing': hasSpacing
+			'y-input-spacing': hasSpacing
 		}"
       ref="qField"
       outlined

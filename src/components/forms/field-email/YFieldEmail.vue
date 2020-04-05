@@ -4,7 +4,7 @@
     */
 
    import { Component, Mixins, Prop } from 'vue-property-decorator';
-   import YBaseFormField from '../YBaseFormField';
+   import YBaseInputField from '../YBaseInputField';
    import { QInput } from 'quasar';
    import { emailCharRegex, emailRegex } from '../../../utils/regex';
    import Utils from '../../../utils';
@@ -13,7 +13,7 @@
    @Component({
       components: { QInput },
    })
-   export default class YFieldEmail extends Mixins(YBaseFormField) {
+   export default class YFieldEmail extends Mixins(YBaseInputField) {
 
       /** Content props */
       @Prop({ default: '' }) public value!: string;
@@ -68,7 +68,7 @@
       :rules="finalRules"
       :readonly="isReadonly"
       :disable="isDisabled"
-      :class="{ 'y-field-email': true, 'y-form-control-spacing': hasSpacing }"
+      :class="{ 'y-field-email': true, 'y-input-spacing': hasSpacing }"
       type="email"
       ref="qField"
       outlined

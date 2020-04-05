@@ -4,14 +4,14 @@
     */
 
    import { Component, Mixins, Prop } from 'vue-property-decorator';
-   import YBaseFormSlider from '../YBaseFormSlider';
+   import YBaseInputSlider from '../YBaseInputSlider';
    import { QSlider } from 'quasar';
 
 
    @Component({
       components: { QSlider },
    })
-   export default class YSlider extends Mixins(YBaseFormSlider) {
+   export default class YSlider extends Mixins(YBaseInputSlider) {
 
       /** Content props */
       @Prop({ default: 0 }) public value!: number;
@@ -38,9 +38,9 @@
 
 <template>
    <div :class="{
-		'y-form-box y-slider-base y-slider': true,
-		'y-form-box--required': isRequired,
-		'y-form-control-spacing': hasSpacing,
+		'y-input-box y-slider-base y-slider': true,
+		'y-input-box--required': isRequired,
+		'y-input-spacing': hasSpacing,
 		'text-negative': innerError,
 	}">
       <div :class="{

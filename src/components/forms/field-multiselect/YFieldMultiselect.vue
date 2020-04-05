@@ -4,7 +4,7 @@
     */
 
    import { Component, Mixins, Prop } from 'vue-property-decorator';
-   import YBaseFormSelect, { Option } from '../YBaseFormSelect';
+   import YBaseInputSelect, { Option } from '../YBaseInputSelect';
    import { QChip, QSelect } from 'quasar';
 
 
@@ -14,7 +14,7 @@
          QChip,
       },
    })
-   export default class YFieldMultiselect extends Mixins(YBaseFormSelect) {
+   export default class YFieldMultiselect extends Mixins(YBaseInputSelect) {
 
       /** Content props */
       @Prop({ default: () => [] }) public value!: Option[];
@@ -95,7 +95,7 @@
       :rules="finalRules"
       :bg-color="bgColor"
       :new-value-mode="canAddNew ? 'add-unique' : undefined"
-      :class="{ 'y-field-multiselect': true, 'y-form-control-spacing': hasSpacing }"
+      :class="{ 'y-field-multiselect': true, 'y-input-spacing': hasSpacing }"
       input-debounce="0"
       ref="qSelect"
       lazy-rules

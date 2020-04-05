@@ -4,14 +4,14 @@
     */
 
    import { Component, Mixins, Prop } from 'vue-property-decorator';
-   import YBaseFormSlider, { Range } from '../YBaseFormSlider';
+   import YBaseInputSlider, { Range } from '../YBaseInputSlider';
    import { QRange } from 'quasar';
 
 
    @Component({
       components: { QRange },
    })
-   export default class YSliderRange extends Mixins(YBaseFormSlider) {
+   export default class YSliderRange extends Mixins(YBaseInputSlider) {
 
       /** Content props */
       @Prop({ default: () => ({ min: 0, max: 0 }) }) public value!: Range;
@@ -66,9 +66,9 @@
 
 <template>
    <div :class="{
-		'y-form-box y-slider-base y-slider-range': true,
-		'y-form-box--required': isRequired,
-		'y-form-control-spacing': hasSpacing,
+		'y-input-box y-slider-base y-slider-range': true,
+		'y-input-box--required': isRequired,
+		'y-input-spacing': hasSpacing,
 		'text-negative': innerError,
 	}">
       <div :class="{

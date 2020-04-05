@@ -1,5 +1,5 @@
 import { Component, Mixins, Prop, Watch } from 'vue-property-decorator';
-import YBaseFormControl from './YBaseFormControl';
+import YBaseInput from './YBaseInput';
 
 
 export interface Option {
@@ -10,7 +10,7 @@ export interface Option {
 
 
 @Component
-export default class YBaseFormSelect extends Mixins(YBaseFormControl) {
+export default class YBaseInputSelect extends Mixins(YBaseInput) {
 
    @Prop({ default: '' }) public hint!: string;
    @Prop({ default: () => [] }) public options!: Option[];
@@ -22,7 +22,7 @@ export default class YBaseFormSelect extends Mixins(YBaseFormControl) {
 
 
    @Watch('options')
-   public onChangeOptions() {
+   public onChange_options() {
       this.currOptions = this.options;
    }
 

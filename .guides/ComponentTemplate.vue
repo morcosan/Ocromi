@@ -18,13 +18,13 @@
 
 
       @Watch('prop1')
-      public onChangeProp1(value: string, oldValue: string) {}
+      public onChange_prop1(value: string, oldValue: string) {}
 
       @Watch('prop2')
-      public onChangeProp2(value: number, oldValue: number) {}
+      public onChange_prop2(value: number, oldValue: number) {}
 
       @Watch('prop3')
-      public onChangeProp3(value: boolean, oldValue: boolean) {}
+      public onChange_prop3(value: boolean, oldValue: boolean) {}
 
 
       public get computed1() { return ''; }

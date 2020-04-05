@@ -1,5 +1,5 @@
 import { Component, Mixins, Prop, Watch } from 'vue-property-decorator';
-import YBaseFormControl from './YBaseFormControl';
+import YBaseInput from './YBaseInput';
 
 
 export interface Range {
@@ -9,7 +9,7 @@ export interface Range {
 
 
 @Component
-export default class YBaseFormSlider extends Mixins(YBaseFormControl) {
+export default class YBaseInputSlider extends Mixins(YBaseInput) {
 
    @Prop({ default: '' }) public thumbSuffix!: string;
    @Prop({ default: 0 }) public minValue!: number;
@@ -24,7 +24,7 @@ export default class YBaseFormSlider extends Mixins(YBaseFormControl) {
 
 
    @Watch('isRequired')
-   public onChangeIsRequired() {
+   public onChange_isRequired() {
       // reset error if not required
       if (!this.isRequired) {
          this.innerError = '';

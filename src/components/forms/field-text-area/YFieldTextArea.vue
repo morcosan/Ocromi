@@ -4,14 +4,14 @@
     */
 
    import { Component, Mixins, Prop } from 'vue-property-decorator';
-   import YBaseFormField from '../YBaseFormField';
+   import YBaseInputField from '../YBaseInputField';
    import { QInput } from 'quasar';
 
 
    @Component({
       components: { QInput },
    })
-   export default class YFieldTextArea extends Mixins(YBaseFormField) {
+   export default class YFieldTextArea extends Mixins(YBaseInputField) {
 
       /** Content props */
       @Prop({ default: '' }) public value!: string;
@@ -19,7 +19,7 @@
 
       /** States */
       public hasScrollbar: boolean = false;
-      public nativeElem: HTMLElement | null = null;
+      public nativeElem: (HTMLElement | null) = null;
 
       /** Compute validation rules */
       public get finalRules() {
@@ -68,7 +68,7 @@
       :class="{
          'y-field-text-area': true,
          'y-field-text-area--has-scrollbar': hasScrollbar,
-         'y-form-control-spacing': hasSpacing
+         'y-input-spacing': hasSpacing
       }"
       :disable="isDisabled"
       type="textarea"

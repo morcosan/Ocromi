@@ -4,7 +4,7 @@
     */
 
    import { Component, Mixins, Prop, Watch } from 'vue-property-decorator';
-   import YBaseFormField from '../YBaseFormField';
+   import YBaseInputField from '../YBaseInputField';
    import { QDate, QIcon, QInput, QPopupProxy, QTooltip } from 'quasar';
    import { DateTime } from 'luxon';
 
@@ -12,7 +12,7 @@
    @Component({
       components: { QInput, QIcon, QDate, QPopupProxy, QTooltip },
    })
-   export default class YFieldDate extends Mixins(YBaseFormField) {
+   export default class YFieldDate extends Mixins(YBaseInputField) {
 
       /** Content props */
       @Prop({ default: '' }) public value!: string;
@@ -30,7 +30,7 @@
 
       /** Prop watcher */
       @Watch('value')
-      public onChangeValue(value: string, oldValue: string) {
+      public onChange_value(value: string, oldValue: string) {
          // update value for input
          this.convertToInputValue(value);
       }
@@ -141,7 +141,7 @@
          }
       }
 
-      /** Lifecycle hook */
+      // Override
       public created() {
          // initialize value for input
          this.convertToInputValue(this.value);
@@ -165,7 +165,7 @@
       :rules="finalRules"
       :disable="isDisabled"
       :readonly="isReadonly"
-      :class="{ 'y-field-date': true, 'y-form-control-spacing': hasSpacing }"
+      :class="{ 'y-field-date': true, 'y-input-spacing': hasSpacing }"
       :mask="!!inputValue || hasFocus ? inputMask : ''"
       fill-mask="_"
       type="text"

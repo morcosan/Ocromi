@@ -4,7 +4,7 @@
     */
 
    import { Component, Mixins, Prop } from 'vue-property-decorator';
-   import YBaseFormField from '../YBaseFormField';
+   import YBaseInputField from '../YBaseInputField';
    import { QInput, QTooltip } from 'quasar';
    import { numberRegex } from '../../../utils/regex';
    import Utils from '../../../utils';
@@ -13,7 +13,7 @@
    @Component({
       components: { QInput, QTooltip },
    })
-   export default class YFieldNumber extends Mixins(YBaseFormField) {
+   export default class YFieldNumber extends Mixins(YBaseInputField) {
 
       /** Content props */
       @Prop({ default: '' }) public value!: number | string;
@@ -184,7 +184,7 @@
       :error="error !== ''"
       :rules="finalRules"
       :disable="isDisabled"
-      :class="{ 'y-field-number': true, 'y-form-control-spacing': hasSpacing }"
+      :class="{ 'y-field-number': true, 'y-input-spacing': hasSpacing }"
       :step="valueStep"
       :bottom-slots="decimals > 0"
       type="text"

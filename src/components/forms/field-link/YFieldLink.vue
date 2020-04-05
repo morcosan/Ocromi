@@ -4,7 +4,7 @@
     */
 
    import { Component, Mixins, Prop, Watch } from 'vue-property-decorator';
-   import YBaseFormField from '../YBaseFormField';
+   import YBaseInputField from '../YBaseInputField';
    import { QIcon, QInput, QTooltip } from 'quasar';
    import { hyperlinkRegex } from '../../../utils/regex';
 
@@ -12,7 +12,7 @@
    @Component({
       components: { QInput, QIcon, QTooltip },
    })
-   export default class YFieldLink extends Mixins(YBaseFormField) {
+   export default class YFieldLink extends Mixins(YBaseInputField) {
 
       /** Content props */
       @Prop({ default: '' }) public value!: string;
@@ -24,7 +24,7 @@
 
       /** Validate when value changes */
       @Watch('value')
-      public onChangeValue() {
+      public onChange_value() {
          // validate
          if (this.canShowError) {
             this.validate();
@@ -55,7 +55,7 @@
       public validate() {
          // validate
          for (let i = 0; i < this.finalRules.length; i++) {
-            const result: boolean | string = this.finalRules[i](this.value);
+            const result: (boolean | string) = this.finalRules[i](this.value);
             if (result === true) {
                this.innerError = '';
             }
@@ -127,7 +127,7 @@
          }
       }
 
-      /** Lifecycle hook */
+      // Override
       public mounted() {
          // get native input element
          // @ts-ignore
@@ -138,7 +138,7 @@
          }
       }
 
-      /** Lifecycle hook */
+      // Override
       public destroyed() {
          // remove paste listener
          if (this.nativeInput) {
@@ -164,7 +164,7 @@
       :error="!!error || !!innerError"
       :error-message="error || innerError"
       :disable="isDisabled"
-      :class="{ 'y-field-link': true, 'y-form-control-spacing': hasSpacing }"
+      :class="{ 'y-field-link': true, 'y-input-spacing': hasSpacing }"
       prefix="http://"
       type="text"
       ref="qField"

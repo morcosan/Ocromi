@@ -12,7 +12,7 @@
     */
 
    import { Component, Mixins, Prop, Watch } from 'vue-property-decorator';
-   import YBaseFormField from '../YBaseFormField';
+   import YBaseInputField from '../YBaseInputField';
    import { QInput } from 'quasar';
    import Utils from '../../../utils';
 
@@ -20,7 +20,7 @@
    @Component({
       components: { QInput },
    })
-   export default class YFieldCipher extends Mixins(YBaseFormField) {
+   export default class YFieldCipher extends Mixins(YBaseInputField) {
 
       /** Content props */
       @Prop({ default: '' }) public value!: string;
@@ -33,7 +33,7 @@
 
       /** Prop watcher */
       @Watch('inputMask')
-      public onChangeInputMask(value: string, oldValue: string) {
+      public onChange_inputMask() {
          // prepare validation
          this.countChars();
       }
@@ -63,7 +63,7 @@
          }
       }
 
-      /** Lifecycle hook */
+      // Override
       public created() {
          // prepare validation
          this.countChars();
@@ -87,7 +87,7 @@
       :error="error !== ''"
       :rules="finalRules"
       :disable="isDisabled"
-      :class="{ 'y-field-cipher': true, 'y-form-control-spacing': hasSpacing }"
+      :class="{ 'y-field-cipher': true, 'y-input-spacing': hasSpacing }"
       type="text"
       ref="qField"
       unmasked-value

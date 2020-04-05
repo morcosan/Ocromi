@@ -6,13 +6,13 @@
 
    import { Component, Mixins, Prop } from 'vue-property-decorator';
    import { QOptionGroup } from 'quasar';
-   import YBaseFormGroup from '../YBaseFormGroup';
+   import YBaseInputGroup from '../YBaseInputGroup';
 
 
    @Component({
       components: { QOptionGroup },
    })
-   export default class YGroupRadio extends Mixins(YBaseFormGroup) {
+   export default class YGroupRadio extends Mixins(YBaseInputGroup) {
 
       /** Content props */
       @Prop({ default: null }) public value!: string | null;
@@ -42,9 +42,9 @@
 
 <template>
    <div :class="{
-		'y-form-box y-group-radio': true,
-		'y-form-box--required': isRequired,
-		'y-form-control-spacing': hasSpacing,
+		'y-input-box y-group-radio': true,
+		'y-input-box--required': isRequired,
+		'y-input-spacing': hasSpacing,
 		'text-negative': innerError,
 	}">
       <div :class="{
