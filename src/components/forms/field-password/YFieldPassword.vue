@@ -118,7 +118,7 @@
 
 <template>
    <QInput
-      @input="$emit('input', $event)"
+      @input="updateValueProp($event)"
       @keyup="onKeyUp"
       :type="showsPassword ? 'text' : 'password'"
       :value="value"

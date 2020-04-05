@@ -78,8 +78,8 @@
          // check date
          const date: DateTime = DateTime.fromFormat(value, this.dateFormatInput);
          if (date.isValid) {
-            // update value
-            this.$emit('input', date.toFormat(this.dateFormatISO));
+
+            this.updateValueProp(date.toFormat(this.dateFormatISO));
          }
       }
 
@@ -92,14 +92,15 @@
          else {
             // value is not valid, reset value
             this.inputValue = '';
-            this.$emit('input', '');
+
+            this.updateValueProp('');
          }
       }
 
       /** Update input value on selecting date */
       public onDateSelect(value: string, reason: string) {
-         // update value
-         this.$emit('input', value);
+
+         this.updateValueProp(value);
       }
 
       /** Convert Quasar format to ISO for custom dates */

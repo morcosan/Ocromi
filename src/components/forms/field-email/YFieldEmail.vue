@@ -56,7 +56,7 @@
 
 <template>
    <QInput
-      @input="$emit('input', $event)"
+      @input="updateValueProp($event)"
       @keydown="onKeyDown"
       :value="value"
       :label="finalLabel"

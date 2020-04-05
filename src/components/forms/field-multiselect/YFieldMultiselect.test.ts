@@ -5,12 +5,12 @@ import { i18n } from '.jest/vue-setup';
 
 describe('YFieldMultiselect', () => {
 
-   test('creates component - shallow', () => {
+   test('Creates component - shallow', () => {
       const wrapper = shallowMount(YFieldMultiselect, { i18n });
       expect(wrapper.is(YFieldMultiselect)).toBe(true);
    });
 
-   test('creates component - full', () => {
+   test('Creates component - full', () => {
       const wrapper = mount(YFieldMultiselect, { i18n });
       expect(wrapper.is(YFieldMultiselect)).toBe(true);
    });

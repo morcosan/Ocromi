@@ -1,4 +1,4 @@
-import { createBasicStory, randomOptions } from '.storybook/story-utils/custom-story';
+import { createBasicStory, createDocs, randomOptions } from '.storybook/story-utils/custom-story';
 import '.storybook/story-utils/custom-story.scss';
 import YForm from './YForm.vue';
 import YCheckbox from '../checkbox/YCheckbox.vue';
@@ -272,3 +272,6 @@ export default {
    title: 'Forms / Form',
 };
 export const default_ = createBasicStory(vue, basicFormTemplate);
+export const docs = createDocs(`
+
+`);

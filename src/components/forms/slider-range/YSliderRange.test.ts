@@ -5,12 +5,12 @@ import { i18n } from '.jest/vue-setup';
 
 describe('YSliderRange', () => {
 
-   test('creates component - shallow', () => {
+   test('Creates component - shallow', () => {
       const wrapper = shallowMount(YSliderRange, { i18n });
       expect(wrapper.is(YSliderRange)).toBe(true);
    });
 
-   test('creates component - full', () => {
+   test('Creates component - full', () => {
       const wrapper = mount(YSliderRange, { i18n });
       expect(wrapper.is(YSliderRange)).toBe(true);
    });

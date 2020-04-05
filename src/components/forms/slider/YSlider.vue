@@ -24,8 +24,8 @@
             value = Math.round(value * tens) / tens;
          }
 
-         // update
-         this.$emit('input', value);
+
+         this.updateValueProp(value);
 
          // mark as dirty and without error
          this.isDirty = true;

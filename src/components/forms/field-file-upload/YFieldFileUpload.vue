@@ -72,12 +72,12 @@
                }
             });
 
-            // update
-            this.$emit('input', this.value);
+
+            this.updateValueProp(this.value);
          }
          else {
-            // update single file
-            this.$emit('input', [value]);
+
+            this.updateValueProp([value]);
          }
       }
 
@@ -89,12 +89,12 @@
             if (index > -1) {
                // remove file
                this.value.splice(index, 1);
-               // update
-               this.$emit('input', this.value);
+
+               this.updateValueProp(this.value);
             }
             else {
-               // clear all
-               this.$emit('input', []);
+
+               this.updateValueProp([]);
             }
          }
       }

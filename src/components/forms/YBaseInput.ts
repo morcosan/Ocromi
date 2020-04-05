@@ -12,18 +12,17 @@ export default class YBaseInput extends Vue {
    @Prop({ default: 'white' }) public bgColor!: string;
 
 
-   /**
-    * Validate this form input
-    * Override this for each type of form control
-    */
+   // override for each type of input
    public validate() {
       return true;
    }
 
 
-   /**
-    * Focus this form input
-    * Override this for each type of form control
-    */
+   // override for each type of input
    public focus() {}
+
+
+   public updateValueProp(value: any) {
+      this.$emit('input', value);
+   }
 }

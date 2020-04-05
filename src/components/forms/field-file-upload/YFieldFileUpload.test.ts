@@ -5,12 +5,12 @@ import { i18n } from '.jest/vue-setup';
 
 describe('YFieldFileUpload', () => {
 
-   test('creates component - shallow', () => {
+   test('Creates component - shallow', () => {
       const wrapper = shallowMount(YFieldFileUpload, { i18n });
       expect(wrapper.is(YFieldFileUpload)).toBe(true);
    });
 
-   test('creates component - full', () => {
+   test('Creates component - full', () => {
       const wrapper = mount(YFieldFileUpload, { i18n });
       expect(wrapper.is(YFieldFileUpload)).toBe(true);
    });

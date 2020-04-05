@@ -1,5 +1,5 @@
 import YFieldNumber from './YFieldNumber.vue';
-import { createStory, StoryLine } from '.storybook/story-utils/custom-story';
+import { createDocs, createStory, StoryLine } from '.storybook/story-utils/custom-story';
 import { formFieldProps } from '.storybook/story-utils/knob-props';
 import { number, withKnobs } from '@storybook/addon-knobs';
 
@@ -60,3 +60,6 @@ export default {
    decorators: [withKnobs],
 };
 export const default_ = createStory(vue, storyLines);
+export const docs = createDocs(`
+
+`);

@@ -38,8 +38,8 @@
             this.hasScrollbar = (this.nativeElem.clientHeight < this.nativeElem.scrollHeight);
          }
 
-         // emit event
-         this.$emit('input', event);
+
+         this.updateValueProp(event);
       }
 
       /** Capture reference to native element on focus */

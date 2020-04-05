@@ -1,5 +1,5 @@
 import YButtonSubmit from './YButtonSubmit.vue';
-import { createStory, StoryLine } from '.storybook/story-utils/custom-story';
+import { createDocs, createStory, StoryLine } from '.storybook/story-utils/custom-story';
 import { buttonProps } from '.storybook/story-utils/knob-props';
 import { boolean, number, withKnobs } from '@storybook/addon-knobs';
 
@@ -41,3 +41,6 @@ export default {
    decorators: [withKnobs],
 };
 export const default_ = createStory(vue, storyLines);
+export const docs = createDocs(`
+
+`);

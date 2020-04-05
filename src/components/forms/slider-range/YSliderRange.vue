@@ -1,8 +1,4 @@
 <script lang="ts">
-   /**
-    * Used when user needs to choose an interval from a spectrum.
-    */
-
    import { Component, Mixins, Prop } from 'vue-property-decorator';
    import YBaseInputSlider, { Range } from '../YBaseInputSlider';
    import { QRange } from 'quasar';
@@ -13,43 +9,14 @@
    })
    export default class YSliderRange extends Mixins(YBaseInputSlider) {
 
-      /** Content props */
       @Prop({ default: () => ({ min: 0, max: 0 }) }) public value!: Range;
-
-      /** Config props */
       @Prop({ default: false, type: Boolean }) public isFixed!: number;
 
-      /** States */
-      public labelElems: HTMLElement[] = [];
 
-      /** Limit the decimals when no steps */
-      public onInput(value: Range) {
-         // limit decimals
-         if (this.valueStep === 0 && this.stepDecimals > 0) {
-            const tens = 10 ** this.stepDecimals;
-            value.min = Math.round(value.min * tens) / tens;
-            value.max = Math.round(value.max * tens) / tens;
+      public labelElems: HTMLElement[] = []; // bug: Range labels are different from model
 
-            // update text manually, fail gracefully
-            if (this.labelElems.length === 2) {
-               this.labelElems[0].innerHTML = String(value.min);
-               this.labelElems[1].innerHTML = String(value.max);
-            }
-         }
 
-         // update
-         this.$emit('input', value);
-
-         // mark as dirty and without error
-         this.isDirty = true;
-         this.innerError = '';
-      }
-
-      /**
-       * Lifecycle hook
-       * Bug fix: range labels are different from model
-       * Store html elements
-       */
+      // Override
       public mounted() {
          if (this.$refs.qRange) {
             // @ts-ignore
@@ -58,6 +25,27 @@
                this.labelElems = this.$refs.qRange.$el.querySelectorAll('.q-slider__pin-text');
             }
          }
+      }
+
+
+      public onInput(value: Range) {
+         // limit decimals when no steps
+
+         if (this.valueStep === 0 && this.stepDecimals > 0) {
+            const tens = 10 ** this.stepDecimals;
+            value.min = Math.round(value.min * tens) / tens;
+            value.max = Math.round(value.max * tens) / tens;
+
+            // bug fix: update text manually, fail gracefully
+            if (this.labelElems.length === 2) {
+               this.labelElems[0].innerHTML = String(value.min);
+               this.labelElems[1].innerHTML = String(value.max);
+            }
+         }
+
+         this.isDirty = true;
+         this.innerError = '';
+         this.updateValueProp(value);
       }
 
    }

@@ -23,8 +23,8 @@
          if (this.isRequired) {
             this.innerError = (value ? '' : this.$locale.all.required);
          }
-         // change value
-         this.$emit('input', value);
+
+         this.updateValueProp(value);
       }
 
       /** Check value and update error */

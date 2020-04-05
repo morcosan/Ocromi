@@ -1,5 +1,5 @@
 import YSliderRange from './YSliderRange.vue';
-import { createStory, StoryLine } from '.storybook/story-utils/custom-story';
+import { createDocs, createStory, StoryLine } from '.storybook/story-utils/custom-story';
 import { formSliderProps } from '.storybook/story-utils/knob-props';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
 
@@ -64,3 +64,8 @@ export default {
    decorators: [withKnobs],
 };
 export const default_ = createStory(vue, storyLines);
+export const docs = createDocs(`
+/**
+ * Used when user needs to choose an interval from a spectrum.
+ */
+`);

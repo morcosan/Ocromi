@@ -26,8 +26,8 @@
             this.error = (value ? '' : this.$locale.all.required);
          }
 
-         // change value
-         this.$emit('input', value);
+
+         this.updateValueProp(value);
       }
 
       /**

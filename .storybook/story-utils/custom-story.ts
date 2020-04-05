@@ -76,6 +76,14 @@ export function createStory(vue: object, stories: StoryLine[]) {
 }
 
 
+export function createDocs(docsStr: string) {
+   return () => `
+      <div class="story-display">
+         <pre>${ docsStr }</pre>
+      </div>
+   `;
+}
+
 /** Crates a story based on template */
 export function createBasicStory(vue: object, template: string) {
    return () => ({

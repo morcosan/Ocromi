@@ -75,7 +75,7 @@
 
 <template>
    <QInput
-      @input="$emit('input', $event)"
+      @input="updateValueProp($event)"
       :value="value"
       :mask="inputMask"
       :label="finalLabel"

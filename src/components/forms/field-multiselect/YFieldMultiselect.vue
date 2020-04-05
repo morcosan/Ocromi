@@ -46,8 +46,8 @@
             value = value.slice(0, this.selectionLimit);
          }
 
-         // emit input event
-         this.$emit('input', value);
+
+         this.updateValueProp(value);
       }
 
       /** Create new options */

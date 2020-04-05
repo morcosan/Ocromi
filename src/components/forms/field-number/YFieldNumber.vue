@@ -79,8 +79,8 @@
          if (!this.isReadonly) {
             // calculate new value
             const newValue: number = Number(this.value) + direction * this.valueStep;
-            // apply
-            this.$emit('input', newValue);
+
+            this.updateValueProp(newValue);
          }
       }
 
@@ -135,16 +135,16 @@
          // check paste event
          const value: number = Number(this.value);
          if (isNaN(value)) {
-            // update with 0
-            this.$emit('input', 0);
+
+            this.updateValueProp(0);
          }
          else {
             // remove additional decimals
             if (this.decimals > -1) {
                const tens = 10 ** this.decimals;
                const newValue = Math.floor(Number(this.value) * tens) / tens;
-               // update
-               this.$emit('input', newValue);
+
+               this.updateValueProp(newValue);
             }
          }
       }
@@ -154,12 +154,12 @@
          // check if string
          if (typeof this.value === 'string') {
             if (this.value === '-') {
-               // update
-               this.$emit('input', '');
+
+               this.updateValueProp('');
             }
             else if (this.value.slice(-1) === '.') {
-               // update
-               this.$emit('input', Number(this.value));
+
+               this.updateValueProp(Number(this.value));
             }
          }
       }
@@ -170,7 +170,7 @@
 
 <template>
    <QInput
-      @input="$emit('input', $event)"
+      @input="updateValueProp($event)"
       @keydown="onKeyDown"
       @keyup="onKeyUp"
       @blur="onBlur"

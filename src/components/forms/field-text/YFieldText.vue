@@ -33,7 +33,7 @@
 
 <template>
    <QInput
-      @input="$emit('input', $event)"
+      @input="updateValueProp($event)"
       :value="value"
       :label="finalLabel"
       :hint="hint"

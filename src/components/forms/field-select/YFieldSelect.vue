@@ -32,7 +32,7 @@
 
 <template>
    <QSelect
-      @input="$emit('input', $event)"
+      @input="updateValueProp($event)"
       @filter="onFilterInput"
       :value="value"
       :options="currOptions"

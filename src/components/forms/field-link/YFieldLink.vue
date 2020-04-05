@@ -103,8 +103,8 @@
             value = url.substr(https.length);
          }
 
-         // update value
-         this.$emit('input', value);
+
+         this.updateValueProp(value);
          // stop paste event
          event.preventDefault();
       }
@@ -152,7 +152,7 @@
 
 <template>
    <QInput
-      @input="$emit('input', $event)"
+      @input="updateValueProp($event)"
       @keydown="onKeyDown"
       @blur="onBlur"
       :value="value"

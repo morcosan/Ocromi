@@ -5,12 +5,12 @@ import { i18n } from '.jest/vue-setup';
 
 describe('YGroupRadio', () => {
 
-   test('creates component - shallow', () => {
+   test('Creates component - shallow', () => {
       const wrapper = shallowMount(YGroupRadio, { i18n });
       expect(wrapper.is(YGroupRadio)).toBe(true);
    });
 
-   test('creates component - full', () => {
+   test('Creates component - full', () => {
       const wrapper = mount(YGroupRadio, { i18n });
       expect(wrapper.is(YGroupRadio)).toBe(true);
    });

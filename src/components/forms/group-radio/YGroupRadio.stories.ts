@@ -1,5 +1,5 @@
 import YGroupRadio from './YGroupRadio.vue';
-import { createStory, StoryLine } from '.storybook/story-utils/custom-story';
+import { createDocs, createStory, StoryLine } from '.storybook/story-utils/custom-story';
 import { formGroupProps } from '.storybook/story-utils/knob-props';
 import { withKnobs } from '@storybook/addon-knobs';
 
@@ -66,3 +66,6 @@ export default {
    decorators: [withKnobs],
 };
 export const default_ = createStory(vue, storyLines);
+export const docs = createDocs(`
+
+`);
