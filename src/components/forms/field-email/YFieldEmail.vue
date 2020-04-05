@@ -68,7 +68,7 @@
       :rules="finalRules"
       :readonly="isReadonly"
       :disable="isDisabled"
-      :class="{ 'y-form-control-spacing': hasSpacing }"
+      :class="{ 'y-field-email': true, 'y-form-control-spacing': hasSpacing }"
       type="email"
       ref="qField"
       outlined

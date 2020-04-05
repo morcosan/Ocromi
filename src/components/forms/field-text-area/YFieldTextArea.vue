@@ -65,7 +65,11 @@
       :error="error !== ''"
       :rules="finalRules"
       :autogrow="isDynamic"
-      :class="{ 'y-field-text-area--scrollbar': hasScrollbar, 'y-form-control-spacing': hasSpacing }"
+      :class="{
+         'y-field-text-area': true,
+         'y-field-text-area--has-scrollbar': hasScrollbar,
+         'y-form-control-spacing': hasSpacing
+      }"
       :disable="isDisabled"
       type="textarea"
       ref="qField"

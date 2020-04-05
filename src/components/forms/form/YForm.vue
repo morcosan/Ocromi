@@ -21,6 +21,7 @@
 <template>
    <QForm
       @submit="$emit('submit')"
+      class="y-form"
       greedy
    >
       <slot/>

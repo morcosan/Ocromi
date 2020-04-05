@@ -35,6 +35,7 @@
       :stack="isStacked"
       :no-caps="noCaps"
       :rounded="isRounded"
+      class="y-button"
    />
 </template>
 

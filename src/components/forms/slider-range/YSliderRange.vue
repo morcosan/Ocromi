@@ -66,7 +66,7 @@
 
 <template>
    <div :class="{
-		'y-form-box y-slider': true,
+		'y-form-box y-slider-base y-slider-range': true,
 		'y-form-box--required': isRequired,
 		'y-form-control-spacing': hasSpacing,
 		'text-negative': innerError,

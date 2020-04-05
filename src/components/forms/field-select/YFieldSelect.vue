@@ -44,7 +44,7 @@
       :error="error !== ''"
       :rules="finalRules"
       :bg-color="bgColor"
-      :class="{ 'y-form-control-spacing': hasSpacing }"
+      :class="{ 'y-field-select': true, 'y-form-control-spacing': hasSpacing }"
       input-debounce="0"
       ref="qSelect"
       outlined

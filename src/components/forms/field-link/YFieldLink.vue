@@ -164,7 +164,7 @@
       :error="!!error || !!innerError"
       :error-message="error || innerError"
       :disable="isDisabled"
-      :class="{ 'y-form-control-spacing': hasSpacing }"
+      :class="{ 'y-field-link': true, 'y-form-control-spacing': hasSpacing }"
       prefix="http://"
       type="text"
       ref="qField"

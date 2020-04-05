@@ -141,6 +141,7 @@
       :rules="finalRules"
       :bg-color="bgColor"
       :class="{
+         'y-field-file-upload': true,
 			'y-form-control-spacing': hasSpacing,
 			'y-field-file-upload--empty': (value.length === 0),
 		}"

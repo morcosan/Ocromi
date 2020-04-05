@@ -44,7 +44,7 @@
       :readonly="isReadonly"
       :disable="isDisabled"
       :bg-color="bgColor"
-      :class="{ 'y-form-control-spacing': hasSpacing }"
+      :class="{ 'y-field-text': true, 'y-form-control-spacing': hasSpacing }"
       type="text"
       ref="qField"
       outlined

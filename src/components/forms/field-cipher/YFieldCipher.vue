@@ -87,7 +87,7 @@
       :error="error !== ''"
       :rules="finalRules"
       :disable="isDisabled"
-      :class="{ 'y-form-control-spacing': hasSpacing }"
+      :class="{ 'y-field-cipher': true, 'y-form-control-spacing': hasSpacing }"
       type="text"
       ref="qField"
       unmasked-value
