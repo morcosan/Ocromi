@@ -14,7 +14,7 @@
    import { Component, Mixins, Prop, Watch } from 'vue-property-decorator';
    import YBaseFormField from '../../mixins/YBaseFormField';
    import { QInput } from 'quasar';
-   import { countChar } from '../../../utils';
+   import Utils from '../../../utils';
 
 
    @Component({
@@ -58,7 +58,7 @@
          this.numChars = 0;
          if (this.inputMask !== '') {
             for (const char of ['#', 'S', 'A', 'a', 'N', 'X', 'x']) {
-               this.numChars += countChar(this.inputMask, char);
+               this.numChars += Utils.countSubstrInString(char, this.inputMask);
             }
          }
       }

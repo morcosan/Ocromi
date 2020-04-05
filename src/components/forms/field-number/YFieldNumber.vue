@@ -7,7 +7,7 @@
    import YBaseFormField from '../../mixins/YBaseFormField';
    import { QInput, QTooltip } from 'quasar';
    import { numberRegex } from '../../../utils/regex';
-   import { insertInString, isSpecialKey } from '../../../utils';
+   import Utils from '../../../utils';
 
 
    @Component({
@@ -108,10 +108,10 @@
          }
 
          // check if special key
-         if (!isSpecialKey(event)) {
+         if (!Utils.isSpecialKey(event)) {
             // @ts-ignore
             const pos = event.target.selectionStart;
-            let newValue: string = insertInString(String(this.value), pos, event.key);
+            let newValue: string = Utils.insertSubstrInString(event.key, String(this.value), pos);
             // if key is dot, add a 0 to validate
             if (event.key === '.') {
                newValue += '0';

@@ -1,15 +1,11 @@
-/**
- * List of regex for various purposes
- */
-
 import * as VerEx from 'verbal-expressions';
 
 
-/** Validate email addresses: https://emailregex.com/ */
+// validate email addresses: https://emailregex.com/
 export const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 
-/** Validate characters for email address */
+// validate allowed characters for email address
 export const emailCharRegex = VerEx()
    .range('0', '9', 'a', 'z')
    .or()
@@ -17,11 +13,11 @@ export const emailCharRegex = VerEx()
    .removeModifier('g');
 
 
-/** Validate IP address */
+// validate IP address
 export const ipRegex = /^(?!0)(?!.*\.$)((1?\d?\d|25[0-5]|2[0-4]\d)(\.|$)){4}$/;
 
 
-/** Validate URL without http */
+// validate URL without http
 export const hyperlinkRegex = VerEx()
    .find(
       VerEx()
@@ -33,5 +29,5 @@ export const hyperlinkRegex = VerEx()
    .removeModifier('g');
 
 
-/** Validate number */
+// validate number
 export const numberRegex = /^-?\d*(\.\d+)?$/;

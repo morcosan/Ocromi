@@ -7,7 +7,7 @@
    import YBaseFormField from '../../mixins/YBaseFormField';
    import { QInput } from 'quasar';
    import { emailCharRegex, emailRegex } from '../../../utils/regex';
-   import { isSpecialKey } from '../../../utils';
+   import Utils from '../../../utils';
 
 
    @Component({
@@ -41,7 +41,7 @@
       /** Block invalid characters on key down */
       public onKeyDown(event: KeyboardEvent) {
          // check if special key
-         if (isSpecialKey(event)) {
+         if (Utils.isSpecialKey(event)) {
             return;
          }
          // check if key is allowed

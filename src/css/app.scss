@@ -1,15 +1,17 @@
-// Global CSS
-
-@import 'overwrites/native-html';
-
-@import 'quasar-overwrites/q-field';
-@import 'quasar-overwrites/q-tooltip';
-@import 'quasar-overwrites/q-select';
-@import 'quasar-overwrites/q-slider';
-@import 'quasar-overwrites/q-date';
-@import 'quasar-overwrites/q-file';
-@import 'quasar-overwrites/q-btn';
+/**
+ * Global CSS
+ */
 
 @import 'variables';
+
+@import 'overrides/native-html';
+
+@import 'overrides/quasar/q-field';
+@import 'overrides/quasar/q-tooltip';
+@import 'overrides/quasar/q-select';
+@import 'overrides/quasar/q-slider';
+@import 'overrides/quasar/q-date';
+@import 'overrides/quasar/q-file';
+@import 'overrides/quasar/q-btn';
 
 @import 'modules/forms';
