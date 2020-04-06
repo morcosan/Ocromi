@@ -5,6 +5,8 @@ Read https://cssguidelin.es/
 Also read https://clubmate.fi/oocss-acss-bem-smacss-what-are-they-what-should-i-use/
 
 
+<br>
+
 ## Naming conventions
 Use BEM notation.
 Never create a class name by Sass concatenation.
@@ -24,6 +26,8 @@ Prefix all block classes with a letter to avoid external collisions.
 ```
 
 
+<br>
+
 ## Selectors
 Use class selector in 99% of cases.
 Avoid using the HTML tag.
@@ -37,9 +41,13 @@ div.y-my-class[my-attr='special'] {}
 ```
 
 
+<br>
+
 ## Indentation
 Use 3 spaces, compact and visible. 
 
+
+<br>
 
 # Spacing
 - After comma
@@ -64,6 +72,8 @@ Use 3 spaces, compact and visible.
 ``` 
 
 
+<br>
+
 # Brackets
 Put the opening bracket at the end of line.
 Do not indent closing bracket.
@@ -81,6 +91,8 @@ Use inline brackets only if:
 ```
 
 
+<br>
+
 ## Quotes
 Use single quotes.
 Add quotes to attribute selectors.
@@ -90,6 +102,8 @@ Add quotes to attribute selectors.
 }
 ```
 
+
+<br>
 
 ## Colors
 Use lower case for hex codes.
@@ -104,15 +118,19 @@ rgba(255, 0, 0, 0.5)
 ```
 
 
+<br>
+
 ## Semi-colons
 Always use semi-colons.
 
+
+<br>
 
 ## Comments
 Use only these 3 types of comments:
 - inline comments, lower case 
 ```
-// simple omment
+// simple comment
 ```
 - header comments, upper case
 ```
@@ -120,11 +138,9 @@ Use only these 3 types of comments:
  * Header comment
  */
 ```
-- inline header comments, upper case
-```
-/** Header comment */
-```
 
+
+<br>
 
 ## Property order
 Don't use alphabetical order.
@@ -167,6 +183,8 @@ For more than 5 properties, add empty lines between categories.
 }
 ```
 
+
+<br>
 
 ## Numbers
 Use the leading 0 for clarity.

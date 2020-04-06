@@ -9,9 +9,8 @@ module.exports = {
       '@storybook/addon-storysource',
    ],
    webpackFinal: async (config, { configType }) => {
-      // `configType` has a value of 'DEVELOPMENT' or 'PRODUCTION'
-      // You can change the configuration based on that.
-      // 'PRODUCTION' is used when building the static version of storybook.
+      // configType has a value of 'DEVELOPMENT' or 'PRODUCTION'
+      // 'PRODUCTION' is used when building the static version of storybook
 
       // add SCSS loader
       config.module.rules.push({

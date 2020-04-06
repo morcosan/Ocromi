@@ -14,6 +14,7 @@
       "storybook": "start-storybook",
       "build:storybook": "build-storybook -c .storybook -o dist/storybook",
       "lint": "eslint ./ --ext .js,.ts,.vue",
+      "lint:file": "eslint",
       "test": "jest",
       "test:file": "jest --",
       "test:clear": "jest --clearCache",

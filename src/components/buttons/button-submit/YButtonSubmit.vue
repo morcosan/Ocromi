@@ -1,10 +1,6 @@
 <script lang="ts">
-   /**
-    * Used when user needs to take the submit action for certain data.
-    */
-
-   import { Component, Mixins, Prop, Watch } from 'vue-property-decorator';
-   import YBaseButton from '../../mixins/YBaseButton';
+   import { Component, Mixins, Override, Prop, Watch } from '../../../core/decorators';
+   import YBaseButton from '../YBaseButton';
    import { QBtn, QSpinnerHourglass } from 'quasar';
 
 
@@ -13,27 +9,34 @@
    })
    export default class YButtonSubmit extends Mixins(YBaseButton) {
 
-      /** Config props */
       @Prop({ default: false, type: Boolean }) public isLoading!: boolean;
       @Prop({ default: 2000 }) public loadingTime!: number;
 
-      /** States */
-      public percentage: number = 0;
-      public loadingTimeout!: NodeJS.Timeout;
 
-      /** Prop watcher */
+      public percentage: number = 0;
+      public intervalID!: number;
+
+
       @Watch('isLoading')
-      public onChangeIsLoading(value: string, oldValue: string) {
+      public onChange_isLoading() {
          if (this.isLoading) {
-            this._startLoading();
+            this.startLoading();
          }
          else {
-            clearInterval(this.loadingTimeout);
+            clearInterval(this.intervalID);
          }
       }
 
-      /** Start loading percentage increase */
-      private _startLoading() {
+
+      @Override
+      public mounted() {
+         if (this.isLoading) {
+            this.startLoading();
+         }
+      }
+
+
+      private startLoading() {
          // reset percentage
          this.percentage = 0;
 
@@ -43,23 +46,16 @@
          const interval = totalTime / 100;
 
          // start loading
-         this.loadingTimeout = setInterval(() => {
-            if (this.percentage < 99) {
-               this.percentage += 1;
-               console.log(this.percentage);
-            }
-            else {
-               // stop interval
-               clearInterval(this.loadingTimeout);
-            }
-         }, interval);
+         this.intervalID = setInterval(this.onLoading, interval);
       }
 
-      /** Lifecycle hook */
-      public mounted() {
-         // if loading is set, start loading
-         if (this.isLoading) {
-            this._startLoading();
+
+      private onLoading() {
+         if (this.percentage < 99) {
+            this.percentage += 1;
+         }
+         else {
+            clearInterval(this.intervalID);
          }
       }
 
@@ -69,7 +65,6 @@
 
 <template>
    <QBtn
-      @click="$emit('click')"
       :disable="isDisabled"
       :loading="isLoading"
       :percentage="percentage"
@@ -77,6 +72,7 @@
       color="primary"
       class="y-button-submit"
       size="md"
+      @click="$emit('click')"
    >
       {{ label }}
 
