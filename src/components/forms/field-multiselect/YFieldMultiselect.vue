@@ -69,9 +69,6 @@
 
 <template>
    <QSelect
-      @input="onInput"
-      @filter="onFilterInput"
-      @new-value="onNewOption"
       :value="value"
       :options="currOptions"
       :label="finalLabel"
@@ -85,23 +82,26 @@
       :new-value-mode="canAddNew ? 'add-unique' : undefined"
       :class="{ 'y-field-multiselect': true, 'y-input-spacing': hasSpacing }"
       input-debounce="0"
-      ref="qSelect"
       lazy-rules
       clearable
       multiple
       use-chips
       use-input
       outlined
+      @input="onInput"
+      @filter="onFilterInput"
+      @new-value="onNewOption"
+      ref="qSelect"
    >
       <template v-slot:selected-item="scope">
          <QChip
-            @remove="scope.removeAtIndex(scope.index)"
             :color="(scope && scope.opt.isNew) ? 'primary' : undefined"
             :tabindex="scope ? scope.tabindex : -1"
             removable
             outline
             square
             dense
+            @remove="scope.removeAtIndex(scope.index)"
          >
             {{ scope ? scope.opt.label : '' }}
          </QChip>

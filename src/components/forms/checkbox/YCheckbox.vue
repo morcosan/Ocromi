@@ -45,17 +45,19 @@
 
 
 <template>
-   <div :class="{
-		'y-checkbox': true,
-		'y-checkbox--required': isRequired,
-		'y-input-spacing': hasSpacing,
-	}">
+   <div
+      :class="{
+         'y-checkbox': true,
+         'y-checkbox--required': isRequired,
+         'y-input-spacing': hasSpacing,
+      }"
+   >
       <QCheckbox
-         @input="onInput"
          :value="value"
          :disable="isDisabled"
          :color="error ? 'negative' : undefined"
          :keep-color="!!error"
+         @input="onInput"
          ref="qCheckbox"
       >
          <div :class="{ 'text-negative': error }">

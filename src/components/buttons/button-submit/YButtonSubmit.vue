@@ -65,7 +65,6 @@
 
 <template>
    <QBtn
-      @click="$emit('click')"
       :disable="isDisabled"
       :loading="isLoading"
       :percentage="percentage"
@@ -73,6 +72,7 @@
       color="primary"
       class="y-button-submit"
       size="md"
+      @click="$emit('click')"
    >
       {{ label }}
 

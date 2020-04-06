@@ -161,10 +161,6 @@
 
 <template>
    <QInput
-      @input="updateValueProp($event)"
-      @keydown="onKeyDown"
-      @keyup="onKeyUp"
-      @blur="onBlur"
       :value="value"
       :label="finalLabel"
       :hint="hint"
@@ -179,25 +175,29 @@
       :step="valueStep"
       :bottom-slots="decimals > 0"
       type="text"
-      ref="qField"
       outlined
       lazy-rules
+      @input="updateValueProp($event)"
+      @keydown="onKeyDown"
+      @keyup="onKeyUp"
+      @blur="onBlur"
+      ref="qField"
    >
       <template v-slot:append>
          <div class="y-field-number__control">
             <button
-               @click="onClickArrow(1)"
                :class="['y-field-number__up', (isReadonly ? 'cursor-not-allowed' : 'cursor-pointer')]"
                tabindex="-1"
+               @click="onClickArrow(1)"
             >
                <QIcon name="keyboard_arrow_up" color="grey-8"/>
                <QTooltip v-if="!isReadonly">+ {{ valueStep }}</QTooltip>
             </button>
 
             <button
-               @click="onClickArrow(-1)"
                :class="['y-field-number__down', (isReadonly ? 'cursor-not-allowed' : 'cursor-pointer')]"
                tabindex="-1"
+               @click="onClickArrow(-1)"
             >
                <QIcon name="keyboard_arrow_down" color="grey-8"/>
                <QTooltip v-if="!isReadonly">- {{ valueStep }}</QTooltip>

@@ -30,8 +30,6 @@
 
 <template>
    <QSelect
-      @input="updateValueProp($event)"
-      @filter="onFilterInput"
       :value="value"
       :options="currOptions"
       :label="finalLabel"
@@ -44,11 +42,13 @@
       :bg-color="bgColor"
       :class="{ 'y-field-select': true, 'y-input-spacing': hasSpacing }"
       input-debounce="0"
-      ref="qSelect"
       outlined
       lazy-rules
       clearable
       use-input
+      @input="updateValueProp($event)"
+      @filter="onFilterInput"
+      ref="qSelect"
    />
 </template>
 

@@ -65,7 +65,6 @@
 
 <template>
    <QInput
-      @input="updateValueProp($event)"
       :value="value"
       :mask="inputMask"
       :label="finalLabel"
@@ -79,10 +78,11 @@
       :disable="isDisabled"
       :class="{ 'y-field-cipher': true, 'y-input-spacing': hasSpacing }"
       type="text"
-      ref="qField"
       unmasked-value
       lazy-rules
       outlined
+      @input="updateValueProp($event)"
+      ref="qField"
    />
 </template>
 

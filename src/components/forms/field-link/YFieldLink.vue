@@ -146,9 +146,6 @@
 
 <template>
    <QInput
-      @input="updateValueProp($event)"
-      @keydown="onKeyDown"
-      @blur="onBlur"
       :value="value"
       :label="finalLabel"
       :hint="hint"
@@ -161,17 +158,20 @@
       :class="{ 'y-field-link': true, 'y-input-spacing': hasSpacing }"
       prefix="http://"
       type="text"
-      ref="qField"
       input-class="js-native-input"
       outlined
+      @input="updateValueProp($event)"
+      @keydown="onKeyDown"
+      @blur="onBlur"
+      ref="qField"
    >
       <template v-if="!error && !innerError && value" v-slot:append>
          <QIcon
-            @click="openURL"
-            @keydown="onKeyDownIcon"
             :class="(isReadonly ? 'cursor-not-allowed' : 'cursor-pointer')"
             :tabindex="isReadonly ? -1 : 0"
             name="open_in_new"
+            @click="openURL"
+            @keydown="onKeyDownIcon"
          >
             <QTooltip v-if="!isReadonly">{{ $locale.fieldLink.tooltip }}</QTooltip>
          </QIcon>

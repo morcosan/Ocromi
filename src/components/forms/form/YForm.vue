@@ -12,9 +12,9 @@
 
 <template>
    <QForm
-      @submit="$emit('submit')"
       class="y-form"
       greedy
+      @submit="$emit('submit')"
    >
       <slot/>
    </QForm>

@@ -146,9 +146,6 @@
 
 <template>
    <QInput
-      @input="onInput"
-      @focus="() => (hasFocus = true)"
-      @blur="() => (hasFocus = false)"
       v-model="inputValue"
       :label="finalLabel"
       :hint="(isDisabled || isReadonly) ? '' : $locale.fieldDate.hint"
@@ -162,34 +159,37 @@
       :mask="!!inputValue || hasFocus ? inputMask : ''"
       fill-mask="_"
       type="text"
-      ref="qField"
       unmasked-value
       hide-hint
       lazy-rules
       outlined
+      @input="onInput"
+      @focus="() => (hasFocus = true)"
+      @blur="() => (hasFocus = false)"
+      ref="qField"
    >
       <template v-slot:append>
          <QIcon
-            @click="onClickDateIcon"
-            @keydown="onKeyDownIcon"
             :class="(isReadonly ? 'cursor-not-allowed' : 'cursor-pointer')"
             :tabindex="isReadonly ? -1 : 0"
             name="event"
+            @click="onClickDateIcon"
+            @keydown="onKeyDownIcon"
          >
             <QPopupProxy
-               @show="onShowCalendar"
                transition-show="scale"
                transition-hide="scale"
+               @show="onShowCalendar"
                ref="qPopupProxy"
             >
                <QDate
-                  @input="onDateSelect"
                   :value="value"
                   :mask="dateFormatQuasarISO"
                   :options="customDatesAdapter"
                   :locale="$locale.fieldDate.config"
-                  ref="qDate"
                   today-btn
+                  @input="onDateSelect"
+                  ref="qDate"
                />
             </QPopupProxy>
 

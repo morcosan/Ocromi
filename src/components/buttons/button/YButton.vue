@@ -22,7 +22,6 @@
 
 <template>
    <QBtn
-      @click="$emit('click')"
       :label="label"
       :color="color"
       :icon="icon"
@@ -30,6 +29,7 @@
       :no-caps="noCaps"
       :rounded="isRounded"
       class="y-button"
+      @click="$emit('click')"
    />
 </template>
 

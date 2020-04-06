@@ -50,8 +50,6 @@
 
 <template>
    <QInput
-      @input="onInput"
-      @focus="onFocus"
       :value="value"
       :label="finalLabel"
       :hint="hint"
@@ -69,9 +67,11 @@
       }"
       :disable="isDisabled"
       type="textarea"
-      ref="qField"
       outlined
       lazy-rules
+      @input="onInput"
+      @focus="onFocus"
+      ref="qField"
    />
 </template>
 

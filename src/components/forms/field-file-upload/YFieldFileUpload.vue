@@ -114,7 +114,6 @@
 
 <template>
    <QFile
-      @input="onInput"
       :value="value"
       :label="finalLabel"
       :placeholder="placeholder"
@@ -136,29 +135,30 @@
 			'y-field-file-upload--empty': (value.length === 0),
 		}"
       :counter-label="getCounterLabel"
-      ref="qField"
       counter
       outlined
       lazy-rules
+      @input="onInput"
+      ref="qField"
    >
       <template v-slot:append>
          <QIcon
             v-if="value.length === 0"
-            @click="onClickAttachIcon"
-            @keydown="onKeyDownAttachIcon"
             :class="(isReadonly ? 'cursor-not-allowed' : 'cursor-pointer')"
             :tabindex="isReadonly ? -1 : 0"
             name="attach_file"
             color="grey-8"
+            @click="onClickAttachIcon"
+            @keydown="onKeyDownAttachIcon"
          >
             <QTooltip v-if="!isReadonly">{{ $locale.fieldFileUpload.tooltipPickFiles }}</QTooltip>
          </QIcon>
 
          <QIcon
             v-if="value.length > 0"
-            @click="onClickRemoveFile(-1, $event)"
             :class="(isReadonly ? 'cursor-not-allowed' : 'cursor-pointer')"
             name="clear_all"
+            @click="onClickRemoveFile(-1, $event)"
          >
             <QTooltip v-if="!isReadonly">{{ $locale.fieldFileUpload.tooltipRemoveFiles }}</QTooltip>
          </QIcon>
@@ -181,10 +181,14 @@
             <div class="ellipsis relative-position col"> {{ scope ? scope.file.name : '' }}</div>
 
             <QAvatar
-               @click="onClickRemoveFile(scope.index, $event)"
                :class="{ 'y-chip__button': true, 'cursor-pointer': !isReadonly }"
+               @click="onClickRemoveFile(scope.index, $event)"
             >
-               <QIcon name="close" size="20px" color="grey-7"/>
+               <QIcon
+                  name="close"
+                  size="20px"
+                  color="grey-7"
+               />
             </QAvatar>
          </QChip>
 

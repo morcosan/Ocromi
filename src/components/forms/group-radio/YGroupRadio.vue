@@ -35,33 +35,37 @@
 
 
 <template>
-   <div :class="{
-		'y-input-box y-group-radio': true,
-		'y-input-box--required': isRequired,
-		'y-input-spacing': hasSpacing,
-		'text-negative': innerError,
-	}">
-      <div :class="{
-			['y-form-box__fieldset bg-' + bgColor]: true,
-			'y-form-box__fieldset--with-error': innerError,
-			'y-form-box__fieldset--labeled': !!label,
-			'y-form-box__fieldset--disabled': isDisabled,
-			'y-form-box__fieldset--readonly': isReadonly,
-		}">
+   <div
+      :class="{
+         'y-input-box y-group-radio': true,
+         'y-input-box--required': isRequired,
+         'y-input-spacing': hasSpacing,
+         'text-negative': innerError,
+      }"
+   >
+      <div
+         :class="{
+            ['y-form-box__fieldset bg-' + bgColor]: true,
+            'y-form-box__fieldset--with-error': innerError,
+            'y-form-box__fieldset--labeled': !!label,
+            'y-form-box__fieldset--disabled': isDisabled,
+            'y-form-box__fieldset--readonly': isReadonly,
+         }"
+      >
          <div v-if="!!label" :class="{ ['y-form-box__label text-subtitle1 bg-' + bgColor]: true }">
             {{ isRequired ? (label + ' *') : label }}
          </div>
 
          <QOptionGroup
-            @input="onInput"
-            @keydown="onKeyDown"
             :value="value"
             :options="options"
             :disable="isDisabled"
             :color="innerError ? 'negative' : undefined"
             :keep-color="!!innerError"
-            ref="qOptionGroup"
             type="radio"
+            @input="onInput"
+            @keydown="onKeyDown"
+            ref="qOptionGroup"
          />
       </div>
 

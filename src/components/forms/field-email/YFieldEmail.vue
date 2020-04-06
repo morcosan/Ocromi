@@ -52,8 +52,6 @@
 
 <template>
    <QInput
-      @input="updateValueProp($event)"
-      @keydown="onKeyDown"
       :value="value"
       :label="finalLabel"
       :hint="hint"
@@ -66,9 +64,11 @@
       :disable="isDisabled"
       :class="{ 'y-field-email': true, 'y-input-spacing': hasSpacing }"
       type="email"
-      ref="qField"
       outlined
       lazy-rules
+      @input="updateValueProp($event)"
+      @keydown="onKeyDown"
+      ref="qField"
    />
 </template>
 

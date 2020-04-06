@@ -119,8 +119,6 @@
 
 <template>
    <QInput
-      @input="updateValueProp($event)"
-      @keyup="onKeyUp"
       :type="showsPassword ? 'text' : 'password'"
       :value="value"
       :label="finalLabel"
@@ -138,17 +136,19 @@
 			'y-field-password--has-meter': hasMeter,
 			'y-input-spacing': hasSpacing
 		}"
-      ref="qField"
       outlined
       lazy-rules
+      @input="updateValueProp($event)"
+      @keyup="onKeyUp"
+      ref="qField"
    >
       <template v-slot:append>
          <QIcon
-            @click="onClickEyeIcon"
-            @keydown="onKeyDownIcon"
             :name="showsPassword ? 'visibility' : 'visibility_off'"
             :class="(isReadonly ? 'cursor-not-allowed' : 'cursor-pointer')"
             :tabindex="isReadonly ? -1 : 0"
+            @click="onClickEyeIcon"
+            @keydown="onKeyDownIcon"
          >
             <QTooltip v-if="!isReadonly">{{ $locale.fieldPassword.tooltip }}</QTooltip>
          </QIcon>

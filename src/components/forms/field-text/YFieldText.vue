@@ -30,7 +30,6 @@
 
 <template>
    <QInput
-      @input="updateValueProp($event)"
       :value="value"
       :label="finalLabel"
       :hint="hint"
@@ -43,9 +42,10 @@
       :bg-color="bgColor"
       :class="{ 'y-field-text': true, 'y-input-spacing': hasSpacing }"
       type="text"
-      ref="qField"
       outlined
       lazy-rules
+      @input="updateValueProp($event)"
+      ref="qField"
    />
 </template>
 
