@@ -1,4 +1,4 @@
-// reset button styles
+// reset button style
 button {
    padding: 0;
    border: none;
@@ -6,4 +6,16 @@ button {
    color: inherit;
    background-color: transparent;
    cursor: pointer;
+}
+
+
+// reset anchor style
+a,
+a:link,
+a:visited,
+a:hover,
+a:active {
+   color: inherit;
+   text-decoration: inherit;
+   font-weight: inherit;
 }

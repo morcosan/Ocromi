@@ -16,6 +16,8 @@
       public nativeInput!: HTMLElement;
       public canShowError: boolean = false;
       public innerError: string = '';
+      public prefix: string = 'https://';
+      public finalURL: string = '';
 
 
       @Watch('value')
@@ -97,6 +99,11 @@
       }
 
 
+      public onKeyUp() {
+         this.updateFinalURL();
+      }
+
+
       public onPaste(event: ClipboardEvent) {
          // get pasted url
          // @ts-ignore
@@ -122,7 +129,7 @@
       }
 
 
-      public onKeyDownIcon(event: KeyboardEvent) {
+      public onKeyDownButton(event: KeyboardEvent) {
          // activate button with space or enter
          if (event.key === ' ' || event.key === 'Enter') {
             event.preventDefault();
@@ -134,10 +141,25 @@
 
       public openURL() {
          if (!this.isReadonly) {
-            const url = 'http://' + this.value;
             // open URL in new tab
-            globalThis.open(url, '_blank');
+            globalThis.open(this.finalURL, '_blank');
          }
+      }
+
+
+      private updateFinalURL() {
+         const httpOptions = ['localhost', '127.0.0.1'];
+
+         let isHttp = false;
+         for (let i = 0; i < httpOptions.length; i++) {
+            if (this.value.includes(httpOptions[i])) {
+               isHttp = true;
+               break;
+            }
+         }
+
+         this.prefix = (isHttp ? 'http://' : 'https://');
+         this.finalURL = this.prefix + this.value;
       }
 
    }
@@ -156,25 +178,31 @@
       :error-message="error || innerError"
       :disable="isDisabled"
       :class="{ 'y-field-link': true, 'y-input-spacing': hasSpacing }"
-      prefix="http://"
+      :prefix="prefix"
       type="text"
       input-class="js-native-input"
       outlined
       @input="updateValueProp($event)"
       @keydown="onKeyDown"
+      @keyup="onKeyUp"
       @blur="onBlur"
       ref="qField"
    >
       <template v-if="!error && !innerError && value" v-slot:append>
-         <QIcon
-            :class="(isReadonly ? 'cursor-not-allowed' : 'cursor-pointer')"
+         <a
+            :href="finalURL"
             :tabindex="isReadonly ? -1 : 0"
-            name="open_in_new"
+            class="y-field-link__anchor"
             @click="openURL"
-            @keydown="onKeyDownIcon"
+            @keydown="onKeyDownButton"
          >
-            <QTooltip v-if="!isReadonly">{{ $locale.fieldLink.tooltip }}</QTooltip>
-         </QIcon>
+            <QIcon
+               :class="(isReadonly ? 'cursor-not-allowed' : 'cursor-pointer')"
+               name="open_in_new"
+            >
+               <QTooltip v-if="!isReadonly">{{ $locale.fieldLink.tooltip }}</QTooltip>
+            </QIcon>
+         </a>
       </template>
    </QInput>
 </template>
@@ -182,4 +210,10 @@
 
 <style scoped lang="scss">
    // @import '../../../css/variables';
+
+   .y-field-link__anchor {
+      display: flex;
+      height: fit-content;
+      width: fit-content;
+   }
 </style>
