@@ -25,6 +25,11 @@ export default class YBaseInputField extends Mixins(YBaseInput) {
    }
 
 
+   public get finalPlaceholder() {
+      return (this.placeholder ? this.$locale.all.placeholder.replace('${1}', this.placeholder) : '');
+   }
+
+
    @Override
    public validate() {
       // @ts-ignore

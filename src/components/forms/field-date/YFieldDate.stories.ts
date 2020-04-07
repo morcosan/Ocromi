@@ -10,6 +10,7 @@ const vue = {
    },
    props: {
       ...propsInputField,
+      placeholder: undefined,
       hint: undefined,
    },
    data() {

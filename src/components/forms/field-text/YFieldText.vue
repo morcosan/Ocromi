@@ -33,7 +33,7 @@
       :value="value"
       :label="finalLabel"
       :hint="hint"
-      :placeholder="placeholder"
+      :placeholder="finalPlaceholder"
       :error="!!error"
       :error-message="error"
       :rules="finalRules"

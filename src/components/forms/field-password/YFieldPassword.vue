@@ -123,7 +123,7 @@
       :value="value"
       :label="finalLabel"
       :hint="hasMeter ? undefined : hint"
-      :placeholder="placeholder"
+      :placeholder="finalPlaceholder"
       :readonly="isReadonly"
       :bg-color="bgColor"
       :error-message="error"

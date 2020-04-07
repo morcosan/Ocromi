@@ -55,7 +55,7 @@
       :value="value"
       :label="finalLabel"
       :hint="hint"
-      :placeholder="placeholder"
+      :placeholder="finalPlaceholder"
       :bg-color="bgColor"
       :error-message="error"
       :error="error !== ''"

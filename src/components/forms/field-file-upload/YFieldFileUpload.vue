@@ -116,7 +116,7 @@
    <QFile
       :value="value"
       :label="finalLabel"
-      :placeholder="placeholder"
+      :placeholder="finalPlaceholder"
       :hint="hint"
       :multiple="isMultiple"
       :accept="fileFormats.join(',')"

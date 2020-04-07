@@ -2,6 +2,7 @@ export default {
    all: {
       required: '* Required',
       requiredField: '* Required field',
+      placeholder: 'Example: ${1}',
    },
 
 
