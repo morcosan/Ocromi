@@ -12,7 +12,7 @@ export interface YFieldMultiselect extends Vue {}
 export interface YGroupCheckbox extends Vue {}
 export interface YGroupRadio extends Vue {}
 export interface YFieldCipher extends Vue {}
-export interface YFieldHyperlink extends Vue {}
+export interface YFieldLink extends Vue {}
 export interface YFieldNumber extends Vue {}
 export interface YSlider extends Vue {}
 export interface YSliderRange extends Vue {}
@@ -31,7 +31,7 @@ export const YFieldMultiselect: VueConstructor<YFieldMultiselect>;
 export const YGroupCheckbox: VueConstructor<YGroupCheckbox>;
 export const YGroupRadio: VueConstructor<YGroupRadio>;
 export const YFieldCipher: VueConstructor<YFieldCipher>;
-export const YFieldHyperlink: VueConstructor<YFieldHyperlink>;
+export const YFieldLink: VueConstructor<YFieldLink>;
 export const YFieldNumber: VueConstructor<YFieldNumber>;
 export const YSlider: VueConstructor<YSlider>;
 export const YSliderRange: VueConstructor<YSliderRange>;

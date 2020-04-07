@@ -1,6 +1,6 @@
 import YButtonSubmit from './YButtonSubmit.vue';
-import { createStory, StoryLine } from '.storybook/story-utils/custom-story';
-import { buttonProps } from '.storybook/story-utils/knob-props';
+import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
+import { propsButton } from '.storybook/custom/knob-props';
 import { boolean, number, withKnobs } from '@storybook/addon-knobs';
 
 
@@ -9,7 +9,7 @@ const vue = {
       YButtonSubmit,
    },
    props: {
-      ...buttonProps,
+      ...propsButton,
       isLoading: {
          default: () => boolean('Is Loading', false),
       },
@@ -40,4 +40,9 @@ export default {
    title: 'Buttons / Button Submit',
    decorators: [withKnobs],
 };
-export const default_ = createStory(vue, storyLines);
+export const default_ = StoryBuilder.createStory(vue, storyLines);
+export const docs = StoryBuilder.createDocs(`
+/**
+ * Used when user needs to take the submit action for certain data.
+ */
+`);

@@ -1,6 +1,6 @@
 {
    "name": "ocromi",
-   "version": "0.2.1",
+   "version": "0.2.2",
    "description": "A little design system",
    "author": "Morco",
    "license": "MIT",
@@ -12,8 +12,9 @@
    "typings": "src/main.d.ts",
    "scripts": {
       "storybook": "start-storybook",
-      "build:storybook": "build-storybook -c .storybook -o dist/storybook",
+      "storybook:build": "build-storybook -c .storybook -o docs/",
       "lint": "eslint ./ --ext .js,.ts,.vue",
+      "lint:file": "eslint",
       "test": "jest",
       "test:file": "jest --",
       "test:clear": "jest --clearCache",

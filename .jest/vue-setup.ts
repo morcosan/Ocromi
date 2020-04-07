@@ -7,7 +7,7 @@ import enUS from '../src/i18n/en-us';
 // @ts-ignore
 Vue.use(VueI18n);
 // @ts-ignore
-Vue.use(Quasar, { config: {}, directives: {} });
+Vue.use(Quasar);
 
 // create global mixin
 // @ts-ignore

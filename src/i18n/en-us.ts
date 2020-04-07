@@ -4,13 +4,14 @@ export default {
       requiredField: '* Required field',
    },
 
+
    fieldCipher: {
       maskError: 'Value must have ${1} characters',
    },
    fieldEmail: {
       maskError: 'Email address is not valid',
    },
-   fieldHyperlink: {
+   fieldLink: {
       maskError: 'URL link is not valid',
       tooltip: 'Open URL',
    },
@@ -46,6 +47,7 @@ export default {
       tooltipPickFiles: 'Open file picker',
       tooltipRemoveFiles: 'Remove all files',
    },
+
 
    buttonSubmit: {
       loading: 'Sending...',

@@ -1,46 +1,73 @@
 <script lang="ts">
-	import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
+   import { Component, Mixins, Override, Prop, Vue, Watch } from '../src/core/decorators';
 
 
-	@Component({
-		components: {},
-	})
-	export default class ExampleClass extends Vue {
+   @Component({
+      components: {},
+   })
+   export default class ExampleMixin extends Vue {}
 
-		/** Custom props */
-		@Prop({ default: 'something' }) public example4!: string;
-		@Prop({ default: false, type: Boolean }) public isRequired!: boolean;
 
-		/** States */
-		public example3!: string;
+   @Component({
+      components: {},
+   })
+   export default class ExampleComponent extends Mixins(ExampleMixin) {
 
-		/** Prop watcher */
-		@Watch('example4')
-		public onChangeExample4(value: string, oldValue: string) {}
+      @Prop({ default: '' }) public prop1!: string;
+      @Prop({ default: 0 }) public prop2!: number;
+      @Prop({ default: false, type: Boolean }) public prop3!: boolean;
 
-		/** Computed property */
-		public get example1() {
-			return '';
-		}
 
-		/** Method */
-		public example2() {}
+      public state1!: string;
+      public state2!: string;
+      public state3!: string;
 
-		/** Lifecycle hook */
-		public created() {}
-		public mounted() {}
-		public updated() {}
-		public destroyed() {}
 
-	}
+      @Watch('prop1')
+      public onChange_prop1(value: string, oldValue: string) {}
+
+      @Watch('prop2')
+      public onChange_prop2(value: number, oldValue: number) {}
+
+      @Watch('prop3')
+      public onChange_prop3(value: boolean, oldValue: boolean) {}
+
+
+      public get computed1() { return ''; }
+
+      public get computed2() { return ''; }
+
+
+      @Override
+      public created() {}
+
+
+      @Override
+      public mounted() {}
+
+
+      @Override
+      public updated() {}
+
+
+      @Override
+      public destroyed() {}
+
+
+      public callMethod1() {}
+
+
+      public callMethod2() {}
+
+   }
 </script>
 
 
 <template>
-	<div>I'm an empty component :)</div>
+   <div>I'm an empty component :)</div>
 </template>
 
 
 <style scoped lang="scss">
-	// @import '../../../css/variables';
+   //@import '../../../css/variables';
 </style>

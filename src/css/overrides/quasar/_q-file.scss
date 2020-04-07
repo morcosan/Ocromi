@@ -1,0 +1,27 @@
+// remove big padding
+.q-file.q-field--labeled .q-field__control-container {
+   padding-top: 10px;
+}
+
+// place the error icon before the attach icon
+.y-field-file-upload--empty.q-file .q-field__append.q-anchor--skip {
+   position: absolute;
+   right: 34px;
+   padding-right: 0;
+}
+
+// swap position for error icon
+:not(.y-field-file-upload--empty).q-file.q-field--error .q-field__append:not(.q-anchor--skip) {
+   position: relative;
+   left: 30px;
+}
+:not(.y-field-file-upload--empty).q-file.q-field--error .q-field__append.q-anchor--skip {
+   position: relative;
+   right: 36px;
+   padding-right: 0;
+}
+
+// align avatar to side
+.q-file .q-chip .q-avatar {
+   margin: 0;
+}
