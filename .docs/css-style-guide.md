@@ -1,8 +1,8 @@
 # CSS Style Guide
 
-Read https://cssguidelin.es/
-
-Also read https://clubmate.fi/oocss-acss-bem-smacss-what-are-they-what-should-i-use/
+Resources:
+- https://cssguidelin.es/
+- https://clubmate.fi/oocss-acss-bem-smacss-what-are-they-what-should-i-use/
 
 
 <br>
@@ -67,8 +67,9 @@ Use 3 spaces, compact and visible.
 
 
 
-.y-completely-unrelated {}
 
+
+.y-completely-unrelated {}
 ``` 
 
 
@@ -153,7 +154,9 @@ For more than 5 properties, add empty lines between categories.
 5) Misc
 ```
 .y-declaration-order {
-    /** Positioning */
+    /**
+     * Positioning 
+     */
     position: absolute;
     top: 0;
     right: 0;
@@ -161,24 +164,32 @@ For more than 5 properties, add empty lines between categories.
     left: 0;
     z-index: 100;
     
-    /** Box-model */
+    /** 
+     * Box-model 
+     */
     display: block;
     float: right;
     width: 100px;
     height: 100px;
     
-    /** Typography */
+    /** 
+     * Visual 
+     */
+    background-color: #f5f5f5;
+    border: 1px solid #e5e5e5;
+    border-radius: 3px;
+
+    /** 
+     * Typography 
+     */
     font: normal 13px "Helvetica Neue", sans-serif;
     line-height: 1.5;
     color: #333;
     text-align: center;
     
-    /** Visual */
-    background-color: #f5f5f5;
-    border: 1px solid #e5e5e5;
-    border-radius: 3px;
-    
-    /** Misc */
+    /** 
+     * Misc 
+     */
     opacity: 1;
 }
 ```
