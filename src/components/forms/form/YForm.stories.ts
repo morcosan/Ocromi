@@ -120,7 +120,6 @@ const basicFormTemplate = `
 		<YFieldText
 			v-model="fullName"
 			label="Full name"
-			is-required
 			has-spacing
 		/>
 		
@@ -128,14 +127,12 @@ const basicFormTemplate = `
 			v-model="email"
 			label="Email address"
 			placeholder="email@gmail.com"
-			is-required
 			has-spacing
 		/>
 		
 		<YFieldPassword
 			v-model="password"
 			label="New password"
-			is-required
 			has-spacing
 			has-meter
 		/>
@@ -143,14 +140,12 @@ const basicFormTemplate = `
 		<YFieldPassword
 			v-model="password2"
 			label="Confirm password"
-			is-required
 			has-spacing
 		/>
 		
 		<YFieldTextArea
 			v-model="description"
 			label="Description"
-			is-required
 			has-spacing
 		/>
 		
@@ -158,7 +153,6 @@ const basicFormTemplate = `
 			v-model="website"
 			label="Website"
 			placeholder="Enter your website"
-			is-required
 			has-spacing
 		/>
 		
@@ -166,7 +160,6 @@ const basicFormTemplate = `
 			v-model="jobTitle"
 			:options="jobTitleList"
 			label="Job title"
-			is-required
 			has-spacing
 		/>
 		
@@ -177,7 +170,6 @@ const basicFormTemplate = `
 			label="Hobbies"
 			hint="Select 5 hobbies"
 			can-add-new
-			is-required
 			has-spacing
 		/>
 		
@@ -187,7 +179,6 @@ const basicFormTemplate = `
 			:decimals="2"
 			label="Budget"
 			placeholder="Enter your budget"
-			is-required
 			has-spacing
 		/>
 	</div>
@@ -197,7 +188,6 @@ const basicFormTemplate = `
 			v-model="jobTypes"
 			:options="jobTypeList"
 			label="Job preferences"
-			is-required
 			has-spacing
 		/>
 		
@@ -205,7 +195,6 @@ const basicFormTemplate = `
 			v-model="gender"
 			:options="genderList"
 			label="Gender"
-			is-required
 			has-spacing
 		/>
 		
@@ -213,7 +202,6 @@ const basicFormTemplate = `
 			v-model="cardNumber"
 			input-mask="####  ####  ####  ####"
 			label="Card number"
-			is-required
 			has-spacing
 		/>
 		
@@ -224,7 +212,6 @@ const basicFormTemplate = `
 			:value-step="5"
 			label="Success rate"
 			thumb-label=" %"
-			is-required
 			has-spacing
 		/>
 		
@@ -234,14 +221,12 @@ const basicFormTemplate = `
 			:max-value="100"
 			label="Success range"
 			thumb-label=" %"
-			is-required
 			has-spacing
 		/>
 		
 		<YFieldDate
 			v-model="meetingDate"
 			label="Meeting date"
-			is-required
 			has-spacing
 		/>
 		
@@ -251,13 +236,11 @@ const basicFormTemplate = `
 			:max-num-files="3"
 			:rules="[ (value) => (value.length === 3 || 'Please select 3 documents') ]"
 			is-multiple
-			is-required
 			has-spacing
 		/>
 		
 		<YCheckbox
 			v-model="termOfService"
-			is-required
 			has-spacing
 		>
 			I agree with terms of service

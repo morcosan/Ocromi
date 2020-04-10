@@ -55,7 +55,7 @@
    <div
       :class="{
          'y-input-box y-slider-base y-slider-range': true,
-         'y-input-box--required': isRequired,
+         'y-input-box--required': !isOptional,
          'y-input-spacing': hasSpacing,
          'text-negative': innerError,
       }"
@@ -70,7 +70,7 @@
          }"
       >
          <div v-if="!!label" :class="{ ['y-form-box__label text-subtitle1 bg-' + bgColor]: true }">
-            {{ isRequired ? (label + ' *') : label }}
+            {{ finalLabel }}
          </div>
 
          <div class="y-slider__min-max text-caption">

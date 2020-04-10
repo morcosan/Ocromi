@@ -30,7 +30,8 @@ const storyLines: StoryLine[] = [
 				:placeholder="placeholder"
 				:hint="hint"
 				:is-disabled="isDisabled"
-				:is-required="isRequired"
+				:is-optional="isOptional"
+				:hides-optional="hidesOptional"
 				:is-readonly="isReadonly"
 				:error="error"
 			/>

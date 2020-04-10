@@ -22,7 +22,7 @@
          const rules = [...this.rules];
 
          // add required rule
-         if (this.isRequired) {
+         if (!this.isOptional) {
             rules.push((value: string) => (!!value || this.$locale.all.requiredField));
          }
 

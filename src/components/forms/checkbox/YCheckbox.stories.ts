@@ -34,7 +34,8 @@ const storyLines: StoryLine[] = [
 				v-model="value"
 				:label="label"
 				:is-disabled="isDisabled"
-				:is-required="isRequired"
+				:is-optional="isOptional"
+				:hides-optional="hidesOptional"
 			/>
 		`,
       states: ['value'],
@@ -45,7 +46,8 @@ const storyLines: StoryLine[] = [
 			<YCheckbox
 				v-model="value1"
 				:is-disabled="isDisabled"
-				:is-required="isRequired"
+				:is-optional="isOptional"
+				:hides-optional="hidesOptional"
 			>
 				I agree with <a href="/" @click="onClick">terms of service</a>
 			</YCheckbox>
@@ -59,7 +61,8 @@ const storyLines: StoryLine[] = [
 				v-model="value2"
 				:label="label"
 				:is-disabled="isDisabled"
-				:is-required="isRequired"
+				:is-optional="isOptional"
+				:hides-optional="hidesOptional"
 			/>
 		`,
       states: ['value2 === null ? "null" : value2'],

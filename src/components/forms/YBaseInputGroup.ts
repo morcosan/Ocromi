@@ -29,9 +29,9 @@ export default class YBaseInputGroup extends Mixins(YBaseInput) {
    }
 
 
-   @Watch('isRequired')
-   public onChange_isRequired() {
-      if (!this.isRequired) {
+   @Watch('isOptional')
+   public onChange_isOptional() {
+      if (this.isOptional) {
          // reset error
          this.innerError = '';
       }

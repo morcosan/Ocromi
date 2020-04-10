@@ -17,7 +17,7 @@
 
       @Override
       public validate() {
-         if (this.isRequired) {
+         if (!this.isOptional) {
             this.error = (this.value ? '' : this.$locale.all.required);
          }
 
@@ -33,7 +33,7 @@
 
 
       public onInput(value: boolean) {
-         if (this.isRequired) {
+         if (!this.isOptional) {
             this.error = (value ? '' : this.$locale.all.required);
          }
 
@@ -48,7 +48,7 @@
    <div
       :class="{
          'y-checkbox': true,
-         'y-checkbox--required': isRequired,
+         'y-checkbox--required': !isOptional,
          'y-input-spacing': hasSpacing,
       }"
    >
@@ -61,7 +61,7 @@
          ref="qCheckbox"
       >
          <div :class="{ 'text-negative': error }">
-            {{ isRequired ? ('* ' + label) : label }}
+            {{ !isOptional ? ('* ' + label) : label }}
             <slot/>
          </div>
       </QCheckbox>

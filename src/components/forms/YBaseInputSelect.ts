@@ -27,11 +27,6 @@ export default class YBaseInputSelect extends Mixins(YBaseInput) {
    }
 
 
-   public get finalLabel() {
-      return (this.isRequired ? (this.label + ' *') : this.label);
-   }
-
-
    @Override
    public get finalRules() {
       return this.rules;

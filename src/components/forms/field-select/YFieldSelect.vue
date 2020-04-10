@@ -17,7 +17,7 @@
          const rules = [];
 
          // add required rule
-         if (this.isRequired) {
+         if (!this.isOptional) {
             rules.push((value: Option | null) => (!!value || this.$locale.all.requiredField));
          }
 

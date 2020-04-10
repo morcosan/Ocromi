@@ -14,7 +14,7 @@
 
       @Override
       public validate() {
-         if (this.isRequired) {
+         if (!this.isOptional) {
             this.innerError = (this.value ? '' : this.$locale.all.required);
          }
 
@@ -23,7 +23,7 @@
 
 
       public onInput(value: string) {
-         if (this.isRequired) {
+         if (!this.isOptional) {
             this.innerError = (value ? '' : this.$locale.all.required);
          }
 
@@ -38,7 +38,7 @@
    <div
       :class="{
          'y-input-box y-group-radio': true,
-         'y-input-box--required': isRequired,
+         'y-input-box--required': !isOptional,
          'y-input-spacing': hasSpacing,
          'text-negative': innerError,
       }"
@@ -53,7 +53,7 @@
          }"
       >
          <div v-if="!!label" :class="{ ['y-form-box__label text-subtitle1 bg-' + bgColor]: true }">
-            {{ isRequired ? (label + ' *') : label }}
+            {{ finalLabel }}
          </div>
 
          <QOptionGroup
