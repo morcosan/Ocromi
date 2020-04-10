@@ -4,12 +4,18 @@
    import { QAvatar, QChip, QFile, QIcon, QTooltip } from 'quasar';
 
 
+   export interface File {
+      type: string;
+      name: string;
+   }
+
+
    @Component({
       components: { QFile, QIcon, QChip, QTooltip, QAvatar },
    })
    export default class YFieldFileUpload extends Mixins(YBaseInputField) {
 
-      @Prop({ default: () => [] }) public value!: object[];
+      @Prop({ default: () => [] }) public value!: File[];
       @Prop({ default: () => [] }) public fileFormats!: string[]; // array of <mediatype>/<extension>
       @Prop({ default: false, type: Boolean }) public isMultiple!: boolean;
       @Prop({ default: 0 }) public maxFileSize!: number; // in KB
@@ -39,23 +45,19 @@
       }
 
 
-      public getFileIcon(file: object) {
-         // @ts-ignore
+      public getFileIcon(file: File) {
          const isVideo = (file.type.indexOf('video/') === 0);
-         // @ts-ignore
          const isImage = (file.type.indexOf('image/') === 0);
-         // @ts-ignore
          const isAudio = (file.type.indexOf('audio/') === 0);
-         // find the appropriate file icon
+
          return (isVideo ? 'movie' : (isImage ? 'photo' : (isAudio ? 'audiotrack' : 'insert_drive_file')));
       }
 
 
-      public onInput(value: object[] | object) {
+      public onInput(value: File[] | File) {
          if (Array.isArray(value)) {
             // add new files to existing ones
-            value.forEach((file: object) => {
-               // @ts-ignore
+            value.forEach((file: File) => {
                const exists = this.value.find(e => (e.name === file.name));
                if (!exists && this.value.length < this.maxNumFiles) {
                   this.value.push(file);
@@ -75,7 +77,7 @@
 
          if (!this.isReadonly && !this.isDisabled) {
             if (index > -1) {
-               // remove file
+               // remove file at index
                this.value.splice(index, 1);
 
                this.updateValueProp(this.value);
@@ -104,8 +106,7 @@
 
 
       private openFilePicker() {
-         // @ts-ignore
-         this.$refs.qField.pickFiles();
+         (this.$refs.qField as QFile).pickFiles();
       }
 
    }

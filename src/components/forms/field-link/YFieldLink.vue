@@ -106,8 +106,7 @@
 
       public onPaste(event: ClipboardEvent) {
          // get pasted url
-         // @ts-ignore
-         const url = (event.clipboardData || globalThis.clipboardData).getData('text');
+         const url = (event.clipboardData || (globalThis as any).clipboardData).getData('text');
 
          // remove http or https
          const http = 'http://';

@@ -1,4 +1,5 @@
-import YFieldFileUpload from './YFieldFileUpload.vue';
+// @ts-ignore
+import YFieldFileUpload, { File } from './YFieldFileUpload.vue';
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
 import { propsInputField } from '.storybook/custom/knob-props';
 import { array, boolean, number, withKnobs } from '@storybook/addon-knobs';
@@ -32,10 +33,9 @@ const vue = {
          value: [],
          value1: [],
          rules: [
-            (value: object[]) => {
+            (value: File[]) => {
                let passed = true;
-               value.forEach((file: object) => {
-                  // @ts-ignore
+               value.forEach((file: File) => {
                   if (file.name.length <= 15) {
                      passed = false;
                   }

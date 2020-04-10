@@ -40,11 +40,10 @@
          // add custom dates rule
          if (this.customDatesFn) {
             rules.push((value: string) => {
-               if (value) {
+               if (this.customDatesFn && value) {
                   const date = DateTime.fromFormat(value, this.dateFormatInput);
                   if (date.isValid) {
                      const valueISO = date.toFormat(this.dateFormatISO);
-                     // @ts-ignore
                      return (this.customDatesFn(valueISO) || this.$locale.fieldDate.customDatesError);
                   }
                   return false;
@@ -135,8 +134,7 @@
       public onClickDateIcon() {
          if (this.isReadonly) {
             // for whatever Quasar reason, calling show() actually blocks the popup event
-            // @ts-ignore
-            this.$refs.qPopupProxy.show();
+            (this.$refs.qPopupProxy as QPopupProxy).show();
          }
       }
 
