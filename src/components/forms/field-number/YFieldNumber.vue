@@ -229,8 +229,8 @@
          width: 24px;
          height: 50%;
          box-sizing: border-box;
-         overflow: hidden;
          outline: none;
+         overflow: hidden;
 
          &.cursor-pointer:hover {
             background-color: $grey-3;

@@ -88,9 +88,7 @@
          position: absolute;
          left: 0;
          bottom: 10px;
-
          padding-left: 12px;
-
          opacity: 0;
          transition: bottom 0.3s, opacity 0.3s;
          transition-timing-function: ease-out;
