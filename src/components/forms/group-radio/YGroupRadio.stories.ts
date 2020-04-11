@@ -1,7 +1,6 @@
 import YGroupRadio from './YGroupRadio.vue';
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
 import { propsInputGroup } from '.storybook/custom/knob-props';
-import { withKnobs } from '@storybook/addon-knobs';
 
 
 const options = [
@@ -62,10 +61,7 @@ const storyLines: StoryLine[] = [
 ];
 
 
-export default {
-   title: 'Forms / Other / Group Radio',
-   decorators: [withKnobs],
-};
+export default StoryBuilder.createDefault('Forms / Other / Group Radio');
 export const default_ = StoryBuilder.createStory(vue, storyLines);
 export const docs = StoryBuilder.createDocs(`
 /**

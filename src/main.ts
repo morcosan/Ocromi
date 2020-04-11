@@ -23,9 +23,17 @@ import '@quasar/extras/roboto-font/roboto-font.css';
 import '@quasar/extras/material-icons/material-icons.css';
 import 'quasar/dist/quasar.css';
 import './css/app.scss';
+import packageJSON from '../package.json';
+
 
 // @ts-ignore
 Vue.use(Quasar);
+
+export class Ocromi {
+   public static version: string = 'v' + packageJSON.version;
+   public static license: string = packageJSON.license;
+   public static description: string = packageJSON.description;
+}
 
 export {
    YForm,

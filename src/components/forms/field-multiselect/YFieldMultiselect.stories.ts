@@ -2,7 +2,7 @@ import YFieldMultiselect from './YFieldMultiselect.vue';
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
 import { selectOptions } from '.storybook/custom/utils';
 import { propsInputSelect } from '.storybook/custom/knob-props';
-import { boolean, number, withKnobs } from '@storybook/addon-knobs';
+import { boolean, number } from '@storybook/addon-knobs';
 
 
 const options = [...selectOptions];
@@ -59,10 +59,7 @@ const storyLines: StoryLine[] = [
 ];
 
 
-export default {
-   title: 'Forms / Fields / Field Multiselect',
-   decorators: [withKnobs],
-};
+export default StoryBuilder.createDefault('Forms / Fields / Field Multiselect');
 export const default_ = StoryBuilder.createStory(vue, storyLines);
 export const docs = StoryBuilder.createDocs(`
 /**

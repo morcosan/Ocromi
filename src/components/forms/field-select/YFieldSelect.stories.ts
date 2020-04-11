@@ -2,7 +2,6 @@ import YFieldSelect from './YFieldSelect.vue';
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
 import { selectOptions } from '.storybook/custom/utils';
 import { propsInputSelect } from '.storybook/custom/knob-props';
-import { withKnobs } from '@storybook/addon-knobs';
 
 
 const vue = {
@@ -41,10 +40,7 @@ const storyLines: StoryLine[] = [
 ];
 
 
-export default {
-   title: 'Forms / Fields / Field Select',
-   decorators: [withKnobs],
-};
+export default StoryBuilder.createDefault('Forms / Fields / Field Select');
 export const default_ = StoryBuilder.createStory(vue, storyLines);
 export const docs = StoryBuilder.createDocs(`
 /**

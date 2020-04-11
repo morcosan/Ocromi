@@ -1,7 +1,6 @@
 import YFieldText from './YFieldText.vue';
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
 import { propsInputField } from '.storybook/custom/knob-props';
-import { withKnobs } from '@storybook/addon-knobs';
 
 
 const vue = {
@@ -57,10 +56,7 @@ const storyLines: StoryLine[] = [
 ];
 
 
-export default {
-   title: 'Forms / Fields / Field Text',
-   decorators: [withKnobs],
-};
+export default StoryBuilder.createDefault('Forms / Fields / Field Text');
 export const default_ = StoryBuilder.createStory(vue, storyLines);
 export const docs = StoryBuilder.createDocs(`
 /**

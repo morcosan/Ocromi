@@ -1,7 +1,6 @@
 import YCheckbox from './YCheckbox.vue';
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
 import { propsInput } from '.storybook/custom/knob-props';
-import { withKnobs } from '@storybook/addon-knobs';
 
 
 const vue = {
@@ -70,10 +69,7 @@ const storyLines: StoryLine[] = [
 ];
 
 
-export default {
-   title: 'Forms / Other / Checkbox',
-   decorators: [withKnobs],
-};
+export default StoryBuilder.createDefault('Forms / Other / Checkbox');
 export const default_ = StoryBuilder.createStory(vue, storyLines);
 export const docs = StoryBuilder.createDocs(`
 /**

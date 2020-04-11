@@ -252,9 +252,7 @@ const basicFormTemplate = `
 `;
 
 
-export default {
-   title: 'Forms / Form',
-};
+export default StoryBuilder.createDefault('Forms / Form');
 export const default_ = StoryBuilder.createBasicStory(vue, basicFormTemplate);
 export const docs = StoryBuilder.createDocs(`
 /**
