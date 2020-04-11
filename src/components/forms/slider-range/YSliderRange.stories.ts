@@ -42,7 +42,6 @@ const storyLines: StoryLine[] = [
             :is-optional="isOptional"
             :hides-optional="hidesOptional"
             :is-readonly="isReadonly"
-            :error="error"
             :thumb-suffix="thumbSuffix"
             :min-value="minValue"
             :max-value="maxValue"

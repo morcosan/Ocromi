@@ -36,7 +36,6 @@ const storyLines: StoryLine[] = [
             :is-optional="isOptional"
             :hides-optional="hidesOptional"
             :is-readonly="isReadonly"
-            :error="error"
             ref="groupCheckbox"
          />
          <br/>
