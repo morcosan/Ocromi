@@ -29,8 +29,8 @@
          const rules = [...this.rules];
 
          // add required rule
-         if (this.isRequired) {
-            rules.push((value: string | number) => (value !== '' || this.$locale.all.requiredField));
+         if (!this.isOptional) {
+            rules.push((value: string | number) => (value !== '' || this.$locale.all.requiredError));
          }
 
          // add min/max rule
@@ -145,6 +145,8 @@
                // remove trailing dot
                this.updateValueProp(Number(this.value));
             }
+
+            this.validate();
          }
       }
 
@@ -164,16 +166,16 @@
       :value="value"
       :label="finalLabel"
       :hint="hint"
-      :placeholder="placeholder"
+      :placeholder="finalPlaceholder"
       :readonly="isReadonly"
       :bg-color="bgColor"
       :error-message="error"
-      :error="error !== ''"
+      :error="!!error"
       :rules="finalRules"
       :disable="isDisabled"
-      :class="{ 'y-field-number': true, 'y-input-spacing': hasSpacing }"
       :step="valueStep"
       :bottom-slots="decimals > 0"
+      class="y-base-input y-field-number"
       type="text"
       outlined
       lazy-rules
@@ -229,8 +231,8 @@
          width: 24px;
          height: 50%;
          box-sizing: border-box;
-         overflow: hidden;
          outline: none;
+         overflow: hidden;
 
          &.cursor-pointer:hover {
             background-color: $grey-3;
@@ -243,5 +245,12 @@
             transform: translate(-50%, -50%);
          }
       }
+   }
+
+   // place the error icon before the arrows
+   .y-field-number.q-field /deep/ .q-field__append.q-anchor--skip {
+      position: absolute;
+      right: 26px;
+      padding-right: 0;
    }
 </style>

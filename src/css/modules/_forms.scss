@@ -1,72 +1,62 @@
 /**
- * Form controls
+ * Form input
  */
 
-.y-input-spacing {
-   margin-bottom: 25px;
-}
-
-
-
-
-
-/**
- * Form input box
- */
-
-.y-input-box {
+.y-base-input {
    position: relative;
 
-   &.y-input-box--required {
+   .y-form & {
+      margin-bottom: 25px;
+   }
+
+   &.y-base-input--required {
       position: relative;
       padding-bottom: 25px;
    }
 
-   .y-form-box__error {
+   .y-base-input__error {
       position: absolute;
       left: 0;
       bottom: 10px;
-
       padding-left: 10px;
-
       opacity: 0;
       transition: bottom 0.3s, opacity 0.3s;
       transition-timing-function: ease-out;
 
-      &.y-form-box__error--visible {
+      &.y-base-input__error--visible {
          bottom: 0;
          opacity: 1;
       }
    }
 
-   .y-form-box__fieldset {
+   .y-base-input__fieldset {
       position: relative;
       border: 1px solid rgba(0, 0, 0, 0.24);
       padding: 1px 2px;
       border-radius: 4px;
       transition: border-color 0.36s cubic-bezier(0.4, 0, 0.2, 1);
 
-      &:hover:not(.y-form-box__fieldset--disabled) {
+      &:hover:not(.y-base-input__fieldset--disabled) {
          border-color: #000;
       }
 
-      .y-form-box__label {
+      .y-base-input__label {
          position: absolute;
          top: 0;
          left: 0;
          transform: translateY(-50%) scale(0.75);
          padding: 3px 8px;
-         color: #555;
          border-radius: 3px 3px 0 0;
+         color: #555;
       }
 
-      &.y-form-box__fieldset--disabled {
-         .y-form-box__label {
+      &.y-base-input__fieldset--disabled {
+         .y-base-input__label {
             color: rgba(85, 85, 85, 0.6);
          }
       }
 
-      &.y-form-box__fieldset--readonly {
+      &.y-base-input__fieldset--readonly {
          border-style: dashed;
 
          &:after {
@@ -79,8 +69,8 @@
          }
       }
 
-      &.y-form-box__fieldset--with-error {
-         .y-form-box__label {
+      &.y-base-input__fieldset--with-error {
+         .y-base-input__label {
             color: $negative;
          }
 
@@ -100,7 +90,7 @@
          }
       }
 
-      &.y-form-box__fieldset--labeled {
+      &.y-base-input__fieldset--labeled {
          padding-top: 10px;
       }
    }
@@ -116,12 +106,12 @@
 
 $paddingSide: 12px;
 
-.y-slider-base {
-   .y-form-box__fieldset.y-form-box__fieldset {
+.y-base-slider {
+   .y-base-input__fieldset.y-base-input__fieldset {
       padding: 30px $paddingSide 0;
    }
 
-   .y-form-box__label.y-form-box__label {
+   .y-base-input__label.y-base-input__label {
       left: -8px;
    }
 

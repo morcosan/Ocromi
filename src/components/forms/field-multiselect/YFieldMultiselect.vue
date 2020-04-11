@@ -22,8 +22,8 @@
          const rules = [];
 
          // add required rule
-         if (this.isRequired) {
-            rules.push((value: Option[]) => (value.length > 0 || this.$locale.all.requiredField));
+         if (!this.isOptional) {
+            rules.push((value: Option[]) => (value.length > 0 || this.$locale.all.requiredError));
          }
 
          return rules;
@@ -76,11 +76,11 @@
       :readonly="isReadonly"
       :disable="isDisabled"
       :error-message="error"
-      :error="error !== ''"
+      :error="!!error"
       :rules="finalRules"
       :bg-color="bgColor"
       :new-value-mode="canAddNew ? 'add-unique' : undefined"
-      :class="{ 'y-field-multiselect': true, 'y-input-spacing': hasSpacing }"
+      class="y-field-multiselect y-base-input"
       input-debounce="0"
       lazy-rules
       clearable
@@ -91,13 +91,14 @@
       @input="onInput"
       @filter="onFilterInput"
       @new-value="onNewOption"
+      @blur="validate"
       ref="qSelect"
    >
       <template v-slot:selected-item="scope">
          <QChip
             :color="(scope && scope.opt.isNew) ? 'primary' : undefined"
             :tabindex="scope ? scope.tabindex : -1"
-            removable
+            :removable="!isReadonly"
             outline
             square
             dense
@@ -118,4 +119,9 @@
 
 <style scoped lang="scss">
    // @import '../../../css/variables';
+
+   // align chips with label
+   .y-field-multiselect /deep/ .q-field__native {
+      margin-left: -4px;
+   }
 </style>

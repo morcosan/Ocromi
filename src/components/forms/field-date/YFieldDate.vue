@@ -1,5 +1,5 @@
 <script lang="ts">
-   import { Component, Mixins, Override, Prop, Watch } from '../../../core/decorators';
+   import { Component, Debounce, Mixins, Override, Prop, Watch } from '../../../core/decorators';
    import YBaseInputField from '../YBaseInputField';
    import { QDate, QIcon, QInput, QPopupProxy, QTooltip } from 'quasar';
    import { DateTime } from 'luxon';
@@ -33,18 +33,17 @@
          const rules = [...this.rules];
 
          // add required rule
-         if (this.isRequired) {
-            rules.push((value: string) => (!!value || this.$locale.all.requiredField));
+         if (!this.isOptional) {
+            rules.push((value: string) => (!!value || this.$locale.all.requiredError));
          }
 
          // add custom dates rule
          if (this.customDatesFn) {
             rules.push((value: string) => {
-               if (value) {
+               if (this.customDatesFn && value) {
                   const date = DateTime.fromFormat(value, this.dateFormatInput);
                   if (date.isValid) {
                      const valueISO = date.toFormat(this.dateFormatISO);
-                     // @ts-ignore
                      return (this.customDatesFn(valueISO) || this.$locale.fieldDate.customDatesError);
                   }
                   return false;
@@ -97,6 +96,7 @@
 
       public onDateSelect(value: string) {
          this.updateValueProp(value);
+         this.closeCalendar();
       }
 
 
@@ -123,10 +123,7 @@
             // activate button with space or enter
             if (event.key === ' ' || event.key === 'Enter') {
                event.preventDefault();
-
-               // open popup
-               // @ts-ignore
-               this.$refs.qPopupProxy.show();
+               (this.$refs.qPopupProxy as QPopupProxy).show();
             }
          }
       }
@@ -135,9 +132,20 @@
       public onClickDateIcon() {
          if (this.isReadonly) {
             // for whatever Quasar reason, calling show() actually blocks the popup event
-            // @ts-ignore
-            this.$refs.qPopupProxy.show();
+            (this.$refs.qPopupProxy as QPopupProxy).show();
          }
+      }
+
+
+      public onBlur() {
+         this.hasFocus = false;
+         this.validate();
+      }
+
+
+      @Debounce(800)
+      private closeCalendar() {
+         (this.$refs.qPopupProxy as QPopupProxy).hide();
       }
 
    }
@@ -151,11 +159,11 @@
       :hint="(isDisabled || isReadonly) ? '' : $locale.fieldDate.hint"
       :bg-color="bgColor"
       :error-message="error"
-      :error="error !== ''"
+      :error="!!error"
       :rules="finalRules"
       :disable="isDisabled"
       :readonly="isReadonly"
-      :class="{ 'y-field-date': true, 'y-input-spacing': hasSpacing }"
+      class="y-base-input y-field-date"
       :mask="!!inputValue || hasFocus ? inputMask : ''"
       fill-mask="_"
       type="text"
@@ -165,7 +173,7 @@
       outlined
       @input="onInput"
       @focus="() => (hasFocus = true)"
-      @blur="() => (hasFocus = false)"
+      @blur="onBlur"
       ref="qField"
    >
       <template v-slot:append>
@@ -202,4 +210,11 @@
 
 <style scoped lang="scss">
    // @import '../../../css/variables';
+
+   // place the error icon before the date icon
+   .y-field-date.q-field /deep/ .q-field__append.q-anchor--skip {
+      position: absolute;
+      right: 34px;
+      padding-right: 0;
+   }
 </style>

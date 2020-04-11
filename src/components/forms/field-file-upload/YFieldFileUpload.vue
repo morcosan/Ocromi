@@ -4,12 +4,18 @@
    import { QAvatar, QChip, QFile, QIcon, QTooltip } from 'quasar';
 
 
+   export interface File {
+      type: string;
+      name: string;
+   }
+
+
    @Component({
       components: { QFile, QIcon, QChip, QTooltip, QAvatar },
    })
    export default class YFieldFileUpload extends Mixins(YBaseInputField) {
 
-      @Prop({ default: () => [] }) public value!: object[];
+      @Prop({ default: () => [] }) public value!: File[];
       @Prop({ default: () => [] }) public fileFormats!: string[]; // array of <mediatype>/<extension>
       @Prop({ default: false, type: Boolean }) public isMultiple!: boolean;
       @Prop({ default: 0 }) public maxFileSize!: number; // in KB
@@ -22,8 +28,8 @@
          const rules = [...this.rules];
 
          // add required rule
-         if (this.isRequired) {
-            rules.push((value: object[]) => (value.length > 0 || this.$locale.all.requiredField));
+         if (!this.isOptional) {
+            rules.push((value: object[]) => (value.length > 0 || this.$locale.all.requiredError));
          }
 
          return rules;
@@ -39,23 +45,19 @@
       }
 
 
-      public getFileIcon(file: object) {
-         // @ts-ignore
+      public getFileIcon(file: File) {
          const isVideo = (file.type.indexOf('video/') === 0);
-         // @ts-ignore
          const isImage = (file.type.indexOf('image/') === 0);
-         // @ts-ignore
          const isAudio = (file.type.indexOf('audio/') === 0);
-         // find the appropriate file icon
+
          return (isVideo ? 'movie' : (isImage ? 'photo' : (isAudio ? 'audiotrack' : 'insert_drive_file')));
       }
 
 
-      public onInput(value: object[] | object) {
+      public onInput(value: File[] | File) {
          if (Array.isArray(value)) {
             // add new files to existing ones
-            value.forEach((file: object) => {
-               // @ts-ignore
+            value.forEach((file: File) => {
                const exists = this.value.find(e => (e.name === file.name));
                if (!exists && this.value.length < this.maxNumFiles) {
                   this.value.push(file);
@@ -75,7 +77,7 @@
 
          if (!this.isReadonly && !this.isDisabled) {
             if (index > -1) {
-               // remove file
+               // remove file at index
                this.value.splice(index, 1);
 
                this.updateValueProp(this.value);
@@ -98,14 +100,8 @@
       }
 
 
-      public onClickAttachIcon() {
-         this.openFilePicker();
-      }
-
-
-      private openFilePicker() {
-         // @ts-ignore
-         this.$refs.qField.pickFiles();
+      public openFilePicker() {
+         (this.$refs.qField as QFile).pickFiles();
       }
 
    }
@@ -116,7 +112,7 @@
    <QFile
       :value="value"
       :label="finalLabel"
-      :placeholder="placeholder"
+      :placeholder="finalPlaceholder"
       :hint="hint"
       :multiple="isMultiple"
       :accept="fileFormats.join(',')"
@@ -130,8 +126,7 @@
       :rules="finalRules"
       :bg-color="bgColor"
       :class="{
-         'y-field-file-upload': true,
-			'y-input-spacing': hasSpacing,
+         'y-base-input y-field-file-upload': true,
 			'y-field-file-upload--empty': (value.length === 0),
 		}"
       :counter-label="getCounterLabel"
@@ -139,6 +134,7 @@
       outlined
       lazy-rules
       @input="onInput"
+      @blur="validate"
       ref="qField"
    >
       <template v-slot:append>
@@ -148,7 +144,7 @@
             :tabindex="isReadonly ? -1 : 0"
             name="attach_file"
             color="grey-8"
-            @click="onClickAttachIcon"
+            @click="openFilePicker"
             @keydown="onKeyDownAttachIcon"
          >
             <QTooltip v-if="!isReadonly">{{ $locale.fieldFileUpload.tooltipPickFiles }}</QTooltip>
@@ -204,5 +200,23 @@
    // change color of close button on hover
    .y-chip__button.cursor-pointer:hover {
       background-color: $red-4;
+   }
+
+   // place the error icon before the attach icon
+   .y-field-file-upload--empty.q-file /deep/ .q-field__append.q-anchor--skip {
+      position: absolute;
+      right: 34px;
+      padding-right: 0;
+   }
+
+   // swap position for error icon when files selected
+   :not(.y-field-file-upload--empty).q-file.q-field--error /deep/ .q-field__append:not(.q-anchor--skip) {
+      position: relative;
+      left: 30px;
+   }
+   :not(.y-field-file-upload--empty).q-file.q-field--error /deep/ .q-field__append.q-anchor--skip {
+      position: relative;
+      right: 36px;
+      padding-right: 0;
    }
 </style>

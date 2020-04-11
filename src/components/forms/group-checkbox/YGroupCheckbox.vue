@@ -14,8 +14,8 @@
 
       @Override
       public validate() {
-         if (this.isRequired) {
-            this.innerError = (this.value.length > 0 ? '' : this.$locale.all.required);
+         if (!this.isOptional) {
+            this.innerError = (this.value.length > 0 ? '' : this.$locale.groupCheckbox.requiredError);
          }
 
          return !this.innerError;
@@ -23,8 +23,8 @@
 
 
       public onInput(value: string[]) {
-         if (this.isRequired) {
-            this.innerError = (value.length > 0 ? '' : this.$locale.all.required);
+         if (!this.isOptional) {
+            this.innerError = (value.length > 0 ? '' : this.$locale.groupCheckbox.requiredError);
          }
 
          this.updateValueProp(value);
@@ -37,23 +37,22 @@
 <template>
    <div
       :class="{
-         'y-input-box y-group-checkbox': true,
-         'y-input-box--required': isRequired,
-         'y-input-spacing': hasSpacing,
+         'y-base-input y-group-checkbox': true,
+         'y-base-input--required': !isOptional,
          'text-negative': innerError,
       }"
    >
       <div
          :class="{
-            ['y-form-box__fieldset bg-' + bgColor]: true,
-            'y-form-box__fieldset--with-error': innerError,
-            'y-form-box__fieldset--labeled': !!label,
-            'y-form-box__fieldset--disabled': isDisabled,
-            'y-form-box__fieldset--readonly': isReadonly,
+            ['y-base-input__fieldset bg-' + bgColor]: true,
+            'y-base-input__fieldset--with-error': innerError,
+            'y-base-input__fieldset--labeled': !!label,
+            'y-base-input__fieldset--disabled': isDisabled,
+            'y-base-input__fieldset--readonly': isReadonly,
          }"
       >
-         <div v-if="!!label" :class="{ ['y-form-box__label text-subtitle1 bg-' + bgColor]: true }">
-            {{ isRequired ? (label + ' *') : label }}
+         <div v-if="!!label" :class="{ ['y-base-input__label text-subtitle1 bg-' + bgColor]: true }">
+            {{ finalLabel }}
          </div>
 
          <QOptionGroup
@@ -69,7 +68,7 @@
          />
       </div>
 
-      <div :class="{ 'y-form-box__error text-caption': true, 'y-form-box__error--visible': innerError }">
+      <div :class="{ 'y-base-input__error text-caption': true, 'y-base-input__error--visible': innerError }">
          {{ innerError }}
       </div>
    </div>
@@ -79,7 +78,7 @@
 <style scoped lang="scss">
    // @import '../../../css/variables';
 
-   .y-group-checkbox .y-form-box__label {
+   .y-group-checkbox .y-base-input__label {
       left: -8px;
    }
 </style>

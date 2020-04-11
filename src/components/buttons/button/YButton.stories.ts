@@ -1,6 +1,5 @@
 import YButton from './YButton.vue';
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
-import { withKnobs } from '@storybook/addon-knobs';
 
 
 const vue = {
@@ -20,19 +19,16 @@ const storyLines: StoryLine[] = [
    {
       title: 'Default',
       template: `
-			<YButton
-				
-			/>
-		`,
+         <YButton
+            
+         />
+      `,
       states: ['value'],
    },
 ];
 
 
-export default {
-   title: 'Buttons / Button',
-   decorators: [withKnobs],
-};
+export default StoryBuilder.createDefault('Buttons / Button');
 export const default_ = StoryBuilder.createStory(vue, storyLines);
 export const docs = StoryBuilder.createDocs(`
 /**

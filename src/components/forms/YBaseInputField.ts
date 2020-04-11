@@ -11,17 +11,17 @@ export default class YBaseInputField extends Mixins(YBaseInput) {
    @Prop({ default: () => [] }) public rules!: Function[];
 
 
-   @Watch('isRequired')
-   public onChange_isRequired() {
-      if (!this.isRequired) {
+   @Watch('isOptional')
+   public onChange_isOptional() {
+      if (this.isOptional) {
          // @ts-ignore
          this.$refs.qField.resetValidation();
       }
    }
 
 
-   public get finalLabel() {
-      return (this.isRequired ? (this.label + ' *') : this.label);
+   public get finalPlaceholder() {
+      return (this.placeholder ? this.$locale.all.placeholder.replace('${1}', this.placeholder) : '');
    }
 
 

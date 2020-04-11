@@ -1,7 +1,7 @@
 import YButtonSubmit from './YButtonSubmit.vue';
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
 import { propsButton } from '.storybook/custom/knob-props';
-import { boolean, number, withKnobs } from '@storybook/addon-knobs';
+import { boolean, number } from '@storybook/addon-knobs';
 
 
 const vue = {
@@ -24,22 +24,19 @@ const storyLines: StoryLine[] = [
    {
       title: 'Default',
       template: `
-			<YButtonSubmit
-				:label="label"
-				:is-disabled="isDisabled"
-				:is-loading="isLoading"
-				:loading-time="loadingTime"
-			/>
-		`,
+         <YButtonSubmit
+            :label="label"
+            :is-disabled="isDisabled"
+            :is-loading="isLoading"
+            :loading-time="loadingTime"
+         />
+      `,
       states: [],
    },
 ];
 
 
-export default {
-   title: 'Buttons / Button Submit',
-   decorators: [withKnobs],
-};
+export default StoryBuilder.createDefault('Buttons / Button Submit');
 export const default_ = StoryBuilder.createStory(vue, storyLines);
 export const docs = StoryBuilder.createDocs(`
 /**

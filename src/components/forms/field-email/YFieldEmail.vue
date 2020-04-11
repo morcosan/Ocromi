@@ -19,8 +19,8 @@
          const rules = [...this.rules];
 
          // add required rule
-         if (this.isRequired) {
-            rules.push((value: string) => (!!value || this.$locale.all.requiredField));
+         if (!this.isOptional) {
+            rules.push((value: string) => (!!value || this.$locale.all.requiredError));
          }
 
          // add email rule
@@ -55,19 +55,20 @@
       :value="value"
       :label="finalLabel"
       :hint="hint"
-      :placeholder="placeholder"
+      :placeholder="finalPlaceholder"
       :bg-color="bgColor"
       :error-message="error"
-      :error="error !== ''"
+      :error="!!error"
       :rules="finalRules"
       :readonly="isReadonly"
       :disable="isDisabled"
-      :class="{ 'y-field-email': true, 'y-input-spacing': hasSpacing }"
+      class="y-base-input y-field-email"
       type="email"
       outlined
       lazy-rules
       @input="updateValueProp($event)"
       @keydown="onKeyDown"
+      @blur="validate"
       ref="qField"
    />
 </template>

@@ -14,10 +14,12 @@
       "moduleResolution": "node",
       "baseUrl": ".",
       "types": [
+         "node",
          "quasar",
          "jest"
       ],
-      "allowSyntheticDefaultImports": true
+      "allowSyntheticDefaultImports": true,
+      "resolveJsonModule": true
    },
    "include": [
       "src/**/*"

@@ -22,8 +22,8 @@
          const rules = [...this.rules];
 
          // add required rule
-         if (this.isRequired) {
-            rules.push((value: string) => (!!value || this.$locale.all.requiredField));
+         if (!this.isOptional) {
+            rules.push((value: string) => (!!value || this.$locale.all.requiredError));
          }
 
          return rules;
@@ -53,17 +53,16 @@
       :value="value"
       :label="finalLabel"
       :hint="hint"
-      :placeholder="placeholder"
+      :placeholder="finalPlaceholder"
       :readonly="isReadonly"
       :bg-color="bgColor"
       :error-message="error"
-      :error="error !== ''"
+      :error="!!error"
       :rules="finalRules"
       :autogrow="isDynamic"
       :class="{
-         'y-field-text-area': true,
+         'y-base-input y-field-text-area': true,
          'y-field-text-area--has-scrollbar': hasScrollbar,
-         'y-input-spacing': hasSpacing
       }"
       :disable="isDisabled"
       type="textarea"
@@ -71,6 +70,7 @@
       lazy-rules
       @input="onInput"
       @focus="onFocus"
+      @blur="validate"
       ref="qField"
    />
 </template>
@@ -78,4 +78,9 @@
 
 <style scoped lang="scss">
    // @import '../../../css/variables';
+
+   // place the icon with javascript
+   .y-field-text-area--has-scrollbar.q-textarea /deep/ .q-field__append {
+      right: 12px;
+   }
 </style>

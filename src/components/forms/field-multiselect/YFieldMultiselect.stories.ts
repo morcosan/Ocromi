@@ -2,7 +2,7 @@ import YFieldMultiselect from './YFieldMultiselect.vue';
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
 import { selectOptions } from '.storybook/custom/utils';
 import { propsInputSelect } from '.storybook/custom/knob-props';
-import { boolean, number, withKnobs } from '@storybook/addon-knobs';
+import { boolean, number } from '@storybook/addon-knobs';
 
 
 const options = [...selectOptions];
@@ -40,28 +40,26 @@ const storyLines: StoryLine[] = [
    {
       title: 'Default',
       template: `
-			<YFieldMultiselect
-				v-model="value"
-				:options="options"
-				:label="label"
-				:hint="hint"
-				:is-disabled="isDisabled"
-				:is-required="isRequired"
-				:is-readonly="isReadonly"
-				:error="error"
-				:selection-limit="selectionLimit"
-				:can-add-new="canAddNew"
-			/>
-		`,
+         <YFieldMultiselect
+            v-model="value"
+            :options="options"
+            :label="label"
+            :hint="hint"
+            :is-disabled="isDisabled"
+            :is-optional="isOptional"
+            :hides-optional="hidesOptional"
+            :is-readonly="isReadonly"
+            :error="error"
+            :selection-limit="selectionLimit"
+            :can-add-new="canAddNew"
+         />
+      `,
       states: ['value'],
    },
 ];
 
 
-export default {
-   title: 'Forms / Fields / Field Multiselect',
-   decorators: [withKnobs],
-};
+export default StoryBuilder.createDefault('Forms / Inputs / Field Multiselect');
 export const default_ = StoryBuilder.createStory(vue, storyLines);
 export const docs = StoryBuilder.createDocs(`
 /**

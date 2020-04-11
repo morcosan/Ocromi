@@ -23,10 +23,10 @@ export default class YBaseInputSlider extends Mixins(YBaseInput) {
    public isDirty: boolean = false;
 
 
-   @Watch('isRequired')
-   public onChange_isRequired() {
-      // reset error if not required
-      if (!this.isRequired) {
+   @Watch('isOptional')
+   public onChange_isOptional() {
+      if (this.isOptional) {
+         // reset error
          this.innerError = '';
       }
    }
@@ -34,8 +34,8 @@ export default class YBaseInputSlider extends Mixins(YBaseInput) {
 
    @Override
    public validate() {
-      if (this.isRequired) {
-         this.innerError = (this.isDirty ? '' : this.$locale.all.required);
+      if (!this.isOptional) {
+         this.innerError = (this.isDirty ? '' : this.$locale.slider.requiredError);
       }
 
       return !this.innerError;

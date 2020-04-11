@@ -17,8 +17,8 @@
          const rules = [];
 
          // add required rule
-         if (this.isRequired) {
-            rules.push((value: Option | null) => (!!value || this.$locale.all.requiredField));
+         if (!this.isOptional) {
+            rules.push((value: Option | null) => (!!value || this.$locale.all.requiredError));
          }
 
          return rules;
@@ -37,10 +37,10 @@
       :readonly="isReadonly"
       :disable="isDisabled"
       :error-message="error"
-      :error="error !== ''"
+      :error="!!error"
       :rules="finalRules"
       :bg-color="bgColor"
-      :class="{ 'y-field-select': true, 'y-input-spacing': hasSpacing }"
+      class="y-base-input y-field-select"
       input-debounce="0"
       outlined
       lazy-rules
@@ -48,6 +48,7 @@
       use-input
       @input="updateValueProp($event)"
       @filter="onFilterInput"
+      @blur="validate"
       ref="qSelect"
    />
 </template>

@@ -3,6 +3,7 @@
    import YBaseInputField from '../YBaseInputField';
    import { QIcon, QInput, QTooltip } from 'quasar';
    import Regex from '../../../utils/regex';
+   import Utils from '../../../utils';
 
 
    @Component({
@@ -16,6 +17,8 @@
       public nativeInput!: HTMLElement;
       public canShowError: boolean = false;
       public innerError: string = '';
+      public prefix: string = 'https://';
+      public finalURL: string = '';
 
 
       @Watch('value')
@@ -31,8 +34,8 @@
          const rules = [...this.rules];
 
          // add required rule
-         if (this.isRequired) {
-            rules.push((value: string) => (!!value || this.$locale.all.requiredField));
+         if (!this.isOptional) {
+            rules.push((value: string) => (!!value || this.$locale.all.requiredError));
          }
 
          // add URL rule
@@ -84,11 +87,6 @@
       }
 
 
-      public onBlur() {
-         this.validate();
-      }
-
-
       public onKeyDown(event: KeyboardEvent) {
          // block space character on key down
          if (event.key === ' ') {
@@ -99,8 +97,7 @@
 
       public onPaste(event: ClipboardEvent) {
          // get pasted url
-         // @ts-ignore
-         const url = (event.clipboardData || globalThis.clipboardData).getData('text');
+         const url = (event.clipboardData || (globalThis as any).clipboardData).getData('text');
 
          // remove http or https
          const http = 'http://';
@@ -122,7 +119,7 @@
       }
 
 
-      public onKeyDownIcon(event: KeyboardEvent) {
+      public onKeyDownButton(event: KeyboardEvent) {
          // activate button with space or enter
          if (event.key === ' ' || event.key === 'Enter') {
             event.preventDefault();
@@ -134,10 +131,24 @@
 
       public openURL() {
          if (!this.isReadonly) {
-            const url = 'http://' + this.value;
-            // open URL in new tab
-            globalThis.open(url, '_blank');
+            Utils.openURL(this.finalURL);
          }
+      }
+
+
+      public updateFinalURL() {
+         const httpOptions = ['localhost', '127.0.0.1'];
+
+         let isHttp = false;
+         for (let i = 0; i < httpOptions.length; i++) {
+            if (this.value.includes(httpOptions[i])) {
+               isHttp = true;
+               break;
+            }
+         }
+
+         this.prefix = (isHttp ? 'http://' : 'https://');
+         this.finalURL = this.prefix + this.value;
       }
 
    }
@@ -149,32 +160,38 @@
       :value="value"
       :label="finalLabel"
       :hint="hint"
-      :placeholder="placeholder"
+      :placeholder="finalPlaceholder"
       :readonly="isReadonly"
       :bg-color="bgColor"
       :error="!!error || !!innerError"
       :error-message="error || innerError"
       :disable="isDisabled"
-      :class="{ 'y-field-link': true, 'y-input-spacing': hasSpacing }"
-      prefix="http://"
+      :prefix="prefix"
+      class="y-base-input y-field-link"
       type="text"
       input-class="js-native-input"
       outlined
       @input="updateValueProp($event)"
       @keydown="onKeyDown"
-      @blur="onBlur"
+      @keyup="updateFinalURL"
+      @blur="validate"
       ref="qField"
    >
       <template v-if="!error && !innerError && value" v-slot:append>
-         <QIcon
-            :class="(isReadonly ? 'cursor-not-allowed' : 'cursor-pointer')"
+         <a
+            :href="finalURL"
             :tabindex="isReadonly ? -1 : 0"
-            name="open_in_new"
+            class="y-field-link__anchor"
             @click="openURL"
-            @keydown="onKeyDownIcon"
+            @keydown="onKeyDownButton"
          >
-            <QTooltip v-if="!isReadonly">{{ $locale.fieldLink.tooltip }}</QTooltip>
-         </QIcon>
+            <QIcon
+               :class="(isReadonly ? 'cursor-not-allowed' : 'cursor-pointer')"
+               name="open_in_new"
+            >
+               <QTooltip v-if="!isReadonly">{{ $locale.fieldLink.tooltip }}</QTooltip>
+            </QIcon>
+         </a>
       </template>
    </QInput>
 </template>
@@ -182,4 +199,10 @@
 
 <style scoped lang="scss">
    // @import '../../../css/variables';
+
+   .y-field-link__anchor {
+      display: flex;
+      height: fit-content;
+      width: fit-content;
+   }
 </style>

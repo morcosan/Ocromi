@@ -34,14 +34,20 @@
          const rules = [...this.rules];
 
          // add required rule
-         if (this.isRequired) {
-            rules.push((value: string) => (!!value || this.$locale.all.requiredField));
+         if (!this.isOptional) {
+            rules.push((value: string) => (!!value || this.$locale.all.requiredError));
          }
 
          // add mask validation rule
-         if (this.inputMask !== '') {
+         const hasMask = (this.inputMask !== '' && this.numCharsRequired > 0);
+         if (hasMask) {
             const error = this.$locale.fieldCipher.maskError.replace('${1}', String(this.numCharsRequired));
-            rules.push((value: string) => (value.length === this.numCharsRequired || error));
+            rules.push((value: string) => {
+               if (value !== '') {
+                  return (value.length === this.numCharsRequired || error);
+               }
+               return true;
+            });
          }
 
          return rules;
@@ -50,8 +56,8 @@
 
       private prepareValidation() {
          const maskOptions = ['#', 'S', 'A', 'a', 'N', 'X', 'x'];
-
          this.numCharsRequired = 0;
+
          if (this.inputMask !== '') {
             for (const char of maskOptions) {
                this.numCharsRequired += Utils.countSubstrInString(char, this.inputMask);
@@ -69,19 +75,20 @@
       :mask="inputMask"
       :label="finalLabel"
       :hint="hint"
-      :placeholder="placeholder"
+      :placeholder="finalPlaceholder"
       :readonly="isReadonly"
       :bg-color="bgColor"
       :error-message="error"
-      :error="error !== ''"
+      :error="!!error"
       :rules="finalRules"
       :disable="isDisabled"
-      :class="{ 'y-field-cipher': true, 'y-input-spacing': hasSpacing }"
+      class="y-base-input y-field-cipher"
       type="text"
       unmasked-value
       lazy-rules
       outlined
       @input="updateValueProp($event)"
+      @blur="validate"
       ref="qField"
    />
 </template>

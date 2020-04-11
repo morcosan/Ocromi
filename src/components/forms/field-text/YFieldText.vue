@@ -17,8 +17,8 @@
          const rules = [...this.rules];
 
          // add required rule
-         if (this.isRequired) {
-            rules.push((value: string) => (!!value || this.$locale.all.requiredField));
+         if (!this.isOptional) {
+            rules.push((value: string) => (!!value || this.$locale.all.requiredError));
          }
 
          return rules;
@@ -33,18 +33,19 @@
       :value="value"
       :label="finalLabel"
       :hint="hint"
-      :placeholder="placeholder"
+      :placeholder="finalPlaceholder"
       :error="!!error"
       :error-message="error"
       :rules="finalRules"
       :readonly="isReadonly"
       :disable="isDisabled"
       :bg-color="bgColor"
-      :class="{ 'y-field-text': true, 'y-input-spacing': hasSpacing }"
+      class="y-base-input y-field-text"
       type="text"
       outlined
       lazy-rules
       @input="updateValueProp($event)"
+      @blur="validate"
       ref="qField"
    />
 </template>

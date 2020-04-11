@@ -27,8 +27,12 @@ export default class YBaseInputSelect extends Mixins(YBaseInput) {
    }
 
 
-   public get finalLabel() {
-      return (this.isRequired ? (this.label + ' *') : this.label);
+   @Watch('isOptional')
+   public onChange_isOptional() {
+      if (this.isOptional) {
+         // @ts-ignore
+         this.$refs.qSelect.resetValidation();
+      }
    }
 
 

@@ -38,3 +38,6 @@ export const YSliderRange: VueConstructor<YSliderRange>;
 export const YFieldDate: VueConstructor<YFieldDate>;
 export const YFieldFileUpload: VueConstructor<YFieldFileUpload>;
 export const YButtonSubmit: VueConstructor<YButtonSubmit>;
+
+export interface Ocromi {}
+export const Ocromi;

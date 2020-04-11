@@ -13,14 +13,14 @@ $newHeight: 56px - (24px - $newPaddingTop);
 
    // make it look like a placeholder
    &::placeholder {
-      color: #999999;
+      color: #999;
    }
 }
 
 // remove space from prefix
 .q-field--labeled .q-field__prefix {
    padding: $newPaddingTop 5px $newPaddingTop 0;
-   color: #999999;
+   color: #999;
 }
 
 // remove empty space
@@ -116,53 +116,4 @@ $newHeight: 56px - (24px - $newPaddingTop);
 .q-textarea .q-field__append {
    position: absolute;
    right: 0;
-}
-// place the icon with javascript
-.y-field-text-area--has-scrollbar.q-textarea .q-field__append {
-   right: 12px;
-}
-
-
-
-
-
-/**
- * For password field
- */
-
-// place the error icon before the date icon
-.y-field-password.q-field .q-field__append.q-anchor--skip {
-   position: absolute;
-   right: 36px;
-   padding-right: 0;
-}
-
-
-
-
-
-/**
- * For number field
- */
-
-// place the error icon before the arrows
-.y-field-number.q-field .q-field__append.q-anchor--skip {
-   position: absolute;
-   right: 26px;
-   padding-right: 0;
-}
-
-
-
-
-
-/**
- * For date field
- */
-
-// place the error icon before the date icon
-.y-field-date.q-field .q-field__append.q-anchor--skip {
-   position: absolute;
-   right: 34px;
-   padding-right: 0;
 }

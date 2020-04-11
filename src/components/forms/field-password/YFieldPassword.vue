@@ -71,8 +71,8 @@
          const rules = [...this.rules];
 
          // add required rule
-         if (this.isRequired) {
-            rules.push((value: string) => (!!value || this.$locale.all.requiredField));
+         if (!this.isOptional) {
+            rules.push((value: string) => (!!value || this.$locale.all.requiredError));
          }
 
          return rules;
@@ -81,11 +81,6 @@
 
       @Override
       public mounted() {
-         this.updateStrength();
-      }
-
-
-      public onKeyUp() {
          this.updateStrength();
       }
 
@@ -106,7 +101,7 @@
       }
 
 
-      private updateStrength() {
+      public updateStrength() {
          // test password
          const performanceCap = 40;
          const result = zxcvbn(this.value.substr(0, performanceCap));
@@ -123,23 +118,23 @@
       :value="value"
       :label="finalLabel"
       :hint="hasMeter ? undefined : hint"
-      :placeholder="placeholder"
+      :placeholder="finalPlaceholder"
       :readonly="isReadonly"
       :bg-color="bgColor"
       :error-message="error"
-      :error="error !== ''"
+      :error="!!error"
       :rules="finalRules"
       :bottom-slots="hasMeter"
       :disable="isDisabled"
       :class="{
-			'y-field-password': true,
+			'y-base-input y-field-password': true,
 			'y-field-password--has-meter': hasMeter,
-			'y-input-spacing': hasSpacing
 		}"
       outlined
       lazy-rules
       @input="updateValueProp($event)"
-      @keyup="onKeyUp"
+      @keyup="updateStrength"
+      @blur="validate"
       ref="qField"
    >
       <template v-slot:append>
@@ -195,5 +190,12 @@
    .y-field-password--has-meter {
       padding-top: 10px;
       margin-bottom: 30px;
+   }
+
+   // place the error icon before the date icon
+   .y-field-password.q-field /deep/ .q-field__append.q-anchor--skip {
+      position: absolute;
+      right: 36px;
+      padding-right: 0;
    }
 </style>
