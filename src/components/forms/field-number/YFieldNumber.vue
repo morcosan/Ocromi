@@ -171,9 +171,9 @@
       :error="error !== ''"
       :rules="finalRules"
       :disable="isDisabled"
-      :class="{ 'y-field-number': true, 'y-input-spacing': hasSpacing }"
       :step="valueStep"
       :bottom-slots="decimals > 0"
+      class="y-base-input y-field-number"
       type="text"
       outlined
       lazy-rules

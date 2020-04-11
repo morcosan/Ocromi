@@ -35,22 +35,22 @@ const storyLines: StoryLine[] = [
    {
       title: 'Default',
       template: `
-			<YFieldNumber
-				v-model="value"
-				:label="label"
-				:placeholder="placeholder"
-				:hint="hint"
-				:is-disabled="isDisabled"
-				:is-optional="isOptional"
-				:hides-optional="hidesOptional"
-				:is-readonly="isReadonly"
-				:error="error"
-				:min-value="minValue"
-				:max-value="maxValue"
-				:value-step="valueStep"
-				:decimals="decimals"
-			/>
-		`,
+         <YFieldNumber
+            v-model="value"
+            :label="label"
+            :placeholder="placeholder"
+            :hint="hint"
+            :is-disabled="isDisabled"
+            :is-optional="isOptional"
+            :hides-optional="hidesOptional"
+            :is-readonly="isReadonly"
+            :error="error"
+            :min-value="minValue"
+            :max-value="maxValue"
+            :value-step="valueStep"
+            :decimals="decimals"
+         />
+      `,
       states: ['value'],
    },
 ];

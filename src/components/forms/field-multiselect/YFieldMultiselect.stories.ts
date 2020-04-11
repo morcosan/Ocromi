@@ -40,20 +40,20 @@ const storyLines: StoryLine[] = [
    {
       title: 'Default',
       template: `
-			<YFieldMultiselect
-				v-model="value"
-				:options="options"
-				:label="label"
-				:hint="hint"
-				:is-disabled="isDisabled"
-				:is-optional="isOptional"
-				:hides-optional="hidesOptional"
-				:is-readonly="isReadonly"
-				:error="error"
-				:selection-limit="selectionLimit"
-				:can-add-new="canAddNew"
-			/>
-		`,
+         <YFieldMultiselect
+            v-model="value"
+            :options="options"
+            :label="label"
+            :hint="hint"
+            :is-disabled="isDisabled"
+            :is-optional="isOptional"
+            :hides-optional="hidesOptional"
+            :is-readonly="isReadonly"
+            :error="error"
+            :selection-limit="selectionLimit"
+            :can-add-new="canAddNew"
+         />
+      `,
       states: ['value'],
    },
 ];

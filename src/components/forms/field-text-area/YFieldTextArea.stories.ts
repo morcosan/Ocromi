@@ -26,19 +26,19 @@ const storyLines: StoryLine[] = [
    {
       title: 'Default',
       template: `
-			<YFieldTextArea
-				v-model="value"
-				:label="label"
-				:placeholder="placeholder"
-				:hint="hint"
-				:is-disabled="isDisabled"
-				:is-optional="isOptional"
-				:hides-optional="hidesOptional"
-				:is-readonly="isReadonly"
-				:error="error"
-				:is-dynamic="isDynamic"
-			/>
-		`,
+         <YFieldTextArea
+            v-model="value"
+            :label="label"
+            :placeholder="placeholder"
+            :hint="hint"
+            :is-disabled="isDisabled"
+            :is-optional="isOptional"
+            :hides-optional="hidesOptional"
+            :is-readonly="isReadonly"
+            :error="error"
+            :is-dynamic="isDynamic"
+         />
+      `,
       states: ['value'],
    },
 ];

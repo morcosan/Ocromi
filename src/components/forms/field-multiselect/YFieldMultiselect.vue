@@ -80,7 +80,7 @@
       :rules="finalRules"
       :bg-color="bgColor"
       :new-value-mode="canAddNew ? 'add-unique' : undefined"
-      :class="{ 'y-field-multiselect': true, 'y-input-spacing': hasSpacing }"
+      class="y-field-multiselect y-base-input"
       input-debounce="0"
       lazy-rules
       clearable

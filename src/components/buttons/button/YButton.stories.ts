@@ -19,10 +19,10 @@ const storyLines: StoryLine[] = [
    {
       title: 'Default',
       template: `
-			<YButton
-				
-			/>
-		`,
+         <YButton
+            
+         />
+      `,
       states: ['value'],
    },
 ];

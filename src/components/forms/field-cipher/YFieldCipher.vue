@@ -76,7 +76,7 @@
       :error="error !== ''"
       :rules="finalRules"
       :disable="isDisabled"
-      :class="{ 'y-field-cipher': true, 'y-input-spacing': hasSpacing }"
+      class="y-base-input y-field-cipher"
       type="text"
       unmasked-value
       lazy-rules

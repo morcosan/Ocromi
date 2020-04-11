@@ -40,7 +40,7 @@
       :error="error !== ''"
       :rules="finalRules"
       :bg-color="bgColor"
-      :class="{ 'y-field-select': true, 'y-input-spacing': hasSpacing }"
+      class="y-base-input y-field-select"
       input-debounce="0"
       outlined
       lazy-rules

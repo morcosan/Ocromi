@@ -26,25 +26,25 @@ const storyLines: StoryLine[] = [
    {
       title: 'Default',
       template: `
-			<YSlider
-				v-model="value"
-				:label="label"
-				:is-disabled="isDisabled"
-				:is-optional="isOptional"
-				:hides-optional="hidesOptional"
-				:is-readonly="isReadonly"
-				:error="error"
-				:thumb-suffix="thumbSuffix"
-				:min-value="minValue"
-				:max-value="maxValue"
-				:value-step="valueStep"
-				:step-decimals="stepDecimals"
-				:has-markers="hasMarkers"
-				ref="slider"
-			/>
-			<br/>
-			<button class="story-button" @click="onClick">Validate</button>
-		`,
+         <YSlider
+            v-model="value"
+            :label="label"
+            :is-disabled="isDisabled"
+            :is-optional="isOptional"
+            :hides-optional="hidesOptional"
+            :is-readonly="isReadonly"
+            :error="error"
+            :thumb-suffix="thumbSuffix"
+            :min-value="minValue"
+            :max-value="maxValue"
+            :value-step="valueStep"
+            :step-decimals="stepDecimals"
+            :has-markers="hasMarkers"
+            ref="slider"
+         />
+         <br/>
+         <button class="story-button" @click="onClick">Validate</button>
+      `,
       states: ['value'],
    },
 ];

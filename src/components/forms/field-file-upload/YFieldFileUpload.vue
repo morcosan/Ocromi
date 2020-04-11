@@ -131,8 +131,7 @@
       :rules="finalRules"
       :bg-color="bgColor"
       :class="{
-         'y-field-file-upload': true,
-			'y-input-spacing': hasSpacing,
+         'y-base-input y-field-file-upload': true,
 			'y-field-file-upload--empty': (value.length === 0),
 		}"
       :counter-label="getCounterLabel"

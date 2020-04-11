@@ -21,36 +21,36 @@ const storyLines: StoryLine[] = [
    {
       title: 'Default',
       template: `
-			<YFieldText
-				v-model="value"
-				:label="label"
-				:placeholder="placeholder"
-				:hint="hint"
-				:is-disabled="isDisabled"
-				:is-optional="isOptional"
-				:hides-optional="hidesOptional"
-				:is-readonly="isReadonly"
-				:error="error"
-			/>
-		`,
+         <YFieldText
+            v-model="value"
+            :label="label"
+            :placeholder="placeholder"
+            :hint="hint"
+            :is-disabled="isDisabled"
+            :is-optional="isOptional"
+            :hides-optional="hidesOptional"
+            :is-readonly="isReadonly"
+            :error="error"
+         />
+      `,
       states: ['value'],
    },
    {
       title: 'With rules (length < 5)',
       template: `
-			<YFieldText
-				v-model="value1"
-				:label="label"
-				:placeholder="placeholder"
-				:hint="hint"
-				:is-disabled="isDisabled"
-				:is-optional="isOptional"
-				:hides-optional="hidesOptional"
-				:is-readonly="isReadonly"
-				:rules="[val => (val.length < 5 || 'Value must have less than 5 characters')]"
-				:error="error"
-			/>
-		`,
+         <YFieldText
+            v-model="value1"
+            :label="label"
+            :placeholder="placeholder"
+            :hint="hint"
+            :is-disabled="isDisabled"
+            :is-optional="isOptional"
+            :hides-optional="hidesOptional"
+            :is-readonly="isReadonly"
+            :rules="[val => (val.length < 5 || 'Value must have less than 5 characters')]"
+            :error="error"
+         />
+      `,
       states: ['value1'],
    },
 ];

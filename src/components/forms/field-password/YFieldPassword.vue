@@ -132,9 +132,8 @@
       :bottom-slots="hasMeter"
       :disable="isDisabled"
       :class="{
-			'y-field-password': true,
+			'y-base-input y-field-password': true,
 			'y-field-password--has-meter': hasMeter,
-			'y-input-spacing': hasSpacing
 		}"
       outlined
       lazy-rules

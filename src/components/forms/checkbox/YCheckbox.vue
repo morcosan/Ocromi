@@ -47,9 +47,8 @@
 <template>
    <div
       :class="{
-         'y-checkbox': true,
+         'y-base-input y-checkbox': true,
          'y-checkbox--required': !isOptional,
-         'y-input-spacing': hasSpacing,
       }"
    >
       <QCheckbox

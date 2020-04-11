@@ -29,32 +29,32 @@ const storyLines: StoryLine[] = [
    {
       title: 'Default',
       template: `
-			<YFieldDate
-				v-model="value"
-				:label="label"
-				:is-disabled="isDisabled"
-				:is-optional="isOptional"
-				:hides-optional="hidesOptional"
-				:is-readonly="isReadonly"
-				:error="error"
-			/>
-		`,
+         <YFieldDate
+            v-model="value"
+            :label="label"
+            :is-disabled="isDisabled"
+            :is-optional="isOptional"
+            :hides-optional="hidesOptional"
+            :is-readonly="isReadonly"
+            :error="error"
+         />
+      `,
       states: ['value'],
    },
    {
       title: 'Custom dates',
       template: `
-			<YFieldDate
-				v-model="value1"
-				:label="label"
-				:is-disabled="isDisabled"
-				:is-optional="isOptional"
-				:hides-optional="hidesOptional"
-				:is-readonly="isReadonly"
-				:error="error"
-				:custom-dates-fn="customDates"
-			/>
-		`,
+         <YFieldDate
+            v-model="value1"
+            :label="label"
+            :is-disabled="isDisabled"
+            :is-optional="isOptional"
+            :hides-optional="hidesOptional"
+            :is-readonly="isReadonly"
+            :error="error"
+            :custom-dates-fn="customDates"
+         />
+      `,
       states: ['value1'],
    },
 ];

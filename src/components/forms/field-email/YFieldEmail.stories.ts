@@ -20,18 +20,18 @@ const storyLines: StoryLine[] = [
    {
       title: 'Default',
       template: `
-			<YFieldEmail
-				v-model="value"
-				:label="label"
-				:placeholder="placeholder"
-				:hint="hint"
-				:is-disabled="isDisabled"
-				:is-optional="isOptional"
-				:hides-optional="hidesOptional"
-				:is-readonly="isReadonly"
-				:error="error"
-			/>
-		`,
+         <YFieldEmail
+            v-model="value"
+            :label="label"
+            :placeholder="placeholder"
+            :hint="hint"
+            :is-disabled="isDisabled"
+            :is-optional="isOptional"
+            :hides-optional="hidesOptional"
+            :is-readonly="isReadonly"
+            :error="error"
+         />
+      `,
       states: ['value'],
    },
 ];

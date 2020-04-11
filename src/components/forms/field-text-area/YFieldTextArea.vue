@@ -61,9 +61,8 @@
       :rules="finalRules"
       :autogrow="isDynamic"
       :class="{
-         'y-field-text-area': true,
+         'y-base-input y-field-text-area': true,
          'y-field-text-area--has-scrollbar': hasScrollbar,
-         'y-input-spacing': hasSpacing
       }"
       :disable="isDisabled"
       type="textarea"

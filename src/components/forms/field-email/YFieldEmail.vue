@@ -62,7 +62,7 @@
       :rules="finalRules"
       :readonly="isReadonly"
       :disable="isDisabled"
-      :class="{ 'y-field-email': true, 'y-input-spacing': hasSpacing }"
+      class="y-base-input y-field-email"
       type="email"
       outlined
       lazy-rules

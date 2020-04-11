@@ -24,13 +24,13 @@ const storyLines: StoryLine[] = [
    {
       title: 'Default',
       template: `
-			<YButtonSubmit
-				:label="label"
-				:is-disabled="isDisabled"
-				:is-loading="isLoading"
-				:loading-time="loadingTime"
-			/>
-		`,
+         <YButtonSubmit
+            :label="label"
+            :is-disabled="isDisabled"
+            :is-loading="isLoading"
+            :loading-time="loadingTime"
+         />
+      `,
       states: [],
    },
 ];

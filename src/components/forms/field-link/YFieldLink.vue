@@ -176,8 +176,8 @@
       :error="!!error || !!innerError"
       :error-message="error || innerError"
       :disable="isDisabled"
-      :class="{ 'y-field-link': true, 'y-input-spacing': hasSpacing }"
       :prefix="prefix"
+      class="y-base-input y-field-link"
       type="text"
       input-class="js-native-input"
       outlined

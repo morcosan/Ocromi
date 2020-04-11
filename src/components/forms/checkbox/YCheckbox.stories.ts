@@ -29,41 +29,41 @@ const storyLines: StoryLine[] = [
    {
       title: 'Default',
       template: `
-			<YCheckbox
-				v-model="value"
-				:label="label"
-				:is-disabled="isDisabled"
-				:is-optional="isOptional"
-				:hides-optional="hidesOptional"
-			/>
-		`,
+         <YCheckbox
+            v-model="value"
+            :label="label"
+            :is-disabled="isDisabled"
+            :is-optional="isOptional"
+            :hides-optional="hidesOptional"
+         />
+      `,
       states: ['value'],
    },
    {
       title: 'Custom label',
       template: `
-			<YCheckbox
-				v-model="value1"
-				:is-disabled="isDisabled"
-				:is-optional="isOptional"
-				:hides-optional="hidesOptional"
-			>
-				I agree with <a href="/" @click="onClick">terms of service</a>
-			</YCheckbox>
-		`,
+         <YCheckbox
+            v-model="value1"
+            :is-disabled="isDisabled"
+            :is-optional="isOptional"
+            :hides-optional="hidesOptional"
+         >
+            I agree with <a href="/" @click="onClick">terms of service</a>
+         </YCheckbox>
+      `,
       states: ['value1'],
    },
    {
       title: 'Indeterminate',
       template: `
-			<YCheckbox
-				v-model="value2"
-				:label="label"
-				:is-disabled="isDisabled"
-				:is-optional="isOptional"
-				:hides-optional="hidesOptional"
-			/>
-		`,
+         <YCheckbox
+            v-model="value2"
+            :label="label"
+            :is-disabled="isDisabled"
+            :is-optional="isOptional"
+            :hides-optional="hidesOptional"
+         />
+      `,
       states: ['value2 === null ? "null" : value2'],
    },
 ];

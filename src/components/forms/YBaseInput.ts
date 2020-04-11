@@ -9,7 +9,6 @@ export default class YBaseInput extends Vue {
    @Prop({ default: false, type: Boolean }) public hidesOptional!: boolean;
    @Prop({ default: false, type: Boolean }) public isDisabled!: boolean;
    @Prop({ default: false, type: Boolean }) public isReadonly!: boolean;
-   @Prop({ default: false, type: Boolean }) public hasSpacing!: boolean;
    @Prop({ default: 'white' }) public bgColor!: string;
 
 

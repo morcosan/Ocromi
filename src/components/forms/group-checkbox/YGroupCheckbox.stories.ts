@@ -28,20 +28,20 @@ const storyLines: StoryLine[] = [
    {
       title: 'Default',
       template: `
-			<YGroupCheckbox
-				v-model="value"
-				:options="options"
-				:label="label"
-				:is-disabled="isDisabled"
-				:is-optional="isOptional"
-				:hides-optional="hidesOptional"
-				:is-readonly="isReadonly"
-				:error="error"
-				ref="groupCheckbox"
-			/>
-			<br/>
-			<button class="story-button" @click="onClick">Validate</button>
-		`,
+         <YGroupCheckbox
+            v-model="value"
+            :options="options"
+            :label="label"
+            :is-disabled="isDisabled"
+            :is-optional="isOptional"
+            :hides-optional="hidesOptional"
+            :is-readonly="isReadonly"
+            :error="error"
+            ref="groupCheckbox"
+         />
+         <br/>
+         <button class="story-button" @click="onClick">Validate</button>
+      `,
       states: ['value'],
    },
 ];

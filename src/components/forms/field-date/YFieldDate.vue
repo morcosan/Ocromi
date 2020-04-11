@@ -153,7 +153,7 @@
       :rules="finalRules"
       :disable="isDisabled"
       :readonly="isReadonly"
-      :class="{ 'y-field-date': true, 'y-input-spacing': hasSpacing }"
+      class="y-base-input y-field-date"
       :mask="!!inputValue || hasFocus ? inputMask : ''"
       fill-mask="_"
       type="text"

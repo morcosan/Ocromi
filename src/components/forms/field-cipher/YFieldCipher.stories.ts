@@ -26,19 +26,19 @@ const storyLines: StoryLine[] = [
    {
       title: 'Default',
       template: `
-			<YFieldCipher
-				v-model="value"
-				:input-mask="inputMask"
-				:label="label"
-				:placeholder="placeholder"
-				:hint="hint"
-				:is-disabled="isDisabled"
-				:is-optional="isOptional"
-				:hides-optional="hidesOptional"
-				:is-readonly="isReadonly"
-				:error="error"
-			/>
-		`,
+         <YFieldCipher
+            v-model="value"
+            :input-mask="inputMask"
+            :label="label"
+            :placeholder="placeholder"
+            :hint="hint"
+            :is-disabled="isDisabled"
+            :is-optional="isOptional"
+            :hides-optional="hidesOptional"
+            :is-readonly="isReadonly"
+            :error="error"
+         />
+      `,
       states: ['value'],
    },
 ];

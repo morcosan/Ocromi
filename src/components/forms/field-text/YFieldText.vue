@@ -40,7 +40,7 @@
       :readonly="isReadonly"
       :disable="isDisabled"
       :bg-color="bgColor"
-      :class="{ 'y-field-text': true, 'y-input-spacing': hasSpacing }"
+      class="y-base-input y-field-text"
       type="text"
       outlined
       lazy-rules

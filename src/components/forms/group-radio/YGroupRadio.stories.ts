@@ -42,20 +42,20 @@ const storyLines: StoryLine[] = [
    {
       title: 'Default',
       template: `
-			<YGroupRadio
-				v-model="value"
-				:options="options"
-				:label="label"
-				:is-disabled="isDisabled"
-				:is-optional="isOptional"
-				:hides-optional="hidesOptional"
-				:is-readonly="isReadonly"
-				:error="error"
-				ref="groupRadio"
-			/>
-			<br/>
-			<button class="story-button" @click="onClick">Validate</button>
-		`,
+         <YGroupRadio
+            v-model="value"
+            :options="options"
+            :label="label"
+            :is-disabled="isDisabled"
+            :is-optional="isOptional"
+            :hides-optional="hidesOptional"
+            :is-readonly="isReadonly"
+            :error="error"
+            ref="groupRadio"
+         />
+         <br/>
+         <button class="story-button" @click="onClick">Validate</button>
+      `,
       states: ['value'],
    },
 ];

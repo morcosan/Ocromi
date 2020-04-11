@@ -63,49 +63,49 @@ const storyLines: StoryLine[] = [
    {
       title: 'Default',
       template: `
-			<YFieldFileUpload
-				v-model="value"
-				:label="label"
-				:hint="hint"
-				:file-formats="fileFormats"
-				:max-file-size="maxFileSize"
-				:max-total-size="maxTotalSize"
-				:max-num-files="maxNumFiles"
-				:is-multiple="isMultiple"
-				:is-disabled="isDisabled"
-				:is-optional="isOptional"
-				:hides-optional="hidesOptional"
-				:is-readonly="isReadonly"
-				:error="error"
-				ref="fieldFileUpload"
-			/>
-			<br/>
-			<button class="story-button" @click="onClick">Validate</button>
-		`,
+         <YFieldFileUpload
+            v-model="value"
+            :label="label"
+            :hint="hint"
+            :file-formats="fileFormats"
+            :max-file-size="maxFileSize"
+            :max-total-size="maxTotalSize"
+            :max-num-files="maxNumFiles"
+            :is-multiple="isMultiple"
+            :is-disabled="isDisabled"
+            :is-optional="isOptional"
+            :hides-optional="hidesOptional"
+            :is-readonly="isReadonly"
+            :error="error"
+            ref="fieldFileUpload"
+         />
+         <br/>
+         <button class="story-button" @click="onClick">Validate</button>
+      `,
       states: ['value', 'typeof value', 'fileFormats'],
    },
    {
       title: 'With rules (name.length > 15)',
       template: `
-			<YFieldFileUpload
-				v-model="value1"
-				:label="label"
-				:hint="hint"
-				:file-formats="fileFormats"
-				:max-file-size="maxFileSize"
-				:max-total-size="maxTotalSize"
-				:is-multiple="isMultiple"
-				:is-disabled="isDisabled"
-				:is-optional="isOptional"
-				:hides-optional="hidesOptional"
-				:is-readonly="isReadonly"
-				:rules="rules"
-				:error="error"
-				ref="fieldFileUpload2"
-			/>
-			<br/>
-			<button class="story-button" @click="onClick2">Validate</button>
-		`,
+         <YFieldFileUpload
+            v-model="value1"
+            :label="label"
+            :hint="hint"
+            :file-formats="fileFormats"
+            :max-file-size="maxFileSize"
+            :max-total-size="maxTotalSize"
+            :is-multiple="isMultiple"
+            :is-disabled="isDisabled"
+            :is-optional="isOptional"
+            :hides-optional="hidesOptional"
+            :is-readonly="isReadonly"
+            :rules="rules"
+            :error="error"
+            ref="fieldFileUpload2"
+         />
+         <br/>
+         <button class="story-button" @click="onClick2">Validate</button>
+      `,
       states: ['value1'],
    },
 ];
