@@ -15,7 +15,7 @@
       @Override
       public validate() {
          if (!this.isOptional) {
-            this.innerError = (this.value ? '' : this.$locale.all.required);
+            this.innerError = (this.value ? '' : this.$locale.groupRadio.requiredError);
          }
 
          return !this.innerError;
@@ -23,10 +23,7 @@
 
 
       public onInput(value: string) {
-         if (!this.isOptional) {
-            this.innerError = (value ? '' : this.$locale.all.required);
-         }
-
+         this.innerError = '';
          this.updateValueProp(value);
       }
 

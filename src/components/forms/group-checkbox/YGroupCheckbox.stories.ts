@@ -47,7 +47,7 @@ const storyLines: StoryLine[] = [
 ];
 
 
-export default StoryBuilder.createDefault('Forms / Other / Group Checkbox');
+export default StoryBuilder.createDefault('Forms / Inputs / Group Checkbox');
 export const default_ = StoryBuilder.createStory(vue, storyLines);
 export const docs = StoryBuilder.createDocs(`
 /**

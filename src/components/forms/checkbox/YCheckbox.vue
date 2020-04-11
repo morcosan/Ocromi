@@ -1,5 +1,5 @@
 <script lang="ts">
-   import { Component, Mixins, Override, Prop } from '../../../core/decorators';
+   import { Component, Mixins, Override, Prop, Watch } from '../../../core/decorators';
    import { QCheckbox } from 'quasar';
    import YBaseInput from '../YBaseInput';
 
@@ -10,18 +10,35 @@
    export default class YCheckbox extends Mixins(YBaseInput) {
 
       @Prop({ default: false }) public value!: boolean | null;
+      @Prop({ default: ' ' }) public error!: string;
 
 
-      public error: string = '';
+      public innerError: string = '';
+
+
+      @Watch('isOptional')
+      public onChange_isOptional() {
+         if (this.isOptional) {
+            // reset error
+            this.innerError = '';
+         }
+      }
+
+
+      @Override
+      public get finalLabel() {
+         const isVisible = (this.isOptional && !this.hidesOptional);
+         return (isVisible ? (this.$locale.all.optional + ' ' + this.label) : this.label);
+      }
 
 
       @Override
       public validate() {
          if (!this.isOptional) {
-            this.error = (this.value ? '' : this.$locale.all.required);
+            this.innerError = (this.value ? '' : this.error);
          }
 
-         return !this.error;
+         return !this.innerError;
       }
 
 
@@ -34,7 +51,7 @@
 
       public onInput(value: boolean) {
          if (!this.isOptional) {
-            this.error = (value ? '' : this.$locale.all.required);
+            this.innerError = (value ? '' : this.error);
          }
 
          this.updateValueProp(value);
@@ -54,19 +71,20 @@
       <QCheckbox
          :value="value"
          :disable="isDisabled"
-         :color="error ? 'negative' : undefined"
-         :keep-color="!!error"
+         :color="innerError ? 'negative' : undefined"
+         :keep-color="!!innerError"
          @input="onInput"
          ref="qCheckbox"
       >
-         <div :class="{ 'text-negative': error }">
-            {{ !isOptional ? ('* ' + label) : label }}
+         <div :class="{ 'text-negative': innerError }">
+            {{ finalLabel }}
             <slot/>
          </div>
       </QCheckbox>
 
-      <div :class="{ 'y-checkbox__error text-caption text-negative': true, 'y-checkbox__error--visible': error	}">
-         {{ error }}
+      <div
+         :class="{ 'y-checkbox__error text-caption text-negative': true, 'y-checkbox__error--visible': innerError	}">
+         {{ innerError }}
       </div>
    </div>
 </template>

@@ -1,9 +1,8 @@
 export default {
    all: {
-      optional: ' (optional)',
-      required: '* Required',
-      requiredField: '* Required field',
+      optional: '(optional)',
       placeholder: 'Example: ${1}',
+      requiredError: 'Input field cannot be empty',
    },
 
 
@@ -48,6 +47,15 @@ export default {
    fieldFileUpload: {
       tooltipPickFiles: 'Open file picker',
       tooltipRemoveFiles: 'Remove all files',
+   },
+   groupRadio: {
+      requiredError: 'An option must be selected',
+   },
+   groupCheckbox: {
+      requiredError: 'One or more options must be selected',
+   },
+   slider: {
+      requiredError: 'A value must be selected',
    },
 
 

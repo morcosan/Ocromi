@@ -30,7 +30,7 @@
 
          // add required rule
          if (!this.isOptional) {
-            rules.push((value: string | number) => (value !== '' || this.$locale.all.requiredField));
+            rules.push((value: string | number) => (value !== '' || this.$locale.all.requiredError));
          }
 
          // add min/max rule
@@ -168,7 +168,7 @@
       :readonly="isReadonly"
       :bg-color="bgColor"
       :error-message="error"
-      :error="error !== ''"
+      :error="!!error"
       :rules="finalRules"
       :disable="isDisabled"
       :step="valueStep"

@@ -5,9 +5,6 @@ export const propsInput = {
    label: {
       default: () => text('Label', 'Nice label'),
    },
-   error: {
-      default: () => text('Error', ''),
-   },
    isDisabled: {
       default: () => boolean('Is Disabled', false),
    },
@@ -61,6 +58,9 @@ export const propsInputSlider = {
 
 export const propsInputField = {
    ...propsInput,
+   error: {
+      default: () => text('Error', ''),
+   },
    placeholder: {
       default: () => text('Placeholder', 'Nice placeholder'),
    },

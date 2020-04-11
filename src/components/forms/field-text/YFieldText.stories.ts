@@ -56,7 +56,7 @@ const storyLines: StoryLine[] = [
 ];
 
 
-export default StoryBuilder.createDefault('Forms / Fields / Field Text');
+export default StoryBuilder.createDefault('Forms / Inputs / Field Text');
 export const default_ = StoryBuilder.createStory(vue, storyLines);
 export const docs = StoryBuilder.createDocs(`
 /**

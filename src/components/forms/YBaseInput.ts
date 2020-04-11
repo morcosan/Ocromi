@@ -13,7 +13,8 @@ export default class YBaseInput extends Vue {
 
 
    public get finalLabel() {
-      return (this.isOptional && !this.hidesOptional ? (this.label + this.$locale.all.optional) : this.label);
+      const isVisible = (this.isOptional && !this.hidesOptional);
+      return (isVisible ? (this.label + ' ' + this.$locale.all.optional) : this.label);
    }
 
 

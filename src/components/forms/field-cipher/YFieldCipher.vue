@@ -35,11 +35,11 @@
 
          // add required rule
          if (!this.isOptional) {
-            rules.push((value: string) => (!!value || this.$locale.all.requiredField));
+            rules.push((value: string) => (!!value || this.$locale.all.requiredError));
          }
 
          // add mask validation rule
-         if (this.inputMask !== '') {
+         if (!!this.inputMask) {
             const error = this.$locale.fieldCipher.maskError.replace('${1}', String(this.numCharsRequired));
             rules.push((value: string) => (value.length === this.numCharsRequired || error));
          }
@@ -52,7 +52,7 @@
          const maskOptions = ['#', 'S', 'A', 'a', 'N', 'X', 'x'];
 
          this.numCharsRequired = 0;
-         if (this.inputMask !== '') {
+         if (!!this.inputMask) {
             for (const char of maskOptions) {
                this.numCharsRequired += Utils.countSubstrInString(char, this.inputMask);
             }
@@ -73,7 +73,7 @@
       :readonly="isReadonly"
       :bg-color="bgColor"
       :error-message="error"
-      :error="error !== ''"
+      :error="!!error"
       :rules="finalRules"
       :disable="isDisabled"
       class="y-base-input y-field-cipher"

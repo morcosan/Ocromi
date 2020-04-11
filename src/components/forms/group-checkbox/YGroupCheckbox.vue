@@ -15,7 +15,7 @@
       @Override
       public validate() {
          if (!this.isOptional) {
-            this.innerError = (this.value.length > 0 ? '' : this.$locale.all.required);
+            this.innerError = (this.value.length > 0 ? '' : this.$locale.groupCheckbox.requiredError);
          }
 
          return !this.innerError;
@@ -24,7 +24,7 @@
 
       public onInput(value: string[]) {
          if (!this.isOptional) {
-            this.innerError = (value.length > 0 ? '' : this.$locale.all.required);
+            this.innerError = (value.length > 0 ? '' : this.$locale.groupCheckbox.requiredError);
          }
 
          this.updateValueProp(value);

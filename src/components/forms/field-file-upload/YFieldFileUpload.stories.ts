@@ -111,7 +111,7 @@ const storyLines: StoryLine[] = [
 ];
 
 
-export default StoryBuilder.createDefault('Forms / Fields / Field File Upload');
+export default StoryBuilder.createDefault('Forms / Inputs / Field File Upload');
 export const default_ = StoryBuilder.createStory(vue, storyLines);
 export const docs = StoryBuilder.createDocs(`
 /**

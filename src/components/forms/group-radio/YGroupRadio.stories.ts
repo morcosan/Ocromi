@@ -61,7 +61,7 @@ const storyLines: StoryLine[] = [
 ];
 
 
-export default StoryBuilder.createDefault('Forms / Other / Group Radio');
+export default StoryBuilder.createDefault('Forms / Inputs / Group Radio');
 export const default_ = StoryBuilder.createStory(vue, storyLines);
 export const docs = StoryBuilder.createDocs(`
 /**

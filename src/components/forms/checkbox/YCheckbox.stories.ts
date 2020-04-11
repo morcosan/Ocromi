@@ -1,13 +1,19 @@
 import YCheckbox from './YCheckbox.vue';
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
 import { propsInput } from '.storybook/custom/knob-props';
+import { text } from '@storybook/addon-knobs';
 
 
 const vue = {
    components: {
       YCheckbox,
    },
-   props: propsInput,
+   props: {
+      ...propsInput,
+      error: {
+         default: () => text('Error', 'Custom error message'),
+      },
+   },
    data() {
       return {
          value: false,
@@ -35,6 +41,7 @@ const storyLines: StoryLine[] = [
             :is-disabled="isDisabled"
             :is-optional="isOptional"
             :hides-optional="hidesOptional"
+            :error="error"
          />
       `,
       states: ['value'],
@@ -47,6 +54,7 @@ const storyLines: StoryLine[] = [
             :is-disabled="isDisabled"
             :is-optional="isOptional"
             :hides-optional="hidesOptional"
+            :error="error"
          >
             I agree with <a href="/" @click="onClick">terms of service</a>
          </YCheckbox>
@@ -62,6 +70,7 @@ const storyLines: StoryLine[] = [
             :is-disabled="isDisabled"
             :is-optional="isOptional"
             :hides-optional="hidesOptional"
+            :error="error"
          />
       `,
       states: ['value2 === null ? "null" : value2'],
@@ -69,7 +78,7 @@ const storyLines: StoryLine[] = [
 ];
 
 
-export default StoryBuilder.createDefault('Forms / Other / Checkbox');
+export default StoryBuilder.createDefault('Forms / Inputs / Checkbox');
 export const default_ = StoryBuilder.createStory(vue, storyLines);
 export const docs = StoryBuilder.createDocs(`
 /**

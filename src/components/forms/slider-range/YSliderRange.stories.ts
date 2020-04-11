@@ -60,7 +60,7 @@ const storyLines: StoryLine[] = [
 ];
 
 
-export default StoryBuilder.createDefault('Forms / Other / Slider Range');
+export default StoryBuilder.createDefault('Forms / Inputs / Slider Range');
 export const default_ = StoryBuilder.createStory(vue, storyLines);
 export const docs = StoryBuilder.createDocs(`
 /**

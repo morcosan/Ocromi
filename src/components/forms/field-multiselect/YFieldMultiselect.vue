@@ -23,7 +23,7 @@
 
          // add required rule
          if (!this.isOptional) {
-            rules.push((value: Option[]) => (value.length > 0 || this.$locale.all.requiredField));
+            rules.push((value: Option[]) => (value.length > 0 || this.$locale.all.requiredError));
          }
 
          return rules;
@@ -76,7 +76,7 @@
       :readonly="isReadonly"
       :disable="isDisabled"
       :error-message="error"
-      :error="error !== ''"
+      :error="!!error"
       :rules="finalRules"
       :bg-color="bgColor"
       :new-value-mode="canAddNew ? 'add-unique' : undefined"
