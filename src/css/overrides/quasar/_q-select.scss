@@ -27,3 +27,11 @@ $newHeight: 56px - (24px - $newPaddingTop);
 .q-select.q-field--disabled .q-field__native {
    opacity: 0.6 !important;
 }
+
+// make the icon on right align correctly
+.q-select.q-field .q-field__append {
+   padding: 0 4px;
+}
+.q-select.q-field .q-field__append + .q-field__append {
+   padding-left: 0;
+}
