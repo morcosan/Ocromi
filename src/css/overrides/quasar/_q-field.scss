@@ -13,14 +13,14 @@ $newHeight: 56px - (24px - $newPaddingTop);
 
    // make it look like a placeholder
    &::placeholder {
-      color: #999999;
+      color: #999;
    }
 }
 
 // remove space from prefix
 .q-field--labeled .q-field__prefix {
    padding: $newPaddingTop 5px $newPaddingTop 0;
-   color: #999999;
+   color: #999;
 }
 
 // remove empty space

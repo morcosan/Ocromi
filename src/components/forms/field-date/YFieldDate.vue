@@ -1,5 +1,5 @@
 <script lang="ts">
-   import { Component, Mixins, Override, Prop, Watch, Debounce } from '../../../core/decorators';
+   import { Component, Debounce, Mixins, Override, Prop, Watch } from '../../../core/decorators';
    import YBaseInputField from '../YBaseInputField';
    import { QDate, QIcon, QInput, QPopupProxy, QTooltip } from 'quasar';
    import { DateTime } from 'luxon';

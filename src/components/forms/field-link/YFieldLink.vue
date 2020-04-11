@@ -3,6 +3,7 @@
    import YBaseInputField from '../YBaseInputField';
    import { QIcon, QInput, QTooltip } from 'quasar';
    import Regex from '../../../utils/regex';
+   import Utils from '../../../utils';
 
 
    @Component({
@@ -140,8 +141,7 @@
 
       public openURL() {
          if (!this.isReadonly) {
-            // open URL in new tab
-            globalThis.open(this.finalURL, '_blank');
+            Utils.openURL(this.finalURL);
          }
       }
 
