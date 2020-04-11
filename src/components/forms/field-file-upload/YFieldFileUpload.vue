@@ -100,12 +100,7 @@
       }
 
 
-      public onClickAttachIcon() {
-         this.openFilePicker();
-      }
-
-
-      private openFilePicker() {
+      public openFilePicker() {
          (this.$refs.qField as QFile).pickFiles();
       }
 
@@ -139,6 +134,7 @@
       outlined
       lazy-rules
       @input="onInput"
+      @blur="validate"
       ref="qField"
    >
       <template v-slot:append>
@@ -148,7 +144,7 @@
             :tabindex="isReadonly ? -1 : 0"
             name="attach_file"
             color="grey-8"
-            @click="onClickAttachIcon"
+            @click="openFilePicker"
             @keydown="onKeyDownAttachIcon"
          >
             <QTooltip v-if="!isReadonly">{{ $locale.fieldFileUpload.tooltipPickFiles }}</QTooltip>

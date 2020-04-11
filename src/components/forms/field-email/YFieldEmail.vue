@@ -68,6 +68,7 @@
       lazy-rules
       @input="updateValueProp($event)"
       @keydown="onKeyDown"
+      @blur="validate"
       ref="qField"
    />
 </template>

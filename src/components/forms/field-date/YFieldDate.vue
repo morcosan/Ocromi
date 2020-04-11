@@ -137,6 +137,12 @@
       }
 
 
+      public onBlur() {
+         this.hasFocus = false;
+         this.validate();
+      }
+
+
       @Debounce(800)
       private closeCalendar() {
          (this.$refs.qPopupProxy as QPopupProxy).hide();
@@ -167,7 +173,7 @@
       outlined
       @input="onInput"
       @focus="() => (hasFocus = true)"
-      @blur="() => (hasFocus = false)"
+      @blur="onBlur"
       ref="qField"
    >
       <template v-slot:append>

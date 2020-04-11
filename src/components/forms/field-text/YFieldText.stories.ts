@@ -12,6 +12,9 @@ const vue = {
       return {
          value: '',
          value1: '',
+         rules: [
+            (val: string) => (val.length < 5 || 'Value must have less than 5 characters'),
+         ],
       };
    },
 };
@@ -47,7 +50,7 @@ const storyLines: StoryLine[] = [
             :is-optional="isOptional"
             :hides-optional="hidesOptional"
             :is-readonly="isReadonly"
-            :rules="[val => (val.length < 5 || 'Value must have less than 5 characters')]"
+            :rules="rules"
             :error="error"
          />
       `,

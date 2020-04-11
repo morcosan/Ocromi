@@ -70,6 +70,7 @@
       lazy-rules
       @input="onInput"
       @focus="onFocus"
+      @blur="validate"
       ref="qField"
    />
 </template>

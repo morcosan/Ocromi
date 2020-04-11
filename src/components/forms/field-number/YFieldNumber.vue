@@ -145,6 +145,8 @@
                // remove trailing dot
                this.updateValueProp(Number(this.value));
             }
+
+            this.validate();
          }
       }
 

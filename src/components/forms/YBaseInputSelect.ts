@@ -27,6 +27,15 @@ export default class YBaseInputSelect extends Mixins(YBaseInput) {
    }
 
 
+   @Watch('isOptional')
+   public onChange_isOptional() {
+      if (this.isOptional) {
+         // @ts-ignore
+         this.$refs.qSelect.resetValidation();
+      }
+   }
+
+
    @Override
    public get finalRules() {
       return this.rules;

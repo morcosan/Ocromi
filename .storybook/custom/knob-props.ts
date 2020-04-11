@@ -25,6 +25,9 @@ export const propsInputSelect = {
    hint: {
       default: () => text('Hint', 'Nice hint'),
    },
+   error: {
+      default: () => text('Error', ''),
+   },
 };
 
 

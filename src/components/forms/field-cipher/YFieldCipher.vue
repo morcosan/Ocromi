@@ -39,9 +39,15 @@
          }
 
          // add mask validation rule
-         if (!!this.inputMask) {
+         const hasMask = (this.inputMask !== '' && this.numCharsRequired > 0);
+         if (hasMask) {
             const error = this.$locale.fieldCipher.maskError.replace('${1}', String(this.numCharsRequired));
-            rules.push((value: string) => (value.length === this.numCharsRequired || error));
+            rules.push((value: string) => {
+               if (value !== '') {
+                  return (value.length === this.numCharsRequired || error);
+               }
+               return true;
+            });
          }
 
          return rules;
@@ -50,9 +56,9 @@
 
       private prepareValidation() {
          const maskOptions = ['#', 'S', 'A', 'a', 'N', 'X', 'x'];
-
          this.numCharsRequired = 0;
-         if (!!this.inputMask) {
+
+         if (this.inputMask !== '') {
             for (const char of maskOptions) {
                this.numCharsRequired += Utils.countSubstrInString(char, this.inputMask);
             }
@@ -82,6 +88,7 @@
       lazy-rules
       outlined
       @input="updateValueProp($event)"
+      @blur="validate"
       ref="qField"
    />
 </template>

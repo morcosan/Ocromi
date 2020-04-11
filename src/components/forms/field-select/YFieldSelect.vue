@@ -48,6 +48,7 @@
       use-input
       @input="updateValueProp($event)"
       @filter="onFilterInput"
+      @blur="validate"
       ref="qSelect"
    />
 </template>

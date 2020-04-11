@@ -85,11 +85,6 @@
       }
 
 
-      public onKeyUp() {
-         this.updateStrength();
-      }
-
-
       public onKeyDownIcon(event: KeyboardEvent) {
          // activate button with space or enter
          if (event.key === ' ' || event.key === 'Enter') {
@@ -106,7 +101,7 @@
       }
 
 
-      private updateStrength() {
+      public updateStrength() {
          // test password
          const performanceCap = 40;
          const result = zxcvbn(this.value.substr(0, performanceCap));
@@ -138,7 +133,8 @@
       outlined
       lazy-rules
       @input="updateValueProp($event)"
-      @keyup="onKeyUp"
+      @keyup="updateStrength"
+      @blur="validate"
       ref="qField"
    >
       <template v-slot:append>

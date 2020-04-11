@@ -91,6 +91,7 @@
       @input="onInput"
       @filter="onFilterInput"
       @new-value="onNewOption"
+      @blur="validate"
       ref="qSelect"
    >
       <template v-slot:selected-item="scope">

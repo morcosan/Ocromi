@@ -87,21 +87,11 @@
       }
 
 
-      public onBlur() {
-         this.validate();
-      }
-
-
       public onKeyDown(event: KeyboardEvent) {
          // block space character on key down
          if (event.key === ' ') {
             event.preventDefault();
          }
-      }
-
-
-      public onKeyUp() {
-         this.updateFinalURL();
       }
 
 
@@ -146,7 +136,7 @@
       }
 
 
-      private updateFinalURL() {
+      public updateFinalURL() {
          const httpOptions = ['localhost', '127.0.0.1'];
 
          let isHttp = false;
@@ -183,8 +173,8 @@
       outlined
       @input="updateValueProp($event)"
       @keydown="onKeyDown"
-      @keyup="onKeyUp"
-      @blur="onBlur"
+      @keyup="updateFinalURL"
+      @blur="validate"
       ref="qField"
    >
       <template v-if="!error && !innerError && value" v-slot:append>
