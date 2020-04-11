@@ -1,5 +1,5 @@
 <script lang="ts">
-   import { Component, Mixins, Override, Prop, Watch } from '../../../core/decorators';
+   import { Component, Mixins, Override, Prop, Watch, Debounce } from '../../../core/decorators';
    import YBaseInputField from '../YBaseInputField';
    import { QDate, QIcon, QInput, QPopupProxy, QTooltip } from 'quasar';
    import { DateTime } from 'luxon';
@@ -96,6 +96,7 @@
 
       public onDateSelect(value: string) {
          this.updateValueProp(value);
+         this.closeCalendar();
       }
 
 
@@ -122,10 +123,7 @@
             // activate button with space or enter
             if (event.key === ' ' || event.key === 'Enter') {
                event.preventDefault();
-
-               // open popup
-               // @ts-ignore
-               this.$refs.qPopupProxy.show();
+               (this.$refs.qPopupProxy as QPopupProxy).show();
             }
          }
       }
@@ -136,6 +134,12 @@
             // for whatever Quasar reason, calling show() actually blocks the popup event
             (this.$refs.qPopupProxy as QPopupProxy).show();
          }
+      }
+
+
+      @Debounce(800)
+      private closeCalendar() {
+         (this.$refs.qPopupProxy as QPopupProxy).hide();
       }
 
    }
