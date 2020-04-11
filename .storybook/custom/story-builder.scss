@@ -1,4 +1,4 @@
-$colorYellow: #FFF667;
+$colorYellow: #fff667;
 $colorBlack: #333;
 $colorGrey: #bbb;
 
@@ -23,41 +23,41 @@ html {
       .story_header {
          margin: 5px 0 25px;
          height: 28px;
+         display: flex;
 
          .story__title {
             margin: 0 5px 0 0;
-            display: inline-block;
          }
 
          .story__state {
             min-width: 30px;
             height: 28px;
             border: 1px solid black;
-            display: inline-block;
             padding: 0 5px;
             margin: 0 3px;
+
+            background: $colorBlack;
 
             line-height: 28px;
             color: $colorYellow;
             word-break: break-all;
             vertical-align: top;
-
-            background: $colorBlack;
+            overflow: hidden;
          }
       }
    }
 }
 
 .story-form-panel {
+   max-width: 1000px;
    display: flex;
    flex-wrap: wrap;
-   max-width: 1000px;
    background: white;
 
    & > div {
-      flex: 1;
       padding: 20px;
       min-width: 300px;
+      flex: 1;
 
       &:first-child {
          border-right: 1px solid #ddd;
@@ -66,8 +66,8 @@ html {
 }
 
 .story-button {
-   background: #ccc;
    padding: 3px 5px;
+   background: #ccc;
 
    &:hover {
       background: #bbb;

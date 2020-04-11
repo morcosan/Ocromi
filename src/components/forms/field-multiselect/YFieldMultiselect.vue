@@ -98,7 +98,7 @@
          <QChip
             :color="(scope && scope.opt.isNew) ? 'primary' : undefined"
             :tabindex="scope ? scope.tabindex : -1"
-            removable
+            :removable="!isReadonly"
             outline
             square
             dense
