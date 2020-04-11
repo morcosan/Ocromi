@@ -201,4 +201,22 @@
    .y-chip__button.cursor-pointer:hover {
       background-color: $red-4;
    }
+
+   // place the error icon before the attach icon
+   .y-field-file-upload--empty.q-file /deep/ .q-field__append.q-anchor--skip {
+      position: absolute;
+      right: 34px;
+      padding-right: 0;
+   }
+
+   // swap position for error icon when files selected
+   :not(.y-field-file-upload--empty).q-file.q-field--error /deep/ .q-field__append:not(.q-anchor--skip) {
+      position: relative;
+      left: 30px;
+   }
+   :not(.y-field-file-upload--empty).q-file.q-field--error /deep/ .q-field__append.q-anchor--skip {
+      position: relative;
+      right: 36px;
+      padding-right: 0;
+   }
 </style>

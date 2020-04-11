@@ -246,4 +246,11 @@
          }
       }
    }
+
+   // place the error icon before the arrows
+   .y-field-number.q-field /deep/ .q-field__append.q-anchor--skip {
+      position: absolute;
+      right: 26px;
+      padding-right: 0;
+   }
 </style>

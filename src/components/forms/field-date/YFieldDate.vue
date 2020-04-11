@@ -210,4 +210,11 @@
 
 <style scoped lang="scss">
    // @import '../../../css/variables';
+
+   // place the error icon before the date icon
+   .y-field-date.q-field /deep/ .q-field__append.q-anchor--skip {
+      position: absolute;
+      right: 34px;
+      padding-right: 0;
+   }
 </style>

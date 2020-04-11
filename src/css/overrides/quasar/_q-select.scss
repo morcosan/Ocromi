@@ -18,11 +18,6 @@ $newHeight: 56px - (24px - $newPaddingTop);
    padding-bottom: 0;
 }
 
-// align chips with label
-.y-field-multiselect .q-field__native {
-   margin-left: -4px;
-}
-
 // when disabled, affect textarea, but not label
 .q-select.q-field--disabled .q-field__native {
    opacity: 0.6 !important;

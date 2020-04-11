@@ -191,4 +191,11 @@
       padding-top: 10px;
       margin-bottom: 30px;
    }
+
+   // place the error icon before the date icon
+   .y-field-password.q-field /deep/ .q-field__append.q-anchor--skip {
+      position: absolute;
+      right: 36px;
+      padding-right: 0;
+   }
 </style>

@@ -119,4 +119,9 @@
 
 <style scoped lang="scss">
    // @import '../../../css/variables';
+
+   // align chips with label
+   .y-field-multiselect /deep/ .q-field__native {
+      margin-left: -4px;
+   }
 </style>
