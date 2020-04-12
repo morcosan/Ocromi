@@ -35,7 +35,7 @@
 
          // add required rule
          if (!this.isOptional) {
-            rules.push((value: string) => (!!value || this.$locale.all.requiredError));
+            rules.push((value: string) => (value || this.$locale.all.requiredError));
          }
 
          // add mask validation rule
@@ -79,7 +79,7 @@
       :readonly="isReadonly"
       :bg-color="bgColor"
       :error-message="error"
-      :error="!!error"
+      :error="error"
       :rules="finalRules"
       :disable="isDisabled"
       class="y-base-input y-field-cipher"

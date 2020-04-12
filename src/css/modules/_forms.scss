@@ -10,35 +10,32 @@
       margin-bottom: 25px;
    }
 
-   &.y-base-input--side-labeled {
-      display: flex;
-      width: 100%;
-
-      .y-base-input__label {
-         width: 50%;
-         padding-top: 5px;
-      }
-
-      .y-base-input__control {
-         flex: 1;
-      }
-   }
-
    .y-base-input__label {
+      display: block;
       padding-bottom: 3px;
       padding-left: 1px;
    }
 
-   &.y-base-input--required {
-      position: relative;
-      padding-bottom: 25px;
+   .y-base-input__control-box {
+      display: block;
+      flex: 1;
+   }
+
+   .y-base-input__hint {
+      display: block;
+      height: 25px;
+      padding-left: 10px;
+      padding-top: 5px;
    }
 
    .y-base-input__error {
       position: absolute;
       left: 0;
       bottom: 10px;
+
+      display: block;
       padding-left: 10px;
+
       opacity: 0;
       transition: bottom 0.3s, opacity 0.3s;
       transition-timing-function: ease-out;
@@ -46,6 +43,25 @@
       &.y-base-input__error--visible {
          bottom: 0;
          opacity: 1;
+      }
+   }
+
+   &.y-base-input--with-error {
+      color: $negative;
+
+      .y-base-input__control-box {
+         position: relative;
+         padding-bottom: 25px;
+      }
+   }
+
+   &.y-base-input--side-labeled {
+      display: flex;
+      width: 100%;
+
+      .y-base-input__label {
+         width: 50%;
+         padding-top: 5px;
       }
    }
 

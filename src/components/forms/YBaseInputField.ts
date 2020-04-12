@@ -14,8 +14,7 @@ export default class YBaseInputField extends Mixins(YBaseInput) {
    @Watch('isOptional')
    public onChange_isOptional() {
       if (this.isOptional) {
-         // @ts-ignore
-         this.$refs.qField.resetValidation();
+         this.resetValidation();
       }
    }
 
@@ -29,6 +28,13 @@ export default class YBaseInputField extends Mixins(YBaseInput) {
    public validate() {
       // @ts-ignore
       return this.$refs.qField.validate();
+   }
+
+
+   @Override
+   public resetValidation() {
+      // @ts-ignore
+      this.$refs.qField.resetValidation();
    }
 
 

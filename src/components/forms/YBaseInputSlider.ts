@@ -26,7 +26,6 @@ export default class YBaseInputSlider extends Mixins(YBaseInput) {
    @Watch('isOptional')
    public onChange_isOptional() {
       if (this.isOptional) {
-         // reset error
          this.innerError = '';
       }
    }

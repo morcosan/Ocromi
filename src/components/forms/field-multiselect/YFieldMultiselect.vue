@@ -76,7 +76,7 @@
       :readonly="isReadonly"
       :disable="isDisabled"
       :error-message="error"
-      :error="!!error"
+      :error="error"
       :rules="finalRules"
       :bg-color="bgColor"
       :new-value-mode="canAddNew ? 'add-unique' : undefined"

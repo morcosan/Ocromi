@@ -19,7 +19,6 @@
       @Watch('isOptional')
       public onChange_isOptional() {
          if (this.isOptional) {
-            // reset error
             this.innerError = '';
          }
       }
@@ -72,7 +71,7 @@
          :value="value"
          :disable="isDisabled"
          :color="innerError ? 'negative' : undefined"
-         :keep-color="!!innerError"
+         :keep-color="innerError"
          @input="onInput"
          ref="qCheckbox"
       >

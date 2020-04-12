@@ -18,7 +18,7 @@
 
          // add required rule
          if (!this.isOptional) {
-            rules.push((value: Option | null) => (!!value || this.$locale.all.requiredError));
+            rules.push((value: Option | null) => (value || this.$locale.all.requiredError));
          }
 
          return rules;
@@ -37,7 +37,7 @@
       :readonly="isReadonly"
       :disable="isDisabled"
       :error-message="error"
-      :error="!!error"
+      :error="error"
       :rules="finalRules"
       :bg-color="bgColor"
       class="y-base-input y-field-select"

@@ -15,7 +15,7 @@
 
 
       public nativeInput!: HTMLElement;
-      public canShowError: boolean = false;
+      public isDirty: boolean = false;
       public innerError: string = '';
       public prefix: string = 'https://';
       public finalURL: string = '';
@@ -23,7 +23,7 @@
 
       @Watch('value')
       public onChange_value() {
-         if (this.canShowError) {
+         if (this.isDirty) {
             this.validate();
          }
       }
@@ -35,7 +35,7 @@
 
          // add required rule
          if (!this.isOptional) {
-            rules.push((value: string) => (!!value || this.$locale.all.requiredError));
+            rules.push((value: string) => (value || this.$locale.all.requiredError));
          }
 
          // add URL rule
@@ -52,7 +52,7 @@
 
       @Override
       public validate() {
-         this.canShowError = true;
+         this.isDirty = true;
 
          for (let i = 0; i < this.finalRules.length; i++) {
             const result: (boolean | string) = this.finalRules[i](this.value);

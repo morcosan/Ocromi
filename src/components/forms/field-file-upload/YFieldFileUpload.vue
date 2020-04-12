@@ -121,7 +121,7 @@
       :max-files="maxNumFiles > 0 ? maxNumFiles : undefined"
       :readonly="isReadonly"
       :disable="isDisabled"
-      :error="!!error"
+      :error="error"
       :error-message="error"
       :rules="finalRules"
       :bg-color="bgColor"

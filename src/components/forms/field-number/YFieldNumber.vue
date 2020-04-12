@@ -170,7 +170,7 @@
       :readonly="isReadonly"
       :bg-color="bgColor"
       :error-message="error"
-      :error="!!error"
+      :error="error"
       :rules="finalRules"
       :disable="isDisabled"
       :step="valueStep"

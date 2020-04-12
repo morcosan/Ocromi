@@ -46,12 +46,12 @@
          :class="{
             ['y-base-input__fieldset bg-' + bgColor]: true,
             'y-base-input__fieldset--with-error': innerError,
-            'y-base-input__fieldset--labeled': !!label,
+            'y-base-input__fieldset--labeled': label,
             'y-base-input__fieldset--disabled': isDisabled,
             'y-base-input__fieldset--readonly': isReadonly,
          }"
       >
-         <div v-if="!!label" :class="{ ['y-base-input__fieldset-label text-subtitle1 bg-' + bgColor]: true }">
+         <div v-if="label" :class="{ ['y-base-input__fieldset-label text-subtitle1 bg-' + bgColor]: true }">
             {{ finalLabel }}
          </div>
 
@@ -60,7 +60,7 @@
             :options="options"
             :disable="isDisabled"
             :color="innerError ? 'negative' : undefined"
-            :keep-color="!!innerError"
+            :keep-color="innerError"
             type="checkbox"
             @input="onInput"
             @keydown="onKeyDown"

@@ -63,12 +63,12 @@
          :class="{
             ['y-base-input__fieldset bg-' + bgColor]: true,
             'y-base-input__fieldset--with-error': innerError,
-            'y-base-input__fieldset--labeled': !!label,
+            'y-base-input__fieldset--labeled': label,
             'y-base-input__fieldset--disabled': isDisabled,
             'y-base-input__fieldset--readonly': isReadonly,
          }"
       >
-         <div v-if="!!label" :class="{ ['y-base-input__fieldset-label text-subtitle1 bg-' + bgColor]: true }">
+         <div v-if="label" :class="{ ['y-base-input__fieldset-label text-subtitle1 bg-' + bgColor]: true }">
             {{ finalLabel }}
          </div>
 
@@ -82,7 +82,7 @@
             :min="minValue"
             :max="maxValue"
             :step="valueStep"
-            :label="!!label"
+            :label="label"
             :left-label-value="value.min + thumbSuffix"
             :right-label-value="value.max + thumbSuffix"
             :markers="hasMarkers"

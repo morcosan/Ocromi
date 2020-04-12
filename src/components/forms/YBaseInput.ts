@@ -27,6 +27,10 @@ export default class YBaseInput extends Vue {
 
 
    // to override for each type of input
+   public resetValidation() {}
+
+
+   // to override for each type of input
    public focus() {}
 
 
