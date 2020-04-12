@@ -187,7 +187,7 @@
                />
 
                <div class="ellipsis relative-position col"> {{ scope ? scope.file.name : '' }}</div>
-               
+
                <QAvatar
                   v-if="!isReadonly && !isDisabled"
                   class="y-chip__button cursor-pointer"
