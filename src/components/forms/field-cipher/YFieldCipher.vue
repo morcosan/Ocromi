@@ -35,7 +35,7 @@
 
          // add required rule
          if (!this.isOptional) {
-            rules.push((value: string) => (value || this.$locale.all.requiredError));
+            rules.push((value: string) => (!!value || this.$locale.all.requiredError));
          }
 
          // add mask validation rule

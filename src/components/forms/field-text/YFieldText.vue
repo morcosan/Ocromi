@@ -1,26 +1,21 @@
 <script lang="ts">
-   import { Component, Mixins, Override, Prop, Watch } from '../../../core/decorators';
+   import { Component, Mixins, Override, Prop } from '../../../core/decorators';
    import YBaseInputField from '../YBaseInputField';
+   import YTemplateInput from '../YTemplateInput.vue';
    import { QInput } from 'quasar';
 
 
    @Component({
-      components: { QInput },
+      components: { QInput, YTemplateInput },
    })
    export default class YFieldText extends Mixins(YBaseInputField) {
 
       @Prop({ default: '' }) public value!: string;
 
 
-      public isDirty: boolean = false;
-      public innerError: string = '';
-
-
-      @Watch('value')
-      public onChange_value() {
-         if (this.isDirty) {
-            this.validate();
-         }
+      @Override
+      public get finalValue() {
+         return this.value;
       }
 
 
@@ -30,41 +25,10 @@
 
          // add required rule
          if (!this.isOptional) {
-            rules.push((value: string) => (value || this.$locale.all.requiredError));
+            rules.push((value: string) => (!!value || this.$locale.all.requiredError));
          }
 
          return rules;
-      }
-
-
-      public get hasError() {
-         return !!(this.error || this.innerError);
-      }
-
-
-      @Override
-      public validate() {
-         this.isDirty = true;
-
-         for (let i = 0; i < this.finalRules.length; i++) {
-            const result: (boolean | string) = this.finalRules[i](this.value);
-            if (result === true) {
-               this.innerError = '';
-            }
-            else {
-               this.innerError = (result as string);
-               break;
-            }
-         }
-
-         return !this.innerError;
-      }
-
-
-      @Override
-      public resetValidation() {
-         this.isDirty = false;
-         this.innerError = '';
       }
 
    }
@@ -72,55 +36,37 @@
 
 
 <template>
-   <label
-      :class="{
-         'y-base-input y-field-text': true,
-         'y-base-input--side-labeled': sideLabelWidth,
-         'y-base-input--with-error': hasError,
-      }"
+   <YTemplateInput
+      css-class="y-field-text"
+      :is-mini="isMini"
+      :side-label-width="sideLabelWidth"
+      :final-label="finalLabel"
+      :final-error="finalError"
    >
-      <span
-         v-if="!isMini"
-         :style="(!isMini ? `width: ${ sideLabelWidth }` : undefined)"
-         class="y-base-input__label text-body1"
-      >
-         {{ finalLabel }}
-      </span>
+      <QInput
+         :value="value"
+         :label="(isMini ? finalLabel : undefined)"
+         :placeholder="finalPlaceholder"
+         :readonly="isReadonly"
+         :disable="isDisabled"
+         :bg-color="bgColor"
+         :error="!!finalError"
+         type="text"
+         outlined
+         lazy-rules
+         hide-bottom-space
+         @input="updateValueProp($event)"
+         @blur="validate"
+         ref="qField"
+      />
 
-      <span class="y-base-input__control-box">
-         <QInput
-            :value="value"
-            :label="isMini ? finalLabel : undefined"
-            :placeholder="finalPlaceholder"
-            :readonly="isReadonly"
-            :disable="isDisabled"
-            :bg-color="bgColor"
-            :error="hasError"
-            type="text"
-            outlined
-            lazy-rules
-            hide-bottom-space
-            @input="updateValueProp($event)"
-            @blur="validate"
-            ref="qField"
-         />
-
-         <span v-if="!hasError && hint" class="y-base-input__hint text-caption text-grey-6">
+      <span v-if="!finalError && hint" class="y-base-input__hint text-caption text-grey-6">
             {{ hint }}
          </span>
-
-         <span :class="{ 'y-base-input__error text-caption': true, 'y-base-input__error--visible': hasError }">
-            {{ error || innerError }}
-         </span>
-      </span>
-   </label>
+   </YTemplateInput>
 </template>
 
 
 <style scoped lang="scss">
    // @import '../../../css/variables';
-
-   .y-base-input /deep/ .q-field__bottom {
-      display: none;
-   }
 </style>

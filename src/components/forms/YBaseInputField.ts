@@ -7,7 +7,6 @@ export default class YBaseInputField extends Mixins(YBaseInput) {
 
    @Prop({ default: '' }) public placeholder!: string;
    @Prop({ default: '' }) public hint!: string;
-   @Prop({ default: '' }) public error!: string;
    @Prop({ default: () => [] }) public rules!: Function[];
 
 
@@ -24,17 +23,31 @@ export default class YBaseInputField extends Mixins(YBaseInput) {
    }
 
 
-   @Override
-   public validate() {
-      // @ts-ignore
-      return this.$refs.qField.validate();
+   /**
+    * Compute validation rules
+    * Override this getter to add additional rules
+    */
+   public get finalRules() {
+      return this.rules;
    }
 
 
    @Override
-   public resetValidation() {
-      // @ts-ignore
-      this.$refs.qField.resetValidation();
+   public validate() {
+      this.isDirty = true;
+
+      for (let i = 0; i < this.finalRules.length; i++) {
+         const result: (boolean | string) = this.finalRules[i](this.finalValue);
+         if (result === true) {
+            this.innerError = '';
+         }
+         else {
+            this.innerError = (result as string);
+            break;
+         }
+      }
+
+      return !this.innerError;
    }
 
 
@@ -42,15 +55,6 @@ export default class YBaseInputField extends Mixins(YBaseInput) {
    public focus() {
       // @ts-ignore
       this.$refs.qField.focus();
-   }
-
-
-   /**
-    * Compute validation rules
-    * Override this getter to add additional rules
-    */
-   public get finalRules() {
-      return this.rules;
    }
 
 }
