@@ -156,6 +156,7 @@
             </QIcon>
          </template>
 
+
          <template v-slot:hint>
             <div>{{ hint }}</div>
             <div class="y-strength-meter">
@@ -171,12 +172,12 @@
                </div>
             </div>
          </template>
+
       </QInput>
 
+
       <template v-slot:bottom>
-         <div v-if="!finalError && hint" class="y-base-input__hint text-caption text-grey-6">
-            {{ hint }}
-         </div>
+         <div v-if="!finalError && hint">{{ hint }}</div>
 
          <div v-if="!finalError && hasMeter" class="y-strength-meter">
             <QLinearProgress
@@ -186,11 +187,12 @@
                size="md"
                stripe
             />
-            <div :class="['y-strength-meter__level', ('text-' + strengthView.color), 'text-caption']">
+            <div :class="['y-strength-meter__level', ('text-' + strengthView.color)]">
                {{ strengthView.text }}
             </div>
          </div>
       </template>
+
    </YTemplateInput>
 </template>
 
@@ -211,7 +213,6 @@
          padding-left: 10px;
          text-align: right;
          font-weight: bold;
-         line-height: initial;
       }
    }
 

@@ -49,6 +49,8 @@ const storyLines: StoryLine[] = [
             :max-value="maxValue"
             :value-step="valueStep"
             :decimals="decimals"
+            :is-mini="isMini"
+            :side-label-width="sideLabelWidth"
          />
       `,
       states: ['value'],

@@ -23,25 +23,29 @@
          'y-base-input--has-error': finalError,
       }"
    >
-      <span
+      <div
          v-if="!isMini"
          :style="(!isMini ? `width: ${ sideLabelWidth }` : undefined)"
          class="y-base-input__label text-body1"
       >
          {{ finalLabel }}
-      </span>
+      </div>
 
-      <span class="y-base-input__control-box">
+      <div class="y-base-input__control-box">
          <slot/>
 
          <div class="y-base-input__bottom">
-            <slot name="bottom"/>
-         </div>
+            <div class="y-base-input__bottom-left">
+               <div :class="{ 'y-base-input__error': true, 'y-base-input__error--visible': finalError }">
+                  {{ finalError }}
+               </div>
 
-         <span :class="{ 'y-base-input__error text-caption': true, 'y-base-input__error--visible': finalError }">
-            {{ finalError }}
-         </span>
-      </span>
+               <slot name="bottom"/>
+            </div>
+
+            <slot name="counter"/>
+         </div>
+      </div>
    </label>
 </template>
 

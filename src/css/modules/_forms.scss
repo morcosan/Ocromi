@@ -15,41 +15,48 @@
    .y-base-input__control-box {
       display: block;
       flex: 1;
-   }
 
-   .y-base-input__bottom {
-      padding: 8px 10px 0;
-
-      .y-base-input__hint {
+      .y-base-input__bottom {
+         display: flex;
+         padding: 8px 10px 0;
+         color: $grey-6;
+         font-size: 0.75rem;
+         font-weight: 400;
          line-height: 1;
-      }
-   }
+         letter-spacing: 0.03333em;
 
-   .y-base-input__error {
-      position: absolute;
-      left: 0;
-      bottom: 10px;
+         .y-base-input__bottom-left {
+            flex: 1;
 
-      display: block;
-      padding: 0 10px;
-      line-height: 1;
+            .y-base-input__error {
+               position: absolute;
+               bottom: 10px;
+               opacity: 0;
+               transition: bottom 0.3s, opacity 0.3s;
+               transition-timing-function: ease-out;
 
-      opacity: 0;
-      transition: bottom 0.3s, opacity 0.3s;
-      transition-timing-function: ease-out;
+               &.y-base-input__error--visible {
+                  position: relative;
+                  bottom: 0;
+                  opacity: 1;
+               }
+            }
+         }
 
-      &.y-base-input__error--visible {
-         bottom: 0;
-         opacity: 1;
+         .y-base-input__counter {
+            padding-left: 10px;
+         }
       }
    }
 
    &.y-base-input--has-error {
       color: $negative;
 
-      .y-base-input__control-box {
+      .y-base-input__bottom {
          position: relative;
-         padding-bottom: 12px;
+         box-sizing: border-box;
+         height: 20px;
+         color: $negative;
       }
    }
 

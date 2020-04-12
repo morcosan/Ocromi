@@ -60,11 +60,11 @@
          ref="qField"
       />
 
-      <template v-if="!finalError && hint" v-slot:bottom>
-         <div class="y-base-input__hint text-caption text-grey-6">
-            {{ hint }}
-         </div>
+
+      <template v-slot:bottom>
+         <div v-if="!finalError && hint">{{ hint }}</div>
       </template>
+
    </YTemplateInput>
 </template>
 

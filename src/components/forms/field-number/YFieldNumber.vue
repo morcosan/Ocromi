@@ -1,13 +1,14 @@
 <script lang="ts">
    import { Component, Mixins, Override, Prop } from '../../../core/decorators';
    import YBaseInputField from '../YBaseInputField';
+   import YTemplateInput from '../YTemplateInput.vue';
    import { QInput, QTooltip } from 'quasar';
    import Regex from '../../../utils/regex';
    import Utils from '../../../utils';
 
 
    @Component({
-      components: { QInput, QTooltip },
+      components: { QInput, QTooltip, YTemplateInput },
    })
    export default class YFieldNumber extends Mixins(YBaseInputField) {
 
@@ -19,8 +20,9 @@
       @Prop({ default: -1 }) public decimals!: number;
 
 
-      public get decimalsHint() {
-         return (this.decimals > 0 ? `Decimals: #.${ '0'.repeat(this.decimals) }` : '');
+      @Override
+      public get finalValue() {
+         return this.value;
       }
 
 
@@ -59,6 +61,11 @@
          });
 
          return rules;
+      }
+
+
+      public get decimalsHint() {
+         return (this.decimals > 0 ? `Decimals: #.${ '0'.repeat(this.decimals) }` : '');
       }
 
 
@@ -162,55 +169,69 @@
 
 
 <template>
-   <QInput
-      :value="value"
-      :label="finalLabel"
-      :hint="hint"
-      :placeholder="finalPlaceholder"
-      :readonly="isReadonly"
-      :bg-color="bgColor"
-      :error-message="error"
-      :error="error"
-      :rules="finalRules"
-      :disable="isDisabled"
-      :step="valueStep"
-      :bottom-slots="decimals > 0"
-      class="y-base-input y-field-number"
-      type="text"
-      outlined
-      lazy-rules
-      @input="updateValueProp($event)"
-      @keydown="onKeyDown"
-      @keyup="onKeyUp"
-      @blur="onBlur"
-      ref="qField"
+   <YTemplateInput
+      css-class="y-field-number"
+      :is-mini="isMini"
+      :side-label-width="sideLabelWidth"
+      :final-label="finalLabel"
+      :final-error="finalError"
    >
-      <template v-slot:append>
-         <div class="y-field-number__control">
-            <button
-               :class="['y-field-number__up', (isReadonly ? 'cursor-not-allowed' : 'cursor-pointer')]"
-               tabindex="-1"
-               @click="onClickArrow(1)"
-            >
-               <QIcon name="keyboard_arrow_up" color="grey-8"/>
-               <QTooltip v-if="!isReadonly">+ {{ valueStep }}</QTooltip>
-            </button>
+      <QInput
+         :value="value"
+         :label="(isMini ? finalLabel : undefined)"
+         :placeholder="finalPlaceholder"
+         :readonly="isReadonly"
+         :disable="isDisabled"
+         :bg-color="bgColor"
+         :error="!!finalError"
+         :step="valueStep"
+         :bottom-slots="decimals > 0"
+         type="text"
+         outlined
+         lazy-rules
+         hide-bottom-space
+         @input="updateValueProp($event)"
+         @keydown="onKeyDown"
+         @keyup="onKeyUp"
+         @blur="onBlur"
+         ref="qField"
+      >
+         <template v-slot:append>
+            <div class="y-field-number__control">
+               <button
+                  :class="['y-field-number__up', (isReadonly ? 'cursor-not-allowed' : 'cursor-pointer')]"
+                  tabindex="-1"
+                  @click="onClickArrow(1)"
+               >
+                  <QIcon name="keyboard_arrow_up" color="grey-8"/>
+                  <QTooltip v-if="!isReadonly">+ {{ valueStep }}</QTooltip>
+               </button>
 
-            <button
-               :class="['y-field-number__down', (isReadonly ? 'cursor-not-allowed' : 'cursor-pointer')]"
-               tabindex="-1"
-               @click="onClickArrow(-1)"
-            >
-               <QIcon name="keyboard_arrow_down" color="grey-8"/>
-               <QTooltip v-if="!isReadonly">- {{ valueStep }}</QTooltip>
-            </button>
+               <button
+                  :class="['y-field-number__down', (isReadonly ? 'cursor-not-allowed' : 'cursor-pointer')]"
+                  tabindex="-1"
+                  @click="onClickArrow(-1)"
+               >
+                  <QIcon name="keyboard_arrow_down" color="grey-8"/>
+                  <QTooltip v-if="!isReadonly">- {{ valueStep }}</QTooltip>
+               </button>
+            </div>
+         </template>
+      </QInput>
+
+
+      <template v-slot:bottom>
+         <div v-if="!finalError && hint">{{ hint }}</div>
+      </template>
+
+
+      <template v-slot:counter>
+         <div v-if="decimals > -1" class="y-base-input__counter">
+            {{ decimalsHint }}
          </div>
       </template>
 
-      <template v-if="decimals > -1" v-slot:counter>
-         {{ decimalsHint }}
-      </template>
-   </QInput>
+   </YTemplateInput>
 </template>
 
 
@@ -248,7 +269,7 @@
    }
 
    // place the error icon before the arrows
-   .y-field-number.q-field /deep/ .q-field__append.q-anchor--skip {
+   .y-field-number /deep/ .q-field__append.q-anchor--skip {
       position: absolute;
       right: 26px;
       padding-right: 0;
