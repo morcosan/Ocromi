@@ -1,11 +1,12 @@
 <script lang="ts">
    import { Component, Mixins, Override, Prop } from '../../../core/decorators';
    import YBaseInputField from '../YBaseInputField';
+   import YTemplateInput from '../YTemplateInput.vue';
    import { QInput } from 'quasar';
 
 
    @Component({
-      components: { QInput },
+      components: { QInput, YTemplateInput },
    })
    export default class YFieldTextArea extends Mixins(YBaseInputField) {
 
@@ -15,6 +16,12 @@
 
       public hasScrollbar: boolean = false;
       public nativeElem: (HTMLElement | null) = null;
+
+
+      @Override
+      public get finalValue() {
+         return this.value;
+      }
 
 
       @Override
@@ -49,30 +56,38 @@
 
 
 <template>
-   <QInput
-      :value="value"
-      :label="finalLabel"
-      :hint="hint"
-      :placeholder="finalPlaceholder"
-      :readonly="isReadonly"
-      :bg-color="bgColor"
-      :error-message="error"
-      :error="error"
-      :rules="finalRules"
-      :autogrow="isDynamic"
-      :class="{
-         'y-base-input y-field-text-area': true,
-         'y-field-text-area--has-scrollbar': hasScrollbar,
-      }"
-      :disable="isDisabled"
-      type="textarea"
-      outlined
-      lazy-rules
-      @input="onInput"
-      @focus="onFocus"
-      @blur="validate"
-      ref="qField"
-   />
+   <YTemplateInput
+      :css-class="'y-field-text-area ' + (hasScrollbar ? 'y-field-text-area--has-scrollbar' : '')"
+      :is-mini="isMini"
+      :side-label-width="sideLabelWidth"
+      :final-label="finalLabel"
+      :final-error="finalError"
+   >
+      <QInput
+         :value="value"
+         :label="(isMini ? finalLabel : undefined)"
+         :placeholder="finalPlaceholder"
+         :readonly="isReadonly"
+         :disable="isDisabled"
+         :autogrow="isDynamic"
+         :bg-color="bgColor"
+         :error="!!finalError"
+         type="textarea"
+         outlined
+         lazy-rules
+         hide-bottom-space
+         @input="onInput"
+         @focus="onFocus"
+         @blur="validate"
+         ref="qField"
+      />
+
+      <template v-if="!finalError && hint" v-slot:bottom>
+         <div class="y-base-input__hint text-caption text-grey-6">
+            {{ hint }}
+         </div>
+      </template>
+   </YTemplateInput>
 </template>
 
 
@@ -80,7 +95,7 @@
    // @import '../../../css/variables';
 
    // place the icon with javascript
-   .y-field-text-area--has-scrollbar.q-textarea /deep/ .q-field__append {
+   .y-field-text-area--has-scrollbar /deep/ .q-field__append {
       right: 12px;
    }
 </style>

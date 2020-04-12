@@ -20,7 +20,7 @@
       :class="{
          ['y-base-input ' + cssClass]: true,
          'y-base-input--side-labeled': sideLabelWidth,
-         'y-base-input--with-error': finalError,
+         'y-base-input--has-error': finalError,
       }"
    >
       <span
@@ -33,6 +33,10 @@
 
       <span class="y-base-input__control-box">
          <slot/>
+
+         <div class="y-base-input__bottom">
+            <slot name="bottom"/>
+         </div>
 
          <span :class="{ 'y-base-input__error text-caption': true, 'y-base-input__error--visible': finalError }">
             {{ finalError }}

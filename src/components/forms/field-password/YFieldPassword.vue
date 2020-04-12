@@ -1,6 +1,7 @@
 <script lang="ts">
    import { Component, Mixins, Override, Prop } from '../../../core/decorators';
    import YBaseInputField from '../YBaseInputField';
+   import YTemplateInput from '../YTemplateInput.vue';
    import { QIcon, QInput, QLinearProgress, QTooltip } from 'quasar';
    import zxcvbn from 'zxcvbn';
 
@@ -15,7 +16,7 @@
 
 
    @Component({
-      components: { QInput, QTooltip, QIcon, QLinearProgress },
+      components: { QInput, QTooltip, QIcon, QLinearProgress, YTemplateInput },
    })
    export default class YFieldPassword extends Mixins(YBaseInputField) {
 
@@ -25,6 +26,25 @@
 
       public showsPassword: boolean = false;
       public strength: StrengthLevel = StrengthLevel.None;
+
+
+      @Override
+      public get finalValue() {
+         return this.value;
+      }
+
+
+      @Override
+      public get finalRules() {
+         const rules = [...this.rules];
+
+         // add required rule
+         if (!this.isOptional) {
+            rules.push((value: string) => (!!value || this.$locale.all.requiredError));
+         }
+
+         return rules;
+      }
 
 
       public get strengthView() {
@@ -67,19 +87,6 @@
 
 
       @Override
-      public get finalRules() {
-         const rules = [...this.rules];
-
-         // add required rule
-         if (!this.isOptional) {
-            rules.push((value: string) => (!!value || this.$locale.all.requiredError));
-         }
-
-         return rules;
-      }
-
-
-      @Override
       public mounted() {
          this.updateStrength();
       }
@@ -113,45 +120,65 @@
 
 
 <template>
-   <QInput
-      :type="showsPassword ? 'text' : 'password'"
-      :value="value"
-      :label="finalLabel"
-      :hint="hasMeter ? undefined : hint"
-      :placeholder="finalPlaceholder"
-      :readonly="isReadonly"
-      :bg-color="bgColor"
-      :error-message="error"
-      :error="error"
-      :rules="finalRules"
-      :bottom-slots="hasMeter"
-      :disable="isDisabled"
-      :class="{
-			'y-base-input y-field-password': true,
-			'y-field-password--has-meter': hasMeter,
-		}"
-      outlined
-      lazy-rules
-      @input="updateValueProp($event)"
-      @keyup="updateStrength"
-      @blur="validate"
-      ref="qField"
+   <YTemplateInput
+      :css-class="'y-field-password ' + (hasMeter ? 'y-field-password--has-meter' : '')"
+      :is-mini="isMini"
+      :side-label-width="sideLabelWidth"
+      :final-label="finalLabel"
+      :final-error="finalError"
    >
-      <template v-slot:append>
-         <QIcon
-            :name="showsPassword ? 'visibility' : 'visibility_off'"
-            :class="(isReadonly ? 'cursor-not-allowed' : 'cursor-pointer')"
-            :tabindex="isReadonly ? -1 : 0"
-            @click="onClickEyeIcon"
-            @keydown="onKeyDownIcon"
-         >
-            <QTooltip v-if="!isReadonly">{{ $locale.fieldPassword.tooltip }}</QTooltip>
-         </QIcon>
-      </template>
+      <QInput
+         :value="value"
+         :label="(isMini ? finalLabel : undefined)"
+         :placeholder="finalPlaceholder"
+         :readonly="isReadonly"
+         :disable="isDisabled"
+         :bg-color="bgColor"
+         :error="!!finalError"
+         :type="(showsPassword ? 'text' : 'password')"
+         outlined
+         lazy-rules
+         hide-bottom-space
+         @input="updateValueProp($event)"
+         @keyup="updateStrength"
+         @blur="validate"
+         ref="qField"
+      >
+         <template v-slot:append>
+            <QIcon
+               :name="showsPassword ? 'visibility' : 'visibility_off'"
+               :class="(isReadonly ? 'cursor-not-allowed' : 'cursor-pointer')"
+               :tabindex="isReadonly ? -1 : 0"
+               @click="onClickEyeIcon"
+               @keydown="onKeyDownIcon"
+            >
+               <QTooltip v-if="!isReadonly">{{ $locale.fieldPassword.tooltip }}</QTooltip>
+            </QIcon>
+         </template>
 
-      <template v-slot:hint>
-         <div>{{ hint }}</div>
-         <div class="y-strength-meter">
+         <template v-slot:hint>
+            <div>{{ hint }}</div>
+            <div class="y-strength-meter">
+               <QLinearProgress
+                  :value="strengthView.progress"
+                  :color="strengthView.color"
+                  class="y-strength-meter__progress"
+                  size="md"
+                  stripe
+               />
+               <div :class="['y-strength-meter__level', 'text-' + strengthView.color]">
+                  {{ strengthView.text }}
+               </div>
+            </div>
+         </template>
+      </QInput>
+
+      <template v-slot:bottom>
+         <div v-if="!finalError && hint" class="y-base-input__hint text-caption text-grey-6">
+            {{ hint }}
+         </div>
+
+         <div v-if="!finalError && hasMeter" class="y-strength-meter">
             <QLinearProgress
                :value="strengthView.progress"
                :color="strengthView.color"
@@ -159,12 +186,12 @@
                size="md"
                stripe
             />
-            <div :class="['y-strength-meter__level', 'text-' + strengthView.color]">
+            <div :class="['y-strength-meter__level', ('text-' + strengthView.color), 'text-caption']">
                {{ strengthView.text }}
             </div>
          </div>
       </template>
-   </QInput>
+   </YTemplateInput>
 </template>
 
 
@@ -184,6 +211,7 @@
          padding-left: 10px;
          text-align: right;
          font-weight: bold;
+         line-height: initial;
       }
    }
 
