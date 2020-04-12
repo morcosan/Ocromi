@@ -1,13 +1,14 @@
 <script lang="ts">
-   import { Component, Mixins, Override, Prop, Watch } from '../../../core/decorators';
+   import { Component, Mixins, Override, Prop } from '../../../core/decorators';
    import YBaseInputField from '../YBaseInputField';
+   import YTemplateInput from '../YTemplateInput.vue';
    import { QIcon, QInput, QTooltip } from 'quasar';
    import Regex from '../../../utils/regex';
    import Utils from '../../../utils';
 
 
    @Component({
-      components: { QInput, QIcon, QTooltip },
+      components: { QInput, QIcon, QTooltip, YTemplateInput },
    })
    export default class YFieldLink extends Mixins(YBaseInputField) {
 
@@ -15,17 +16,13 @@
 
 
       public nativeInput!: HTMLElement;
-      public isDirty: boolean = false;
-      public innerError: string = '';
       public prefix: string = 'https://';
       public finalURL: string = '';
 
 
-      @Watch('value')
-      public onChange_value() {
-         if (this.isDirty) {
-            this.validate();
-         }
+      @Override
+      public get finalValue() {
+         return this.value;
       }
 
 
@@ -50,22 +47,8 @@
       }
 
 
-      @Override
-      public validate() {
-         this.isDirty = true;
-
-         for (let i = 0; i < this.finalRules.length; i++) {
-            const result: (boolean | string) = this.finalRules[i](this.value);
-            if (result === true) {
-               this.innerError = '';
-            }
-            else {
-               this.innerError = (result as string);
-               break;
-            }
-         }
-
-         return !this.innerError;
+      public get canShowIcon() {
+         return (!this.finalError && this.value && this.isDirty);
       }
 
 
@@ -156,44 +139,53 @@
 
 
 <template>
-   <QInput
-      :value="value"
-      :label="finalLabel"
-      :hint="hint"
-      :placeholder="finalPlaceholder"
-      :readonly="isReadonly"
-      :bg-color="bgColor"
-      :error="!!error || !!innerError"
-      :error-message="error || innerError"
-      :disable="isDisabled"
-      :prefix="prefix"
-      class="y-base-input y-field-link"
-      type="text"
-      input-class="js-native-input"
-      outlined
-      @input="updateValueProp($event)"
-      @keydown="onKeyDown"
-      @keyup="updateFinalURL"
-      @blur="validate"
-      ref="qField"
+   <YTemplateInput
+      css-class="y-field-link"
+      :is-mini="isMini"
+      :side-label-width="sideLabelWidth"
+      :final-label="finalLabel"
+      :final-error="finalError"
    >
-      <template v-if="!error && !innerError && value" v-slot:append>
-         <a
-            :href="finalURL"
-            :tabindex="isReadonly ? -1 : 0"
-            class="y-field-link__anchor"
-            @click="openURL"
-            @keydown="onKeyDownButton"
-         >
-            <QIcon
-               :class="(isReadonly ? 'cursor-not-allowed' : 'cursor-pointer')"
-               name="open_in_new"
+      <QInput
+         :value="value"
+         :label="(isMini ? finalLabel : undefined)"
+         :placeholder="finalPlaceholder"
+         :readonly="isReadonly"
+         :disable="isDisabled"
+         :bg-color="bgColor"
+         :error="!!finalError"
+         :prefix="prefix"
+         type="text"
+         input-class="js-native-input"
+         outlined
+         hide-bottom-space
+         @input="updateValueProp($event)"
+         @keydown="onKeyDown"
+         @keyup="updateFinalURL"
+         @blur="validate"
+         ref="qField"
+      >
+         <template v-if="canShowIcon" v-slot:append>
+            <a
+               :href="finalURL"
+               :tabindex="isReadonly ? -1 : 0"
+               class="y-field-link__anchor"
+               @click="openURL"
+               @keydown="onKeyDownButton"
             >
-               <QTooltip v-if="!isReadonly">{{ $locale.fieldLink.tooltip }}</QTooltip>
-            </QIcon>
-         </a>
+               <QIcon :class="(isReadonly ? 'cursor-not-allowed' : 'cursor-pointer')" name="open_in_new">
+                  <QTooltip v-if="!isReadonly">{{ $locale.fieldLink.tooltip }}</QTooltip>
+               </QIcon>
+            </a>
+         </template>
+      </QInput>
+
+
+      <template v-slot:bottom>
+         <div v-if="!finalError && hint">{{ hint }}</div>
       </template>
-   </QInput>
+
+   </YTemplateInput>
 </template>
 
 
@@ -204,5 +196,10 @@
       display: flex;
       height: fit-content;
       width: fit-content;
+   }
+
+   .y-field-link /deep/ .q-field .q-field__prefix {
+      padding: inherit;
+      padding-right: 5px;
    }
 </style>
