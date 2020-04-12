@@ -4,9 +4,29 @@
 
 .y-base-input {
    position: relative;
+   display: block;
 
    .y-form & {
       margin-bottom: 25px;
+   }
+
+   &.y-base-input--side-labeled {
+      display: flex;
+      width: 100%;
+
+      .y-base-input__label {
+         width: 50%;
+         padding-top: 5px;
+      }
+
+      .y-base-input__control {
+         flex: 1;
+      }
+   }
+
+   .y-base-input__label {
+      padding-bottom: 3px;
+      padding-left: 1px;
    }
 
    &.y-base-input--required {
@@ -40,7 +60,7 @@
          border-color: #000;
       }
 
-      .y-base-input__label {
+      .y-base-input__fieldset-label {
          position: absolute;
          top: 0;
          left: 0;
@@ -51,7 +71,7 @@
       }
 
       &.y-base-input__fieldset--disabled {
-         .y-base-input__label {
+         .y-base-input__fieldset-label {
             color: rgba(85, 85, 85, 0.6);
          }
       }
@@ -70,7 +90,7 @@
       }
 
       &.y-base-input__fieldset--with-error {
-         .y-base-input__label {
+         .y-base-input__fieldset-label {
             color: $negative;
          }
 
@@ -111,7 +131,7 @@ $paddingSide: 12px;
       padding: 30px $paddingSide 0;
    }
 
-   .y-base-input__label.y-base-input__label {
+   .y-base-input__fieldset-label.y-base-input__fieldset-label {
       left: -8px;
    }
 

@@ -29,25 +29,40 @@
 
 
 <template>
-   <QInput
-      :value="value"
-      :label="finalLabel"
-      :hint="hint"
-      :placeholder="finalPlaceholder"
-      :error="!!error"
-      :error-message="error"
-      :rules="finalRules"
-      :readonly="isReadonly"
-      :disable="isDisabled"
-      :bg-color="bgColor"
-      class="y-base-input y-field-text"
-      type="text"
-      outlined
-      lazy-rules
-      @input="updateValueProp($event)"
-      @blur="validate"
-      ref="qField"
-   />
+   <label
+      :class="{
+         'y-base-input y-field-text': true,
+         'y-base-input--side-labeled': !!sideLabelWidth
+      }"
+   >
+      <div
+         v-if="!isMini"
+         :style="(!isMini ? `width: ${ sideLabelWidth }` : undefined)"
+         class="y-base-input__label text-body1"
+      >
+         {{ finalLabel }}
+      </div>
+
+      <QInput
+         :value="value"
+         :label="isMini ? finalLabel : undefined"
+         :hint="hint"
+         :placeholder="finalPlaceholder"
+         :error="!!error"
+         :error-message="error"
+         :rules="finalRules"
+         :readonly="isReadonly"
+         :disable="isDisabled"
+         :bg-color="bgColor"
+         class="y-base-input__control"
+         type="text"
+         outlined
+         lazy-rules
+         @input="updateValueProp($event)"
+         @blur="validate"
+         ref="qField"
+      />
+   </label>
 </template>
 
 

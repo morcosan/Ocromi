@@ -48,7 +48,7 @@
             'y-base-input__fieldset--readonly': isReadonly,
          }"
       >
-         <div v-if="!!label" :class="{ ['y-base-input__label text-subtitle1 bg-' + bgColor]: true }">
+         <div v-if="!!label" :class="{ ['y-base-input__fieldset-label text-subtitle1 bg-' + bgColor]: true }">
             {{ finalLabel }}
          </div>
 
@@ -75,7 +75,7 @@
 <style scoped lang="scss">
    // @import '../../../css/variables';
 
-   .y-group-radio .y-base-input__label {
+   .y-group-radio .y-base-input__fieldset-label {
       left: -4px;
    }
 </style>

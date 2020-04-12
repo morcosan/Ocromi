@@ -45,7 +45,7 @@
             'y-base-input__fieldset--readonly': isReadonly,
          }"
       >
-         <div v-if="!!label" :class="{ ['y-base-input__label text-subtitle1 bg-' + bgColor]: true }">
+         <div v-if="!!label" :class="{ ['y-base-input__fieldset-label text-subtitle1 bg-' + bgColor]: true }">
             {{ finalLabel }}
          </div>
 

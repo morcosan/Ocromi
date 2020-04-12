@@ -17,6 +17,12 @@ export const propsInput = {
    isReadonly: {
       default: () => boolean('Is Readonly', false),
    },
+   isMini: {
+      default: () => boolean('Is Mini', false),
+   },
+   sideLabelWidth: {
+      default: () => text('Side Label Width', ''),
+   },
 };
 
 
