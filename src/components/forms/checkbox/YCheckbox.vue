@@ -83,7 +83,11 @@
       </QCheckbox>
 
       <div
-         :class="{ 'y-checkbox__error text-caption text-negative': true, 'y-checkbox__error--visible': innerError	}">
+         :class="{
+            'y-checkbox__error text-caption text-negative': true,
+            'y-checkbox__error--visible': innerError
+         }"
+      >
          {{ innerError }}
       </div>
    </div>
