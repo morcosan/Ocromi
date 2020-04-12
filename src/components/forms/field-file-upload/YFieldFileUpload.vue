@@ -24,6 +24,9 @@
       @Prop({ default: 0 }) public maxNumFiles!: number;
 
 
+      public counter: string = '';
+
+
       @Override
       public get finalValue() {
          return this.value;
@@ -44,11 +47,11 @@
 
 
       // @ts-ignore
-      public getCounterLabel({ totalSize, filesNumber }) {
+      public setCounter({ totalSize, filesNumber }) {
          if (this.maxNumFiles > 0) {
-            return `${ filesNumber } / ${ this.maxNumFiles } files (${ totalSize })`;
+            this.counter = `${ filesNumber } / ${ this.maxNumFiles } files (${ totalSize })`;
          }
-         return `${ filesNumber } files (${ totalSize })`;
+         this.counter = `${ filesNumber } files (${ totalSize })`;
       }
 
 
@@ -137,7 +140,7 @@
          :disable="isDisabled"
          :error="!!finalError"
          :bg-color="bgColor"
-         :counter-label="getCounterLabel"
+         :counter-label="setCounter"
          counter
          outlined
          lazy-rules
@@ -160,7 +163,7 @@
             </QIcon>
 
             <QIcon
-               v-if="value.length > 0"
+               v-if="value.length > 1 && !isReadonly && !isDisabled"
                :class="(isReadonly ? 'cursor-not-allowed' : 'cursor-pointer')"
                name="clear_all"
                @click="onClickRemoveFile(-1, $event)"
@@ -184,27 +187,29 @@
                />
 
                <div class="ellipsis relative-position col"> {{ scope ? scope.file.name : '' }}</div>
-
+               
                <QAvatar
-                  :class="{ 'y-chip__button': true, 'cursor-pointer': !isReadonly }"
+                  v-if="!isReadonly && !isDisabled"
+                  class="y-chip__button cursor-pointer"
                   @click="onClickRemoveFile(scope.index, $event)"
                >
-                  <QIcon
-                     name="close"
-                     size="20px"
-                     color="grey-7"
-                  />
+                  <QIcon name="close" size="20px" color="grey-7"/>
+                  <QTooltip>{{ $locale.fieldFileUpload.tooltipRemoveFile }}</QTooltip>
                </QAvatar>
             </QChip>
 
             <QTooltip v-if="!isReadonly">{{ $locale.fieldFileUpload.tooltipPickFiles }}</QTooltip>
          </template>
-
       </QFile>
 
 
       <template v-slot:bottom>
          <div v-if="!finalError && hint">{{ hint }}</div>
+      </template>
+
+
+      <template v-slot:counter>
+         {{ counter }}
       </template>
 
    </YTemplateInput>

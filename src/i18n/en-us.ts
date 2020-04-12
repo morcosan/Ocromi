@@ -47,6 +47,7 @@ export default {
    fieldFileUpload: {
       tooltipPickFiles: 'Open file picker',
       tooltipRemoveFiles: 'Remove all files',
+      tooltipRemoveFile: 'Remove file',
    },
    groupRadio: {
       requiredError: 'An option must be selected',
