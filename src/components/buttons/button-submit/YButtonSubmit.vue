@@ -46,6 +46,7 @@
          const interval = totalTime / 100;
 
          // start loading
+         // @ts-ignore
          this.intervalID = setInterval(this.onLoading, interval);
       }
 

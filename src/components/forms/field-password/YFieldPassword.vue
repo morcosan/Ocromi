@@ -121,7 +121,7 @@
 
 <template>
    <YTemplateInput
-      :css-class="'y-field-password ' + (hasMeter ? 'y-field-password--has-meter' : '')"
+      :css-class="'y-field-password ' + (hasMeter ? 'has-meter' : '')"
       :is-mini="isMini"
       :side-label-width="sideLabelWidth"
       :final-label="finalLabel"
@@ -176,7 +176,7 @@
       </QInput>
 
 
-      <template v-slot:bottom>
+      <template v-slot:bottom-left>
          <div v-if="!finalError && hint">{{ hint }}</div>
 
          <div v-if="!finalError && hasMeter" class="y-strength-meter">
@@ -216,7 +216,7 @@
       }
    }
 
-   .y-field-password--has-meter {
+   .y-field-password.has-meter {
       padding-top: 10px;
       margin-bottom: 30px;
    }

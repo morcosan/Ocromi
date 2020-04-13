@@ -3,6 +3,7 @@
 Resources:
 - https://cssguidelin.es/
 - https://clubmate.fi/oocss-acss-bem-smacss-what-are-they-what-should-i-use/
+- https://github.com/chris-pearce/css-guidelines
 
 
 <br>
@@ -11,17 +12,20 @@ Resources:
 Use BEM notation.
 Never create a class name by Sass concatenation.
 Use 'js-' notation for classes that only have scripting purpose.
-Prefix all block classes with a letter to avoid external collisions.
+Prefix all block classes with 'y-' to avoid external collisions.
+User additional classes for states that start with 'is-' or 'has-'.
 ```
 // good:
 .y-my-class {
-    .y-my-class--extended {}
+    .y-my-class.is-extended {}
+    .y-my-class--primary.is-extended {}
 }
 
 // bad:
 .y-my-class {
     &--extended {}
-    .js-example {}
+    &.y-my-class--is-extended {}
+    .js-hook {}
 }
 ```
 

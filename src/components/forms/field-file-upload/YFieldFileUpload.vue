@@ -24,7 +24,7 @@
       @Prop({ default: 0 }) public maxNumFiles!: number;
 
 
-      public counter: string = '';
+      public hintOnRight: string = '';
 
 
       @Override
@@ -47,11 +47,11 @@
 
 
       // @ts-ignore
-      public setCounter({ totalSize, filesNumber }) {
+      public setHintOnRight({ totalSize, filesNumber }) {
          if (this.maxNumFiles > 0) {
-            this.counter = `${ filesNumber } / ${ this.maxNumFiles } files (${ totalSize })`;
+            this.hintOnRight = `${ filesNumber } / ${ this.maxNumFiles } files (${ totalSize })`;
          }
-         this.counter = `${ filesNumber } files (${ totalSize })`;
+         this.hintOnRight = `${ filesNumber } files (${ totalSize })`;
       }
 
 
@@ -121,7 +121,7 @@
 
 <template>
    <YTemplateInput
-      :css-class="'y-field-file-upload ' + (value.length === 0 ? 'y-field-file-upload--empty' : '')"
+      :css-class="'y-field-file-upload ' + (value.length === 0 ? 'is-empty' : '')"
       :is-mini="isMini"
       :side-label-width="sideLabelWidth"
       :final-label="finalLabel"
@@ -140,7 +140,7 @@
          :disable="isDisabled"
          :error="!!finalError"
          :bg-color="bgColor"
-         :counter-label="setCounter"
+         :counter-label="setHintOnRight"
          counter
          outlined
          lazy-rules
@@ -203,13 +203,13 @@
       </QFile>
 
 
-      <template v-slot:bottom>
+      <template v-slot:bottom-left>
          <div v-if="!finalError && hint">{{ hint }}</div>
       </template>
 
 
-      <template v-slot:counter>
-         {{ counter }}
+      <template v-slot:bottom-right>
+         {{ hintOnRight }}
       </template>
 
    </YTemplateInput>
@@ -224,26 +224,28 @@
       background-color: $grey-5;
    }
 
-   // place the error icon before the attach icon
-   .y-field-file-upload--empty /deep/ .q-field__append.q-anchor--skip {
-      position: absolute;
-      right: 34px;
-      padding-right: 0;
-   }
+   .y-field-file-upload {
+      // place the error icon before the attach icon
+      &.is-empty /deep/ .q-field__append.q-anchor--skip {
+         position: absolute;
+         right: 34px;
+         padding-right: 0;
+      }
 
-   // reset height for input
-   :not(.y-field-file-upload--empty) /deep/ .q-file.q-field--auto-height .q-field__control {
-      height: auto;
-   }
+      // reset height for input
+      &:not(.is-empty) /deep/ .q-file.q-field--auto-height .q-field__control {
+         height: auto;
+      }
 
-   // swap position for error icon when files selected
-   :not(.y-field-file-upload--empty) /deep/ .q-file.q-field--error .q-field__append:not(.q-anchor--skip) {
-      position: relative;
-      left: 30px;
-   }
-   :not(.y-field-file-upload--empty) /deep/ .q-file.q-field--error .q-field__append.q-anchor--skip {
-      position: relative;
-      right: 36px;
-      padding-right: 0;
+      // swap position for error icon when files selected
+      &:not(.is-empty) /deep/ .q-file.q-field--error .q-field__append:not(.q-anchor--skip) {
+         position: relative;
+         left: 30px;
+      }
+      &:not(.is-empty) /deep/ .q-file.q-field--error .q-field__append.q-anchor--skip {
+         position: relative;
+         right: 36px;
+         padding-right: 0;
+      }
    }
 </style>

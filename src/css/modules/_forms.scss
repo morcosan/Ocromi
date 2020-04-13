@@ -35,7 +35,7 @@
                transition: bottom 0.3s, opacity 0.3s;
                transition-timing-function: ease-out;
 
-               &.y-base-input__error--visible {
+               &.is-visible {
                   position: relative;
                   bottom: 0;
                   opacity: 1;
@@ -43,13 +43,13 @@
             }
          }
 
-         .y-base-input__counter {
+         .y-base-input__bottom-right {
             padding-left: 10px;
          }
       }
    }
 
-   &.y-base-input--has-error {
+   &.has-error {
       color: $negative;
 
       .y-base-input__bottom {
@@ -60,7 +60,7 @@
       }
    }
 
-   &.y-base-input--side-labeled {
+   &.has-side-label {
       display: flex;
       width: 100%;
 
@@ -77,7 +77,7 @@
       border-radius: 4px;
       transition: border-color 0.36s cubic-bezier(0.4, 0, 0.2, 1);
 
-      &:hover:not(.y-base-input__fieldset--disabled) {
+      &:hover:not(.is-disabled) {
          border-color: #000;
       }
 
@@ -91,13 +91,13 @@
          color: #555;
       }
 
-      &.y-base-input__fieldset--disabled {
+      &.is-disabled {
          .y-base-input__fieldset-label {
             color: rgba(85, 85, 85, 0.6);
          }
       }
 
-      &.y-base-input__fieldset--readonly {
+      &.is-readonly {
          border-style: dashed;
 
          &:after {
@@ -110,7 +110,7 @@
          }
       }
 
-      &.y-base-input__fieldset--with-error {
+      &.has-error {
          .y-base-input__fieldset-label {
             color: $negative;
          }
@@ -131,7 +131,7 @@
          }
       }
 
-      &.y-base-input__fieldset--labeled {
+      &.has-label {
          padding-top: 10px;
       }
    }

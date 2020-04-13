@@ -181,7 +181,7 @@
       </QInput>
 
 
-      <template v-slot:bottom>
+      <template v-slot:bottom-left>
          <div v-if="!finalError && hint">{{ hint }}</div>
       </template>
 

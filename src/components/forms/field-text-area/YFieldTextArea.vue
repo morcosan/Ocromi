@@ -57,7 +57,7 @@
 
 <template>
    <YTemplateInput
-      :css-class="'y-field-text-area ' + (hasScrollbar ? 'y-field-text-area--has-scrollbar' : '')"
+      :css-class="'y-field-text-area ' + (hasScrollbar ? 'has-scrollbar' : '')"
       :is-mini="isMini"
       :side-label-width="sideLabelWidth"
       :final-label="finalLabel"
@@ -83,7 +83,7 @@
       />
 
 
-      <template v-slot:bottom>
+      <template v-slot:bottom-left>
          <div v-if="!finalError && hint">{{ hint }}</div>
       </template>
 
@@ -95,7 +95,7 @@
    // @import '../../../css/variables';
 
    // place the icon with javascript
-   .y-field-text-area--has-scrollbar /deep/ .q-field__append {
+   .y-field-text-area.has-scrollbar /deep/ .q-field__append {
       right: 12px;
    }
 </style>

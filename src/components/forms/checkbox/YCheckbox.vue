@@ -64,7 +64,7 @@
    <div
       :class="{
          'y-base-input y-checkbox': true,
-         'y-checkbox--required': !isOptional,
+         'is-required': !isOptional,
       }"
    >
       <QCheckbox
@@ -84,7 +84,7 @@
       <div
          :class="{
             'y-checkbox__error text-caption text-negative': true,
-            'y-checkbox__error--visible': innerError
+            'is-visible': innerError
          }"
       >
          {{ innerError }}
@@ -99,7 +99,7 @@
    .y-checkbox {
       margin-left: -10px;
 
-      &.y-checkbox--required {
+      &.is-required {
          position: relative;
          padding-bottom: 18px;
       }
@@ -113,7 +113,7 @@
          transition: bottom 0.3s, opacity 0.3s;
          transition-timing-function: ease-out;
 
-         &.y-checkbox__error--visible {
+         &.is-visible {
             bottom: 0;
             opacity: 1;
          }

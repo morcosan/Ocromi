@@ -19,8 +19,8 @@
    <label
       :class="{
          ['y-base-input ' + cssClass]: true,
-         'y-base-input--side-labeled': sideLabelWidth,
-         'y-base-input--has-error': finalError,
+         'has-side-label': sideLabelWidth,
+         'has-error': finalError,
       }"
    >
       <div
@@ -36,14 +36,14 @@
 
          <div class="y-base-input__bottom">
             <div class="y-base-input__bottom-left">
-               <div :class="{ 'y-base-input__error': true, 'y-base-input__error--visible': finalError }">
+               <div :class="{ 'y-base-input__error': true, 'is-visible': finalError }">
                   {{ finalError }}
                </div>
 
-               <slot name="bottom"/>
+               <slot name="bottom-left"/>
             </div>
 
-            <slot name="counter"/>
+            <slot name="bottom-right"/>
          </div>
       </div>
    </label>

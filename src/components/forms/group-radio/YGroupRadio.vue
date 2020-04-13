@@ -42,10 +42,10 @@
       <div
          :class="{
             ['y-base-input__fieldset bg-' + bgColor]: true,
-            'y-base-input__fieldset--with-error': innerError,
-            'y-base-input__fieldset--labeled': label,
-            'y-base-input__fieldset--disabled': isDisabled,
-            'y-base-input__fieldset--readonly': isReadonly,
+            'has-error': innerError,
+            'has-label': label,
+            'is-disabled': isDisabled,
+            'is-readonly': isReadonly,
          }"
       >
          <div v-if="label" :class="{ ['y-base-input__fieldset-label text-subtitle1 bg-' + bgColor]: true }">
@@ -65,7 +65,7 @@
          />
       </div>
 
-      <div :class="{ 'y-base-input__error text-caption': true, 'y-base-input__error--visible': innerError }">
+      <div :class="{ 'y-base-input__error text-caption': true, 'is-visible': innerError }">
          {{ innerError }}
       </div>
    </div>

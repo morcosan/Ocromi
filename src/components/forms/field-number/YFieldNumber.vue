@@ -220,13 +220,13 @@
       </QInput>
 
 
-      <template v-slot:bottom>
+      <template v-slot:bottom-left>
          <div v-if="!finalError && hint">{{ hint }}</div>
       </template>
 
 
       <template v-slot:counter>
-         <div v-if="decimals > -1" class="y-base-input__counter">
+         <div v-if="decimals > -1" class="y-base-input__bottom-right">
             {{ decimalsHint }}
          </div>
       </template>
