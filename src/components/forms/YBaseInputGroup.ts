@@ -2,10 +2,13 @@ import { Component, Mixins, Override, Prop, Watch } from '../../core/decorators'
 import YBaseInput from './YBaseInput';
 
 
-export interface Option {
+export type Option = {
    value: string;
    label: string;
 }
+
+
+type Target = (HTMLElement | null);
 
 
 @Component
@@ -52,7 +55,7 @@ export default class YBaseInputGroup extends Mixins(YBaseInput) {
    public mounted() {
       // make the options readonly
       [...this.qOptionGroupChildren].forEach((elem: HTMLElement) => {
-         const target: (HTMLElement | null) = elem.querySelector('[tabindex]');
+         const target: Target = elem.querySelector('[tabindex]');
          if (target) {
             // disable option
             target.setAttribute('tabindex', '-1');
@@ -94,7 +97,7 @@ export default class YBaseInputGroup extends Mixins(YBaseInput) {
 
 
    private enableCurrOption() {
-      const target: (HTMLElement | null) = this.getTarget(this.currOptionIndex);
+      const target: Target = this.getTarget(this.currOptionIndex);
       if (target) {
          target.setAttribute('tabindex', '0');
       }
@@ -102,7 +105,7 @@ export default class YBaseInputGroup extends Mixins(YBaseInput) {
 
 
    private disableCurrOption() {
-      const target: (HTMLElement | null) = this.getTarget(this.currOptionIndex);
+      const target: Target = this.getTarget(this.currOptionIndex);
       if (target) {
          target.setAttribute('tabindex', '-1');
       }
@@ -110,7 +113,7 @@ export default class YBaseInputGroup extends Mixins(YBaseInput) {
 
 
    private focusCurrOption() {
-      const target: (HTMLElement | null) = this.getTarget(this.currOptionIndex);
+      const target: Target = this.getTarget(this.currOptionIndex);
       if (target) {
          target.focus();
       }
@@ -120,7 +123,7 @@ export default class YBaseInputGroup extends Mixins(YBaseInput) {
    private getTarget(index: number) {
       const elem: (HTMLElement | undefined) = this.qOptionGroupChildren[index];
       if (elem) {
-         const target: (HTMLElement | null) = elem.querySelector('[tabindex]');
+         const target: Target = elem.querySelector('[tabindex]');
          if (target) {
             return target;
          }

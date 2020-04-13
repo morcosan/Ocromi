@@ -2,7 +2,7 @@ import { Component, Mixins, Override, Prop, Watch } from '../../core/decorators'
 import YBaseInput from './YBaseInput';
 
 
-export interface Range {
+export type Range = {
    min: number;
    max: number;
 }

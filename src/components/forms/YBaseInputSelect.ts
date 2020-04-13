@@ -2,7 +2,7 @@ import { Component, Mixins, Override, Prop, Watch } from '../../core/decorators'
 import YBaseInput from './YBaseInput';
 
 
-export interface Option {
+export type Option = {
    value: string;
    label: string;
    isNew: boolean;

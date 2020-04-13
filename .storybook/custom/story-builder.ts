@@ -3,7 +3,7 @@ import i18n from '../../src/i18n';
 import './story-builder.scss';
 
 
-export interface StoryLine {
+export type StoryLine = {
    template: string;
    title: string;
    states: string[];

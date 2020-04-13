@@ -5,9 +5,15 @@
    import { QAvatar, QChip, QFile, QIcon, QTooltip } from 'quasar';
 
 
-   export interface File {
+   export type File = {
       type: string;
       name: string;
+   }
+
+
+   type FileData = {
+      totalSize: number;
+      filesNumber: number;
    }
 
 
@@ -46,8 +52,7 @@
       }
 
 
-      // @ts-ignore
-      public setHintOnRight({ totalSize, filesNumber }) {
+      public setHintOnRight({ totalSize, filesNumber }: FileData) {
          if (this.maxNumFiles > 0) {
             this.hintOnRight = `${ filesNumber } / ${ this.maxNumFiles } files (${ totalSize })`;
          }
