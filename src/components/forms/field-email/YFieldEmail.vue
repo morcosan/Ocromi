@@ -1,17 +1,24 @@
 <script lang="ts">
    import { Component, Mixins, Override, Prop } from '../../../core/decorators';
    import YBaseInputField from '../YBaseInputField';
+   import YTemplateInput from '../YTemplateInput.vue';
    import { QInput } from 'quasar';
    import Regex from '../../../utils/regex';
    import Utils from '../../../utils';
 
 
    @Component({
-      components: { QInput },
+      components: { QInput, YTemplateInput },
    })
    export default class YFieldEmail extends Mixins(YBaseInputField) {
 
       @Prop({ default: '' }) public value!: string;
+
+
+      @Override
+      public get finalValue() {
+         return this.value;
+      }
 
 
       @Override
@@ -51,26 +58,37 @@
 
 
 <template>
-   <QInput
-      :value="value"
-      :label="finalLabel"
-      :hint="hint"
-      :placeholder="finalPlaceholder"
-      :bg-color="bgColor"
-      :error-message="error"
-      :error="error"
-      :rules="finalRules"
-      :readonly="isReadonly"
-      :disable="isDisabled"
-      class="y-base-input y-field-email"
-      type="email"
-      outlined
-      lazy-rules
-      @input="updateValueProp($event)"
-      @keydown="onKeyDown"
-      @blur="validate"
-      ref="qField"
-   />
+   <YTemplateInput
+      css-class="y-field-email"
+      :is-mini="isMini"
+      :side-label-width="sideLabelWidth"
+      :final-label="finalLabel"
+      :final-error="finalError"
+   >
+      <QInput
+         :value="value"
+         :label="(isMini ? finalLabel : undefined)"
+         :placeholder="finalPlaceholder"
+         :bg-color="bgColor"
+         :readonly="isReadonly"
+         :disable="isDisabled"
+         :error="!!finalError"
+         type="email"
+         outlined
+         lazy-rules
+         hide-bottom-space
+         @input="updateValueProp($event)"
+         @keydown="onKeyDown"
+         @blur="validate"
+         ref="qField"
+      />
+
+
+      <template v-slot:bottom-left>
+         <div v-if="!finalError && hint">{{ hint }}</div>
+      </template>
+
+   </YTemplateInput>
 </template>
 
 

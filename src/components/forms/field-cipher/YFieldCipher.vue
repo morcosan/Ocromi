@@ -1,12 +1,13 @@
 <script lang="ts">
    import { Component, Mixins, Override, Prop, Watch } from '../../../core/decorators';
    import YBaseInputField from '../YBaseInputField';
+   import YTemplateInput from '../YTemplateInput.vue';
    import { QInput } from 'quasar';
    import Utils from '../../../utils';
 
 
    @Component({
-      components: { QInput },
+      components: { QInput, YTemplateInput },
    })
    export default class YFieldCipher extends Mixins(YBaseInputField) {
 
@@ -22,6 +23,12 @@
          this.prepareValidation();
       }
 
+
+      @Override
+      public get finalValue() {
+         return this.value;
+      }
+      
 
       @Override
       public created() {
@@ -70,27 +77,38 @@
 
 
 <template>
-   <QInput
-      :value="value"
-      :mask="inputMask"
-      :label="finalLabel"
-      :hint="hint"
-      :placeholder="finalPlaceholder"
-      :readonly="isReadonly"
-      :bg-color="bgColor"
-      :error-message="error"
-      :error="error"
-      :rules="finalRules"
-      :disable="isDisabled"
-      class="y-base-input y-field-cipher"
-      type="text"
-      unmasked-value
-      lazy-rules
-      outlined
-      @input="updateValueProp($event)"
-      @blur="validate"
-      ref="qField"
-   />
+   <YTemplateInput
+      css-class="y-field-cipher"
+      :is-mini="isMini"
+      :side-label-width="sideLabelWidth"
+      :final-label="finalLabel"
+      :final-error="finalError"
+   >
+      <QInput
+         :value="value"
+         :mask="inputMask"
+         :label="(isMini ? finalLabel : undefined)"
+         :placeholder="finalPlaceholder"
+         :readonly="isReadonly"
+         :disable="isDisabled"
+         :bg-color="bgColor"
+         :error="!!finalError"
+         type="text"
+         unmasked-value
+         outlined
+         lazy-rules
+         hide-bottom-space
+         @input="updateValueProp($event)"
+         @blur="validate"
+         ref="qField"
+      />
+
+
+      <template v-slot:bottom-left>
+         <div v-if="!finalError && hint">{{ hint }}</div>
+      </template>
+
+   </YTemplateInput>
 </template>
 
 

@@ -20,7 +20,7 @@ const vue = {
    },
    methods: {
       customDates(date: string) {
-         return (date >= '2020-03-19' && date <= '2020-04-03');
+         return (date >= '2020-04-19' && date <= '2020-05-03');
       },
    },
 };
@@ -37,6 +37,8 @@ const storyLines: StoryLine[] = [
             :hides-optional="hidesOptional"
             :is-readonly="isReadonly"
             :error="error"
+            :is-mini="isMini"
+            :side-label-width="sideLabelWidth"
          />
       `,
       states: ['value'],
@@ -53,6 +55,8 @@ const storyLines: StoryLine[] = [
             :is-readonly="isReadonly"
             :error="error"
             :custom-dates-fn="customDates"
+            :is-mini="isMini"
+            :side-label-width="sideLabelWidth"
          />
       `,
       states: ['value1'],
