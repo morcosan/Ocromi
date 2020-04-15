@@ -12,10 +12,8 @@ export type Option = {
 @Component
 export default class YBaseInputSelect extends Mixins(YBaseInput) {
 
-   @Prop({ default: '' }) public hint!: string;
    @Prop({ default: () => [] }) public options!: Option[];
-   @Prop({ default: '' }) public error!: string;
-   @Prop({ default: () => [] }) public rules!: Function[];
+   @Prop({ default: '' }) public hint!: string;
 
 
    public currOptions: Option[] = [];
@@ -24,28 +22,6 @@ export default class YBaseInputSelect extends Mixins(YBaseInput) {
    @Watch('options')
    public onChange_options() {
       this.currOptions = this.options;
-   }
-
-
-   @Watch('isOptional')
-   public onChange_isOptional() {
-      if (this.isOptional) {
-         // @ts-ignore
-         this.$refs.qSelect.resetValidation();
-      }
-   }
-
-
-   @Override
-   public get finalRules() {
-      return this.rules;
-   }
-
-
-   @Override
-   public validate() {
-      // @ts-ignore
-      return this.$refs.qSelect.validate();
    }
 
 

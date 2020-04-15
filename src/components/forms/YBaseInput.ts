@@ -1,4 +1,4 @@
-import { Component, Prop, Vue, Watch } from '../../core/decorators';
+import { Component, Override, Prop, Vue, Watch } from '../../core/decorators';
 
 
 @Component
@@ -13,6 +13,7 @@ export default class YBaseInput extends Vue {
    @Prop({ default: false, type: Boolean }) public isMini!: boolean;
    @Prop({ default: '' }) public sideLabelWidth!: string;
    @Prop({ default: 'white' }) public bgColor!: string;
+   @Prop({ default: () => [] }) public rules!: Function[];
 
 
    public isDirty: boolean = false;
@@ -27,9 +28,21 @@ export default class YBaseInput extends Vue {
    }
 
 
-   // to override for each type of input
+   @Watch('isOptional')
+   public onChange_isOptional() {
+      if (this.isOptional) {
+         this.resetValidation();
+      }
+   }
+
+
    public get finalValue(): any {
       return undefined;
+   }
+
+
+   public get finalRules() {
+      return this.rules;
    }
 
 
@@ -44,20 +57,30 @@ export default class YBaseInput extends Vue {
    }
 
 
-   // to override for each type of input
    public validate() {
-      return true;
+      this.isDirty = true;
+
+      for (let i = 0; i < this.finalRules.length; i++) {
+         const result: (boolean | string) = this.finalRules[i](this.finalValue);
+         if (result === true) {
+            this.innerError = '';
+         }
+         else {
+            this.innerError = (result as string);
+            break;
+         }
+      }
+
+      return !this.innerError;
    }
 
 
-   // to override for each type of input
    public resetValidation() {
       this.isDirty = false;
       this.innerError = '';
    }
 
 
-   // to override for each type of input
    public focus() {}
 
 

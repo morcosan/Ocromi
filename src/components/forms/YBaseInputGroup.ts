@@ -17,7 +17,6 @@ export default class YBaseInputGroup extends Mixins(YBaseInput) {
    @Prop({ default: () => [] }) public options!: Option[];
 
 
-   public innerError: string = '';
    public currOptionIndex: number = 0;
 
 
@@ -29,14 +28,6 @@ export default class YBaseInputGroup extends Mixins(YBaseInput) {
       }
 
       return [];
-   }
-
-
-   @Watch('isOptional')
-   public onChange_isOptional() {
-      if (this.isOptional) {
-         this.innerError = '';
-      }
    }
 
 

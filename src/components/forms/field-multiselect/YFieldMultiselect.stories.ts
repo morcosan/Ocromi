@@ -52,6 +52,8 @@ const storyLines: StoryLine[] = [
             :error="error"
             :selection-limit="selectionLimit"
             :can-add-new="canAddNew"
+            :is-mini="isMini"
+            :side-label-width="sideLabelWidth"
          />
       `,
       states: ['value'],

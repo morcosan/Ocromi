@@ -1,15 +1,22 @@
 <script lang="ts">
    import { Component, Mixins, Override, Prop } from '../../../core/decorators';
    import YBaseInputSelect, { Option } from '../YBaseInputSelect';
+   import YTemplateInput from '../YTemplateInput.vue';
    import { QSelect } from 'quasar';
 
 
    @Component({
-      components: { QSelect },
+      components: { QSelect, YTemplateInput },
    })
    export default class YFieldSelect extends Mixins(YBaseInputSelect) {
 
       @Prop({ default: null }) public value!: Option | null;
+
+
+      @Override
+      public get finalValue() {
+         return this.value;
+      }
 
 
       @Override
@@ -29,28 +36,39 @@
 
 
 <template>
-   <QSelect
-      :value="value"
-      :options="currOptions"
-      :label="finalLabel"
-      :hint="hint"
-      :readonly="isReadonly"
-      :disable="isDisabled"
-      :error-message="error"
-      :error="error"
-      :rules="finalRules"
-      :bg-color="bgColor"
-      class="y-base-input y-field-select"
-      input-debounce="0"
-      outlined
-      lazy-rules
-      clearable
-      use-input
-      @input="updateValueProp($event)"
-      @filter="onFilterInput"
-      @blur="validate"
-      ref="qSelect"
-   />
+   <YTemplateInput
+      css-class="y-field-select"
+      :is-mini="isMini"
+      :side-label-width="sideLabelWidth"
+      :final-label="finalLabel"
+      :final-error="finalError"
+   >
+      <QSelect
+         :value="value"
+         :options="currOptions"
+         :label="(isMini ? finalLabel : undefined)"
+         :readonly="isReadonly"
+         :disable="isDisabled"
+         :error="!!finalError"
+         :bg-color="bgColor"
+         input-debounce="0"
+         outlined
+         lazy-rules
+         clearable
+         use-input
+         hide-bottom-space
+         @input="updateValueProp($event)"
+         @filter="onFilterInput"
+         @blur="validate"
+         ref="qSelect"
+      />
+
+
+      <template v-slot:bottom-left>
+         <div v-if="!finalError && hint">{{ hint }}</div>
+      </template>
+
+   </YTemplateInput>
 </template>
 
 

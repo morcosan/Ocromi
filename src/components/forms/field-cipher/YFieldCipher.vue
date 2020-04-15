@@ -28,7 +28,7 @@
       public get finalValue() {
          return this.value;
       }
-      
+
 
       @Override
       public created() {
