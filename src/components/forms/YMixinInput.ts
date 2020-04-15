@@ -47,8 +47,11 @@ export default class YMixinInput extends Vue {
 
 
    public get finalLabel() {
-      const isVisible = (this.isOptional && !this.hidesOptional);
-      return (isVisible ? (this.label + ' ' + this.$locale.all.optional) : this.label);
+      if (this.label !== '') {
+         const hasOptional = (this.isOptional && !this.hidesOptional);
+         return (hasOptional ? (this.label + ' ' + this.$locale.all.optional) : this.label);
+      }
+      return '';
    }
 
 

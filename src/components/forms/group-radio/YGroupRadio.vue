@@ -35,7 +35,6 @@
    <div
       :class="{
          'y-base-input y-group-radio': true,
-         'y-base-input--required': !isOptional,
          'text-negative': innerError,
       }"
    >

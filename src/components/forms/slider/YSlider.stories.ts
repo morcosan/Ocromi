@@ -39,6 +39,7 @@ const storyLines: StoryLine[] = [
             :value-step="valueStep"
             :step-decimals="stepDecimals"
             :has-markers="hasMarkers"
+            :error="error"
             :is-mini="isMini"
             :side-label-width="sideLabelWidth"
             ref="slider"

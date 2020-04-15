@@ -50,6 +50,7 @@ const storyLines: StoryLine[] = [
             :is-optional="isOptional"
             :hides-optional="hidesOptional"
             :is-readonly="isReadonly"
+            :error="error"
             :is-mini="isMini"
             :side-label-width="sideLabelWidth"
             ref="groupRadio"

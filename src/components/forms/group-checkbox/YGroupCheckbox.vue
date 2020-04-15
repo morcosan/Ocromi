@@ -38,7 +38,6 @@
    <div
       :class="{
          'y-base-input y-group-checkbox': true,
-         'y-base-input--required': !isOptional,
          'text-negative': innerError,
       }"
    >

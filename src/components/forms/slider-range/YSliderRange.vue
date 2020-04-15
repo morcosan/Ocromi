@@ -55,7 +55,6 @@
    <div
       :class="{
          'y-base-input y-base-slider y-slider-range': true,
-         'y-base-input--required': !isOptional,
          'text-negative': innerError,
       }"
    >

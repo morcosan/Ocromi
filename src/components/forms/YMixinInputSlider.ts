@@ -33,6 +33,23 @@ export default class YMixinInputSlider extends Mixins(YMixinInput) {
 
 
    @Override
+   public validate() {
+      for (let i = 0; i < this.finalRules.length; i++) {
+         const result: (boolean | string) = this.finalRules[i](this.finalValue);
+         if (result === true) {
+            this.innerError = '';
+         }
+         else {
+            this.innerError = (result as string);
+            break;
+         }
+      }
+
+      return !this.innerError;
+   }
+
+
+   @Override
    public focus() {
       if (this.$refs.qRange) {
          // @ts-ignore

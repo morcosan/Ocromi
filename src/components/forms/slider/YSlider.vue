@@ -1,11 +1,12 @@
 <script lang="ts">
    import { Component, Mixins, Prop } from '../../../core/decorators';
    import YMixinInputSlider from '../YMixinInputSlider';
+   import YTemplateInputSlider from '../YTemplateInputSlider.vue';
    import { QSlider } from 'quasar';
 
 
    @Component({
-      components: { QSlider },
+      components: { QSlider, YTemplateInputSlider },
    })
    export default class YSlider extends Mixins(YMixinInputSlider) {
 
@@ -29,51 +30,32 @@
 
 
 <template>
-   <div
-      :class="{
-         'y-base-input y-base-slider y-slider': true,
-         'y-base-input--required': !isOptional,
-         'text-negative': innerError,
-      }"
+   <YTemplateInputSlider
+      class-name="y-slider"
+      :is-mini="isMini"
+      :side-label-width="sideLabelWidth"
+      :final-label="finalLabel"
+      :final-error="finalError"
+      :is-disabled="isDisabled"
+      :is-readonly="isReadonly"
+      :min-value="minValue"
+      :max-value="maxValue"
+      :bg-color="bgColor"
    >
-      <div
-         :class="{
-            ['y-base-input__fieldset bg-' + bgColor]: true,
-            'has-error': innerError,
-            'has-label': label,
-            'is-disabled': isDisabled,
-            'is-readonly': isReadonly,
-         }"
-      >
-         <div v-if="label" :class="{ ['y-base-input__fieldset-label text-subtitle1 bg-' + bgColor]: true }">
-            {{ finalLabel }}
-         </div>
-
-         <div class="y-slider__min-max text-caption">
-            <div class="y-slider__min">{{ minValue }}</div>
-            <div class="y-slider__max">{{ maxValue }}</div>
-         </div>
-
-         <QSlider
-            :value="value"
-            :min="minValue"
-            :max="maxValue"
-            :step="valueStep"
-            :label="label"
-            :label-value="value + thumbSuffix"
-            :markers="hasMarkers"
-            :readonly="isReadonly"
-            :disable="isDisabled"
-            :label-always="isDirty || isDisabled || isReadonly"
-            @input="onInput"
-            ref="qSlider"
-         />
-      </div>
-
-      <div :class="{ 'y-base-input__error text-caption': true, 'is-visible': innerError }">
-         {{ innerError }}
-      </div>
-   </div>
+      <QSlider
+         :value="value"
+         :min="minValue"
+         :max="maxValue"
+         :step="valueStep"
+         :label-value="value + thumbSuffix"
+         :label-always="isDirty || isDisabled || isReadonly"
+         :markers="hasMarkers"
+         :readonly="isReadonly"
+         :disable="isDisabled"
+         @input="onInput"
+         ref="qSlider"
+      />
+   </YTemplateInputSlider>
 </template>
 
 
