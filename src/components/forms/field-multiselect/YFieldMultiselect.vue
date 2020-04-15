@@ -1,20 +1,24 @@
 <script lang="ts">
    import { Component, Mixins, Override, Prop } from '../../../core/decorators';
    import YMixinInputSelect, { Option } from '../YMixinInputSelect';
+   import YTemplateInput from '../YTemplateInput.vue';
    import { QChip, QSelect } from 'quasar';
 
 
    @Component({
-      components: {
-         QSelect,
-         QChip,
-      },
+      components: { QSelect, QChip, YTemplateInput },
    })
    export default class YFieldMultiselect extends Mixins(YMixinInputSelect) {
 
       @Prop({ default: () => [] }) public value!: Option[];
       @Prop({ default: 0 }) public selectionLimit!: number;
       @Prop({ default: false, type: Boolean }) public canAddNew!: boolean;
+
+
+      @Override
+      public get finalValue() {
+         return this.value;
+      }
 
 
       @Override
@@ -68,52 +72,63 @@
 
 
 <template>
-   <QSelect
-      :value="value"
-      :options="currOptions"
-      :label="finalLabel"
-      :hint="hint"
-      :readonly="isReadonly"
-      :disable="isDisabled"
-      :error-message="error"
-      :error="error"
-      :rules="finalRules"
-      :bg-color="bgColor"
-      :new-value-mode="canAddNew ? 'add-unique' : undefined"
-      class="y-field-multiselect y-base-input"
-      input-debounce="0"
-      lazy-rules
-      clearable
-      multiple
-      use-chips
-      use-input
-      outlined
-      @input="onInput"
-      @filter="onFilterInput"
-      @new-value="onNewOption"
-      @blur="validate"
-      ref="qSelect"
+   <YTemplateInput
+      class-name="y-field-multiselect"
+      :is-mini="isMini"
+      :side-label-width="sideLabelWidth"
+      :final-label="finalLabel"
+      :final-error="finalError"
    >
-      <template v-slot:selected-item="scope">
-         <QChip
-            :color="(scope && scope.opt.isNew) ? 'primary' : undefined"
-            :tabindex="scope ? scope.tabindex : -1"
-            :removable="!isReadonly"
-            outline
-            square
-            dense
-            @remove="scope.removeAtIndex(scope.index)"
-         >
-            {{ scope ? scope.opt.label : '' }}
-         </QChip>
+      <QSelect
+         :value="value"
+         :options="currOptions"
+         :label="(isMini ? finalLabel : undefined)"
+         :readonly="isReadonly"
+         :disable="isDisabled"
+         :error="!!finalError"
+         :bg-color="bgColor"
+         :new-value-mode="canAddNew ? 'add-unique' : undefined"
+         input-debounce="0"
+         lazy-rules
+         clearable
+         multiple
+         use-chips
+         use-input
+         outlined
+         hide-bottom-space
+         @input="onInput"
+         @filter="onFilterInput"
+         @new-value="onNewOption"
+         @blur="validate"
+         ref="qSelect"
+      >
+         <template v-slot:selected-item="scope">
+            <QChip
+               :color="(scope && scope.opt.isNew) ? 'primary' : undefined"
+               :tabindex="scope ? scope.tabindex : -1"
+               :removable="!isReadonly"
+               outline
+               square
+               dense
+               @remove="scope.removeAtIndex(scope.index)"
+            >
+               {{ scope ? scope.opt.label : '' }}
+            </QChip>
+         </template>
+
+         <template v-if="selectionLimit > 0" v-slot:counter>
+            <div :class="{ 'text-weight-bold': (value.length >= selectionLimit) }">
+               {{ value.length }} / {{ selectionLimit }}
+            </div>
+         </template>
+      </QSelect>
+
+
+      <template v-slot:bottom-left>
+         <div v-if="!finalError && hint">{{ hint }}</div>
       </template>
 
-      <template v-if="selectionLimit > 0" v-slot:counter>
-         <div :class="{ 'text-weight-bold': (value.length >= selectionLimit) }">
-            {{ value.length }} / {{ selectionLimit }}
-         </div>
-      </template>
-   </QSelect>
+   </YTemplateInput>
 </template>
 
 
