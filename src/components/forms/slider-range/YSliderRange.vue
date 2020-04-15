@@ -1,13 +1,13 @@
 <script lang="ts">
    import { Component, Mixins, Override, Prop } from '../../../core/decorators';
-   import YBaseInputSlider, { Range } from '../YBaseInputSlider';
+   import YMixinInputSlider, { Range } from '../YMixinInputSlider';
    import { QRange } from 'quasar';
 
 
    @Component({
       components: { QRange },
    })
-   export default class YSliderRange extends Mixins(YBaseInputSlider) {
+   export default class YSliderRange extends Mixins(YMixinInputSlider) {
 
       @Prop({ default: () => ({ min: 0, max: 0 }) }) public value!: Range;
       @Prop({ default: false, type: Boolean }) public isFixed!: number;

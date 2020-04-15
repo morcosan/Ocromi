@@ -1,13 +1,13 @@
 <script lang="ts">
    import { Component, Mixins, Override, Prop, Watch } from '../../../core/decorators';
-   import YBaseButton from '../YBaseButton';
+   import YMixinButton from '../YMixinButton';
    import { QBtn, QSpinnerHourglass } from 'quasar';
 
 
    @Component({
       components: { QBtn, QSpinnerHourglass },
    })
-   export default class YButtonSubmit extends Mixins(YBaseButton) {
+   export default class YButtonSubmit extends Mixins(YMixinButton) {
 
       @Prop({ default: false, type: Boolean }) public isLoading!: boolean;
       @Prop({ default: 2000 }) public loadingTime!: number;

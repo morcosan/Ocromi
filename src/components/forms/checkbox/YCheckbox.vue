@@ -1,13 +1,13 @@
 <script lang="ts">
    import { Component, Mixins, Override, Prop, Watch } from '../../../core/decorators';
    import { QCheckbox } from 'quasar';
-   import YBaseInput from '../YBaseInput';
+   import YMixinInput from '../YMixinInput';
 
 
    @Component({
       components: { QCheckbox },
    })
-   export default class YCheckbox extends Mixins(YBaseInput) {
+   export default class YCheckbox extends Mixins(YMixinInput) {
 
       @Prop({ default: false }) public value!: boolean | null;
       @Prop({ default: ' ' }) public error!: string;

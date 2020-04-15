@@ -1,6 +1,6 @@
 <script lang="ts">
    import { Component, Mixins, Override, Prop } from '../../../core/decorators';
-   import YBaseInputField from '../YBaseInputField';
+   import YMixinInputField from '../YMixinInputField';
    import YTemplateInput from '../YTemplateInput.vue';
    import { QInput } from 'quasar';
 
@@ -8,7 +8,7 @@
    @Component({
       components: { QInput, YTemplateInput },
    })
-   export default class YFieldTextArea extends Mixins(YBaseInputField) {
+   export default class YFieldTextArea extends Mixins(YMixinInputField) {
 
       @Prop({ default: '' }) public value!: string;
       @Prop({ default: false, type: Boolean }) public isDynamic!: boolean;
@@ -57,7 +57,7 @@
 
 <template>
    <YTemplateInput
-      :css-class="'y-field-text-area ' + (hasScrollbar ? 'has-scrollbar' : '')"
+      :class-name="'y-field-text-area ' + (hasScrollbar ? 'has-scrollbar' : '')"
       :is-mini="isMini"
       :side-label-width="sideLabelWidth"
       :final-label="finalLabel"

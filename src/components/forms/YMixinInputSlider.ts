@@ -1,5 +1,5 @@
-import { Component, Mixins, Override, Prop, Watch } from '../../core/decorators';
-import YBaseInput from './YBaseInput';
+import { Component, Mixins, Override, Prop } from '../../core/decorators';
+import YMixinInput from './YMixinInput';
 
 
 export type Range = {
@@ -9,7 +9,7 @@ export type Range = {
 
 
 @Component
-export default class YBaseInputSlider extends Mixins(YBaseInput) {
+export default class YMixinInputSlider extends Mixins(YMixinInput) {
 
    @Prop({ default: '' }) public thumbSuffix!: string;
    @Prop({ default: 0 }) public minValue!: number;

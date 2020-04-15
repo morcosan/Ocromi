@@ -1,6 +1,6 @@
 <script lang="ts">
    import { Component, Mixins, Override, Prop } from '../../../core/decorators';
-   import YBaseInputField from '../YBaseInputField';
+   import YMixinInputField from '../YMixinInputField';
    import YTemplateInput from '../YTemplateInput.vue';
    import { QAvatar, QChip, QFile, QIcon, QTooltip } from 'quasar';
 
@@ -20,7 +20,7 @@
    @Component({
       components: { QFile, QIcon, QChip, QTooltip, QAvatar, YTemplateInput },
    })
-   export default class YFieldFileUpload extends Mixins(YBaseInputField) {
+   export default class YFieldFileUpload extends Mixins(YMixinInputField) {
 
       @Prop({ default: () => [] }) public value!: File[];
       @Prop({ default: () => [] }) public fileFormats!: string[]; // array of <mediatype>/<extension>
@@ -126,7 +126,7 @@
 
 <template>
    <YTemplateInput
-      :css-class="'y-field-file-upload ' + (value.length === 0 ? 'is-empty' : '')"
+      :class-name="'y-field-file-upload ' + (value.length === 0 ? 'is-empty' : '')"
       :is-mini="isMini"
       :side-label-width="sideLabelWidth"
       :final-label="finalLabel"

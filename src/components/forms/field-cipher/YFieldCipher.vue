@@ -1,6 +1,6 @@
 <script lang="ts">
    import { Component, Mixins, Override, Prop, Watch } from '../../../core/decorators';
-   import YBaseInputField from '../YBaseInputField';
+   import YMixinInputField from '../YMixinInputField';
    import YTemplateInput from '../YTemplateInput.vue';
    import { QInput } from 'quasar';
    import Utils from '../../../utils';
@@ -9,7 +9,7 @@
    @Component({
       components: { QInput, YTemplateInput },
    })
-   export default class YFieldCipher extends Mixins(YBaseInputField) {
+   export default class YFieldCipher extends Mixins(YMixinInputField) {
 
       @Prop({ default: '' }) public value!: string;
       @Prop({ default: '' }) public inputMask!: string;
@@ -78,7 +78,7 @@
 
 <template>
    <YTemplateInput
-      css-class="y-field-cipher"
+      class-name="y-field-cipher"
       :is-mini="isMini"
       :side-label-width="sideLabelWidth"
       :final-label="finalLabel"

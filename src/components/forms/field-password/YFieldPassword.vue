@@ -1,6 +1,6 @@
 <script lang="ts">
    import { Component, Mixins, Override, Prop } from '../../../core/decorators';
-   import YBaseInputField from '../YBaseInputField';
+   import YMixinInputField from '../YMixinInputField';
    import YTemplateInput from '../YTemplateInput.vue';
    import { QIcon, QInput, QLinearProgress, QTooltip } from 'quasar';
    import zxcvbn from 'zxcvbn';
@@ -18,7 +18,7 @@
    @Component({
       components: { QInput, QTooltip, QIcon, QLinearProgress, YTemplateInput },
    })
-   export default class YFieldPassword extends Mixins(YBaseInputField) {
+   export default class YFieldPassword extends Mixins(YMixinInputField) {
 
       @Prop({ default: '' }) public value!: string;
       @Prop({ default: false, type: Boolean }) public hasMeter!: boolean;
@@ -121,7 +121,7 @@
 
 <template>
    <YTemplateInput
-      :css-class="'y-field-password ' + (hasMeter ? 'has-meter' : '')"
+      :class-name="'y-field-password ' + (hasMeter ? 'has-meter' : '')"
       :is-mini="isMini"
       :side-label-width="sideLabelWidth"
       :final-label="finalLabel"

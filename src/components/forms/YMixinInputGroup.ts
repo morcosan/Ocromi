@@ -1,5 +1,5 @@
-import { Component, Mixins, Override, Prop, Watch } from '../../core/decorators';
-import YBaseInput from './YBaseInput';
+import { Component, Mixins, Override, Prop } from '../../core/decorators';
+import YMixinInput from './YMixinInput';
 
 
 export type Option = {
@@ -12,7 +12,7 @@ type Target = (HTMLElement | null);
 
 
 @Component
-export default class YBaseInputGroup extends Mixins(YBaseInput) {
+export default class YMixinInputGroup extends Mixins(YMixinInput) {
 
    @Prop({ default: () => [] }) public options!: Option[];
 

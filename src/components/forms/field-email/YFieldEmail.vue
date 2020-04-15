@@ -1,6 +1,6 @@
 <script lang="ts">
    import { Component, Mixins, Override, Prop } from '../../../core/decorators';
-   import YBaseInputField from '../YBaseInputField';
+   import YMixinInputField from '../YMixinInputField';
    import YTemplateInput from '../YTemplateInput.vue';
    import { QInput } from 'quasar';
    import Regex from '../../../utils/regex';
@@ -10,7 +10,7 @@
    @Component({
       components: { QInput, YTemplateInput },
    })
-   export default class YFieldEmail extends Mixins(YBaseInputField) {
+   export default class YFieldEmail extends Mixins(YMixinInputField) {
 
       @Prop({ default: '' }) public value!: string;
 
@@ -59,7 +59,7 @@
 
 <template>
    <YTemplateInput
-      css-class="y-field-email"
+      class-name="y-field-email"
       :is-mini="isMini"
       :side-label-width="sideLabelWidth"
       :final-label="finalLabel"

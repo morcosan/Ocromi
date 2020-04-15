@@ -1,6 +1,6 @@
 <script lang="ts">
    import { Component, Debounce, Mixins, Override, Prop, Watch } from '../../../core/decorators';
-   import YBaseInputField from '../YBaseInputField';
+   import YMixinInputField from '../YMixinInputField';
    import YTemplateInput from '../YTemplateInput.vue';
    import { QDate, QIcon, QInput, QPopupProxy, QTooltip } from 'quasar';
    import { DateTime } from 'luxon';
@@ -9,7 +9,7 @@
    @Component({
       components: { QInput, QIcon, QDate, QPopupProxy, QTooltip, YTemplateInput },
    })
-   export default class YFieldDate extends Mixins(YBaseInputField) {
+   export default class YFieldDate extends Mixins(YMixinInputField) {
 
       @Prop({ default: '' }) public value!: string;
       @Prop({ default: undefined }) public customDatesFn!: Function | undefined;
@@ -159,7 +159,7 @@
 
 <template>
    <YTemplateInput
-      css-class="y-field-date"
+      class-name="y-field-date"
       :is-mini="isMini"
       :side-label-width="sideLabelWidth"
       :final-label="finalLabel"

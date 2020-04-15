@@ -5,7 +5,7 @@
    @Component
    export default class YTemplateInput extends Vue {
 
-      @Prop({ default: '' }) public cssClass!: string;
+      @Prop({ default: '' }) public className!: string;
       @Prop({ default: '' }) public finalLabel!: string;
       @Prop({ default: '' }) public finalError!: string;
       @Prop({ default: '' }) public sideLabelWidth!: string;
@@ -18,7 +18,7 @@
 <template>
    <label
       :class="{
-         ['y-base-input ' + cssClass]: true,
+         ['y-base-input ' + className]: true,
          'has-side-label': sideLabelWidth,
          'has-error': finalError,
       }"

@@ -1,13 +1,13 @@
 <script lang="ts">
    import { Component, Mixins, Prop } from '../../../core/decorators';
-   import YBaseInputSlider from '../YBaseInputSlider';
+   import YMixinInputSlider from '../YMixinInputSlider';
    import { QSlider } from 'quasar';
 
 
    @Component({
       components: { QSlider },
    })
-   export default class YSlider extends Mixins(YBaseInputSlider) {
+   export default class YSlider extends Mixins(YMixinInputSlider) {
 
       @Prop({ default: 0 }) public value!: number;
 

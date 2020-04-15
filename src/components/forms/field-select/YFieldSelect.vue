@@ -1,6 +1,6 @@
 <script lang="ts">
    import { Component, Mixins, Override, Prop } from '../../../core/decorators';
-   import YBaseInputSelect, { Option } from '../YBaseInputSelect';
+   import YMixinInputSelect, { Option } from '../YMixinInputSelect';
    import YTemplateInput from '../YTemplateInput.vue';
    import { QSelect } from 'quasar';
 
@@ -8,7 +8,7 @@
    @Component({
       components: { QSelect, YTemplateInput },
    })
-   export default class YFieldSelect extends Mixins(YBaseInputSelect) {
+   export default class YFieldSelect extends Mixins(YMixinInputSelect) {
 
       @Prop({ default: null }) public value!: Option | null;
 
@@ -37,7 +37,7 @@
 
 <template>
    <YTemplateInput
-      css-class="y-field-select"
+      class-name="y-field-select"
       :is-mini="isMini"
       :side-label-width="sideLabelWidth"
       :final-label="finalLabel"

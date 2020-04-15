@@ -1,8 +1,8 @@
-import { Component, Override, Prop, Vue, Watch } from '../../core/decorators';
+import { Component, Prop, Vue, Watch } from '../../core/decorators';
 
 
 @Component
-export default class YBaseInput extends Vue {
+export default class YMixinInput extends Vue {
 
    @Prop({ default: '' }) public label!: string;
    @Prop({ default: '' }) public error!: string;

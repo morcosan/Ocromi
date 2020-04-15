@@ -1,6 +1,6 @@
 <script lang="ts">
    import { Component, Mixins, Override, Prop } from '../../../core/decorators';
-   import YBaseInputSelect, { Option } from '../YBaseInputSelect';
+   import YMixinInputSelect, { Option } from '../YMixinInputSelect';
    import { QChip, QSelect } from 'quasar';
 
 
@@ -10,7 +10,7 @@
          QChip,
       },
    })
-   export default class YFieldMultiselect extends Mixins(YBaseInputSelect) {
+   export default class YFieldMultiselect extends Mixins(YMixinInputSelect) {
 
       @Prop({ default: () => [] }) public value!: Option[];
       @Prop({ default: 0 }) public selectionLimit!: number;
