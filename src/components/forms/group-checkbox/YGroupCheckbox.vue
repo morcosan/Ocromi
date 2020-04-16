@@ -2,10 +2,11 @@
    import { Component, Mixins, Override, Prop } from '../../../core/decorators';
    import { QOptionGroup } from 'quasar';
    import YMixinInputGroup from '../YMixinInputGroup';
+   import YTemplateInputGroup from '../YTemplateInputGroup.vue';
 
 
    @Component({
-      components: { QOptionGroup },
+      components: { QOptionGroup, YTemplateInputGroup },
    })
    export default class YGroupCheckbox extends Mixins(YMixinInputGroup) {
 
@@ -35,49 +36,31 @@
 
 
 <template>
-   <div
-      :class="{
-         'y-base-input y-group-checkbox': true,
-         'text-negative': innerError,
-      }"
+   <YTemplateInputGroup
+      class="y-group-checkbox"
+      :is-mini="isMini"
+      :side-label-width="sideLabelWidth"
+      :final-label="finalLabel"
+      :final-error="finalError"
+      :is-disabled="isDisabled"
+      :is-readonly="isReadonly"
+      :bg-color="bgColor"
    >
-      <div
-         :class="{
-            ['y-base-input__fieldset bg-' + bgColor]: true,
-            'has-error': innerError,
-            'has-label': label,
-            'is-disabled': isDisabled,
-            'is-readonly': isReadonly,
-         }"
-      >
-         <div v-if="label" :class="{ ['y-base-input__fieldset-label text-subtitle1 bg-' + bgColor]: true }">
-            {{ finalLabel }}
-         </div>
-
-         <QOptionGroup
-            :value="value"
-            :options="options"
-            :disable="isDisabled"
-            :color="innerError ? 'negative' : undefined"
-            :keep-color="innerError"
-            type="checkbox"
-            @input="onInput"
-            @keydown="onKeyDown"
-            ref="qOptionGroup"
-         />
-      </div>
-
-      <div :class="{ 'y-base-input__error text-caption': true, 'is-visible': innerError }">
-         {{ innerError }}
-      </div>
-   </div>
+      <QOptionGroup
+         :value="value"
+         :options="options"
+         :disable="isDisabled"
+         :color="(finalError ? 'negative' : undefined)"
+         :keep-color="!!finalError"
+         type="checkbox"
+         @input="onInput"
+         @keydown="onKeyDown"
+         ref="qOptionGroup"
+      />
+   </YTemplateInputGroup>
 </template>
 
 
 <style scoped lang="scss">
    // @import '../../../css/variables';
-
-   .y-group-checkbox .y-base-input__fieldset-label {
-      left: -8px;
-   }
 </style>

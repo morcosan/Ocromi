@@ -6,7 +6,7 @@
    @Component({
       components: { YTemplateInput },
    })
-   export default class YTemplateInputSlider extends Vue {
+   export default class YTemplateInputGroup extends Vue {
 
       @Prop({ default: '' }) public finalLabel!: string;
       @Prop({ default: '' }) public finalError!: string;
@@ -15,8 +15,6 @@
       @Prop({ default: false, type: Boolean }) public isMini!: boolean;
       @Prop({ default: false, type: Boolean }) public isDisabled!: boolean;
       @Prop({ default: false, type: Boolean }) public isReadonly!: boolean;
-      @Prop({ default: 0 }) public minValue!: number;
-      @Prop({ default: 0 }) public maxValue!: number;
 
    }
 </script>
@@ -24,7 +22,6 @@
 
 <template>
    <YTemplateInput
-      class="y-base-slider"
       :is-mini="isMini"
       :side-label-width="sideLabelWidth"
       :final-label="finalLabel"
@@ -41,11 +38,6 @@
       >
          <div v-if="isMini && finalLabel" :class="{ ['y-base-input__fieldset-label bg-' + bgColor]: true }">
             {{ finalLabel }}
-         </div>
-
-         <div class="y-slider__min-max text-caption">
-            <div class="y-slider__min">{{ minValue }}</div>
-            <div class="y-slider__max">{{ maxValue }}</div>
          </div>
 
          <slot/>
