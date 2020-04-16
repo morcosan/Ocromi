@@ -17,15 +17,15 @@
 <template>
    <label
       :class="{
-         ['y-base-input']: true,
+         'y-base-input': true,
          'has-side-label': sideLabelWidth,
          'has-error': finalError,
       }"
    >
       <div
-         v-if="!isMini"
+         v-if="!isMini && finalLabel"
          :style="(!isMini ? `width: ${ sideLabelWidth }` : undefined)"
-         class="y-base-input__label text-body1"
+         class="y-base-input__label"
       >
          {{ finalLabel }}
       </div>

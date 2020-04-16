@@ -116,119 +116,115 @@ const vue = {
 
 const basicFormTemplate = `
 <YForm @submit="onSubmit" class="story-form-panel">
-   <div>
-      <YFieldText
-         v-model="fullName"
-         label="Full name"
-      />
+   <YFieldText
+      v-model="fullName"
+      label="Full name"
+   />
+
+   <YFieldEmail
+      v-model="email"
+      label="Email address"
+      placeholder="email@gmail.com"
+   />
+
+   <YFieldPassword
+      v-model="password"
+      label="New password"
+      has-meter
+   />
    
-      <YFieldEmail
-         v-model="email"
-         label="Email address"
-         placeholder="email@gmail.com"
-      />
+   <YFieldPassword
+      v-model="password2"
+      label="Confirm password"
+   />
    
-      <YFieldPassword
-         v-model="password"
-         label="New password"
-         has-meter
-      />
-      
-      <YFieldPassword
-         v-model="password2"
-         label="Confirm password"
-      />
-      
-      <YFieldTextArea
-         v-model="description"
-         label="Description"
-      />
-      
-      <YFieldLink
-         v-model="website"
-         label="Website"
-         placeholder="Enter your website"
-      />
-      
-      <YFieldSelect
-         v-model="jobTitle"
-         :options="jobTitleList"
-         label="Job title"
-      />
-      
-      <YFieldMultiselect
-         v-model="hobbies"
-         :options="hobbyList"
-         :selection-limit="5"
-         label="Hobbies"
-         hint="Select 5 hobbies"
-         can-add-new
-      />
-      
-      <YFieldNumber
-         v-model="budget"
-         :value-step="10"
-         :decimals="2"
-         label="Budget"
-         placeholder="Enter your budget"
-      />
-   </div>
+   <YFieldTextArea
+      v-model="description"
+      label="Description"
+   />
    
-   <div>		
-      <YGroupCheckbox
-         v-model="jobTypes"
-         :options="jobTypeList"
-         label="Job preferences"
-      />
+   <YFieldLink
+      v-model="website"
+      label="Website"
+      placeholder="Enter your website"
+   />
+   
+   <YFieldSelect
+      v-model="jobTitle"
+      :options="jobTitleList"
+      label="Job title"
+   />
+   
+   <YFieldMultiselect
+      v-model="hobbies"
+      :options="hobbyList"
+      :selection-limit="5"
+      label="Hobbies"
+      hint="Select 5 hobbies"
+      can-add-new
+   />
+   
+   <YFieldNumber
+      v-model="budget"
+      :value-step="10"
+      :decimals="2"
+      label="Budget"
+      placeholder="Enter your budget"
+   />
       
-      <YGroupRadio
-         v-model="gender"
-         :options="genderList"
-         label="Gender"
-      />
-      
-      <YFieldCipher
-         v-model="cardNumber"
-         input-mask="####  ####  ####  ####"
-         label="Card number"
-      />
-      
-      <YSlider
-         v-model="successRate"
-         :min-value="0"
-         :max-value="100"
-         :value-step="5"
-         label="Success rate"
-         thumb-label=" %"
-      />
-      
-      <YSliderRange
-         v-model="successRange"
-         :min-value="0"
-         :max-value="100"
-         label="Success range"
-         thumb-label=" %"
-      />
-      
-      <YFieldDate
-         v-model="meetingDate"
-         label="Meeting date"
-      />
-      
-      <YFieldFileUpload
-         v-model="documents"
-         label="Upload 3 documents"
-         :max-num-files="3"
-         :rules="[ (value) => (value.length === 3 || 'Please select 3 documents') ]"
-         is-multiple
-      />
-      
-      <YCheckbox v-model="termOfService">
-         I agree with terms of service
-      </YCheckbox>
-      
-      <YButtonSubmit	label="Validate"/>
-   </div>
+   <YGroupCheckbox
+      v-model="jobTypes"
+      :options="jobTypeList"
+      label="Job preferences"
+   />
+   
+   <YGroupRadio
+      v-model="gender"
+      :options="genderList"
+      label="Gender"
+   />
+   
+   <YFieldCipher
+      v-model="cardNumber"
+      input-mask="####  ####  ####  ####"
+      label="Card number"
+   />
+   
+   <YSlider
+      v-model="successRate"
+      :min-value="0"
+      :max-value="100"
+      :value-step="5"
+      label="Success rate"
+      thumb-label=" %"
+   />
+   
+   <YSliderRange
+      v-model="successRange"
+      :min-value="0"
+      :max-value="100"
+      label="Success range"
+      thumb-label=" %"
+   />
+   
+   <YFieldDate
+      v-model="meetingDate"
+      label="Meeting date"
+   />
+   
+   <YFieldFileUpload
+      v-model="documents"
+      label="Upload 3 documents"
+      :max-num-files="3"
+      :rules="[ (value) => (value.length === 3 || 'Please select 3 documents') ]"
+      is-multiple
+   />
+   
+   <YCheckbox v-model="termOfService" error="You must agree with our terms">
+      I agree with terms of service
+   </YCheckbox>
+   
+   <YButtonSubmit	label="Validate"/>
 </YForm>
 `;
 

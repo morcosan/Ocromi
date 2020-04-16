@@ -1,25 +1,21 @@
 <script lang="ts">
-   import { Component, Mixins, Override, Prop, Watch } from '../../../core/decorators';
+   import { Component, Mixins, Override, Prop } from '../../../core/decorators';
    import { QCheckbox } from 'quasar';
    import YMixinInput from '../YMixinInput';
+   import YTemplateInput from '../YTemplateInput.vue';
 
 
    @Component({
-      components: { QCheckbox },
+      components: { QCheckbox, YTemplateInput },
    })
    export default class YCheckbox extends Mixins(YMixinInput) {
 
       @Prop({ default: false }) public value!: boolean | null;
-      @Prop({ default: ' ' }) public error!: string;
 
 
-      public innerError: string = '';
-
-
-      @Override
-      public get finalLabel() {
-         const isVisible = (this.isOptional && !this.hidesOptional);
-         return (isVisible ? (this.$locale.all.optional + ' ' + this.label) : this.label);
+      public get optionalText() {
+         const hasOptional = (this.isOptional && !this.hidesOptional);
+         return (hasOptional ? (this.$locale.all.optional + ' ') : '');
       }
 
 
@@ -41,10 +37,8 @@
 
 
       public onInput(value: boolean) {
-         if (!this.isOptional) {
-            this.innerError = (value ? '' : this.error);
-         }
-
+         this.isDirty = true;
+         this.validate();
          this.updateValueProp(value);
       }
 
@@ -53,35 +47,28 @@
 
 
 <template>
-   <div
-      :class="{
-         'y-base-input y-checkbox': true,
-         'is-required': !isOptional,
-      }"
+   <YTemplateInput
+      class="y-checkbox"
+      :is-mini="isMini"
+      :side-label-width="sideLabelWidth"
+      :final-label="(sideLabelWidth ? finalLabel : undefined)"
+      :final-error="innerError"
    >
       <QCheckbox
          :value="value"
          :disable="isDisabled"
-         :color="innerError ? 'negative' : undefined"
-         :keep-color="innerError"
+         :color="(innerError ? 'negative' : undefined)"
+         :keep-color="!!innerError"
          @input="onInput"
          ref="qCheckbox"
       >
-         <div :class="{ 'text-negative': innerError }">
-            {{ finalLabel }}
+         <div v-if="!sideLabelWidth">
+            {{ optionalText }}
+            {{ this.label }}
             <slot/>
          </div>
       </QCheckbox>
-
-      <div
-         :class="{
-            'y-checkbox__error text-caption text-negative': true,
-            'is-visible': innerError
-         }"
-      >
-         {{ innerError }}
-      </div>
-   </div>
+   </YTemplateInput>
 </template>
 
 
@@ -89,26 +76,22 @@
    //@import '../../../css/variables';
 
    .y-checkbox {
-      margin-left: -10px;
+      /deep/ .y-base-input__control-box {
+         margin-left: -10px;
+      }
 
       &.is-required {
          position: relative;
          padding-bottom: 18px;
       }
 
-      .y-checkbox__error {
-         position: absolute;
-         left: 0;
-         bottom: 10px;
-         padding-left: 12px;
-         opacity: 0;
-         transition: bottom 0.3s, opacity 0.3s;
-         transition-timing-function: ease-out;
+      /deep/ .y-base-input__control-box .y-base-input__bottom {
+         padding-top: 4px;
+      }
 
-         &.is-visible {
-            bottom: 0;
-            opacity: 1;
-         }
+      /deep/ a {
+         color: initial;
+         text-decoration: underline;
       }
    }
 </style>

@@ -10,6 +10,7 @@
       display: block;
       padding-bottom: 3px;
       padding-left: 1px;
+      @include text-body1;
    }
 
    .y-base-input__control-box {
@@ -63,7 +64,7 @@
 
       .y-base-input__label {
          width: 50%;
-         padding-top: 5px;
+         padding-top: 8px;
       }
    }
 
