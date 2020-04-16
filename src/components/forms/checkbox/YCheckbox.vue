@@ -16,14 +16,6 @@
       public innerError: string = '';
 
 
-      @Watch('isOptional')
-      public onChange_isOptional() {
-         if (this.isOptional) {
-            this.innerError = '';
-         }
-      }
-
-
       @Override
       public get finalLabel() {
          const isVisible = (this.isOptional && !this.hidesOptional);

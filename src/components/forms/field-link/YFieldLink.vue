@@ -162,7 +162,7 @@
          @input="updateValueProp($event)"
          @keydown="onKeyDown"
          @keyup="updateFinalURL"
-         @blur="validate"
+         @blur="onBlur"
          ref="qField"
       >
          <template v-if="canShowIcon" v-slot:append>

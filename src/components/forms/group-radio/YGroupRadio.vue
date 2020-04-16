@@ -24,6 +24,7 @@
 
 
       public onInput(value: string) {
+         this.isDirty = true;
          this.innerError = '';
          this.updateValueProp(value);
       }

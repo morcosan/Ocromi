@@ -151,7 +151,7 @@
          lazy-rules
          hide-bottom-space
          @input="onInput"
-         @blur="validate"
+         @blur="onBlur"
          ref="qField"
       >
          <template v-slot:append>

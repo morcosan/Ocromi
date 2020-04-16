@@ -24,10 +24,8 @@
 
 
       public onInput(value: string[]) {
-         if (!this.isOptional) {
-            this.innerError = (value.length > 0 ? '' : this.$locale.groupCheckbox.requiredError);
-         }
-
+         this.isDirty = true;
+         this.validate();
          this.updateValueProp(value);
       }
 

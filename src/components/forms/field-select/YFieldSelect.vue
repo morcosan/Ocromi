@@ -59,7 +59,7 @@
          hide-bottom-space
          @input="updateValueProp($event)"
          @filter="onFilterInput"
-         @blur="validate"
+         @blur="onBlur"
          ref="qSelect"
       />
 

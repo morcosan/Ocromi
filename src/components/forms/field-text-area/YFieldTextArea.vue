@@ -78,7 +78,7 @@
          hide-bottom-space
          @input="onInput"
          @focus="onFocus"
-         @blur="validate"
+         @blur="onBlur"
          ref="qField"
       />
 

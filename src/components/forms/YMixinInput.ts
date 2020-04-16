@@ -61,8 +61,6 @@ export default class YMixinInput extends Vue {
 
 
    public validate() {
-      this.isDirty = true;
-
       for (let i = 0; i < this.finalRules.length; i++) {
          const result: (boolean | string) = this.finalRules[i](this.finalValue);
          if (result === true) {

@@ -54,4 +54,10 @@ export default class YMixinInputSelect extends Mixins(YMixinInput) {
       });
    }
 
+
+   public onBlur() {
+      this.isDirty = true;
+      this.validate();
+   }
+
 }

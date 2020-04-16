@@ -20,4 +20,10 @@ export default class YMixinInputField extends Mixins(YMixinInput) {
       this.$refs.qField.focus();
    }
 
+
+   public onBlur() {
+      this.isDirty = true;
+      this.validate();
+   }
+
 }

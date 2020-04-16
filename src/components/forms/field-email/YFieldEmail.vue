@@ -79,7 +79,7 @@
          hide-bottom-space
          @input="updateValueProp($event)"
          @keydown="onKeyDown"
-         @blur="validate"
+         @blur="onBlur"
          ref="qField"
       />
 

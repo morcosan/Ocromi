@@ -99,7 +99,7 @@
          lazy-rules
          hide-bottom-space
          @input="updateValueProp($event)"
-         @blur="validate"
+         @blur="onBlur"
          ref="qField"
       />
 

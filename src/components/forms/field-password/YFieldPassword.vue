@@ -141,7 +141,7 @@
          hide-bottom-space
          @input="updateValueProp($event)"
          @keyup="updateStrength"
-         @blur="validate"
+         @blur="onBlur"
          ref="qField"
       >
          <template v-slot:append>
