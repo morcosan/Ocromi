@@ -45,6 +45,7 @@
             value = value.slice(0, this.selectionLimit);
          }
 
+         this.isDirty = true;
          this.updateValueProp(value);
       }
 

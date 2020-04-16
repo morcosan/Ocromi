@@ -144,6 +144,7 @@
 
       public onBlur() {
          this.hasFocus = false;
+         this.isDirty = true;
          this.validate();
       }
 

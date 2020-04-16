@@ -31,6 +31,12 @@
          return rules;
       }
 
+
+      public onInput(value: Option) {
+         this.isDirty = true;
+         this.updateValueProp(value);
+      }
+
    }
 </script>
 
@@ -57,7 +63,7 @@
          clearable
          use-input
          hide-bottom-space
-         @input="updateValueProp($event)"
+         @input="onInput"
          @filter="onFilterInput"
          @blur="onBlur"
          ref="qSelect"
