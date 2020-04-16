@@ -1,11 +1,12 @@
 <script lang="ts">
    import { Component, Mixins, Override, Prop } from '../../../core/decorators';
    import YMixinInputSlider, { Range } from '../YMixinInputSlider';
+   import YTemplateInputSlider from '../YTemplateInputSlider.vue';
    import { QRange } from 'quasar';
 
 
    @Component({
-      components: { QRange },
+      components: { QRange, YTemplateInputSlider },
    })
    export default class YSliderRange extends Mixins(YMixinInputSlider) {
 
@@ -52,53 +53,35 @@
 
 
 <template>
-   <div
-      :class="{
-         'y-base-input y-base-slider y-slider-range': true,
-         'text-negative': innerError,
-      }"
+   <YTemplateInputSlider
+      class="y-slider-range"
+      :is-mini="isMini"
+      :side-label-width="sideLabelWidth"
+      :final-label="finalLabel"
+      :final-error="finalError"
+      :is-disabled="isDisabled"
+      :is-readonly="isReadonly"
+      :min-value="minValue"
+      :max-value="maxValue"
+      :bg-color="bgColor"
    >
-      <div
-         :class="{
-            ['y-base-input__fieldset bg-' + bgColor]: true,
-            'has-error': innerError,
-            'has-label': label,
-            'is-disabled': isDisabled,
-            'is-readonly': isReadonly,
-         }"
-      >
-         <div v-if="label" :class="{ ['y-base-input__fieldset-label text-subtitle1 bg-' + bgColor]: true }">
-            {{ finalLabel }}
-         </div>
-
-         <div class="y-slider__min-max text-caption">
-            <div class="y-slider__min">{{ minValue }}</div>
-            <div class="y-slider__max">{{ maxValue }}</div>
-         </div>
-
-         <QRange
-            :value="value"
-            :min="minValue"
-            :max="maxValue"
-            :step="valueStep"
-            :label="label"
-            :left-label-value="value.min + thumbSuffix"
-            :right-label-value="value.max + thumbSuffix"
-            :markers="hasMarkers"
-            :readonly="isReadonly"
-            :disable="isDisabled"
-            :label-always="isDirty || isDisabled || isReadonly"
-            :drag-only-range="isFixed"
-            drag-range
-            @input="onInput"
-            ref="qRange"
-         />
-      </div>
-
-      <div :class="{ 'y-base-input__error text-caption': true, 'is-visible': innerError }">
-         {{ innerError }}
-      </div>
-   </div>
+      <QRange
+         :value="value"
+         :min="minValue"
+         :max="maxValue"
+         :step="valueStep"
+         :left-label-value="value.min + thumbSuffix"
+         :right-label-value="value.max + thumbSuffix"
+         :markers="hasMarkers"
+         :readonly="isReadonly"
+         :disable="isDisabled"
+         :label-always="isDirty || isDisabled || isReadonly"
+         :drag-only-range="isFixed"
+         drag-range
+         @input="onInput"
+         ref="qRange"
+      />
+   </YTemplateInputSlider>
 </template>
 
 
