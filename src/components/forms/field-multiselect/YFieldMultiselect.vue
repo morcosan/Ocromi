@@ -73,7 +73,7 @@
 
 <template>
    <YTemplateInput
-      class-name="y-field-multiselect"
+      class="y-field-multiselect"
       :is-mini="isMini"
       :side-label-width="sideLabelWidth"
       :final-label="finalLabel"

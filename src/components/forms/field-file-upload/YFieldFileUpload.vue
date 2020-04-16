@@ -126,7 +126,7 @@
 
 <template>
    <YTemplateInput
-      :class-name="'y-field-file-upload ' + (value.length === 0 ? 'is-empty' : '')"
+      :class="'y-field-file-upload ' + (value.length === 0 ? 'is-empty' : '')"
       :is-mini="isMini"
       :side-label-width="sideLabelWidth"
       :final-label="finalLabel"

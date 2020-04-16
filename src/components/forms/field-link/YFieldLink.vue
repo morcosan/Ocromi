@@ -140,7 +140,7 @@
 
 <template>
    <YTemplateInput
-      class-name="y-field-link"
+      class="y-field-link"
       :is-mini="isMini"
       :side-label-width="sideLabelWidth"
       :final-label="finalLabel"

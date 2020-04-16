@@ -8,7 +8,6 @@
    })
    export default class YTemplateInputSlider extends Vue {
 
-      @Prop({ default: '' }) public className!: string;
       @Prop({ default: '' }) public finalLabel!: string;
       @Prop({ default: '' }) public finalError!: string;
       @Prop({ default: '' }) public sideLabelWidth!: string;
@@ -25,7 +24,7 @@
 
 <template>
    <YTemplateInput
-      :class-name="'y-base-slider ' + className"
+      class="y-base-slider"
       :is-mini="isMini"
       :side-label-width="sideLabelWidth"
       :final-label="finalLabel"

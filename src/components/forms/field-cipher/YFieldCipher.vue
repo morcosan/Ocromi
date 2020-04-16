@@ -78,7 +78,7 @@
 
 <template>
    <YTemplateInput
-      class-name="y-field-cipher"
+      class="y-field-cipher"
       :is-mini="isMini"
       :side-label-width="sideLabelWidth"
       :final-label="finalLabel"

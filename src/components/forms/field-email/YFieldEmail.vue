@@ -59,7 +59,7 @@
 
 <template>
    <YTemplateInput
-      class-name="y-field-email"
+      class="y-field-email"
       :is-mini="isMini"
       :side-label-width="sideLabelWidth"
       :final-label="finalLabel"

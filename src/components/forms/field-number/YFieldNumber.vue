@@ -170,7 +170,7 @@
 
 <template>
    <YTemplateInput
-      class-name="y-field-number"
+      class="y-field-number"
       :is-mini="isMini"
       :side-label-width="sideLabelWidth"
       :final-label="finalLabel"

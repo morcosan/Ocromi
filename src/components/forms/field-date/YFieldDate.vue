@@ -159,7 +159,7 @@
 
 <template>
    <YTemplateInput
-      class-name="y-field-date"
+      class="y-field-date"
       :is-mini="isMini"
       :side-label-width="sideLabelWidth"
       :final-label="finalLabel"

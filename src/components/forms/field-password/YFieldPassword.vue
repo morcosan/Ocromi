@@ -121,7 +121,7 @@
 
 <template>
    <YTemplateInput
-      :class-name="'y-field-password ' + (hasMeter ? 'has-meter' : '')"
+      :class="'y-field-password ' + (hasMeter ? 'has-meter' : '')"
       :is-mini="isMini"
       :side-label-width="sideLabelWidth"
       :final-label="finalLabel"

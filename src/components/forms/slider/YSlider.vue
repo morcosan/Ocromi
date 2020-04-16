@@ -31,7 +31,7 @@
 
 <template>
    <YTemplateInputSlider
-      class-name="y-slider"
+      class="y-slider"
       :is-mini="isMini"
       :side-label-width="sideLabelWidth"
       :final-label="finalLabel"

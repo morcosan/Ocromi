@@ -37,7 +37,7 @@
 
 <template>
    <YTemplateInput
-      class-name="y-field-text"
+      class="y-field-text"
       :is-mini="isMini"
       :side-label-width="sideLabelWidth"
       :final-label="finalLabel"

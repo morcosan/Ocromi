@@ -57,7 +57,7 @@
 
 <template>
    <YTemplateInput
-      :class-name="'y-field-text-area ' + (hasScrollbar ? 'has-scrollbar' : '')"
+      :class="'y-field-text-area ' + (hasScrollbar ? 'has-scrollbar' : '')"
       :is-mini="isMini"
       :side-label-width="sideLabelWidth"
       :final-label="finalLabel"
