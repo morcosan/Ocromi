@@ -6,7 +6,7 @@ import './story-builder.scss';
 export type StoryLine = {
    template: string;
    title: string;
-   states: string[];
+   states?: string[];
 }
 
 
@@ -25,9 +25,11 @@ export default class StoryBuilder {
       let storyTemplate = '';
       stories.forEach((story: StoryLine) => {
          let statesTemplate = '';
-         story.states.forEach((state: string) => {
-            statesTemplate += `<div class="story__state">{{ ${ state } }}</div>`;
-         });
+         if (story.states) {
+            story.states.forEach((state: string) => {
+               statesTemplate += `<div class="story__state">{{ ${ state } }}</div>`;
+            });
+         }
 
          storyTemplate += `
             <div class="story">

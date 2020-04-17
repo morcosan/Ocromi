@@ -58,6 +58,7 @@
       :color="(isDisabled ? 'grey-6' : color)"
       :size="size"
       :class="{ 'y-base-button': true, 'is-loading': isLoading }"
+      @click="$emit('click')"
    >
       <template v-slot:loading>
          <QSpinner v-if="spinner === 'DEFAULT'"/>
