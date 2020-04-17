@@ -78,18 +78,16 @@ export const propsInputField = {
 
 const spinners = {
    Default: 'DEFAULT',
-   Balls: 'BALLS',
    Bars: 'BARS',
    Cube: 'CUBE',
    Dots: 'DOTS',
    Facebook: 'FACEBOOK',
-   Gears: 'GEARS',
    Grid: 'GRID',
    Hourglass: 'HOURGLASS',
    IOS: 'IOS',
+   Circle: 'CIRCLE',
    Pie: 'PIE',
    Radio: 'RADIO',
-   Circle: 'CIRCLE',
 };
 
 export const propsButton = {

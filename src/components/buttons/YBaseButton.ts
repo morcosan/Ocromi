@@ -3,18 +3,16 @@ import { Component, Override, Prop, Vue, Watch } from '../../core/decorators';
 
 export enum Spinner {
    Default = 'DEFAULT',
-   Balls = 'BALLS',
    Bars = 'BARS',
    Cube = 'CUBE',
    Dots = 'DOTS',
    Facebook = 'FACEBOOK',
-   Gears = 'GEARS',
    Grid = 'GRID',
    Hourglass = 'HOURGLASS',
    IOS = 'IOS',
+   Circle = 'CIRCLE',
    Pie = 'PIE',
    Radio = 'RADIO',
-   Circle = 'CIRCLE',
 }
 
 

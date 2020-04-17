@@ -3,12 +3,10 @@
    import {
       QBtn,
       QSpinner,
-      QSpinnerBall,
       QSpinnerBars,
       QSpinnerCube,
       QSpinnerDots,
       QSpinnerFacebook,
-      QSpinnerGears,
       QSpinnerGrid,
       QSpinnerHourglass,
       QSpinnerIos,
@@ -23,12 +21,10 @@
       components: {
          QBtn,
          QSpinner,
-         QSpinnerBall,
          QSpinnerBars,
          QSpinnerCube,
          QSpinnerDots,
          QSpinnerFacebook,
-         QSpinnerGears,
          QSpinnerGrid,
          QSpinnerHourglass,
          QSpinnerIos,
@@ -59,13 +55,22 @@
       :loading="isLoading"
       :percentage="percentage"
       :type="type"
-      :color="color"
+      :color="(isDisabled ? 'grey-6' : color)"
       :size="size"
       :class="{ 'y-base-button': true, 'is-loading': isLoading }"
    >
       <template v-slot:loading>
          <QSpinner v-if="spinner === 'DEFAULT'"/>
+         <QSpinnerBars v-if="spinner === 'BARS'"/>
+         <QSpinnerCube v-if="spinner === 'CUBE'"/>
+         <QSpinnerDots v-if="spinner === 'DOTS'"/>
+         <QSpinnerFacebook v-if="spinner === 'FACEBOOK'"/>
+         <QSpinnerGrid v-if="spinner === 'GRID'"/>
          <QSpinnerHourglass v-if="spinner === 'HOURGLASS'"/>
+         <QSpinnerIos v-if="spinner === 'IOS'"/>
+         <QSpinnerOval v-if="spinner === 'CIRCLE'"/>
+         <QSpinnerPie v-if="spinner === 'PIE'"/>
+         <QSpinnerRadio v-if="spinner === 'RADIO'"/>
       </template>
    </QBtn>
 </template>
