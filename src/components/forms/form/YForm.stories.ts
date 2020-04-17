@@ -107,7 +107,8 @@ const vue = {
             min: 40,
             max: 60,
          },
-         termOfService: false,
+         hasTOS: false,
+         hasSpam: false,
          successRate: 50,
          meetingDate: '',
          documents: [],
@@ -234,7 +235,18 @@ const basicFormTemplate = `
       is-multiple
    />
    
-   <YCheckbox v-model="termOfService" error="You must agree with our terms">
+   <YCheckbox 
+      v-model="hasSpam"
+      label="I want spam"
+      error="You must agree with our terms"
+      is-optional
+   />
+   
+   <YCheckbox 
+      v-model="hasTOS"
+      side-label-width=""
+      error="You must agree with our terms"
+   >
       I agree with terms of service
    </YCheckbox>
    

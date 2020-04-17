@@ -17,8 +17,8 @@ export default class YBaseInput extends Vue {
    @Prop({ default: false, type: Boolean }) public hidesOptional!: boolean;
    @Prop({ default: false, type: Boolean }) public isDisabled!: boolean;
    @Prop({ default: false, type: Boolean }) public isReadonly!: boolean;
-   @Prop({ default: false, type: Boolean }) public isMini!: boolean;
-   @Prop({ default: '' }) public sideLabelWidth!: string;
+   @Prop({ default: null, type: Boolean }) public isMini!: boolean | null;
+   @Prop({ default: null }) public sideLabelWidth!: string | null;
    @Prop({ default: 'white' }) public bgColor!: string;
    @Prop({ default: () => [] }) public rules!: Function[];
 
@@ -44,17 +44,17 @@ export default class YBaseInput extends Vue {
    }
 
 
-   public get finalValue(): any {
+   public get valueComputed(): any {
       return undefined;
    }
 
 
-   public get finalRules() {
+   public get rulesComputed() {
       return this.rules;
    }
 
 
-   public get finalLabel() {
+   public get labelComputed() {
       if (this.label !== '') {
          const hasOptional = (this.isOptional && !this.hidesOptional);
          return (hasOptional ? (this.label + ' ' + this.$locale.all.optional) : this.label);
@@ -63,20 +63,30 @@ export default class YBaseInput extends Vue {
    }
 
 
-   public get finalError() {
+   public get errorComputed() {
       return (this.error || this.innerError);
+   }
+
+
+   public get isMiniComputed() {
+      return (this.isMini !== null ? this.isMini : this.formProps.isMini);
+   }
+
+
+   public get sideLabelWidthComputed() {
+      return (this.sideLabelWidth !== null ? this.sideLabelWidth : this.formProps.sideLabelWidth);
    }
 
 
    @Override
    public created() {
-      this.findFormProps();
+      this.findParentForm();
    }
 
 
    public validate() {
-      for (let i = 0; i < this.finalRules.length; i++) {
-         const result: (boolean | string) = this.finalRules[i](this.finalValue);
+      for (let i = 0; i < this.rulesComputed.length; i++) {
+         const result: (boolean | string) = this.rulesComputed[i](this.valueComputed);
          if (result === true) {
             this.innerError = '';
          }
@@ -104,12 +114,11 @@ export default class YBaseInput extends Vue {
    }
 
 
-   public findFormProps() {
+   public findParentForm() {
       let parent = this.$parent;
-
       while (parent) {
          if (parent instanceof YBaseForm) {
-            console.log(parent);
+            parent.registerInputChild(this);
             break;
          }
 

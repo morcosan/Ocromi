@@ -32,10 +32,10 @@
 <template>
    <YTemplateInputSlider
       class="y-slider"
-      :is-mini="isMini"
-      :side-label-width="sideLabelWidth"
-      :final-label="finalLabel"
-      :final-error="finalError"
+      :is-mini="isMiniComputed"
+      :side-label-width="sideLabelWidthComputed"
+      :label="labelComputed"
+      :error="errorComputed"
       :is-disabled="isDisabled"
       :is-readonly="isReadonly"
       :min-value="minValue"

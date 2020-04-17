@@ -16,13 +16,13 @@
 
 
       @Override
-      public get finalValue() {
+      public get valueComputed() {
          return this.value;
       }
 
 
       @Override
-      public get finalRules() {
+      public get rulesComputed() {
          const rules = [...this.rules];
 
          // add required rule
@@ -60,19 +60,19 @@
 <template>
    <YTemplateInput
       class="y-field-email"
-      :is-mini="isMini"
-      :side-label-width="sideLabelWidth"
-      :final-label="finalLabel"
-      :final-error="finalError"
+      :is-mini="isMiniComputed"
+      :side-label-width="sideLabelWidthComputed"
+      :label="labelComputed"
+      :error="errorComputed"
    >
       <QInput
          :value="value"
-         :label="(isMini ? finalLabel : undefined)"
+         :label="(isMiniComputed ? labelComputed : undefined)"
          :placeholder="finalPlaceholder"
          :bg-color="bgColor"
          :readonly="isReadonly"
          :disable="isDisabled"
-         :error="!!finalError"
+         :error="!!errorComputed"
          type="email"
          outlined
          lazy-rules
@@ -85,7 +85,7 @@
 
 
       <template v-slot:bottom-left>
-         <div v-if="!finalError && hint">{{ hint }}</div>
+         <div v-if="!errorComputed && hint">{{ hint }}</div>
       </template>
 
    </YTemplateInput>

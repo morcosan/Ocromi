@@ -16,13 +16,13 @@
 
 
       @Override
-      public get finalValue() {
+      public get valueComputed() {
          return this.value;
       }
 
 
       @Override
-      public get finalRules() {
+      public get rulesComputed() {
          const rules = [];
 
          // add required rule
@@ -75,18 +75,18 @@
 <template>
    <YTemplateInput
       class="y-field-multiselect"
-      :is-mini="isMini"
-      :side-label-width="sideLabelWidth"
-      :final-label="finalLabel"
-      :final-error="finalError"
+      :is-mini="isMiniComputed"
+      :side-label-width="sideLabelWidthComputed"
+      :label="labelComputed"
+      :error="errorComputed"
    >
       <QSelect
          :value="value"
          :options="currOptions"
-         :label="(isMini ? finalLabel : undefined)"
+         :label="(isMiniComputed ? labelComputed : undefined)"
          :readonly="isReadonly"
          :disable="isDisabled"
-         :error="!!finalError"
+         :error="!!errorComputed"
          :bg-color="bgColor"
          :new-value-mode="canAddNew ? 'add-unique' : undefined"
          input-debounce="0"
@@ -126,7 +126,7 @@
 
 
       <template v-slot:bottom-left>
-         <div v-if="!finalError && hint">{{ hint }}</div>
+         <div v-if="!errorComputed && hint">{{ hint }}</div>
       </template>
 
    </YTemplateInput>

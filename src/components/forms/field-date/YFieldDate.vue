@@ -12,7 +12,7 @@
    export default class YFieldDate extends YBaseInputField {
 
       @Prop({ default: '' }) public value!: string;
-      @Prop({ default: undefined }) public customDatesFn!: Function | undefined;
+      @Prop({ default: null }) public customDatesFn!: Function | null;
 
 
       public inputValue: string = '';
@@ -35,13 +35,13 @@
 
 
       @Override
-      public get finalValue() {
+      public get valueComputed() {
          return this.value;
       }
 
 
       @Override
-      public get finalRules() {
+      public get rulesComputed() {
          const rules = [...this.rules];
 
          // add required rule
@@ -161,16 +161,16 @@
 <template>
    <YTemplateInput
       class="y-field-date"
-      :is-mini="isMini"
-      :side-label-width="sideLabelWidth"
-      :final-label="finalLabel"
-      :final-error="finalError"
+      :is-mini="isMiniComputed"
+      :side-label-width="sideLabelWidthComputed"
+      :label="labelComputed"
+      :error="errorComputed"
    >
       <QInput
          v-model="inputValue"
-         :label="(isMini ? finalLabel : undefined)"
+         :label="(isMiniComputed ? labelComputed : undefined)"
          :bg-color="bgColor"
-         :error="!!finalError"
+         :error="!!errorComputed"
          :disable="isDisabled"
          :readonly="isReadonly"
          :mask="(inputValue || hasFocus ? inputMask : '')"
@@ -217,7 +217,7 @@
 
 
       <template v-slot:bottom-left>
-         <div v-if="!finalError">{{ $locale.fieldDate.hint }}</div>
+         <div v-if="!errorComputed">{{ $locale.fieldDate.hint }}</div>
       </template>
 
    </YTemplateInput>

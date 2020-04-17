@@ -5,8 +5,8 @@
    @Component
    export default class YTemplateInput extends Vue {
 
-      @Prop({ default: '' }) public finalLabel!: string;
-      @Prop({ default: '' }) public finalError!: string;
+      @Prop({ default: '' }) public label!: string;
+      @Prop({ default: '' }) public error!: string;
       @Prop({ default: '' }) public sideLabelWidth!: string;
       @Prop({ default: false, type: Boolean }) public isMini!: boolean;
 
@@ -19,15 +19,15 @@
       :class="{
          'y-base-input': true,
          'has-side-label': sideLabelWidth,
-         'has-error': finalError,
+         'has-error': error,
       }"
    >
       <div
-         v-if="!isMini && finalLabel"
+         v-if="!isMini && label"
          :style="(!isMini ? `width: ${ sideLabelWidth }` : undefined)"
          class="y-base-input__label"
       >
-         {{ finalLabel }}
+         {{ label }}
       </div>
 
       <div class="y-base-input__control-box">
@@ -35,8 +35,8 @@
 
          <div class="y-base-input__bottom">
             <div class="y-base-input__bottom-left">
-               <div :class="{ 'y-base-input__error': true, 'is-visible': finalError }">
-                  {{ finalError }}
+               <div :class="{ 'y-base-input__error': true, 'is-visible': error }">
+                  {{ error }}
                </div>
 
                <slot name="bottom-left"/>

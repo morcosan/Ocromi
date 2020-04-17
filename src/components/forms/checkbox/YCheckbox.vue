@@ -49,10 +49,10 @@
 <template>
    <YTemplateInput
       class="y-checkbox"
-      :is-mini="isMini"
-      :side-label-width="sideLabelWidth"
-      :final-label="(sideLabelWidth ? finalLabel : undefined)"
-      :final-error="innerError"
+      :is-mini="isMiniComputed"
+      :side-label-width="sideLabelWidthComputed"
+      :label="(sideLabelWidthComputed ? labelComputed : undefined)"
+      :error="innerError"
    >
       <QCheckbox
          :value="value"
@@ -62,9 +62,9 @@
          @input="onInput"
          ref="qCheckbox"
       >
-         <div v-if="!sideLabelWidth">
+         <div v-if="!sideLabelWidthComputed">
             {{ optionalText }}
-            {{ this.label }}
+            {{ label }}
             <slot/>
          </div>
       </QCheckbox>

@@ -20,7 +20,7 @@ export default class YBaseInputSlider extends YBaseInput {
 
 
    @Override
-   public get finalRules() {
+   public get rulesComputed() {
       const rules = [...this.rules];
 
       // add required rule

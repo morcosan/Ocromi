@@ -8,8 +8,8 @@
    })
    export default class YTemplateInputSlider extends Vue {
 
-      @Prop({ default: '' }) public finalLabel!: string;
-      @Prop({ default: '' }) public finalError!: string;
+      @Prop({ default: '' }) public label!: string;
+      @Prop({ default: '' }) public error!: string;
       @Prop({ default: '' }) public sideLabelWidth!: string;
       @Prop({ default: '' }) public bgColor!: string;
       @Prop({ default: false, type: Boolean }) public isMini!: boolean;
@@ -27,20 +27,20 @@
       class="y-base-slider"
       :is-mini="isMini"
       :side-label-width="sideLabelWidth"
-      :final-label="finalLabel"
-      :final-error="finalError"
+      :label="label"
+      :error="error"
    >
       <div
          :class="{
             ['y-base-input__fieldset bg-' + bgColor]: true,
-            'has-error': finalError,
-            'has-label': (isMini && finalLabel),
+            'has-error': error,
+            'has-label': (isMini && label),
             'is-disabled': isDisabled,
             'is-readonly': isReadonly,
          }"
       >
-         <div v-if="isMini && finalLabel" :class="{ ['y-base-input__fieldset-label bg-' + bgColor]: true }">
-            {{ finalLabel }}
+         <div v-if="isMini && label" :class="{ ['y-base-input__fieldset-label bg-' + bgColor]: true }">
+            {{ label }}
          </div>
 
          <div class="y-slider__min-max text-caption">
