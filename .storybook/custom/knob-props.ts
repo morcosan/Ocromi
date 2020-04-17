@@ -94,11 +94,11 @@ export const propsButton = {
    label: {
       default: () => text('Label', 'Nice button'),
    },
-   isDisabled: {
-      default: () => boolean('Is Disabled', false),
-   },
    isLoading: {
       default: () => boolean('Is Loading', false),
+   },
+   isDisabled: {
+      default: () => boolean('Is Disabled', false),
    },
    loadingTime: {
       default: () => number('Loading Time', 3000),

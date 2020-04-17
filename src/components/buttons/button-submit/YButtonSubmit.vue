@@ -1,5 +1,5 @@
 <script lang="ts">
-   import { Component, Override } from '../../../core/decorators';
+   import { Component } from '../../../core/decorators';
    import YBaseButtonSubmit from '../YBaseButtonSubmit';
    import YTemplateButton from '../YTemplateButton.vue';
 

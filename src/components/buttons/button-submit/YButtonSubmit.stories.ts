@@ -4,6 +4,7 @@ import YCheckbox from '../../forms/checkbox/YCheckbox.vue';
 import YFieldText from '../../forms/field-text/YFieldText.vue';
 import StoryBuilder from '.storybook/custom/story-builder';
 import { propsButton } from '.storybook/custom/knob-props';
+import { boolean } from '@storybook/addon-knobs';
 
 
 const vue = {
@@ -15,7 +16,9 @@ const vue = {
    },
    props: {
       ...propsButton,
-      isDisabled: undefined,
+      isActivatable: {
+         default: () => boolean('Is Activatable', false),
+      },
    },
    data() {
       return {
@@ -60,8 +63,10 @@ const basicFormTemplate = `
    <YButtonSubmit
       :label="label"
       :is-loading="isLoading"
+      :is-disabled="isDisabled"
       :loading-time="loadingTime"
       :spinner="spinner"
+      :is-activatable="isActivatable"
    />
 </YForm>
 `;
