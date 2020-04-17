@@ -1,6 +1,6 @@
 <script lang="ts">
-   import { Component, Mixins, Override, Prop } from '../../../core/decorators';
-   import YMixinInputSlider, { Range } from '../YMixinInputSlider';
+   import { Component, Override, Prop } from '../../../core/decorators';
+   import YBaseInputSlider, { Range } from '../YBaseInputSlider';
    import YTemplateInputSlider from '../YTemplateInputSlider.vue';
    import { QRange } from 'quasar';
 
@@ -8,7 +8,7 @@
    @Component({
       components: { QRange, YTemplateInputSlider },
    })
-   export default class YSliderRange extends Mixins(YMixinInputSlider) {
+   export default class YSliderRange extends YBaseInputSlider {
 
       @Prop({ default: () => ({ min: 0, max: 0 }) }) public value!: Range;
       @Prop({ default: false, type: Boolean }) public isFixed!: number;

@@ -1,6 +1,6 @@
 <script lang="ts">
-   import { Component, Mixins, Override, Prop } from '../../../core/decorators';
-   import YMixinInputField from '../YMixinInputField';
+   import { Component, Override, Prop } from '../../../core/decorators';
+   import YBaseInputField from '../YBaseInputField';
    import YTemplateInput from '../YTemplateInput.vue';
    import { QIcon, QInput, QTooltip } from 'quasar';
    import Regex from '../../../utils/regex';
@@ -10,7 +10,7 @@
    @Component({
       components: { QInput, QIcon, QTooltip, YTemplateInput },
    })
-   export default class YFieldLink extends Mixins(YMixinInputField) {
+   export default class YFieldLink extends YBaseInputField {
 
       @Prop({ default: '' }) public value!: string;
 

@@ -1,9 +1,9 @@
-import { Component, Mixins, Override, Prop } from '../../core/decorators';
-import YMixinInput from './YMixinInput';
+import { Component, Override, Prop } from '../../core/decorators';
+import YBaseInput from './YBaseInput';
 
 
 @Component
-export default class YMixinInputField extends Mixins(YMixinInput) {
+export default class YBaseInputField extends YBaseInput {
 
    @Prop({ default: '' }) public placeholder!: string;
    @Prop({ default: '' }) public hint!: string;

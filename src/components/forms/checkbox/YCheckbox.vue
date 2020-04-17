@@ -1,14 +1,14 @@
 <script lang="ts">
-   import { Component, Mixins, Override, Prop } from '../../../core/decorators';
+   import { Component, Override, Prop } from '../../../core/decorators';
    import { QCheckbox } from 'quasar';
-   import YMixinInput from '../YMixinInput';
+   import YBaseInput from '../YBaseInput';
    import YTemplateInput from '../YTemplateInput.vue';
 
 
    @Component({
       components: { QCheckbox, YTemplateInput },
    })
-   export default class YCheckbox extends Mixins(YMixinInput) {
+   export default class YCheckbox extends YBaseInput {
 
       @Prop({ default: false }) public value!: boolean | null;
 

@@ -1,8 +1,15 @@
-import { Component, Prop, Vue, Watch } from '../../core/decorators';
+import { Component, Override, Prop, Vue, Watch } from '../../core/decorators';
+import YBaseForm from './YBaseForm';
+
+
+type FormProps = {
+   isMini?: boolean;
+   sideLabelWidth?: string;
+}
 
 
 @Component
-export default class YMixinInput extends Vue {
+export default class YBaseInput extends Vue {
 
    @Prop({ default: '' }) public label!: string;
    @Prop({ default: '' }) public error!: string;
@@ -18,6 +25,7 @@ export default class YMixinInput extends Vue {
 
    public isDirty: boolean = false;
    public innerError: string = '';
+   public formProps: FormProps = {};
 
 
    @Watch('value')
@@ -60,6 +68,12 @@ export default class YMixinInput extends Vue {
    }
 
 
+   @Override
+   public created() {
+      this.findFormProps();
+   }
+
+
    public validate() {
       for (let i = 0; i < this.finalRules.length; i++) {
          const result: (boolean | string) = this.finalRules[i](this.finalValue);
@@ -87,6 +101,20 @@ export default class YMixinInput extends Vue {
 
    public updateValueProp(value: any) {
       this.$emit('input', value);
+   }
+
+
+   public findFormProps() {
+      let parent = this.$parent;
+
+      while (parent) {
+         if (parent instanceof YBaseForm) {
+            console.log(parent);
+            break;
+         }
+
+         parent = parent.$parent;
+      }
    }
 
 }

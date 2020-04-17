@@ -1,6 +1,6 @@
 <script lang="ts">
-   import { Component, Debounce, Mixins, Override, Prop, Watch } from '../../../core/decorators';
-   import YMixinInputField from '../YMixinInputField';
+   import { Component, Debounce, Override, Prop, Watch } from '../../../core/decorators';
+   import YBaseInputField from '../YBaseInputField';
    import YTemplateInput from '../YTemplateInput.vue';
    import { QDate, QIcon, QInput, QPopupProxy, QTooltip } from 'quasar';
    import { DateTime } from 'luxon';
@@ -9,7 +9,7 @@
    @Component({
       components: { QInput, QIcon, QDate, QPopupProxy, QTooltip, YTemplateInput },
    })
-   export default class YFieldDate extends Mixins(YMixinInputField) {
+   export default class YFieldDate extends YBaseInputField {
 
       @Prop({ default: '' }) public value!: string;
       @Prop({ default: undefined }) public customDatesFn!: Function | undefined;

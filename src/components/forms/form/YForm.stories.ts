@@ -19,6 +19,7 @@ import YSliderRange from '../slider-range/YSliderRange.vue';
 import YFieldDate from '../field-date/YFieldDate.vue';
 import YFieldFileUpload from '../field-file-upload/YFieldFileUpload.vue';
 import YButtonSubmit from '../../buttons/button-submit/YButtonSubmit.vue';
+import { boolean, text } from '@storybook/addon-knobs';
 
 
 // generate random lists
@@ -46,6 +47,14 @@ const vue = {
       YFieldDate,
       YFieldFileUpload,
       YButtonSubmit,
+   },
+   props: {
+      isMini: {
+         default: () => boolean('Is Mini', false),
+      },
+      sideLabelWidth: {
+         default: () => text('Side Label Width', ''),
+      },
    },
    data() {
       return {
@@ -115,7 +124,12 @@ const vue = {
 
 
 const basicFormTemplate = `
-<YForm @submit="onSubmit" class="story-form-panel">
+<YForm 
+   :is-mini="isMini"
+   :side-label-width="sideLabelWidth"
+   class="story-form-panel"
+   @submit="onSubmit" 
+>
    <YFieldText
       v-model="fullName"
       label="Full name"

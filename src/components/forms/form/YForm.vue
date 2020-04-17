@@ -1,12 +1,13 @@
 <script lang="ts">
-   import { Component, Vue } from '../../../core/decorators';
+   import { Component } from '../../../core/decorators';
+   import YBaseForm from '../YBaseForm';
    import { QForm } from 'quasar';
 
 
    @Component({
       components: { QForm },
    })
-   export default class YForm extends Vue {}
+   export default class YForm extends YBaseForm {}
 </script>
 
 

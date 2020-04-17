@@ -1,14 +1,14 @@
 <script lang="ts">
-   import { Component, Mixins, Override, Prop } from '../../../core/decorators';
+   import { Component, Override, Prop } from '../../../core/decorators';
    import { QOptionGroup } from 'quasar';
-   import YMixinInputGroup from '../YMixinInputGroup';
+   import YBaseInputGroup from '../YBaseInputGroup';
    import YTemplateInputGroup from '../YTemplateInputGroup.vue';
 
 
    @Component({
       components: { QOptionGroup, YTemplateInputGroup },
    })
-   export default class YGroupCheckbox extends Mixins(YMixinInputGroup) {
+   export default class YGroupCheckbox extends YBaseInputGroup {
 
       @Prop({ default: () => [] }) public value!: string[];
 

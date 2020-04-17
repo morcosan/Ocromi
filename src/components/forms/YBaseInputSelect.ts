@@ -1,5 +1,5 @@
-import { Component, Mixins, Override, Prop, Watch } from '../../core/decorators';
-import YMixinInput from './YMixinInput';
+import { Component, Override, Prop, Watch } from '../../core/decorators';
+import YBaseInput from './YBaseInput';
 
 
 export type Option = {
@@ -10,7 +10,7 @@ export type Option = {
 
 
 @Component
-export default class YMixinInputSelect extends Mixins(YMixinInput) {
+export default class YBaseInputSelect extends YBaseInput {
 
    @Prop({ default: () => [] }) public options!: Option[];
    @Prop({ default: '' }) public hint!: string;

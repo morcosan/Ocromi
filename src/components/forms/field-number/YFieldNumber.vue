@@ -1,6 +1,6 @@
 <script lang="ts">
-   import { Component, Mixins, Override, Prop } from '../../../core/decorators';
-   import YMixinInputField from '../YMixinInputField';
+   import { Component, Override, Prop } from '../../../core/decorators';
+   import YBaseInputField from '../YBaseInputField';
    import YTemplateInput from '../YTemplateInput.vue';
    import { QInput, QTooltip } from 'quasar';
    import Regex from '../../../utils/regex';
@@ -10,7 +10,7 @@
    @Component({
       components: { QInput, QTooltip, YTemplateInput },
    })
-   export default class YFieldNumber extends Mixins(YMixinInputField) {
+   export default class YFieldNumber extends YBaseInputField {
 
       @Prop({ default: '' }) public value!: number | string;
       @Prop({ default: false, type: Boolean }) public hasDecimals!: boolean;

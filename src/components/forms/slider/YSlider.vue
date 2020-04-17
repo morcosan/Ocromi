@@ -1,6 +1,6 @@
 <script lang="ts">
-   import { Component, Mixins, Prop } from '../../../core/decorators';
-   import YMixinInputSlider from '../YMixinInputSlider';
+   import { Component, Prop } from '../../../core/decorators';
+   import YBaseInputSlider from '../YBaseInputSlider';
    import YTemplateInputSlider from '../YTemplateInputSlider.vue';
    import { QSlider } from 'quasar';
 
@@ -8,7 +8,7 @@
    @Component({
       components: { QSlider, YTemplateInputSlider },
    })
-   export default class YSlider extends Mixins(YMixinInputSlider) {
+   export default class YSlider extends YBaseInputSlider {
 
       @Prop({ default: 0 }) public value!: number;
 

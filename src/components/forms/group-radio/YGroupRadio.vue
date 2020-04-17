@@ -1,14 +1,14 @@
 <script lang="ts">
-   import { Component, Mixins, Override, Prop } from '../../../core/decorators';
+   import { Component, Override, Prop } from '../../../core/decorators';
    import { QOptionGroup } from 'quasar';
-   import YMixinInputGroup from '../YMixinInputGroup';
+   import YBaseInputGroup from '../YBaseInputGroup';
    import YTemplateInputGroup from '../YTemplateInputGroup.vue';
 
 
    @Component({
       components: { QOptionGroup, YTemplateInputGroup },
    })
-   export default class YGroupRadio extends Mixins(YMixinInputGroup) {
+   export default class YGroupRadio extends YBaseInputGroup {
 
       @Prop({ default: null }) public value!: string | null;
 
