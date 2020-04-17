@@ -1,4 +1,4 @@
-import { boolean, number, text } from '@storybook/addon-knobs';
+import { boolean, number, text, select } from '@storybook/addon-knobs';
 
 
 export const propsInput = {
@@ -76,11 +76,36 @@ export const propsInputField = {
 };
 
 
+const spinners = {
+   Default: 'DEFAULT',
+   Balls: 'BALLS',
+   Bars: 'BARS',
+   Cube: 'CUBE',
+   Dots: 'DOTS',
+   Facebook: 'FACEBOOK',
+   Gears: 'GEARS',
+   Grid: 'GRID',
+   Hourglass: 'HOURGLASS',
+   IOS: 'IOS',
+   Pie: 'PIE',
+   Radio: 'RADIO',
+   Circle: 'CIRCLE',
+};
+
 export const propsButton = {
    label: {
       default: () => text('Label', 'Nice button'),
    },
    isDisabled: {
       default: () => boolean('Is Disabled', false),
+   },
+   isLoading: {
+      default: () => boolean('Is Loading', false),
+   },
+   loadingTime: {
+      default: () => number('Loading Time', 3000),
+   },
+   spinner: {
+      default: () => select('Spinner', spinners, 'DEFAULT'),
    },
 };

@@ -58,9 +58,4 @@ export default {
    slider: {
       requiredError: 'A value must be selected',
    },
-
-
-   buttonSubmit: {
-      loading: 'Sending...',
-   },
 };

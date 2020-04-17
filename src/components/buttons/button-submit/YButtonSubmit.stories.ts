@@ -1,22 +1,13 @@
 import YButtonSubmit from './YButtonSubmit.vue';
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
 import { propsButton } from '.storybook/custom/knob-props';
-import { boolean, number } from '@storybook/addon-knobs';
 
 
 const vue = {
    components: {
       YButtonSubmit,
    },
-   props: {
-      ...propsButton,
-      isLoading: {
-         default: () => boolean('Is Loading', false),
-      },
-      loadingTime: {
-         default: () => number('Loading Time', 3000),
-      },
-   },
+   props: propsButton,
 };
 
 
@@ -29,6 +20,7 @@ const storyLines: StoryLine[] = [
             :is-disabled="isDisabled"
             :is-loading="isLoading"
             :loading-time="loadingTime"
+            :spinner="spinner"
          />
       `,
       states: [],
