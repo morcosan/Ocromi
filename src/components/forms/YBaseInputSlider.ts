@@ -1,15 +1,15 @@
-import { Component, Mixins, Override, Prop, Watch } from '../../core/decorators';
+import { Component, Override, Prop } from '../../core/decorators';
 import YBaseInput from './YBaseInput';
 
 
-export interface Range {
+export type Range = {
    min: number;
    max: number;
 }
 
 
 @Component
-export default class YBaseInputSlider extends Mixins(YBaseInput) {
+export default class YBaseInputSlider extends YBaseInput {
 
    @Prop({ default: '' }) public thumbSuffix!: string;
    @Prop({ default: 0 }) public minValue!: number;
@@ -19,26 +19,16 @@ export default class YBaseInputSlider extends Mixins(YBaseInput) {
    @Prop({ default: false, type: Boolean }) public hasMarkers!: number;
 
 
-   public innerError: string = '';
-   public isDirty: boolean = false;
-
-
-   @Watch('isOptional')
-   public onChange_isOptional() {
-      if (this.isOptional) {
-         // reset error
-         this.innerError = '';
-      }
-   }
-
-
    @Override
-   public validate() {
+   public get rulesComputed() {
+      const rules = [...this.rules];
+
+      // add required rule
       if (!this.isOptional) {
-         this.innerError = (this.isDirty ? '' : this.$locale.slider.requiredError);
+         rules.push(() => (this.isDirty || this.$locale.slider.requiredError));
       }
 
-      return !this.innerError;
+      return rules;
    }
 
 

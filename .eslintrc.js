@@ -63,11 +63,14 @@ module.exports = {
          'selfClosingTag': 'never',
       }],
       'vue/max-attributes-per-line': ['warn', {
-         'singleline': 2,
+         'singleline': 3,
          'multiline': {
             'max': 1,
             'allowFirstLine': false,
          },
+      }],
+      'vue/multiline-html-element-content-newline': ['warn', {
+         'allowEmptyLines': true,
       }],
    },
    ignorePatterns: [

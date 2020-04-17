@@ -1,5 +1,5 @@
 <script lang="ts">
-   import { Component, Mixins, Prop } from '../../../core/decorators';
+   import { Component, Prop } from '../../../core/decorators';
    import YBaseButton from '../YBaseButton';
    import { QBtn } from 'quasar';
 
@@ -7,7 +7,7 @@
    @Component({
       components: { QBtn },
    })
-   export default class YButtonLv3 extends Mixins(YBaseButton) {
+   export default class YButtonLv3 extends YBaseButton {
 
       @Prop({ default: false, type: Boolean }) public isStacked!: boolean;
       @Prop({ default: false, type: Boolean }) public isRounded!: boolean;

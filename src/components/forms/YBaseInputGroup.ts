@@ -1,20 +1,22 @@
-import { Component, Mixins, Override, Prop, Watch } from '../../core/decorators';
+import { Component, Override, Prop } from '../../core/decorators';
 import YBaseInput from './YBaseInput';
 
 
-export interface Option {
+export type Option = {
    value: string;
    label: string;
 }
 
 
+type Target = (HTMLElement | null);
+
+
 @Component
-export default class YBaseInputGroup extends Mixins(YBaseInput) {
+export default class YBaseInputGroup extends YBaseInput {
 
    @Prop({ default: () => [] }) public options!: Option[];
 
 
-   public innerError: string = '';
    public currOptionIndex: number = 0;
 
 
@@ -26,15 +28,6 @@ export default class YBaseInputGroup extends Mixins(YBaseInput) {
       }
 
       return [];
-   }
-
-
-   @Watch('isOptional')
-   public onChange_isOptional() {
-      if (this.isOptional) {
-         // reset error
-         this.innerError = '';
-      }
    }
 
 
@@ -53,7 +46,7 @@ export default class YBaseInputGroup extends Mixins(YBaseInput) {
    public mounted() {
       // make the options readonly
       [...this.qOptionGroupChildren].forEach((elem: HTMLElement) => {
-         const target: (HTMLElement | null) = elem.querySelector('[tabindex]');
+         const target: Target = elem.querySelector('[tabindex]');
          if (target) {
             // disable option
             target.setAttribute('tabindex', '-1');
@@ -95,7 +88,7 @@ export default class YBaseInputGroup extends Mixins(YBaseInput) {
 
 
    private enableCurrOption() {
-      const target: (HTMLElement | null) = this.getTarget(this.currOptionIndex);
+      const target: Target = this.getTarget(this.currOptionIndex);
       if (target) {
          target.setAttribute('tabindex', '0');
       }
@@ -103,7 +96,7 @@ export default class YBaseInputGroup extends Mixins(YBaseInput) {
 
 
    private disableCurrOption() {
-      const target: (HTMLElement | null) = this.getTarget(this.currOptionIndex);
+      const target: Target = this.getTarget(this.currOptionIndex);
       if (target) {
          target.setAttribute('tabindex', '-1');
       }
@@ -111,7 +104,7 @@ export default class YBaseInputGroup extends Mixins(YBaseInput) {
 
 
    private focusCurrOption() {
-      const target: (HTMLElement | null) = this.getTarget(this.currOptionIndex);
+      const target: Target = this.getTarget(this.currOptionIndex);
       if (target) {
          target.focus();
       }
@@ -121,7 +114,7 @@ export default class YBaseInputGroup extends Mixins(YBaseInput) {
    private getTarget(index: number) {
       const elem: (HTMLElement | undefined) = this.qOptionGroupChildren[index];
       if (elem) {
-         const target: (HTMLElement | null) = elem.querySelector('[tabindex]');
+         const target: Target = elem.querySelector('[tabindex]');
          if (target) {
             return target;
          }

@@ -33,6 +33,8 @@ const storyLines: StoryLine[] = [
             :is-optional="isOptional"
             :hides-optional="hidesOptional"
             :is-readonly="isReadonly"
+            :is-mini="isMini"
+            :side-label-width="sideLabelWidth"
             :error="error"
          />
       `,
@@ -52,6 +54,8 @@ const storyLines: StoryLine[] = [
             :is-readonly="isReadonly"
             :rules="rules"
             :error="error"
+            :is-mini="isMini"
+            :side-label-width="sideLabelWidth"
          />
       `,
       states: ['value1'],

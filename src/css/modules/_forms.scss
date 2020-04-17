@@ -4,28 +4,67 @@
 
 .y-base-input {
    position: relative;
+   display: block;
 
-   .y-form & {
-      margin-bottom: 25px;
+   .y-base-input__label {
+      display: block;
+      padding-bottom: 3px;
+      padding-left: 1px;
+      @include text-body1;
    }
 
-   &.y-base-input--required {
-      position: relative;
-      padding-bottom: 25px;
+   .y-base-input__control-box {
+      display: block;
+      flex: 1;
+
+      .y-base-input__bottom {
+         display: flex;
+         padding: 8px 10px 0;
+         color: $grey-6;
+         @include text-caption;
+
+         .y-base-input__bottom-left {
+            flex: 1;
+
+            .y-base-input__error {
+               position: absolute;
+               bottom: 10px;
+               opacity: 0;
+               transition: bottom 0.3s, opacity 0.3s;
+               transition-timing-function: ease-out;
+
+               &.is-visible {
+                  position: relative;
+                  bottom: 0;
+                  opacity: 1;
+               }
+            }
+         }
+
+         .y-base-input__bottom-right {
+            padding-left: 10px;
+         }
+      }
    }
 
-   .y-base-input__error {
-      position: absolute;
-      left: 0;
-      bottom: 10px;
-      padding-left: 10px;
-      opacity: 0;
-      transition: bottom 0.3s, opacity 0.3s;
-      transition-timing-function: ease-out;
+   &.has-error {
+      color: $negative;
 
-      &.y-base-input__error--visible {
-         bottom: 0;
-         opacity: 1;
+      .y-base-input__bottom {
+         position: relative;
+         box-sizing: border-box;
+         height: 20px;
+         color: $negative;
+      }
+   }
+
+   &.has-side-label {
+      display: flex;
+      width: 100%;
+
+      .y-base-input__label {
+         width: 50%;
+         padding-top: 8px;
       }
    }
 
@@ -36,27 +75,30 @@
       border-radius: 4px;
       transition: border-color 0.36s cubic-bezier(0.4, 0, 0.2, 1);
 
-      &:hover:not(.y-base-input__fieldset--disabled) {
+      &:hover:not(.is-disabled) {
          border-color: #000;
       }
 
-      .y-base-input__label {
+      .y-base-input__fieldset-label {
          position: absolute;
          top: 0;
-         left: 0;
+         left: 6px;
          transform: translateY(-50%) scale(0.75);
+         transform-origin: 0 50%;
          padding: 3px 8px;
          border-radius: 3px 3px 0 0;
          color: #555;
+
+         @include text-subtitle1;
       }
 
-      &.y-base-input__fieldset--disabled {
-         .y-base-input__label {
+      &.is-disabled {
+         .y-base-input__fieldset-label {
             color: rgba(85, 85, 85, 0.6);
          }
       }
 
-      &.y-base-input__fieldset--readonly {
+      &.is-readonly {
          border-style: dashed;
 
          &:after {
@@ -69,8 +111,8 @@
          }
       }
 
-      &.y-base-input__fieldset--with-error {
-         .y-base-input__label {
+      &.has-error {
+         .y-base-input__fieldset-label {
             color: $negative;
          }
 
@@ -90,9 +132,13 @@
          }
       }
 
-      &.y-base-input__fieldset--labeled {
+      &.has-label {
          padding-top: 10px;
       }
+   }
+
+   .y-form & {
+      margin-bottom: 25px;
    }
 }
 
@@ -109,10 +155,6 @@ $paddingSide: 12px;
 .y-base-slider {
    .y-base-input__fieldset.y-base-input__fieldset {
       padding: 30px $paddingSide 0;
-   }
-
-   .y-base-input__label.y-base-input__label {
-      left: -8px;
    }
 
    .y-slider__min-max {

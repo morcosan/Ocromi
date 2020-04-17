@@ -1,19 +1,26 @@
 <script lang="ts">
-   import { Component, Mixins, Override, Prop } from '../../../core/decorators';
+   import { Component, Override, Prop } from '../../../core/decorators';
    import YBaseInputField from '../YBaseInputField';
+   import YTemplateInput from '../YTemplateInput.vue';
    import { QInput } from 'quasar';
 
 
    @Component({
-      components: { QInput },
+      components: { QInput, YTemplateInput },
    })
-   export default class YFieldText extends Mixins(YBaseInputField) {
+   export default class YFieldText extends YBaseInputField {
 
       @Prop({ default: '' }) public value!: string;
 
 
       @Override
-      public get finalRules() {
+      public get valueComputed() {
+         return this.value;
+      }
+
+
+      @Override
+      public get rulesComputed() {
          const rules = [...this.rules];
 
          // add required rule
@@ -29,25 +36,36 @@
 
 
 <template>
-   <QInput
-      :value="value"
-      :label="finalLabel"
-      :hint="hint"
-      :placeholder="finalPlaceholder"
-      :error="!!error"
-      :error-message="error"
-      :rules="finalRules"
-      :readonly="isReadonly"
-      :disable="isDisabled"
-      :bg-color="bgColor"
-      class="y-base-input y-field-text"
-      type="text"
-      outlined
-      lazy-rules
-      @input="updateValueProp($event)"
-      @blur="validate"
-      ref="qField"
-   />
+   <YTemplateInput
+      class="y-field-text"
+      :is-mini="isMiniComputed"
+      :side-label-width="sideLabelWidthComputed"
+      :label="labelComputed"
+      :error="errorComputed"
+   >
+      <QInput
+         :value="value"
+         :label="(isMiniComputed ? labelComputed : undefined)"
+         :placeholder="finalPlaceholder"
+         :readonly="isReadonly"
+         :disable="isDisabled"
+         :bg-color="bgColor"
+         :error="!!errorComputed"
+         type="text"
+         outlined
+         lazy-rules
+         hide-bottom-space
+         @input="updateValueProp($event)"
+         @blur="onBlur"
+         ref="qField"
+      />
+
+
+      <template v-slot:bottom-left>
+         <div v-if="!errorComputed && hint">{{ hint }}</div>
+      </template>
+
+   </YTemplateInput>
 </template>
 
 

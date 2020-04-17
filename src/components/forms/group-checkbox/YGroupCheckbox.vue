@@ -1,13 +1,14 @@
 <script lang="ts">
-   import { Component, Mixins, Override, Prop } from '../../../core/decorators';
+   import { Component, Override, Prop } from '../../../core/decorators';
    import { QOptionGroup } from 'quasar';
    import YBaseInputGroup from '../YBaseInputGroup';
+   import YTemplateInputGroup from '../YTemplateInputGroup.vue';
 
 
    @Component({
-      components: { QOptionGroup },
+      components: { QOptionGroup, YTemplateInputGroup },
    })
-   export default class YGroupCheckbox extends Mixins(YBaseInputGroup) {
+   export default class YGroupCheckbox extends YBaseInputGroup {
 
       @Prop({ default: () => [] }) public value!: string[];
 
@@ -23,10 +24,8 @@
 
 
       public onInput(value: string[]) {
-         if (!this.isOptional) {
-            this.innerError = (value.length > 0 ? '' : this.$locale.groupCheckbox.requiredError);
-         }
-
+         this.isDirty = true;
+         this.validate();
          this.updateValueProp(value);
       }
 
@@ -35,50 +34,31 @@
 
 
 <template>
-   <div
-      :class="{
-         'y-base-input y-group-checkbox': true,
-         'y-base-input--required': !isOptional,
-         'text-negative': innerError,
-      }"
+   <YTemplateInputGroup
+      class="y-group-checkbox"
+      :is-mini="isMiniComputed"
+      :side-label-width="sideLabelWidthComputed"
+      :label="labelComputed"
+      :error="errorComputed"
+      :is-disabled="isDisabled"
+      :is-readonly="isReadonly"
+      :bg-color="bgColor"
    >
-      <div
-         :class="{
-            ['y-base-input__fieldset bg-' + bgColor]: true,
-            'y-base-input__fieldset--with-error': innerError,
-            'y-base-input__fieldset--labeled': !!label,
-            'y-base-input__fieldset--disabled': isDisabled,
-            'y-base-input__fieldset--readonly': isReadonly,
-         }"
-      >
-         <div v-if="!!label" :class="{ ['y-base-input__label text-subtitle1 bg-' + bgColor]: true }">
-            {{ finalLabel }}
-         </div>
-
-         <QOptionGroup
-            :value="value"
-            :options="options"
-            :disable="isDisabled"
-            :color="innerError ? 'negative' : undefined"
-            :keep-color="!!innerError"
-            type="checkbox"
-            @input="onInput"
-            @keydown="onKeyDown"
-            ref="qOptionGroup"
-         />
-      </div>
-
-      <div :class="{ 'y-base-input__error text-caption': true, 'y-base-input__error--visible': innerError }">
-         {{ innerError }}
-      </div>
-   </div>
+      <QOptionGroup
+         :value="value"
+         :options="options"
+         :disable="isDisabled"
+         :color="(errorComputed ? 'negative' : undefined)"
+         :keep-color="!!errorComputed"
+         type="checkbox"
+         @input="onInput"
+         @keydown="onKeyDown"
+         ref="qOptionGroup"
+      />
+   </YTemplateInputGroup>
 </template>
 
 
 <style scoped lang="scss">
    // @import '../../../css/variables';
-
-   .y-group-checkbox .y-base-input__label {
-      left: -8px;
-   }
 </style>

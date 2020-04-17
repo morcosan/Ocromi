@@ -1,14 +1,15 @@
 <script lang="ts">
-   import { Component, Mixins, Override, Prop, Watch } from '../../../core/decorators';
+   import { Component, Override, Prop, Watch } from '../../../core/decorators';
    import YBaseInputField from '../YBaseInputField';
+   import YTemplateInput from '../YTemplateInput.vue';
    import { QInput } from 'quasar';
    import Utils from '../../../utils';
 
 
    @Component({
-      components: { QInput },
+      components: { QInput, YTemplateInput },
    })
-   export default class YFieldCipher extends Mixins(YBaseInputField) {
+   export default class YFieldCipher extends YBaseInputField {
 
       @Prop({ default: '' }) public value!: string;
       @Prop({ default: '' }) public inputMask!: string;
@@ -24,13 +25,19 @@
 
 
       @Override
+      public get valueComputed() {
+         return this.value;
+      }
+
+
+      @Override
       public created() {
          this.prepareValidation();
       }
 
 
       @Override
-      public get finalRules() {
+      public get rulesComputed() {
          const rules = [...this.rules];
 
          // add required rule
@@ -70,27 +77,38 @@
 
 
 <template>
-   <QInput
-      :value="value"
-      :mask="inputMask"
-      :label="finalLabel"
-      :hint="hint"
-      :placeholder="finalPlaceholder"
-      :readonly="isReadonly"
-      :bg-color="bgColor"
-      :error-message="error"
-      :error="!!error"
-      :rules="finalRules"
-      :disable="isDisabled"
-      class="y-base-input y-field-cipher"
-      type="text"
-      unmasked-value
-      lazy-rules
-      outlined
-      @input="updateValueProp($event)"
-      @blur="validate"
-      ref="qField"
-   />
+   <YTemplateInput
+      class="y-field-cipher"
+      :is-mini="isMiniComputed"
+      :side-label-width="sideLabelWidthComputed"
+      :label="labelComputed"
+      :error="errorComputed"
+   >
+      <QInput
+         :value="value"
+         :mask="inputMask"
+         :label="(isMiniComputed ? labelComputed : undefined)"
+         :placeholder="finalPlaceholder"
+         :readonly="isReadonly"
+         :disable="isDisabled"
+         :bg-color="bgColor"
+         :error="!!errorComputed"
+         type="text"
+         unmasked-value
+         outlined
+         lazy-rules
+         hide-bottom-space
+         @input="updateValueProp($event)"
+         @blur="onBlur"
+         ref="qField"
+      />
+
+
+      <template v-slot:bottom-left>
+         <div v-if="!errorComputed && hint">{{ hint }}</div>
+      </template>
+
+   </YTemplateInput>
 </template>
 
 

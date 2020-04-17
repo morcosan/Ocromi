@@ -10,6 +10,7 @@ const vue = {
    },
    props: {
       ...propsInput,
+      isMini: undefined,
       error: {
          default: () => text('Error', 'Custom error message'),
       },
@@ -42,6 +43,7 @@ const storyLines: StoryLine[] = [
             :is-optional="isOptional"
             :hides-optional="hidesOptional"
             :error="error"
+            :side-label-width="sideLabelWidth"
          />
       `,
       states: ['value'],
@@ -55,6 +57,7 @@ const storyLines: StoryLine[] = [
             :is-optional="isOptional"
             :hides-optional="hidesOptional"
             :error="error"
+            :side-label-width="sideLabelWidth"
          >
             I agree with <a href="/" @click="onClick">terms of service</a>
          </YCheckbox>
@@ -71,6 +74,7 @@ const storyLines: StoryLine[] = [
             :is-optional="isOptional"
             :hides-optional="hidesOptional"
             :error="error"
+            :side-label-width="sideLabelWidth"
          />
       `,
       states: ['value2 === null ? "null" : value2'],

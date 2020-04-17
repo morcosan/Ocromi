@@ -1,13 +1,14 @@
 <script lang="ts">
-   import { Component, Mixins, Override, Prop } from '../../../core/decorators';
+   import { Component, Override, Prop } from '../../../core/decorators';
    import YBaseInputField from '../YBaseInputField';
+   import YTemplateInput from '../YTemplateInput.vue';
    import { QInput } from 'quasar';
 
 
    @Component({
-      components: { QInput },
+      components: { QInput, YTemplateInput },
    })
-   export default class YFieldTextArea extends Mixins(YBaseInputField) {
+   export default class YFieldTextArea extends YBaseInputField {
 
       @Prop({ default: '' }) public value!: string;
       @Prop({ default: false, type: Boolean }) public isDynamic!: boolean;
@@ -18,7 +19,13 @@
 
 
       @Override
-      public get finalRules() {
+      public get valueComputed() {
+         return this.value;
+      }
+
+
+      @Override
+      public get rulesComputed() {
          const rules = [...this.rules];
 
          // add required rule
@@ -49,30 +56,38 @@
 
 
 <template>
-   <QInput
-      :value="value"
-      :label="finalLabel"
-      :hint="hint"
-      :placeholder="finalPlaceholder"
-      :readonly="isReadonly"
-      :bg-color="bgColor"
-      :error-message="error"
-      :error="!!error"
-      :rules="finalRules"
-      :autogrow="isDynamic"
-      :class="{
-         'y-base-input y-field-text-area': true,
-         'y-field-text-area--has-scrollbar': hasScrollbar,
-      }"
-      :disable="isDisabled"
-      type="textarea"
-      outlined
-      lazy-rules
-      @input="onInput"
-      @focus="onFocus"
-      @blur="validate"
-      ref="qField"
-   />
+   <YTemplateInput
+      :class="'y-field-text-area ' + (hasScrollbar ? 'has-scrollbar' : '')"
+      :is-mini="isMiniComputed"
+      :side-label-width="sideLabelWidthComputed"
+      :label="labelComputed"
+      :error="errorComputed"
+   >
+      <QInput
+         :value="value"
+         :label="(isMiniComputed ? labelComputed : undefined)"
+         :placeholder="finalPlaceholder"
+         :readonly="isReadonly"
+         :disable="isDisabled"
+         :autogrow="isDynamic"
+         :bg-color="bgColor"
+         :error="!!errorComputed"
+         type="textarea"
+         outlined
+         lazy-rules
+         hide-bottom-space
+         @input="onInput"
+         @focus="onFocus"
+         @blur="onBlur"
+         ref="qField"
+      />
+
+
+      <template v-slot:bottom-left>
+         <div v-if="!errorComputed && hint">{{ hint }}</div>
+      </template>
+
+   </YTemplateInput>
 </template>
 
 
@@ -80,7 +95,7 @@
    // @import '../../../css/variables';
 
    // place the icon with javascript
-   .y-field-text-area--has-scrollbar.q-textarea /deep/ .q-field__append {
+   .y-field-text-area.has-scrollbar /deep/ .q-field__append {
       right: 12px;
    }
 </style>

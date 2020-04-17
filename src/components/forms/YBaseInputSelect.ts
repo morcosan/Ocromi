@@ -1,8 +1,8 @@
-import { Component, Mixins, Override, Prop, Watch } from '../../core/decorators';
+import { Component, Override, Prop, Watch } from '../../core/decorators';
 import YBaseInput from './YBaseInput';
 
 
-export interface Option {
+export type Option = {
    value: string;
    label: string;
    isNew: boolean;
@@ -10,12 +10,10 @@ export interface Option {
 
 
 @Component
-export default class YBaseInputSelect extends Mixins(YBaseInput) {
+export default class YBaseInputSelect extends YBaseInput {
 
-   @Prop({ default: '' }) public hint!: string;
    @Prop({ default: () => [] }) public options!: Option[];
-   @Prop({ default: '' }) public error!: string;
-   @Prop({ default: () => [] }) public rules!: Function[];
+   @Prop({ default: '' }) public hint!: string;
 
 
    public currOptions: Option[] = [];
@@ -24,28 +22,6 @@ export default class YBaseInputSelect extends Mixins(YBaseInput) {
    @Watch('options')
    public onChange_options() {
       this.currOptions = this.options;
-   }
-
-
-   @Watch('isOptional')
-   public onChange_isOptional() {
-      if (this.isOptional) {
-         // @ts-ignore
-         this.$refs.qSelect.resetValidation();
-      }
-   }
-
-
-   @Override
-   public get finalRules() {
-      return this.rules;
-   }
-
-
-   @Override
-   public validate() {
-      // @ts-ignore
-      return this.$refs.qSelect.validate();
    }
 
 
@@ -76,6 +52,12 @@ export default class YBaseInputSelect extends Mixins(YBaseInput) {
             );
          }
       });
+   }
+
+
+   public onBlur() {
+      this.isDirty = true;
+      this.validate();
    }
 
 }

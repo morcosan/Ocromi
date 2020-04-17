@@ -50,19 +50,9 @@ html {
 
 .story-form-panel {
    max-width: 1000px;
-   display: flex;
-   flex-wrap: wrap;
+   min-width: 300px;
+   padding: 30px;
    background: white;
-
-   & > div {
-      padding: 20px;
-      min-width: 300px;
-      flex: 1;
-
-      &:first-child {
-         border-right: 1px solid #ddd;
-      }
-   }
 }
 
 .story-button {

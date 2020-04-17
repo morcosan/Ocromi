@@ -77,6 +77,8 @@ const storyLines: StoryLine[] = [
             :hides-optional="hidesOptional"
             :is-readonly="isReadonly"
             :error="error"
+            :is-mini="isMini"
+            :side-label-width="sideLabelWidth"
             ref="fieldFileUpload"
          />
          <br/>
@@ -101,6 +103,8 @@ const storyLines: StoryLine[] = [
             :is-readonly="isReadonly"
             :rules="rules"
             :error="error"
+            :is-mini="isMini"
+            :side-label-width="sideLabelWidth"
             ref="fieldFileUpload2"
          />
          <br/>

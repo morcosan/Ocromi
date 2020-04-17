@@ -1,3 +1,14 @@
+$newPaddingTop: 8px;
+$newTop: 10px;
+$newHeight: 56px - (24px - $newPaddingTop);
+
+
+// remove empty space
+.q-file.q-field--auto-height .q-field__control {
+   height: $newHeight;
+   min-height: $newHeight;
+}
+
 // remove big padding
 .q-file.q-field--labeled .q-field__control-container {
    padding-top: 10px;
