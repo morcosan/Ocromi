@@ -19,6 +19,11 @@
       }
 
 
+      public get labelFinal() {
+         return (this.sideLabelWidthComputed ? this.labelComputed : undefined);
+      }
+
+
       @Override
       public validate() {
          if (!this.isOptional) {
@@ -47,28 +52,46 @@
 
 
 <template>
-   <YTemplateInput
-      class="y-checkbox"
-      :is-mini="isMiniComputed"
-      :side-label-width="sideLabelWidthComputed"
-      :label="(sideLabelWidthComputed ? labelComputed : undefined)"
-      :error="innerError"
+   <div
+      :class="{
+         'y-base-input y-checkbox': true,
+         'has-side-label': sideLabelWidthComputed,
+         'has-error': innerError,
+      }"
    >
-      <QCheckbox
-         :value="value"
-         :disable="isDisabled"
-         :color="(innerError ? 'negative' : undefined)"
-         :keep-color="!!innerError"
-         @input="onInput"
-         ref="qCheckbox"
+      <div
+         v-if="!isMiniComputed && labelFinal"
+         :style="(!isMiniComputed ? `width: ${ sideLabelWidthComputed }` : undefined)"
+         class="y-base-input__label"
       >
-         <div v-if="!sideLabelWidthComputed">
-            {{ optionalText }}
-            {{ label }}
-            <slot/>
+         {{ labelFinal }}
+      </div>
+
+      <div class="y-base-input__control-box">
+         <QCheckbox
+            :value="value"
+            :disable="isDisabled"
+            :color="(innerError ? 'negative' : undefined)"
+            :keep-color="!!innerError"
+            @input="onInput"
+            ref="qCheckbox"
+         >
+            <div v-if="!sideLabelWidthComputed">
+               {{ optionalText }}
+               {{ label }}
+               <slot/>
+            </div>
+         </QCheckbox>
+
+         <div class="y-base-input__bottom">
+            <div class="y-base-input__bottom-left">
+               <div :class="{ 'y-base-input__error': true, 'is-visible': innerError }">
+                  {{ innerError }}
+               </div>
+            </div>
          </div>
-      </QCheckbox>
-   </YTemplateInput>
+      </div>
+   </div>
 </template>
 
 
