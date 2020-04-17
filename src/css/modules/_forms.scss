@@ -139,6 +139,10 @@
 
    .y-form & {
       margin-bottom: 25px;
+
+      &.y-checkbox:not(.has-side-label) {
+         margin-bottom: 0;
+      }
    }
 }
 

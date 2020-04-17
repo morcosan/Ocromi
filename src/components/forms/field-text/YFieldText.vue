@@ -48,7 +48,7 @@
          :label="(isMiniComputed ? labelComputed : undefined)"
          :placeholder="finalPlaceholder"
          :readonly="isReadonly"
-         :disable="isDisabled"
+         :disable="isDisabledComputed"
          :bg-color="bgColor"
          :error="!!errorComputed"
          type="text"

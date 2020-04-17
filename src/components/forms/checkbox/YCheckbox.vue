@@ -25,12 +25,18 @@
 
 
       @Override
-      public validate() {
-         if (!this.isOptional) {
-            this.innerError = (this.value ? '' : this.error);
+      public getValidationError() {
+         if (this.isOptional) {
+            return '';
          }
 
-         return !this.innerError;
+         return (this.value ? '' : this.error);
+      }
+
+
+      @Override
+      public isValid() {
+         return (this.isOptional ? true : !!this.value);
       }
 
 
@@ -43,7 +49,6 @@
 
       public onInput(value: boolean) {
          this.isDirty = true;
-         this.validate();
          this.updateValueProp(value);
       }
 
@@ -70,7 +75,7 @@
       <div class="y-base-input__control-box">
          <QCheckbox
             :value="value"
-            :disable="isDisabled"
+            :disable="isDisabledComputed"
             :color="(innerError ? 'negative' : undefined)"
             :keep-color="!!innerError"
             @input="onInput"

@@ -68,7 +68,7 @@
          :label="(isMiniComputed ? labelComputed : undefined)"
          :placeholder="finalPlaceholder"
          :readonly="isReadonly"
-         :disable="isDisabled"
+         :disable="isDisabledComputed"
          :autogrow="isDynamic"
          :bg-color="bgColor"
          :error="!!errorComputed"

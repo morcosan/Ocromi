@@ -1,4 +1,4 @@
-import { boolean, number, text, select } from '@storybook/addon-knobs';
+import { boolean, number, select, text } from '@storybook/addon-knobs';
 
 
 export const propsInput = {

@@ -58,7 +58,6 @@ const vue = {
    },
    data() {
       return {
-         value: null,
          email: '',
          fullName: '',
          password: '',
@@ -249,9 +248,6 @@ const basicFormTemplate = `
    >
       I agree with terms of service
    </YCheckbox>
-   
-   <br/>
-   <br/>
    
    <YButtonSubmit	label="Validate"/>
 </YForm>

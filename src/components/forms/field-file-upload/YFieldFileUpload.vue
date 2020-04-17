@@ -91,7 +91,7 @@
       public onClickRemoveFile(index: number, event: Event) {
          event.preventDefault();
 
-         if (!this.isReadonly && !this.isDisabled) {
+         if (!this.isReadonly && !this.isDisabledComputed) {
             if (index > -1) {
                // remove file at index
                this.value.splice(index, 1);
@@ -142,7 +142,7 @@
          :max-total-size="maxTotalSize > 0 ? (maxTotalSize * 1024) : undefined"
          :max-files="maxNumFiles > 0 ? maxNumFiles : undefined"
          :readonly="isReadonly"
-         :disable="isDisabled"
+         :disable="isDisabledComputed"
          :error="!!errorComputed"
          :bg-color="bgColor"
          :counter-label="setHintOnRight"
@@ -168,7 +168,7 @@
             </QIcon>
 
             <QIcon
-               v-if="value.length > 1 && !isReadonly && !isDisabled"
+               v-if="value.length > 1 && !isReadonly && !isDisabledComputed"
                :class="(isReadonly ? 'cursor-not-allowed' : 'cursor-pointer')"
                name="clear_all"
                @click="onClickRemoveFile(-1, $event)"
@@ -194,7 +194,7 @@
                <div class="ellipsis relative-position col"> {{ scope ? scope.file.name : '' }}</div>
 
                <QAvatar
-                  v-if="!isReadonly && !isDisabled"
+                  v-if="!isReadonly && !isDisabledComputed"
                   class="y-chip__button cursor-pointer"
                   @click="onClickRemoveFile(scope.index, $event)"
                >

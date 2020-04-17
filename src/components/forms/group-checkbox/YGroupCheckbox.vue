@@ -14,18 +14,23 @@
 
 
       @Override
-      public validate() {
-         if (!this.isOptional) {
-            this.innerError = (this.value.length > 0 ? '' : this.$locale.groupCheckbox.requiredError);
+      public getValidationError() {
+         if (this.isOptional) {
+            return '';
          }
 
-         return !this.innerError;
+         return (this.value.length > 0 ? '' : this.$locale.groupCheckbox.requiredError);
+      }
+
+
+      @Override
+      public isValid() {
+         return (this.isOptional ? true : (this.value.length > 0));
       }
 
 
       public onInput(value: string[]) {
          this.isDirty = true;
-         this.validate();
          this.updateValueProp(value);
       }
 
@@ -40,14 +45,14 @@
       :side-label-width="sideLabelWidthComputed"
       :label="labelComputed"
       :error="errorComputed"
-      :is-disabled="isDisabled"
+      :is-disabled="isDisabledComputed"
       :is-readonly="isReadonly"
       :bg-color="bgColor"
    >
       <QOptionGroup
          :value="value"
          :options="options"
-         :disable="isDisabled"
+         :disable="isDisabledComputed"
          :color="(errorComputed ? 'negative' : undefined)"
          :keep-color="!!errorComputed"
          type="checkbox"

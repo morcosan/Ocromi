@@ -26,6 +26,8 @@ export default class YBaseInput extends Vue {
    public isDirty: boolean = false;
    public innerError: string = '';
    public formProps: FormProps = {};
+   public parentForm: (YBaseForm | null) = null;
+   public isActive: boolean = true;
 
 
    @Watch('value')
@@ -46,6 +48,11 @@ export default class YBaseInput extends Vue {
 
    public get valueComputed(): any {
       return undefined;
+   }
+
+
+   public get isDisabledComputed(): any {
+      return (this.isDisabled || !this.isActive);
    }
 
 
@@ -80,23 +87,38 @@ export default class YBaseInput extends Vue {
 
    @Override
    public created() {
-      this.findParentForm();
+      this.parentForm = this.getParentForm();
+      if (this.parentForm) {
+         this.parentForm.registerInputChild(this);
+      }
    }
 
 
    public validate() {
-      for (let i = 0; i < this.rulesComputed.length; i++) {
-         const result: (boolean | string) = this.rulesComputed[i](this.valueComputed);
-         if (result === true) {
-            this.innerError = '';
-         }
-         else {
-            this.innerError = (result as string);
-            break;
-         }
+      this.innerError = this.getValidationError();
+
+      if (this.parentForm) {
+         this.parentForm.emitInputChange();
       }
 
       return !this.innerError;
+   }
+
+
+   public isValid() {
+      return !this.getValidationError();
+   }
+
+
+   public getValidationError() {
+      for (let i = 0; i < this.rulesComputed.length; i++) {
+         const result: (boolean | string) = this.rulesComputed[i](this.valueComputed);
+         if (result !== true) {
+            return (result as string);
+         }
+      }
+
+      return '';
    }
 
 
@@ -109,21 +131,27 @@ export default class YBaseInput extends Vue {
    public focus() {}
 
 
+   public disable() {
+      this.isActive = false;
+   }
+
+
    public updateValueProp(value: any) {
       this.$emit('input', value);
    }
 
 
-   public findParentForm() {
+   private getParentForm() {
       let parent = this.$parent;
       while (parent) {
          if (parent instanceof YBaseForm) {
-            parent.registerInputChild(this);
-            break;
+            return parent;
          }
 
          parent = parent.$parent;
       }
+
+      return null;
    }
 
 }

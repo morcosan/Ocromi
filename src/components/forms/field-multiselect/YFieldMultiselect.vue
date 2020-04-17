@@ -85,7 +85,7 @@
          :options="currOptions"
          :label="(isMiniComputed ? labelComputed : undefined)"
          :readonly="isReadonly"
-         :disable="isDisabled"
+         :disable="isDisabledComputed"
          :error="!!errorComputed"
          :bg-color="bgColor"
          :new-value-mode="canAddNew ? 'add-unique' : undefined"

@@ -171,7 +171,7 @@
          :label="(isMiniComputed ? labelComputed : undefined)"
          :bg-color="bgColor"
          :error="!!errorComputed"
-         :disable="isDisabled"
+         :disable="isDisabledComputed"
          :readonly="isReadonly"
          :mask="(inputValue || hasFocus ? inputMask : '')"
          fill-mask="_"

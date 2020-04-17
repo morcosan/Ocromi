@@ -42,6 +42,16 @@ export default class YBaseButton extends Vue {
    }
 
 
+   public get isDisabledComputed() {
+      return (this.isDisabled && !this.isLoading);
+   }
+
+
+   public get isLoadingComputed() {
+      return this.isLoading;
+   }
+
+
    @Override
    public mounted() {
       if (this.isLoading) {

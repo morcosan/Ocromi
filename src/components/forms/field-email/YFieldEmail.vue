@@ -71,7 +71,7 @@
          :placeholder="finalPlaceholder"
          :bg-color="bgColor"
          :readonly="isReadonly"
-         :disable="isDisabled"
+         :disable="isDisabledComputed"
          :error="!!errorComputed"
          type="email"
          outlined
