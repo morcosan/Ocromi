@@ -1,27 +1,36 @@
 <script lang="ts">
-   import { Component, Mixins, Override, Prop } from '../../../core/decorators';
+   import { Component, Override, Prop } from '../../../core/decorators';
    import { QCheckbox } from 'quasar';
    import YBaseInput from '../YBaseInput';
+   import YTemplateInput from '../YTemplateInput.vue';
 
 
    @Component({
-      components: { QCheckbox },
+      components: { QCheckbox, YTemplateInput },
    })
-   export default class YCheckbox extends Mixins(YBaseInput) {
+   export default class YCheckbox extends YBaseInput {
 
       @Prop({ default: false }) public value!: boolean | null;
 
 
-      public error: string = '';
+      public get optionalText() {
+         const hasOptional = (this.isOptional && !this.hidesOptional);
+         return (hasOptional ? (this.$locale.all.optional + ' ') : '');
+      }
+
+
+      public get labelFinal() {
+         return (this.sideLabelWidthComputed ? this.labelComputed : undefined);
+      }
 
 
       @Override
       public validate() {
-         if (this.isRequired) {
-            this.error = (this.value ? '' : this.$locale.all.required);
+         if (!this.isOptional) {
+            this.innerError = (this.value ? '' : this.error);
          }
 
-         return !this.error;
+         return !this.innerError;
       }
 
 
@@ -33,10 +42,8 @@
 
 
       public onInput(value: boolean) {
-         if (this.isRequired) {
-            this.error = (value ? '' : this.$locale.all.required);
-         }
-
+         this.isDirty = true;
+         this.validate();
          this.updateValueProp(value);
       }
 
@@ -47,27 +54,42 @@
 <template>
    <div
       :class="{
-         'y-checkbox': true,
-         'y-checkbox--required': isRequired,
-         'y-input-spacing': hasSpacing,
+         'y-base-input y-checkbox': true,
+         'has-side-label': sideLabelWidthComputed,
+         'has-error': innerError,
       }"
    >
-      <QCheckbox
-         :value="value"
-         :disable="isDisabled"
-         :color="error ? 'negative' : undefined"
-         :keep-color="!!error"
-         @input="onInput"
-         ref="qCheckbox"
+      <div
+         v-if="!isMiniComputed && labelFinal"
+         :style="(!isMiniComputed ? `width: ${ sideLabelWidthComputed }` : undefined)"
+         class="y-base-input__label"
       >
-         <div :class="{ 'text-negative': error }">
-            {{ isRequired ? ('* ' + label) : label }}
-            <slot/>
-         </div>
-      </QCheckbox>
+         {{ labelFinal }}
+      </div>
 
-      <div :class="{ 'y-checkbox__error text-caption text-negative': true, 'y-checkbox__error--visible': error	}">
-         {{ error }}
+      <div class="y-base-input__control-box">
+         <QCheckbox
+            :value="value"
+            :disable="isDisabled"
+            :color="(innerError ? 'negative' : undefined)"
+            :keep-color="!!innerError"
+            @input="onInput"
+            ref="qCheckbox"
+         >
+            <div v-if="!sideLabelWidthComputed">
+               {{ optionalText }}
+               {{ label }}
+               <slot/>
+            </div>
+         </QCheckbox>
+
+         <div class="y-base-input__bottom">
+            <div class="y-base-input__bottom-left">
+               <div :class="{ 'y-base-input__error': true, 'is-visible': innerError }">
+                  {{ innerError }}
+               </div>
+            </div>
+         </div>
       </div>
    </div>
 </template>
@@ -77,28 +99,22 @@
    //@import '../../../css/variables';
 
    .y-checkbox {
-      margin-left: -10px;
+      /deep/ .y-base-input__control-box {
+         margin-left: -10px;
+      }
 
-      &.y-checkbox--required {
+      &.is-required {
          position: relative;
          padding-bottom: 18px;
       }
 
-      .y-checkbox__error {
-         position: absolute;
-         left: 0;
-         bottom: 10px;
+      /deep/ .y-base-input__control-box .y-base-input__bottom {
+         padding-top: 4px;
+      }
 
-         padding-left: 12px;
-
-         opacity: 0;
-         transition: bottom 0.3s, opacity 0.3s;
-         transition-timing-function: ease-out;
-
-         &.y-checkbox__error--visible {
-            bottom: 0;
-            opacity: 1;
-         }
+      /deep/ a {
+         color: initial;
+         text-decoration: underline;
       }
    }
 </style>

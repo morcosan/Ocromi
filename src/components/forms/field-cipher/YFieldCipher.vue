@@ -1,14 +1,15 @@
 <script lang="ts">
-   import { Component, Mixins, Override, Prop, Watch } from '../../../core/decorators';
+   import { Component, Override, Prop, Watch } from '../../../core/decorators';
    import YBaseInputField from '../YBaseInputField';
+   import YTemplateInput from '../YTemplateInput.vue';
    import { QInput } from 'quasar';
    import Utils from '../../../utils';
 
 
    @Component({
-      components: { QInput },
+      components: { QInput, YTemplateInput },
    })
-   export default class YFieldCipher extends Mixins(YBaseInputField) {
+   export default class YFieldCipher extends YBaseInputField {
 
       @Prop({ default: '' }) public value!: string;
       @Prop({ default: '' }) public inputMask!: string;
@@ -24,24 +25,36 @@
 
 
       @Override
+      public get valueComputed() {
+         return this.value;
+      }
+
+
+      @Override
       public created() {
          this.prepareValidation();
       }
 
 
       @Override
-      public get finalRules() {
+      public get rulesComputed() {
          const rules = [...this.rules];
 
          // add required rule
-         if (this.isRequired) {
-            rules.push((value: string) => (!!value || this.$locale.all.requiredField));
+         if (!this.isOptional) {
+            rules.push((value: string) => (!!value || this.$locale.all.requiredError));
          }
 
          // add mask validation rule
-         if (this.inputMask !== '') {
+         const hasMask = (this.inputMask !== '' && this.numCharsRequired > 0);
+         if (hasMask) {
             const error = this.$locale.fieldCipher.maskError.replace('${1}', String(this.numCharsRequired));
-            rules.push((value: string) => (value.length === this.numCharsRequired || error));
+            rules.push((value: string) => {
+               if (value !== '') {
+                  return (value.length === this.numCharsRequired || error);
+               }
+               return true;
+            });
          }
 
          return rules;
@@ -50,8 +63,8 @@
 
       private prepareValidation() {
          const maskOptions = ['#', 'S', 'A', 'a', 'N', 'X', 'x'];
-
          this.numCharsRequired = 0;
+
          if (this.inputMask !== '') {
             for (const char of maskOptions) {
                this.numCharsRequired += Utils.countSubstrInString(char, this.inputMask);
@@ -64,26 +77,38 @@
 
 
 <template>
-   <QInput
-      :value="value"
-      :mask="inputMask"
-      :label="finalLabel"
-      :hint="hint"
-      :placeholder="placeholder"
-      :readonly="isReadonly"
-      :bg-color="bgColor"
-      :error-message="error"
-      :error="error !== ''"
-      :rules="finalRules"
-      :disable="isDisabled"
-      :class="{ 'y-field-cipher': true, 'y-input-spacing': hasSpacing }"
-      type="text"
-      unmasked-value
-      lazy-rules
-      outlined
-      @input="updateValueProp($event)"
-      ref="qField"
-   />
+   <YTemplateInput
+      class="y-field-cipher"
+      :is-mini="isMiniComputed"
+      :side-label-width="sideLabelWidthComputed"
+      :label="labelComputed"
+      :error="errorComputed"
+   >
+      <QInput
+         :value="value"
+         :mask="inputMask"
+         :label="(isMiniComputed ? labelComputed : undefined)"
+         :placeholder="finalPlaceholder"
+         :readonly="isReadonly"
+         :disable="isDisabled"
+         :bg-color="bgColor"
+         :error="!!errorComputed"
+         type="text"
+         unmasked-value
+         outlined
+         lazy-rules
+         hide-bottom-space
+         @input="updateValueProp($event)"
+         @blur="onBlur"
+         ref="qField"
+      />
+
+
+      <template v-slot:bottom-left>
+         <div v-if="!errorComputed && hint">{{ hint }}</div>
+      </template>
+
+   </YTemplateInput>
 </template>
 
 

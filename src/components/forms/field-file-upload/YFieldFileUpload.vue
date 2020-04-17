@@ -1,15 +1,28 @@
 <script lang="ts">
-   import { Component, Mixins, Override, Prop } from '../../../core/decorators';
+   import { Component, Override, Prop } from '../../../core/decorators';
    import YBaseInputField from '../YBaseInputField';
+   import YTemplateInput from '../YTemplateInput.vue';
    import { QAvatar, QChip, QFile, QIcon, QTooltip } from 'quasar';
 
 
-   @Component({
-      components: { QFile, QIcon, QChip, QTooltip, QAvatar },
-   })
-   export default class YFieldFileUpload extends Mixins(YBaseInputField) {
+   export type File = {
+      type: string;
+      name: string;
+   }
 
-      @Prop({ default: () => [] }) public value!: object[];
+
+   type FileData = {
+      totalSize: number;
+      filesNumber: number;
+   }
+
+
+   @Component({
+      components: { QFile, QIcon, QChip, QTooltip, QAvatar, YTemplateInput },
+   })
+   export default class YFieldFileUpload extends YBaseInputField {
+
+      @Prop({ default: () => [] }) public value!: File[];
       @Prop({ default: () => [] }) public fileFormats!: string[]; // array of <mediatype>/<extension>
       @Prop({ default: false, type: Boolean }) public isMultiple!: boolean;
       @Prop({ default: 0 }) public maxFileSize!: number; // in KB
@@ -17,47 +30,52 @@
       @Prop({ default: 0 }) public maxNumFiles!: number;
 
 
+      public hintOnRight: string = '';
+
+
       @Override
-      public get finalRules() {
+      public get valueComputed() {
+         return this.value;
+      }
+
+
+      @Override
+      public get rulesComputed() {
          const rules = [...this.rules];
 
          // add required rule
-         if (this.isRequired) {
-            rules.push((value: object[]) => (value.length > 0 || this.$locale.all.requiredField));
+         if (!this.isOptional) {
+            rules.push((value: object[]) => (value.length > 0 || this.$locale.all.requiredError));
          }
 
          return rules;
       }
 
 
-      // @ts-ignore
-      public getCounterLabel({ totalSize, filesNumber }) {
+      public setHintOnRight({ totalSize, filesNumber }: FileData) {
          if (this.maxNumFiles > 0) {
-            return `${ filesNumber } / ${ this.maxNumFiles } files (${ totalSize })`;
+            this.hintOnRight = `${ filesNumber } / ${ this.maxNumFiles } files (${ totalSize })`;
          }
-         return `${ filesNumber } files (${ totalSize })`;
+         this.hintOnRight = `${ filesNumber } files (${ totalSize })`;
       }
 
 
-      public getFileIcon(file: object) {
-         // @ts-ignore
+      public getFileIcon(file: File) {
          const isVideo = (file.type.indexOf('video/') === 0);
-         // @ts-ignore
          const isImage = (file.type.indexOf('image/') === 0);
-         // @ts-ignore
          const isAudio = (file.type.indexOf('audio/') === 0);
-         // find the appropriate file icon
+
          return (isVideo ? 'movie' : (isImage ? 'photo' : (isAudio ? 'audiotrack' : 'insert_drive_file')));
       }
 
 
-      public onInput(value: object[] | object) {
+      public onInput(value: File[] | File) {
          if (Array.isArray(value)) {
             // add new files to existing ones
-            value.forEach((file: object) => {
-               // @ts-ignore
-               const exists = this.value.find(e => (e.name === file.name));
-               if (!exists && this.value.length < this.maxNumFiles) {
+            value.forEach((file: File) => {
+               const isNew = !this.value.find(e => (e.name === file.name));
+               const isNotFull = (this.maxNumFiles === 0 || this.value.length < this.maxNumFiles);
+               if (isNew && isNotFull) {
                   this.value.push(file);
                }
             });
@@ -75,7 +93,7 @@
 
          if (!this.isReadonly && !this.isDisabled) {
             if (index > -1) {
-               // remove file
+               // remove file at index
                this.value.splice(index, 1);
 
                this.updateValueProp(this.value);
@@ -98,14 +116,8 @@
       }
 
 
-      public onClickAttachIcon() {
-         this.openFilePicker();
-      }
-
-
-      private openFilePicker() {
-         // @ts-ignore
-         this.$refs.qField.pickFiles();
+      public openFilePicker() {
+         (this.$refs.qField as QFile).pickFiles();
       }
 
    }
@@ -113,88 +125,99 @@
 
 
 <template>
-   <QFile
-      :value="value"
-      :label="finalLabel"
-      :placeholder="placeholder"
-      :hint="hint"
-      :multiple="isMultiple"
-      :accept="fileFormats.join(',')"
-      :max-file-size="maxFileSize > 0 ? (maxFileSize * 1024) : undefined"
-      :max-total-size="maxTotalSize > 0 ? (maxTotalSize * 1024) : undefined"
-      :max-files="maxNumFiles > 0 ? maxNumFiles : undefined"
-      :readonly="isReadonly"
-      :disable="isDisabled"
-      :error="!!error"
-      :error-message="error"
-      :rules="finalRules"
-      :bg-color="bgColor"
-      :class="{
-         'y-field-file-upload': true,
-			'y-input-spacing': hasSpacing,
-			'y-field-file-upload--empty': (value.length === 0),
-		}"
-      :counter-label="getCounterLabel"
-      counter
-      outlined
-      lazy-rules
-      @input="onInput"
-      ref="qField"
+   <YTemplateInput
+      :class="'y-field-file-upload ' + (value.length === 0 ? 'is-empty' : '')"
+      :is-mini="isMiniComputed"
+      :side-label-width="sideLabelWidthComputed"
+      :label="labelComputed"
+      :error="errorComputed"
    >
-      <template v-slot:append>
-         <QIcon
-            v-if="value.length === 0"
-            :class="(isReadonly ? 'cursor-not-allowed' : 'cursor-pointer')"
-            :tabindex="isReadonly ? -1 : 0"
-            name="attach_file"
-            color="grey-8"
-            @click="onClickAttachIcon"
-            @keydown="onKeyDownAttachIcon"
-         >
-            <QTooltip v-if="!isReadonly">{{ $locale.fieldFileUpload.tooltipPickFiles }}</QTooltip>
-         </QIcon>
-
-         <QIcon
-            v-if="value.length > 0"
-            :class="(isReadonly ? 'cursor-not-allowed' : 'cursor-pointer')"
-            name="clear_all"
-            @click="onClickRemoveFile(-1, $event)"
-         >
-            <QTooltip v-if="!isReadonly">{{ $locale.fieldFileUpload.tooltipRemoveFiles }}</QTooltip>
-         </QIcon>
-      </template>
-
-
-      <template v-slot:file="scope">
-         <QChip
-            :class="{ 'q-mb-xs q-px-none q-mx-none row': true, 'cursor-not-allowed': isReadonly }"
-            style="width: 100%"
-            square
-         >
+      <QFile
+         :value="value"
+         :label="(isMiniComputed ? labelComputed : undefined)"
+         :placeholder="finalPlaceholder"
+         :multiple="isMultiple"
+         :accept="fileFormats.join(',')"
+         :max-file-size="maxFileSize > 0 ? (maxFileSize * 1024) : undefined"
+         :max-total-size="maxTotalSize > 0 ? (maxTotalSize * 1024) : undefined"
+         :max-files="maxNumFiles > 0 ? maxNumFiles : undefined"
+         :readonly="isReadonly"
+         :disable="isDisabled"
+         :error="!!errorComputed"
+         :bg-color="bgColor"
+         :counter-label="setHintOnRight"
+         counter
+         outlined
+         lazy-rules
+         hide-bottom-space
+         @input="onInput"
+         @blur="onBlur"
+         ref="qField"
+      >
+         <template v-slot:append>
             <QIcon
-               :name="scope ? getFileIcon(scope.file) : ''"
-               size="xs"
-               color="grey-7"
-               class="q-mx-xs"
-            />
+               v-if="value.length === 0"
+               :class="(isReadonly ? 'cursor-not-allowed' : 'cursor-pointer')"
+               :tabindex="isReadonly ? -1 : 0"
+               name="attach_file"
+               color="grey-8"
+               @click="openFilePicker"
+               @keydown="onKeyDownAttachIcon"
+            >
+               <QTooltip v-if="!isReadonly">{{ $locale.fieldFileUpload.tooltipPickFiles }}</QTooltip>
+            </QIcon>
 
-            <div class="ellipsis relative-position col"> {{ scope ? scope.file.name : '' }}</div>
+            <QIcon
+               v-if="value.length > 1 && !isReadonly && !isDisabled"
+               :class="(isReadonly ? 'cursor-not-allowed' : 'cursor-pointer')"
+               name="clear_all"
+               @click="onClickRemoveFile(-1, $event)"
+            >
+               <QTooltip v-if="!isReadonly">{{ $locale.fieldFileUpload.tooltipRemoveFiles }}</QTooltip>
+            </QIcon>
+         </template>
 
-            <QAvatar
-               :class="{ 'y-chip__button': true, 'cursor-pointer': !isReadonly }"
-               @click="onClickRemoveFile(scope.index, $event)"
+
+         <template v-slot:file="scope">
+            <QChip
+               :class="{ 'q-mb-xs q-px-none q-mx-none row': true, 'cursor-not-allowed': isReadonly }"
+               style="width: 100%"
+               square
             >
                <QIcon
-                  name="close"
-                  size="20px"
+                  :name="scope ? getFileIcon(scope.file) : ''"
+                  size="xs"
                   color="grey-7"
+                  class="q-mx-xs"
                />
-            </QAvatar>
-         </QChip>
 
-         <QTooltip v-if="!isReadonly">{{ $locale.fieldFileUpload.tooltipPickFiles }}</QTooltip>
+               <div class="ellipsis relative-position col"> {{ scope ? scope.file.name : '' }}</div>
+
+               <QAvatar
+                  v-if="!isReadonly && !isDisabled"
+                  class="y-chip__button cursor-pointer"
+                  @click="onClickRemoveFile(scope.index, $event)"
+               >
+                  <QIcon name="close" size="20px" color="grey-7"/>
+                  <QTooltip>{{ $locale.fieldFileUpload.tooltipRemoveFile }}</QTooltip>
+               </QAvatar>
+            </QChip>
+
+            <QTooltip v-if="!isReadonly">{{ $locale.fieldFileUpload.tooltipPickFiles }}</QTooltip>
+         </template>
+      </QFile>
+
+
+      <template v-slot:bottom-left>
+         <div v-if="!errorComputed && hint">{{ hint }}</div>
       </template>
-   </QFile>
+
+
+      <template v-slot:bottom-right>
+         {{ hintOnRight }}
+      </template>
+
+   </YTemplateInput>
 </template>
 
 
@@ -203,6 +226,31 @@
 
    // change color of close button on hover
    .y-chip__button.cursor-pointer:hover {
-      background-color: $red-4;
+      background-color: $grey-5;
+   }
+
+   .y-field-file-upload {
+      // place the error icon before the attach icon
+      &.is-empty /deep/ .q-field__append.q-anchor--skip {
+         position: absolute;
+         right: 34px;
+         padding-right: 0;
+      }
+
+      // reset height for input
+      &:not(.is-empty) /deep/ .q-file.q-field--auto-height .q-field__control {
+         height: auto;
+      }
+
+      // swap position for error icon when files selected
+      &:not(.is-empty) /deep/ .q-file.q-field--error .q-field__append:not(.q-anchor--skip) {
+         position: relative;
+         left: 30px;
+      }
+      &:not(.is-empty) /deep/ .q-file.q-field--error .q-field__append.q-anchor--skip {
+         position: relative;
+         right: 36px;
+         padding-right: 0;
+      }
    }
 </style>

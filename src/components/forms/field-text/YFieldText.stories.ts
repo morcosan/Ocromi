@@ -1,7 +1,6 @@
 import YFieldText from './YFieldText.vue';
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
 import { propsInputField } from '.storybook/custom/knob-props';
-import { withKnobs } from '@storybook/addon-knobs';
 
 
 const vue = {
@@ -13,6 +12,9 @@ const vue = {
       return {
          value: '',
          value1: '',
+         rules: [
+            (val: string) => (val.length < 5 || 'Value must have less than 5 characters'),
+         ],
       };
    },
 };
@@ -22,43 +24,46 @@ const storyLines: StoryLine[] = [
    {
       title: 'Default',
       template: `
-			<YFieldText
-				v-model="value"
-				:label="label"
-				:placeholder="placeholder"
-				:hint="hint"
-				:is-disabled="isDisabled"
-				:is-required="isRequired"
-				:is-readonly="isReadonly"
-				:error="error"
-			/>
-		`,
+         <YFieldText
+            v-model="value"
+            :label="label"
+            :placeholder="placeholder"
+            :hint="hint"
+            :is-disabled="isDisabled"
+            :is-optional="isOptional"
+            :hides-optional="hidesOptional"
+            :is-readonly="isReadonly"
+            :is-mini="isMini"
+            :side-label-width="sideLabelWidth"
+            :error="error"
+         />
+      `,
       states: ['value'],
    },
    {
       title: 'With rules (length < 5)',
       template: `
-			<YFieldText
-				v-model="value1"
-				:label="label"
-				:placeholder="placeholder"
-				:hint="hint"
-				:is-disabled="isDisabled"
-				:is-required="isRequired"
-				:is-readonly="isReadonly"
-				:rules="[val => (val.length < 5 || 'Value must have less than 5 characters')]"
-				:error="error"
-			/>
-		`,
+         <YFieldText
+            v-model="value1"
+            :label="label"
+            :placeholder="placeholder"
+            :hint="hint"
+            :is-disabled="isDisabled"
+            :is-optional="isOptional"
+            :hides-optional="hidesOptional"
+            :is-readonly="isReadonly"
+            :rules="rules"
+            :error="error"
+            :is-mini="isMini"
+            :side-label-width="sideLabelWidth"
+         />
+      `,
       states: ['value1'],
    },
 ];
 
 
-export default {
-   title: 'Forms / Fields / Field Text',
-   decorators: [withKnobs],
-};
+export default StoryBuilder.createDefault('Forms / Inputs / Field Text');
 export const default_ = StoryBuilder.createStory(vue, storyLines);
 export const docs = StoryBuilder.createDocs(`
 /**

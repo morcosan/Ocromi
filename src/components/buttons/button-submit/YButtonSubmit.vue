@@ -1,5 +1,5 @@
 <script lang="ts">
-   import { Component, Mixins, Override, Prop, Watch } from '../../../core/decorators';
+   import { Component, Override, Prop, Watch } from '../../../core/decorators';
    import YBaseButton from '../YBaseButton';
    import { QBtn, QSpinnerHourglass } from 'quasar';
 
@@ -7,7 +7,7 @@
    @Component({
       components: { QBtn, QSpinnerHourglass },
    })
-   export default class YButtonSubmit extends Mixins(YBaseButton) {
+   export default class YButtonSubmit extends YBaseButton {
 
       @Prop({ default: false, type: Boolean }) public isLoading!: boolean;
       @Prop({ default: 2000 }) public loadingTime!: number;
@@ -46,6 +46,7 @@
          const interval = totalTime / 100;
 
          // start loading
+         // @ts-ignore
          this.intervalID = setInterval(this.onLoading, interval);
       }
 

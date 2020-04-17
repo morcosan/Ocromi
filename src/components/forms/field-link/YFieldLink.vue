@@ -1,38 +1,38 @@
 <script lang="ts">
-   import { Component, Mixins, Override, Prop, Watch } from '../../../core/decorators';
+   import { Component, Override, Prop } from '../../../core/decorators';
    import YBaseInputField from '../YBaseInputField';
+   import YTemplateInput from '../YTemplateInput.vue';
    import { QIcon, QInput, QTooltip } from 'quasar';
    import Regex from '../../../utils/regex';
+   import Utils from '../../../utils';
 
 
    @Component({
-      components: { QInput, QIcon, QTooltip },
+      components: { QInput, QIcon, QTooltip, YTemplateInput },
    })
-   export default class YFieldLink extends Mixins(YBaseInputField) {
+   export default class YFieldLink extends YBaseInputField {
 
       @Prop({ default: '' }) public value!: string;
 
 
       public nativeInput!: HTMLElement;
-      public canShowError: boolean = false;
-      public innerError: string = '';
+      public prefix: string = 'https://';
+      public finalURL: string = '';
 
 
-      @Watch('value')
-      public onChange_value() {
-         if (this.canShowError) {
-            this.validate();
-         }
+      @Override
+      public get valueComputed() {
+         return this.value;
       }
 
 
       @Override
-      public get finalRules() {
+      public get rulesComputed() {
          const rules = [...this.rules];
 
          // add required rule
-         if (this.isRequired) {
-            rules.push((value: string) => (!!value || this.$locale.all.requiredField));
+         if (!this.isOptional) {
+            rules.push((value: string) => (!!value || this.$locale.all.requiredError));
          }
 
          // add URL rule
@@ -47,22 +47,8 @@
       }
 
 
-      @Override
-      public validate() {
-         this.canShowError = true;
-
-         for (let i = 0; i < this.finalRules.length; i++) {
-            const result: (boolean | string) = this.finalRules[i](this.value);
-            if (result === true) {
-               this.innerError = '';
-            }
-            else {
-               this.innerError = (result as string);
-               break;
-            }
-         }
-
-         return !this.innerError;
+      public get canShowIcon() {
+         return (!this.errorComputed && this.value && this.isDirty);
       }
 
 
@@ -84,11 +70,6 @@
       }
 
 
-      public onBlur() {
-         this.validate();
-      }
-
-
       public onKeyDown(event: KeyboardEvent) {
          // block space character on key down
          if (event.key === ' ') {
@@ -99,8 +80,7 @@
 
       public onPaste(event: ClipboardEvent) {
          // get pasted url
-         // @ts-ignore
-         const url = (event.clipboardData || globalThis.clipboardData).getData('text');
+         const url = (event.clipboardData || (globalThis as any).clipboardData).getData('text');
 
          // remove http or https
          const http = 'http://';
@@ -122,7 +102,7 @@
       }
 
 
-      public onKeyDownIcon(event: KeyboardEvent) {
+      public onKeyDownButton(event: KeyboardEvent) {
          // activate button with space or enter
          if (event.key === ' ' || event.key === 'Enter') {
             event.preventDefault();
@@ -134,10 +114,24 @@
 
       public openURL() {
          if (!this.isReadonly) {
-            const url = 'http://' + this.value;
-            // open URL in new tab
-            globalThis.open(url, '_blank');
+            Utils.openURL(this.finalURL);
          }
+      }
+
+
+      public updateFinalURL() {
+         const httpOptions = ['localhost', '127.0.0.1'];
+
+         let isHttp = false;
+         for (let i = 0; i < httpOptions.length; i++) {
+            if (this.value.includes(httpOptions[i])) {
+               isHttp = true;
+               break;
+            }
+         }
+
+         this.prefix = (isHttp ? 'http://' : 'https://');
+         this.finalURL = this.prefix + this.value;
       }
 
    }
@@ -145,41 +139,67 @@
 
 
 <template>
-   <QInput
-      :value="value"
-      :label="finalLabel"
-      :hint="hint"
-      :placeholder="placeholder"
-      :readonly="isReadonly"
-      :bg-color="bgColor"
-      :error="!!error || !!innerError"
-      :error-message="error || innerError"
-      :disable="isDisabled"
-      :class="{ 'y-field-link': true, 'y-input-spacing': hasSpacing }"
-      prefix="http://"
-      type="text"
-      input-class="js-native-input"
-      outlined
-      @input="updateValueProp($event)"
-      @keydown="onKeyDown"
-      @blur="onBlur"
-      ref="qField"
+   <YTemplateInput
+      class="y-field-link"
+      :is-mini="isMiniComputed"
+      :side-label-width="sideLabelWidthComputed"
+      :label="labelComputed"
+      :error="errorComputed"
    >
-      <template v-if="!error && !innerError && value" v-slot:append>
-         <QIcon
-            :class="(isReadonly ? 'cursor-not-allowed' : 'cursor-pointer')"
-            :tabindex="isReadonly ? -1 : 0"
-            name="open_in_new"
-            @click="openURL"
-            @keydown="onKeyDownIcon"
-         >
-            <QTooltip v-if="!isReadonly">{{ $locale.fieldLink.tooltip }}</QTooltip>
-         </QIcon>
+      <QInput
+         :value="value"
+         :label="(isMiniComputed ? labelComputed : undefined)"
+         :placeholder="finalPlaceholder"
+         :readonly="isReadonly"
+         :disable="isDisabled"
+         :bg-color="bgColor"
+         :error="!!errorComputed"
+         :prefix="prefix"
+         type="text"
+         input-class="js-native-input"
+         outlined
+         hide-bottom-space
+         @input="updateValueProp($event)"
+         @keydown="onKeyDown"
+         @keyup="updateFinalURL"
+         @blur="onBlur"
+         ref="qField"
+      >
+         <template v-if="canShowIcon" v-slot:append>
+            <a
+               :href="finalURL"
+               :tabindex="isReadonly ? -1 : 0"
+               class="y-field-link__anchor"
+               @click="openURL"
+               @keydown="onKeyDownButton"
+            >
+               <QIcon :class="(isReadonly ? 'cursor-not-allowed' : 'cursor-pointer')" name="open_in_new">
+                  <QTooltip v-if="!isReadonly">{{ $locale.fieldLink.tooltip }}</QTooltip>
+               </QIcon>
+            </a>
+         </template>
+      </QInput>
+
+
+      <template v-slot:bottom-left>
+         <div v-if="!errorComputed && hint">{{ hint }}</div>
       </template>
-   </QInput>
+
+   </YTemplateInput>
 </template>
 
 
 <style scoped lang="scss">
    // @import '../../../css/variables';
+
+   .y-field-link__anchor {
+      display: flex;
+      height: fit-content;
+      width: fit-content;
+   }
+
+   .y-field-link /deep/ .q-field .q-field__prefix {
+      padding: inherit;
+      padding-right: 5px;
+   }
 </style>

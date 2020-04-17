@@ -1,8 +1,9 @@
 # CSS Style Guide
 
-Read https://cssguidelin.es/
-
-Also read https://clubmate.fi/oocss-acss-bem-smacss-what-are-they-what-should-i-use/
+Resources:
+- https://cssguidelin.es/
+- https://clubmate.fi/oocss-acss-bem-smacss-what-are-they-what-should-i-use/
+- https://github.com/chris-pearce/css-guidelines
 
 
 <br>
@@ -11,17 +12,20 @@ Also read https://clubmate.fi/oocss-acss-bem-smacss-what-are-they-what-should-i-
 Use BEM notation.
 Never create a class name by Sass concatenation.
 Use 'js-' notation for classes that only have scripting purpose.
-Prefix all block classes with a letter to avoid external collisions.
+Prefix all block classes with 'y-' to avoid external collisions.
+User additional classes for states that start with 'is-' or 'has-'.
 ```
 // good:
 .y-my-class {
-    .y-my-class--extended {}
+    .y-my-class.is-extended {}
+    .y-my-class--primary.is-extended {}
 }
 
 // bad:
 .y-my-class {
     &--extended {}
-    .js-example {}
+    &.y-my-class--is-extended {}
+    .js-hook {}
 }
 ```
 
@@ -67,8 +71,9 @@ Use 3 spaces, compact and visible.
 
 
 
-.y-completely-unrelated {}
 
+
+.y-completely-unrelated {}
 ``` 
 
 
@@ -153,7 +158,9 @@ For more than 5 properties, add empty lines between categories.
 5) Misc
 ```
 .y-declaration-order {
-    /** Positioning */
+    /**
+     * Positioning 
+     */
     position: absolute;
     top: 0;
     right: 0;
@@ -161,24 +168,32 @@ For more than 5 properties, add empty lines between categories.
     left: 0;
     z-index: 100;
     
-    /** Box-model */
+    /** 
+     * Box-model 
+     */
     display: block;
     float: right;
     width: 100px;
     height: 100px;
     
-    /** Typography */
+    /** 
+     * Visual 
+     */
+    background-color: #f5f5f5;
+    border: 1px solid #e5e5e5;
+    border-radius: 3px;
+
+    /** 
+     * Typography 
+     */
     font: normal 13px "Helvetica Neue", sans-serif;
     line-height: 1.5;
     color: #333;
     text-align: center;
     
-    /** Visual */
-    background-color: #f5f5f5;
-    border: 1px solid #e5e5e5;
-    border-radius: 3px;
-    
-    /** Misc */
+    /** 
+     * Misc 
+     */
     opacity: 1;
 }
 ```

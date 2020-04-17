@@ -1,16 +1,14 @@
 <script lang="ts">
-   import { Component, Mixins, Override, Prop } from '../../../core/decorators';
+   import { Component, Override, Prop } from '../../../core/decorators';
    import YBaseInputSelect, { Option } from '../YBaseInputSelect';
+   import YTemplateInput from '../YTemplateInput.vue';
    import { QChip, QSelect } from 'quasar';
 
 
    @Component({
-      components: {
-         QSelect,
-         QChip,
-      },
+      components: { QSelect, QChip, YTemplateInput },
    })
-   export default class YFieldMultiselect extends Mixins(YBaseInputSelect) {
+   export default class YFieldMultiselect extends YBaseInputSelect {
 
       @Prop({ default: () => [] }) public value!: Option[];
       @Prop({ default: 0 }) public selectionLimit!: number;
@@ -18,12 +16,18 @@
 
 
       @Override
-      public get finalRules() {
+      public get valueComputed() {
+         return this.value;
+      }
+
+
+      @Override
+      public get rulesComputed() {
          const rules = [];
 
          // add required rule
-         if (this.isRequired) {
-            rules.push((value: Option[]) => (value.length > 0 || this.$locale.all.requiredField));
+         if (!this.isOptional) {
+            rules.push((value: Option[]) => (value.length > 0 || this.$locale.all.requiredError));
          }
 
          return rules;
@@ -41,6 +45,7 @@
             value = value.slice(0, this.selectionLimit);
          }
 
+         this.isDirty = true;
          this.updateValueProp(value);
       }
 
@@ -68,54 +73,71 @@
 
 
 <template>
-   <QSelect
-      :value="value"
-      :options="currOptions"
-      :label="finalLabel"
-      :hint="hint"
-      :readonly="isReadonly"
-      :disable="isDisabled"
-      :error-message="error"
-      :error="error !== ''"
-      :rules="finalRules"
-      :bg-color="bgColor"
-      :new-value-mode="canAddNew ? 'add-unique' : undefined"
-      :class="{ 'y-field-multiselect': true, 'y-input-spacing': hasSpacing }"
-      input-debounce="0"
-      lazy-rules
-      clearable
-      multiple
-      use-chips
-      use-input
-      outlined
-      @input="onInput"
-      @filter="onFilterInput"
-      @new-value="onNewOption"
-      ref="qSelect"
+   <YTemplateInput
+      class="y-field-multiselect"
+      :is-mini="isMiniComputed"
+      :side-label-width="sideLabelWidthComputed"
+      :label="labelComputed"
+      :error="errorComputed"
    >
-      <template v-slot:selected-item="scope">
-         <QChip
-            :color="(scope && scope.opt.isNew) ? 'primary' : undefined"
-            :tabindex="scope ? scope.tabindex : -1"
-            removable
-            outline
-            square
-            dense
-            @remove="scope.removeAtIndex(scope.index)"
-         >
-            {{ scope ? scope.opt.label : '' }}
-         </QChip>
+      <QSelect
+         :value="value"
+         :options="currOptions"
+         :label="(isMiniComputed ? labelComputed : undefined)"
+         :readonly="isReadonly"
+         :disable="isDisabled"
+         :error="!!errorComputed"
+         :bg-color="bgColor"
+         :new-value-mode="canAddNew ? 'add-unique' : undefined"
+         input-debounce="0"
+         lazy-rules
+         clearable
+         multiple
+         use-chips
+         use-input
+         outlined
+         hide-bottom-space
+         @input="onInput"
+         @filter="onFilterInput"
+         @new-value="onNewOption"
+         @blur="onBlur"
+         ref="qSelect"
+      >
+         <template v-slot:selected-item="scope">
+            <QChip
+               :color="(scope && scope.opt.isNew) ? 'primary' : undefined"
+               :tabindex="scope ? scope.tabindex : -1"
+               :removable="!isReadonly"
+               outline
+               square
+               dense
+               @remove="scope.removeAtIndex(scope.index)"
+            >
+               {{ scope ? scope.opt.label : '' }}
+            </QChip>
+         </template>
+
+         <template v-if="selectionLimit > 0" v-slot:counter>
+            <div :class="{ 'text-weight-bold': (value.length >= selectionLimit) }">
+               {{ value.length }} / {{ selectionLimit }}
+            </div>
+         </template>
+      </QSelect>
+
+
+      <template v-slot:bottom-left>
+         <div v-if="!errorComputed && hint">{{ hint }}</div>
       </template>
 
-      <template v-if="selectionLimit > 0" v-slot:counter>
-         <div :class="{ 'text-weight-bold': (value.length >= selectionLimit) }">
-            {{ value.length }} / {{ selectionLimit }}
-         </div>
-      </template>
-   </QSelect>
+   </YTemplateInput>
 </template>
 
 
 <style scoped lang="scss">
    // @import '../../../css/variables';
+
+   // align chips with label
+   .y-field-multiselect /deep/ .q-field__native {
+      margin-left: -4px;
+   }
 </style>

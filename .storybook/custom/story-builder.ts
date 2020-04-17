@@ -1,8 +1,9 @@
+import { withKnobs } from '@storybook/addon-knobs';
 import i18n from '../../src/i18n';
 import './story-builder.scss';
 
 
-export interface StoryLine {
+export type StoryLine = {
    template: string;
    title: string;
    states: string[];
@@ -10,6 +11,15 @@ export interface StoryLine {
 
 
 export default class StoryBuilder {
+
+   public static createDefault(title: string) {
+      return {
+         // @ts-ignore
+         title: (process.Ocromi.version + ' | ' + title),
+         decorators: [withKnobs],
+      };
+   }
+
 
    public static createStory(vue: object, stories: StoryLine[]) {
       let storyTemplate = '';

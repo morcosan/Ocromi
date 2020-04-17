@@ -1,7 +1,7 @@
 import YFieldPassword from './YFieldPassword.vue';
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
 import { propsInputField } from '.storybook/custom/knob-props';
-import { boolean, withKnobs } from '@storybook/addon-knobs';
+import { boolean } from '@storybook/addon-knobs';
 
 
 const vue = {
@@ -26,27 +26,27 @@ const storyLines: StoryLine[] = [
    {
       title: 'Default',
       template: `
-			<YFieldPassword
-				v-model="value"
-				:label="label"
-				:placeholder="placeholder"
-				:hint="hint"
-				:is-disabled="isDisabled"
-				:is-required="isRequired"
-				:is-readonly="isReadonly"
-				:error="error"
-				:has-meter="hasMeter"
-			/>
-		`,
+         <YFieldPassword
+            v-model="value"
+            :label="label"
+            :placeholder="placeholder"
+            :hint="hint"
+            :is-disabled="isDisabled"
+            :is-optional="isOptional"
+            :hides-optional="hidesOptional"
+            :is-readonly="isReadonly"
+            :error="error"
+            :has-meter="hasMeter"
+            :is-mini="isMini"
+            :side-label-width="sideLabelWidth"
+         />
+      `,
       states: ['value'],
    },
 ];
 
 
-export default {
-   title: 'Forms / Fields / Field Password',
-   decorators: [withKnobs],
-};
+export default StoryBuilder.createDefault('Forms / Inputs / Field Password');
 export const default_ = StoryBuilder.createStory(vue, storyLines);
 export const docs = StoryBuilder.createDocs(`
 /**

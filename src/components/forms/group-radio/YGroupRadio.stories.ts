@@ -1,7 +1,6 @@
 import YGroupRadio from './YGroupRadio.vue';
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
 import { propsInputGroup } from '.storybook/custom/knob-props';
-import { withKnobs } from '@storybook/addon-knobs';
 
 
 const options = [
@@ -43,28 +42,28 @@ const storyLines: StoryLine[] = [
    {
       title: 'Default',
       template: `
-			<YGroupRadio
-				v-model="value"
-				:options="options"
-				:label="label"
-				:is-disabled="isDisabled"
-				:is-required="isRequired"
-				:is-readonly="isReadonly"
-				:error="error"
-				ref="groupRadio"
-			/>
-			<br/>
-			<button class="story-button" @click="onClick">Validate</button>
-		`,
+         <YGroupRadio
+            v-model="value"
+            :options="options"
+            :label="label"
+            :is-disabled="isDisabled"
+            :is-optional="isOptional"
+            :hides-optional="hidesOptional"
+            :is-readonly="isReadonly"
+            :error="error"
+            :is-mini="isMini"
+            :side-label-width="sideLabelWidth"
+            ref="groupRadio"
+         />
+         <br/>
+         <button class="story-button" @click="onClick">Validate</button>
+      `,
       states: ['value'],
    },
 ];
 
 
-export default {
-   title: 'Forms / Other / Group Radio',
-   decorators: [withKnobs],
-};
+export default StoryBuilder.createDefault('Forms / Inputs / Group Radio');
 export const default_ = StoryBuilder.createStory(vue, storyLines);
 export const docs = StoryBuilder.createDocs(`
 /**

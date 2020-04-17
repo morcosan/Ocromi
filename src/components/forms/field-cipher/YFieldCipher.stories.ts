@@ -1,7 +1,7 @@
 import YFieldCipher from './YFieldCipher.vue';
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
 import { propsInputField } from '.storybook/custom/knob-props';
-import { text, withKnobs } from '@storybook/addon-knobs';
+import { text } from '@storybook/addon-knobs';
 
 
 const vue = {
@@ -26,27 +26,27 @@ const storyLines: StoryLine[] = [
    {
       title: 'Default',
       template: `
-			<YFieldCipher
-				v-model="value"
-				:input-mask="inputMask"
-				:label="label"
-				:placeholder="placeholder"
-				:hint="hint"
-				:is-disabled="isDisabled"
-				:is-required="isRequired"
-				:is-readonly="isReadonly"
-				:error="error"
-			/>
-		`,
+         <YFieldCipher
+            v-model="value"
+            :input-mask="inputMask"
+            :label="label"
+            :placeholder="placeholder"
+            :hint="hint"
+            :is-disabled="isDisabled"
+            :is-optional="isOptional"
+            :hides-optional="hidesOptional"
+            :is-readonly="isReadonly"
+            :error="error"
+            :is-mini="isMini"
+            :side-label-width="sideLabelWidth"
+         />
+      `,
       states: ['value'],
    },
 ];
 
 
-export default {
-   title: 'Forms / Fields / Field Cipher',
-   decorators: [withKnobs],
-};
+export default StoryBuilder.createDefault('Forms / Inputs / Field Cipher');
 export const default_ = StoryBuilder.createStory(vue, storyLines);
 export const docs = StoryBuilder.createDocs(`
 /**

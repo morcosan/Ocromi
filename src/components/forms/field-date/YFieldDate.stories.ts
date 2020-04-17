@@ -1,7 +1,6 @@
 import YFieldDate from './YFieldDate.vue';
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
 import { propsInputField } from '.storybook/custom/knob-props';
-import { withKnobs } from '@storybook/addon-knobs';
 
 
 const vue = {
@@ -10,6 +9,7 @@ const vue = {
    },
    props: {
       ...propsInputField,
+      placeholder: undefined,
       hint: undefined,
    },
    data() {
@@ -20,7 +20,7 @@ const vue = {
    },
    methods: {
       customDates(date: string) {
-         return (date >= '2020-03-19' && date <= '2020-04-03');
+         return (date >= '2020-04-19' && date <= '2020-05-03');
       },
    },
 };
@@ -29,39 +29,42 @@ const storyLines: StoryLine[] = [
    {
       title: 'Default',
       template: `
-			<YFieldDate
-				v-model="value"
-				:label="label"
-				:is-disabled="isDisabled"
-				:is-required="isRequired"
-				:is-readonly="isReadonly"
-				:error="error"
-			/>
-		`,
+         <YFieldDate
+            v-model="value"
+            :label="label"
+            :is-disabled="isDisabled"
+            :is-optional="isOptional"
+            :hides-optional="hidesOptional"
+            :is-readonly="isReadonly"
+            :error="error"
+            :is-mini="isMini"
+            :side-label-width="sideLabelWidth"
+         />
+      `,
       states: ['value'],
    },
    {
       title: 'Custom dates',
       template: `
-			<YFieldDate
-				v-model="value1"
-				:label="label"
-				:is-disabled="isDisabled"
-				:is-required="isRequired"
-				:is-readonly="isReadonly"
-				:error="error"
-				:custom-dates-fn="customDates"
-			/>
-		`,
+         <YFieldDate
+            v-model="value1"
+            :label="label"
+            :is-disabled="isDisabled"
+            :is-optional="isOptional"
+            :hides-optional="hidesOptional"
+            :is-readonly="isReadonly"
+            :error="error"
+            :custom-dates-fn="customDates"
+            :is-mini="isMini"
+            :side-label-width="sideLabelWidth"
+         />
+      `,
       states: ['value1'],
    },
 ];
 
 
-export default {
-   title: 'Forms / Fields / Field Date',
-   decorators: [withKnobs],
-};
+export default StoryBuilder.createDefault('Forms / Inputs / Field Date');
 export const default_ = StoryBuilder.createStory(vue, storyLines);
 export const docs = StoryBuilder.createDocs(`
 /**

@@ -23,9 +23,17 @@ import '@quasar/extras/roboto-font/roboto-font.css';
 import '@quasar/extras/material-icons/material-icons.css';
 import 'quasar/dist/quasar.css';
 import './css/app.scss';
+import packageJSON from '../package.json';
+
 
 // @ts-ignore
 Vue.use(Quasar);
+
+export class Ocromi {
+   public static version: string = 'v' + packageJSON.version;
+   public static license: string = packageJSON.license;
+   public static description: string = packageJSON.description;
+}
 
 export {
    YForm,
@@ -47,3 +55,23 @@ export {
    YFieldFileUpload,
    YButtonSubmit,
 };
+
+
+// display ocromi version in console
+console.log(
+   `%cPowered by Ocromi%c${ Ocromi.version }`,
+   `
+      padding: 4px 5px 4px 7px;
+      background-color: #585858;
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+      color: #fff;
+   `,
+   `
+      padding: 4px 7px 4px 5px;
+      background-color: #6ab04c;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+      color: #fff;
+   `,
+);

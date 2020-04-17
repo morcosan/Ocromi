@@ -9,21 +9,25 @@ $newHeight: 56px - (24px - $newPaddingTop);
 }
 
 // remove empty space
-.q-item,
-.q-field__marginal,
-.q-field--auto-height .q-field__control {
+.q-select .q-item,
+.q-select .q-field__marginal,
+.q-select.q-field--auto-height .q-field__control,
+.q-select:not(.q-field--labeled) .q-field__native {
    min-height: $newHeight;
 }
 .q-select.q-field--labeled .q-field__native {
    padding-bottom: 0;
 }
 
-// align chips with label
-.y-field-multiselect .q-field__native {
-   margin-left: -4px;
-}
-
 // when disabled, affect textarea, but not label
 .q-select.q-field--disabled .q-field__native {
    opacity: 0.6 !important;
+}
+
+// make the icon on right align correctly
+.q-select.q-field .q-field__append {
+   padding: 0 4px;
+}
+.q-select.q-field .q-field__append + .q-field__append {
+   padding-left: 0;
 }

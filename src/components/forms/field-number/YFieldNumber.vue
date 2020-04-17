@@ -1,15 +1,16 @@
 <script lang="ts">
-   import { Component, Mixins, Override, Prop } from '../../../core/decorators';
+   import { Component, Override, Prop } from '../../../core/decorators';
    import YBaseInputField from '../YBaseInputField';
+   import YTemplateInput from '../YTemplateInput.vue';
    import { QInput, QTooltip } from 'quasar';
    import Regex from '../../../utils/regex';
    import Utils from '../../../utils';
 
 
    @Component({
-      components: { QInput, QTooltip },
+      components: { QInput, QTooltip, YTemplateInput },
    })
-   export default class YFieldNumber extends Mixins(YBaseInputField) {
+   export default class YFieldNumber extends YBaseInputField {
 
       @Prop({ default: '' }) public value!: number | string;
       @Prop({ default: false, type: Boolean }) public hasDecimals!: boolean;
@@ -19,18 +20,19 @@
       @Prop({ default: -1 }) public decimals!: number;
 
 
-      public get decimalsHint() {
-         return (this.decimals > 0 ? `Decimals: #.${ '0'.repeat(this.decimals) }` : '');
+      @Override
+      public get valueComputed() {
+         return this.value;
       }
 
 
       @Override
-      public get finalRules() {
+      public get rulesComputed() {
          const rules = [...this.rules];
 
          // add required rule
-         if (this.isRequired) {
-            rules.push((value: string | number) => (value !== '' || this.$locale.all.requiredField));
+         if (!this.isOptional) {
+            rules.push((value: string | number) => (value !== '' || this.$locale.all.requiredError));
          }
 
          // add min/max rule
@@ -59,6 +61,11 @@
          });
 
          return rules;
+      }
+
+
+      public get decimalsHint() {
+         return (this.decimals > 0 ? `Decimals: #.${ '0'.repeat(this.decimals) }` : '');
       }
 
 
@@ -146,6 +153,9 @@
                this.updateValueProp(Number(this.value));
             }
          }
+
+         this.isDirty = true;
+         this.validate();
       }
 
 
@@ -160,55 +170,69 @@
 
 
 <template>
-   <QInput
-      :value="value"
-      :label="finalLabel"
-      :hint="hint"
-      :placeholder="placeholder"
-      :readonly="isReadonly"
-      :bg-color="bgColor"
-      :error-message="error"
-      :error="error !== ''"
-      :rules="finalRules"
-      :disable="isDisabled"
-      :class="{ 'y-field-number': true, 'y-input-spacing': hasSpacing }"
-      :step="valueStep"
-      :bottom-slots="decimals > 0"
-      type="text"
-      outlined
-      lazy-rules
-      @input="updateValueProp($event)"
-      @keydown="onKeyDown"
-      @keyup="onKeyUp"
-      @blur="onBlur"
-      ref="qField"
+   <YTemplateInput
+      class="y-field-number"
+      :is-mini="isMiniComputed"
+      :side-label-width="sideLabelWidthComputed"
+      :label="labelComputed"
+      :error="errorComputed"
    >
-      <template v-slot:append>
-         <div class="y-field-number__control">
-            <button
-               :class="['y-field-number__up', (isReadonly ? 'cursor-not-allowed' : 'cursor-pointer')]"
-               tabindex="-1"
-               @click="onClickArrow(1)"
-            >
-               <QIcon name="keyboard_arrow_up" color="grey-8"/>
-               <QTooltip v-if="!isReadonly">+ {{ valueStep }}</QTooltip>
-            </button>
+      <QInput
+         :value="value"
+         :label="(isMiniComputed ? labelComputed : undefined)"
+         :placeholder="finalPlaceholder"
+         :readonly="isReadonly"
+         :disable="isDisabled"
+         :bg-color="bgColor"
+         :error="!!errorComputed"
+         :step="valueStep"
+         :bottom-slots="decimals > 0"
+         type="text"
+         outlined
+         lazy-rules
+         hide-bottom-space
+         @input="updateValueProp($event)"
+         @keydown="onKeyDown"
+         @keyup="onKeyUp"
+         @blur="onBlur"
+         ref="qField"
+      >
+         <template v-slot:append>
+            <div class="y-field-number__control">
+               <button
+                  :class="['y-field-number__up', (isReadonly ? 'cursor-not-allowed' : 'cursor-pointer')]"
+                  tabindex="-1"
+                  @click="onClickArrow(1)"
+               >
+                  <QIcon name="keyboard_arrow_up" color="grey-8"/>
+                  <QTooltip v-if="!isReadonly">+ {{ valueStep }}</QTooltip>
+               </button>
 
-            <button
-               :class="['y-field-number__down', (isReadonly ? 'cursor-not-allowed' : 'cursor-pointer')]"
-               tabindex="-1"
-               @click="onClickArrow(-1)"
-            >
-               <QIcon name="keyboard_arrow_down" color="grey-8"/>
-               <QTooltip v-if="!isReadonly">- {{ valueStep }}</QTooltip>
-            </button>
+               <button
+                  :class="['y-field-number__down', (isReadonly ? 'cursor-not-allowed' : 'cursor-pointer')]"
+                  tabindex="-1"
+                  @click="onClickArrow(-1)"
+               >
+                  <QIcon name="keyboard_arrow_down" color="grey-8"/>
+                  <QTooltip v-if="!isReadonly">- {{ valueStep }}</QTooltip>
+               </button>
+            </div>
+         </template>
+      </QInput>
+
+
+      <template v-slot:bottom-left>
+         <div v-if="!errorComputed && hint">{{ hint }}</div>
+      </template>
+
+
+      <template v-slot:counter>
+         <div v-if="decimals > -1" class="y-base-input__bottom-right">
+            {{ decimalsHint }}
          </div>
       </template>
 
-      <template v-if="decimals > -1" v-slot:counter>
-         {{ decimalsHint }}
-      </template>
-   </QInput>
+   </YTemplateInput>
 </template>
 
 
@@ -229,8 +253,8 @@
          width: 24px;
          height: 50%;
          box-sizing: border-box;
-         overflow: hidden;
          outline: none;
+         overflow: hidden;
 
          &.cursor-pointer:hover {
             background-color: $grey-3;
@@ -243,5 +267,12 @@
             transform: translate(-50%, -50%);
          }
       }
+   }
+
+   // place the error icon before the arrows
+   .y-field-number /deep/ .q-field__append.q-anchor--skip {
+      position: absolute;
+      right: 26px;
+      padding-right: 0;
    }
 </style>

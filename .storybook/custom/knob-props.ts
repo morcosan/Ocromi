@@ -11,11 +11,20 @@ export const propsInput = {
    isDisabled: {
       default: () => boolean('Is Disabled', false),
    },
-   isRequired: {
-      default: () => boolean('Is Required', false),
+   isOptional: {
+      default: () => boolean('Is Optional', false),
+   },
+   hidesOptional: {
+      default: () => boolean('Hides Optional', false),
    },
    isReadonly: {
       default: () => boolean('Is Readonly', false),
+   },
+   isMini: {
+      default: () => boolean('Is Mini', false),
+   },
+   sideLabelWidth: {
+      default: () => text('Side Label Width', ''),
    },
 };
 

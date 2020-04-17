@@ -1,7 +1,7 @@
 import YFieldNumber from './YFieldNumber.vue';
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
 import { propsInputField } from '.storybook/custom/knob-props';
-import { number, withKnobs } from '@storybook/addon-knobs';
+import { number } from '@storybook/addon-knobs';
 
 
 const vue = {
@@ -35,30 +35,30 @@ const storyLines: StoryLine[] = [
    {
       title: 'Default',
       template: `
-			<YFieldNumber
-				v-model="value"
-				:label="label"
-				:placeholder="placeholder"
-				:hint="hint"
-				:is-disabled="isDisabled"
-				:is-required="isRequired"
-				:is-readonly="isReadonly"
-				:error="error"
-				:min-value="minValue"
-				:max-value="maxValue"
-				:value-step="valueStep"
-				:decimals="decimals"
-			/>
-		`,
+         <YFieldNumber
+            v-model="value"
+            :label="label"
+            :placeholder="placeholder"
+            :hint="hint"
+            :is-disabled="isDisabled"
+            :is-optional="isOptional"
+            :hides-optional="hidesOptional"
+            :is-readonly="isReadonly"
+            :error="error"
+            :min-value="minValue"
+            :max-value="maxValue"
+            :value-step="valueStep"
+            :decimals="decimals"
+            :is-mini="isMini"
+            :side-label-width="sideLabelWidth"
+         />
+      `,
       states: ['value'],
    },
 ];
 
 
-export default {
-   title: 'Forms / Fields / Field Number',
-   decorators: [withKnobs],
-};
+export default StoryBuilder.createDefault('Forms / Inputs / Field Number');
 export const default_ = StoryBuilder.createStory(vue, storyLines);
 export const docs = StoryBuilder.createDocs(`
 /**

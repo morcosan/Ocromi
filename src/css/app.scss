@@ -1,7 +1,3 @@
-/**
- * Global CSS
- */
-
 @import 'variables';
 
 @import 'overrides/native-html';
@@ -13,5 +9,7 @@
 @import 'overrides/quasar/q-date';
 @import 'overrides/quasar/q-file';
 @import 'overrides/quasar/q-btn';
+
+@import 'mixins/quasar-classes';
 
 @import 'modules/forms';

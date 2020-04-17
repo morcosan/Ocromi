@@ -1,21 +1,22 @@
 <script lang="ts">
-   import { Component, Mixins, Override, Prop } from '../../../core/decorators';
+   import { Component, Override, Prop } from '../../../core/decorators';
    import { QOptionGroup } from 'quasar';
    import YBaseInputGroup from '../YBaseInputGroup';
+   import YTemplateInputGroup from '../YTemplateInputGroup.vue';
 
 
    @Component({
-      components: { QOptionGroup },
+      components: { QOptionGroup, YTemplateInputGroup },
    })
-   export default class YGroupCheckbox extends Mixins(YBaseInputGroup) {
+   export default class YGroupCheckbox extends YBaseInputGroup {
 
       @Prop({ default: () => [] }) public value!: string[];
 
 
       @Override
       public validate() {
-         if (this.isRequired) {
-            this.innerError = (this.value.length > 0 ? '' : this.$locale.all.required);
+         if (!this.isOptional) {
+            this.innerError = (this.value.length > 0 ? '' : this.$locale.groupCheckbox.requiredError);
          }
 
          return !this.innerError;
@@ -23,10 +24,8 @@
 
 
       public onInput(value: string[]) {
-         if (this.isRequired) {
-            this.innerError = (value.length > 0 ? '' : this.$locale.all.required);
-         }
-
+         this.isDirty = true;
+         this.validate();
          this.updateValueProp(value);
       }
 
@@ -35,51 +34,31 @@
 
 
 <template>
-   <div
-      :class="{
-         'y-input-box y-group-checkbox': true,
-         'y-input-box--required': isRequired,
-         'y-input-spacing': hasSpacing,
-         'text-negative': innerError,
-      }"
+   <YTemplateInputGroup
+      class="y-group-checkbox"
+      :is-mini="isMiniComputed"
+      :side-label-width="sideLabelWidthComputed"
+      :label="labelComputed"
+      :error="errorComputed"
+      :is-disabled="isDisabled"
+      :is-readonly="isReadonly"
+      :bg-color="bgColor"
    >
-      <div
-         :class="{
-            ['y-form-box__fieldset bg-' + bgColor]: true,
-            'y-form-box__fieldset--with-error': innerError,
-            'y-form-box__fieldset--labeled': !!label,
-            'y-form-box__fieldset--disabled': isDisabled,
-            'y-form-box__fieldset--readonly': isReadonly,
-         }"
-      >
-         <div v-if="!!label" :class="{ ['y-form-box__label text-subtitle1 bg-' + bgColor]: true }">
-            {{ isRequired ? (label + ' *') : label }}
-         </div>
-
-         <QOptionGroup
-            :value="value"
-            :options="options"
-            :disable="isDisabled"
-            :color="innerError ? 'negative' : undefined"
-            :keep-color="!!innerError"
-            type="checkbox"
-            @input="onInput"
-            @keydown="onKeyDown"
-            ref="qOptionGroup"
-         />
-      </div>
-
-      <div :class="{ 'y-form-box__error text-caption': true, 'y-form-box__error--visible': innerError }">
-         {{ innerError }}
-      </div>
-   </div>
+      <QOptionGroup
+         :value="value"
+         :options="options"
+         :disable="isDisabled"
+         :color="(errorComputed ? 'negative' : undefined)"
+         :keep-color="!!errorComputed"
+         type="checkbox"
+         @input="onInput"
+         @keydown="onKeyDown"
+         ref="qOptionGroup"
+      />
+   </YTemplateInputGroup>
 </template>
 
 
 <style scoped lang="scss">
    // @import '../../../css/variables';
-
-   .y-group-checkbox .y-form-box__label {
-      left: -8px;
-   }
 </style>

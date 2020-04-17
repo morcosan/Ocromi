@@ -19,6 +19,7 @@ import YSliderRange from '../slider-range/YSliderRange.vue';
 import YFieldDate from '../field-date/YFieldDate.vue';
 import YFieldFileUpload from '../field-file-upload/YFieldFileUpload.vue';
 import YButtonSubmit from '../../buttons/button-submit/YButtonSubmit.vue';
+import { boolean, text } from '@storybook/addon-knobs';
 
 
 // generate random lists
@@ -46,6 +47,14 @@ const vue = {
       YFieldDate,
       YFieldFileUpload,
       YButtonSubmit,
+   },
+   props: {
+      isMini: {
+         default: () => boolean('Is Mini', false),
+      },
+      sideLabelWidth: {
+         default: () => text('Side Label Width', ''),
+      },
    },
    data() {
       return {
@@ -98,7 +107,8 @@ const vue = {
             min: 40,
             max: 60,
          },
-         termOfService: false,
+         hasTOS: false,
+         hasSpam: false,
          successRate: 50,
          meetingDate: '',
          documents: [],
@@ -115,163 +125,140 @@ const vue = {
 
 
 const basicFormTemplate = `
-<YForm @submit="onSubmit" class="story-form-panel">
-	<div>
-		<YFieldText
-			v-model="fullName"
-			label="Full name"
-			is-required
-			has-spacing
-		/>
-		
-		<YFieldEmail
-			v-model="email"
-			label="Email address"
-			placeholder="email@gmail.com"
-			is-required
-			has-spacing
-		/>
-		
-		<YFieldPassword
-			v-model="password"
-			label="New password"
-			is-required
-			has-spacing
-			has-meter
-		/>
-		
-		<YFieldPassword
-			v-model="password2"
-			label="Confirm password"
-			is-required
-			has-spacing
-		/>
-		
-		<YFieldTextArea
-			v-model="description"
-			label="Description"
-			is-required
-			has-spacing
-		/>
-		
-		<YFieldLink
-			v-model="website"
-			label="Website"
-			placeholder="Enter your website"
-			is-required
-			has-spacing
-		/>
-		
-		<YFieldSelect
-			v-model="jobTitle"
-			:options="jobTitleList"
-			label="Job title"
-			is-required
-			has-spacing
-		/>
-		
-		<YFieldMultiselect
-			v-model="hobbies"
-			:options="hobbyList"
-			:selection-limit="5"
-			label="Hobbies"
-			hint="Select 5 hobbies"
-			can-add-new
-			is-required
-			has-spacing
-		/>
-		
-		<YFieldNumber
-			v-model="budget"
-			:value-step="10"
-			:decimals="2"
-			label="Budget"
-			placeholder="Enter your budget"
-			is-required
-			has-spacing
-		/>
-	</div>
-	
-	<div>		
-		<YGroupCheckbox
-			v-model="jobTypes"
-			:options="jobTypeList"
-			label="Job preferences"
-			is-required
-			has-spacing
-		/>
-		
-		<YGroupRadio
-			v-model="gender"
-			:options="genderList"
-			label="Gender"
-			is-required
-			has-spacing
-		/>
-		
-		<YFieldCipher
-			v-model="cardNumber"
-			input-mask="####  ####  ####  ####"
-			label="Card number"
-			is-required
-			has-spacing
-		/>
-		
-		<YSlider
-			v-model="successRate"
-			:min-value="0"
-			:max-value="100"
-			:value-step="5"
-			label="Success rate"
-			thumb-label=" %"
-			is-required
-			has-spacing
-		/>
-		
-		<YSliderRange
-			v-model="successRange"
-			:min-value="0"
-			:max-value="100"
-			label="Success range"
-			thumb-label=" %"
-			is-required
-			has-spacing
-		/>
-		
-		<YFieldDate
-			v-model="meetingDate"
-			label="Meeting date"
-			is-required
-			has-spacing
-		/>
-		
-		<YFieldFileUpload
-			v-model="documents"
-			label="Upload 3 documents"
-			:max-num-files="3"
-			:rules="[ (value) => (value.length === 3 || 'Please select 3 documents') ]"
-			is-multiple
-			is-required
-			has-spacing
-		/>
-		
-		<YCheckbox
-			v-model="termOfService"
-			is-required
-			has-spacing
-		>
-			I agree with terms of service
-		</YCheckbox>
-		
-		<YButtonSubmit	label="Validate"/>
-	</div>
+<YForm 
+   :is-mini="isMini"
+   :side-label-width="sideLabelWidth"
+   class="story-form-panel"
+   @submit="onSubmit" 
+>
+   <YFieldText
+      v-model="fullName"
+      label="Full name"
+   />
+
+   <YFieldEmail
+      v-model="email"
+      label="Email address"
+      placeholder="email@gmail.com"
+   />
+
+   <YFieldPassword
+      v-model="password"
+      label="New password"
+      has-meter
+   />
+   
+   <YFieldPassword
+      v-model="password2"
+      label="Confirm password"
+   />
+   
+   <YFieldTextArea
+      v-model="description"
+      label="Description"
+   />
+   
+   <YFieldLink
+      v-model="website"
+      label="Website"
+      placeholder="Enter your website"
+   />
+   
+   <YFieldSelect
+      v-model="jobTitle"
+      :options="jobTitleList"
+      label="Job title"
+   />
+   
+   <YFieldMultiselect
+      v-model="hobbies"
+      :options="hobbyList"
+      :selection-limit="5"
+      label="Hobbies"
+      hint="Select 5 hobbies"
+      can-add-new
+   />
+   
+   <YFieldNumber
+      v-model="budget"
+      :value-step="10"
+      :decimals="2"
+      label="Budget"
+      placeholder="Enter your budget"
+   />
+      
+   <YGroupCheckbox
+      v-model="jobTypes"
+      :options="jobTypeList"
+      label="Job preferences"
+   />
+   
+   <YGroupRadio
+      v-model="gender"
+      :options="genderList"
+      label="Gender"
+   />
+   
+   <YFieldCipher
+      v-model="cardNumber"
+      input-mask="####  ####  ####  ####"
+      label="Card number"
+   />
+   
+   <YSlider
+      v-model="successRate"
+      :min-value="0"
+      :max-value="100"
+      :value-step="5"
+      label="Success rate"
+      thumb-label=" %"
+   />
+   
+   <YSliderRange
+      v-model="successRange"
+      :min-value="0"
+      :max-value="100"
+      label="Success range"
+      thumb-label=" %"
+   />
+   
+   <YFieldDate
+      v-model="meetingDate"
+      label="Meeting date"
+   />
+   
+   <YFieldFileUpload
+      v-model="documents"
+      label="Upload 3 documents"
+      :max-num-files="3"
+      :rules="[ (value) => (value.length === 3 || 'Please select 3 documents') ]"
+      is-multiple
+   />
+   
+   <YCheckbox 
+      v-model="hasSpam"
+      label="I want spam"
+      error="You must agree with our terms"
+      is-optional
+   />
+   
+   <YCheckbox 
+      v-model="hasTOS"
+      side-label-width=""
+      error="You must agree with our terms"
+   >
+      I agree with terms of service
+   </YCheckbox>
+   
+   <br/>
+   <br/>
+   
+   <YButtonSubmit	label="Validate"/>
 </YForm>
 `;
 
 
-export default {
-   title: 'Forms / Form',
-};
+export default StoryBuilder.createDefault('Forms / Form');
 export const default_ = StoryBuilder.createBasicStory(vue, basicFormTemplate);
 export const docs = StoryBuilder.createDocs(`
 /**

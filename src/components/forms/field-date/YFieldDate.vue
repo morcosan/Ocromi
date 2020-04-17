@@ -1,17 +1,18 @@
 <script lang="ts">
-   import { Component, Mixins, Override, Prop, Watch } from '../../../core/decorators';
+   import { Component, Debounce, Override, Prop, Watch } from '../../../core/decorators';
    import YBaseInputField from '../YBaseInputField';
+   import YTemplateInput from '../YTemplateInput.vue';
    import { QDate, QIcon, QInput, QPopupProxy, QTooltip } from 'quasar';
    import { DateTime } from 'luxon';
 
 
    @Component({
-      components: { QInput, QIcon, QDate, QPopupProxy, QTooltip },
+      components: { QInput, QIcon, QDate, QPopupProxy, QTooltip, YTemplateInput },
    })
-   export default class YFieldDate extends Mixins(YBaseInputField) {
+   export default class YFieldDate extends YBaseInputField {
 
       @Prop({ default: '' }) public value!: string;
-      @Prop({ default: undefined }) public customDatesFn!: Function | undefined;
+      @Prop({ default: null }) public customDatesFn!: Function | null;
 
 
       public inputValue: string = '';
@@ -22,41 +23,44 @@
       public hasFocus: boolean = false;
 
 
+      @Override
       @Watch('value')
-      public onChange_value(value: string) {
-         this.updateInputValue(value);
+      public onChange_value() {
+         this.updateInputValue(this.value);
+
+         if (this.isDirty) {
+            this.validate();
+         }
       }
 
 
       @Override
-      public get finalRules() {
+      public get valueComputed() {
+         return this.value;
+      }
+
+
+      @Override
+      public get rulesComputed() {
          const rules = [...this.rules];
 
          // add required rule
-         if (this.isRequired) {
-            rules.push((value: string) => (!!value || this.$locale.all.requiredField));
+         if (!this.isOptional) {
+            rules.push((value: string) => (!!value || this.$locale.all.requiredError));
          }
 
          // add custom dates rule
-         if (this.customDatesFn) {
-            rules.push((value: string) => {
-               if (value) {
-                  const date = DateTime.fromFormat(value, this.dateFormatInput);
-                  if (date.isValid) {
-                     const valueISO = date.toFormat(this.dateFormatISO);
-                     // @ts-ignore
-                     return (this.customDatesFn(valueISO) || this.$locale.fieldDate.customDatesError);
-                  }
-                  return false;
-               }
-               return true;
-            });
-         }
+         rules.push(() => {
+            if (this.customDatesFn) {
+               return (this.customDatesFn(this.value) || this.$locale.fieldDate.customDatesError);
+            }
+            return true;
+         });
 
          // add date validation rule
-         rules.push((value: string) => {
-            if (value) {
-               const date = DateTime.fromFormat(value, this.dateFormatInput);
+         rules.push(() => {
+            if (this.inputValue !== '') {
+               const date = DateTime.fromFormat(this.inputValue, this.dateFormatInput);
                return (date.isValid || this.$locale.fieldDate.maskError);
             }
             return true;
@@ -97,6 +101,7 @@
 
       public onDateSelect(value: string) {
          this.updateValueProp(value);
+         this.closeCalendar();
       }
 
 
@@ -123,10 +128,7 @@
             // activate button with space or enter
             if (event.key === ' ' || event.key === 'Enter') {
                event.preventDefault();
-
-               // open popup
-               // @ts-ignore
-               this.$refs.qPopupProxy.show();
+               (this.$refs.qPopupProxy as QPopupProxy).show();
             }
          }
       }
@@ -135,9 +137,21 @@
       public onClickDateIcon() {
          if (this.isReadonly) {
             // for whatever Quasar reason, calling show() actually blocks the popup event
-            // @ts-ignore
-            this.$refs.qPopupProxy.show();
+            (this.$refs.qPopupProxy as QPopupProxy).show();
          }
+      }
+
+
+      public onBlur() {
+         this.hasFocus = false;
+         this.isDirty = true;
+         this.validate();
+      }
+
+
+      @Debounce(800)
+      private closeCalendar() {
+         (this.$refs.qPopupProxy as QPopupProxy).hide();
       }
 
    }
@@ -145,61 +159,78 @@
 
 
 <template>
-   <QInput
-      v-model="inputValue"
-      :label="finalLabel"
-      :hint="(isDisabled || isReadonly) ? '' : $locale.fieldDate.hint"
-      :bg-color="bgColor"
-      :error-message="error"
-      :error="error !== ''"
-      :rules="finalRules"
-      :disable="isDisabled"
-      :readonly="isReadonly"
-      :class="{ 'y-field-date': true, 'y-input-spacing': hasSpacing }"
-      :mask="!!inputValue || hasFocus ? inputMask : ''"
-      fill-mask="_"
-      type="text"
-      unmasked-value
-      hide-hint
-      lazy-rules
-      outlined
-      @input="onInput"
-      @focus="() => (hasFocus = true)"
-      @blur="() => (hasFocus = false)"
-      ref="qField"
+   <YTemplateInput
+      class="y-field-date"
+      :is-mini="isMiniComputed"
+      :side-label-width="sideLabelWidthComputed"
+      :label="labelComputed"
+      :error="errorComputed"
    >
-      <template v-slot:append>
-         <QIcon
-            :class="(isReadonly ? 'cursor-not-allowed' : 'cursor-pointer')"
-            :tabindex="isReadonly ? -1 : 0"
-            name="event"
-            @click="onClickDateIcon"
-            @keydown="onKeyDownIcon"
-         >
-            <QPopupProxy
-               transition-show="scale"
-               transition-hide="scale"
-               @show="onShowCalendar"
-               ref="qPopupProxy"
+      <QInput
+         v-model="inputValue"
+         :label="(isMiniComputed ? labelComputed : undefined)"
+         :bg-color="bgColor"
+         :error="!!errorComputed"
+         :disable="isDisabled"
+         :readonly="isReadonly"
+         :mask="(inputValue || hasFocus ? inputMask : '')"
+         fill-mask="_"
+         type="text"
+         unmasked-value
+         outlined
+         lazy-rules
+         hide-bottom-space
+         @input="onInput"
+         @focus="() => (hasFocus = true)"
+         @blur="onBlur"
+         ref="qField"
+      >
+         <template v-slot:append>
+            <QIcon
+               :class="(isReadonly ? 'cursor-not-allowed' : 'cursor-pointer')"
+               :tabindex="isReadonly ? -1 : 0"
+               name="event"
+               @click="onClickDateIcon"
+               @keydown="onKeyDownIcon"
             >
-               <QDate
-                  :value="value"
-                  :mask="dateFormatQuasarISO"
-                  :options="customDatesAdapter"
-                  :locale="$locale.fieldDate.config"
-                  today-btn
-                  @input="onDateSelect"
-                  ref="qDate"
-               />
-            </QPopupProxy>
+               <QPopupProxy
+                  transition-show="scale"
+                  transition-hide="scale"
+                  @show="onShowCalendar"
+                  ref="qPopupProxy"
+               >
+                  <QDate
+                     :value="value"
+                     :mask="dateFormatQuasarISO"
+                     :options="customDatesAdapter"
+                     :locale="$locale.fieldDate.config"
+                     today-btn
+                     @input="onDateSelect"
+                     ref="qDate"
+                  />
+               </QPopupProxy>
 
-            <QTooltip v-if="!isReadonly">{{ $locale.fieldDate.tooltip }}</QTooltip>
-         </QIcon>
+               <QTooltip v-if="!isReadonly">{{ $locale.fieldDate.tooltip }}</QTooltip>
+            </QIcon>
+         </template>
+      </QInput>
+
+
+      <template v-slot:bottom-left>
+         <div v-if="!errorComputed">{{ $locale.fieldDate.hint }}</div>
       </template>
-   </QInput>
+
+   </YTemplateInput>
 </template>
 
 
 <style scoped lang="scss">
    // @import '../../../css/variables';
+
+   // place the error icon before the date icon
+   .y-field-date /deep/ .q-field .q-field__append.q-anchor--skip {
+      position: absolute;
+      right: 34px;
+      padding-right: 0;
+   }
 </style>

@@ -1,26 +1,33 @@
 <script lang="ts">
-   import { Component, Mixins, Override, Prop } from '../../../core/decorators';
+   import { Component, Override, Prop } from '../../../core/decorators';
    import YBaseInputField from '../YBaseInputField';
+   import YTemplateInput from '../YTemplateInput.vue';
    import { QInput } from 'quasar';
    import Regex from '../../../utils/regex';
    import Utils from '../../../utils';
 
 
    @Component({
-      components: { QInput },
+      components: { QInput, YTemplateInput },
    })
-   export default class YFieldEmail extends Mixins(YBaseInputField) {
+   export default class YFieldEmail extends YBaseInputField {
 
       @Prop({ default: '' }) public value!: string;
 
 
       @Override
-      public get finalRules() {
+      public get valueComputed() {
+         return this.value;
+      }
+
+
+      @Override
+      public get rulesComputed() {
          const rules = [...this.rules];
 
          // add required rule
-         if (this.isRequired) {
-            rules.push((value: string) => (!!value || this.$locale.all.requiredField));
+         if (!this.isOptional) {
+            rules.push((value: string) => (!!value || this.$locale.all.requiredError));
          }
 
          // add email rule
@@ -51,25 +58,37 @@
 
 
 <template>
-   <QInput
-      :value="value"
-      :label="finalLabel"
-      :hint="hint"
-      :placeholder="placeholder"
-      :bg-color="bgColor"
-      :error-message="error"
-      :error="error !== ''"
-      :rules="finalRules"
-      :readonly="isReadonly"
-      :disable="isDisabled"
-      :class="{ 'y-field-email': true, 'y-input-spacing': hasSpacing }"
-      type="email"
-      outlined
-      lazy-rules
-      @input="updateValueProp($event)"
-      @keydown="onKeyDown"
-      ref="qField"
-   />
+   <YTemplateInput
+      class="y-field-email"
+      :is-mini="isMiniComputed"
+      :side-label-width="sideLabelWidthComputed"
+      :label="labelComputed"
+      :error="errorComputed"
+   >
+      <QInput
+         :value="value"
+         :label="(isMiniComputed ? labelComputed : undefined)"
+         :placeholder="finalPlaceholder"
+         :bg-color="bgColor"
+         :readonly="isReadonly"
+         :disable="isDisabled"
+         :error="!!errorComputed"
+         type="email"
+         outlined
+         lazy-rules
+         hide-bottom-space
+         @input="updateValueProp($event)"
+         @keydown="onKeyDown"
+         @blur="onBlur"
+         ref="qField"
+      />
+
+
+      <template v-slot:bottom-left>
+         <div v-if="!errorComputed && hint">{{ hint }}</div>
+      </template>
+
+   </YTemplateInput>
 </template>
 
 

@@ -1,13 +1,14 @@
 <script lang="ts">
-   import { Component, Mixins, Override, Prop } from '../../../core/decorators';
+   import { Component, Override, Prop } from '../../../core/decorators';
    import YBaseInputSlider, { Range } from '../YBaseInputSlider';
+   import YTemplateInputSlider from '../YTemplateInputSlider.vue';
    import { QRange } from 'quasar';
 
 
    @Component({
-      components: { QRange },
+      components: { QRange, YTemplateInputSlider },
    })
-   export default class YSliderRange extends Mixins(YBaseInputSlider) {
+   export default class YSliderRange extends YBaseInputSlider {
 
       @Prop({ default: () => ({ min: 0, max: 0 }) }) public value!: Range;
       @Prop({ default: false, type: Boolean }) public isFixed!: number;
@@ -52,55 +53,35 @@
 
 
 <template>
-   <div
-      :class="{
-         'y-input-box y-slider-base y-slider-range': true,
-         'y-input-box--required': isRequired,
-         'y-input-spacing': hasSpacing,
-         'text-negative': innerError,
-      }"
+   <YTemplateInputSlider
+      class="y-slider-range"
+      :is-mini="isMiniComputed"
+      :side-label-width="sideLabelWidthComputed"
+      :label="labelComputed"
+      :error="errorComputed"
+      :is-disabled="isDisabled"
+      :is-readonly="isReadonly"
+      :min-value="minValue"
+      :max-value="maxValue"
+      :bg-color="bgColor"
    >
-      <div
-         :class="{
-            ['y-form-box__fieldset bg-' + bgColor]: true,
-            'y-form-box__fieldset--with-error': innerError,
-            'y-form-box__fieldset--labeled': !!label,
-            'y-form-box__fieldset--disabled': isDisabled,
-            'y-form-box__fieldset--readonly': isReadonly,
-         }"
-      >
-         <div v-if="!!label" :class="{ ['y-form-box__label text-subtitle1 bg-' + bgColor]: true }">
-            {{ isRequired ? (label + ' *') : label }}
-         </div>
-
-         <div class="y-slider__min-max text-caption">
-            <div class="y-slider__min">{{ minValue }}</div>
-            <div class="y-slider__max">{{ maxValue }}</div>
-         </div>
-
-         <QRange
-            :value="value"
-            :min="minValue"
-            :max="maxValue"
-            :step="valueStep"
-            :label="!!label"
-            :left-label-value="value.min + thumbSuffix"
-            :right-label-value="value.max + thumbSuffix"
-            :markers="hasMarkers"
-            :readonly="isReadonly"
-            :disable="isDisabled"
-            :label-always="isDirty || isDisabled || isReadonly"
-            :drag-only-range="isFixed"
-            drag-range
-            @input="onInput"
-            ref="qRange"
-         />
-      </div>
-
-      <div :class="{ 'y-form-box__error text-caption': true, 'y-form-box__error--visible': innerError }">
-         {{ innerError }}
-      </div>
-   </div>
+      <QRange
+         :value="value"
+         :min="minValue"
+         :max="maxValue"
+         :step="valueStep"
+         :left-label-value="value.min + thumbSuffix"
+         :right-label-value="value.max + thumbSuffix"
+         :markers="hasMarkers"
+         :readonly="isReadonly"
+         :disable="isDisabled"
+         :label-always="isDirty || isDisabled || isReadonly"
+         :drag-only-range="isFixed"
+         drag-range
+         @input="onInput"
+         ref="qRange"
+      />
+   </YTemplateInputSlider>
 </template>
 
 

@@ -25,4 +25,13 @@ export default class Utils {
       return (str.match(regex) || []).length;
    }
 
+
+   public static openURL(url: string) {
+      const newWindow = globalThis.open('', '_blank');
+      if (newWindow) {
+         newWindow.opener = null;
+         newWindow.location.href = url;
+      }
+   }
+
 }
