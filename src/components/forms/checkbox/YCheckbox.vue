@@ -62,6 +62,7 @@
          'y-base-input y-checkbox': true,
          'has-side-label': sideLabelWidthComputed,
          'has-error': innerError,
+         'is-disabled': isDisabled,
       }"
    >
       <div
@@ -120,6 +121,10 @@
       /deep/ a {
          color: initial;
          text-decoration: underline;
+      }
+
+      &.is-disabled /deep/ .q-checkbox__inner {
+         opacity: 0.5;
       }
    }
 </style>

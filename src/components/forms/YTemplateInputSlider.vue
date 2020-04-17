@@ -26,6 +26,7 @@
    <YTemplateInput
       class="y-base-slider"
       :is-mini="isMini"
+      :is-disabled="isDisabled"
       :side-label-width="sideLabelWidth"
       :label="label"
       :error="error"
@@ -33,9 +34,7 @@
       <div
          :class="{
             ['y-base-input__fieldset bg-' + bgColor]: true,
-            'has-error': error,
             'has-label': (isMini && label),
-            'is-disabled': isDisabled,
             'is-readonly': isReadonly,
          }"
       >

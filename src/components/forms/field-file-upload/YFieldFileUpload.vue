@@ -128,6 +128,7 @@
    <YTemplateInput
       :class="'y-field-file-upload ' + (value.length === 0 ? 'is-empty' : '')"
       :is-mini="isMiniComputed"
+      :is-disabled="isDisabledComputed"
       :side-label-width="sideLabelWidthComputed"
       :label="labelComputed"
       :error="errorComputed"

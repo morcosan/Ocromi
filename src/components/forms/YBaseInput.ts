@@ -32,6 +32,10 @@ export default class YBaseInput extends Vue {
 
    @Watch('value')
    public onChange_value() {
+      if (this.parentForm) {
+         this.parentForm.emitInputChange();
+      }
+      
       if (this.isDirty) {
          this.validate();
       }
@@ -96,10 +100,6 @@ export default class YBaseInput extends Vue {
 
    public validate() {
       this.innerError = this.getValidationError();
-
-      if (this.parentForm) {
-         this.parentForm.emitInputChange();
-      }
 
       return !this.innerError;
    }

@@ -61,6 +61,7 @@
    <YTemplateInput
       class="y-field-email"
       :is-mini="isMiniComputed"
+      :is-disabled="isDisabledComputed"
       :side-label-width="sideLabelWidthComputed"
       :label="labelComputed"
       :error="errorComputed"

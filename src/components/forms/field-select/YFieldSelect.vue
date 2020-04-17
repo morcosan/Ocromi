@@ -45,6 +45,7 @@
    <YTemplateInput
       class="y-field-select"
       :is-mini="isMiniComputed"
+      :is-disabled="isDisabledComputed"
       :side-label-width="sideLabelWidthComputed"
       :label="labelComputed"
       :error="errorComputed"

@@ -162,6 +162,7 @@
    <YTemplateInput
       class="y-field-date"
       :is-mini="isMiniComputed"
+      :is-disabled="isDisabledComputed"
       :side-label-width="sideLabelWidthComputed"
       :label="labelComputed"
       :error="errorComputed"

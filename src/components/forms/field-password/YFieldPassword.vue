@@ -123,6 +123,7 @@
    <YTemplateInput
       :class="'y-field-password ' + (hasMeter ? 'has-meter' : '')"
       :is-mini="isMiniComputed"
+      :is-disabled="isDisabledComputed"
       :side-label-width="sideLabelWidthComputed"
       :label="labelComputed"
       :error="errorComputed"
