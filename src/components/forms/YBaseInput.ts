@@ -106,7 +106,6 @@ export default class YBaseInput extends Vue {
 
    public validate() {
       this.innerError = this.getValidationError();
-
       return !this.innerError;
    }
 

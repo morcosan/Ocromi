@@ -149,7 +149,12 @@
 
 
    .y-form & {
-      margin-bottom: 25px;
+      margin-bottom: 20px;
+
+      &.is-mini,
+      &.has-side-label {
+         margin-bottom: 16px;
+      }
 
       &.y-checkbox:not(.has-side-label) {
          margin-bottom: 0;

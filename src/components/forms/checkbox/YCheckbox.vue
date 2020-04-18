@@ -61,7 +61,7 @@
          'y-base-input y-checkbox': true,
          'has-side-label': sideLabelWidthComputed,
          'has-error': innerError,
-         'is-disabled': isDisabled,
+         'is-disabled': isDisabledComputed,
       }"
    >
       <div

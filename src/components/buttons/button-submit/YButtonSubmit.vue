@@ -29,6 +29,6 @@
    // @import '../../../css/variables';
 
    .y-button-submit {
-      margin-top: 40px;
+      min-width: 80px;
    }
 </style>

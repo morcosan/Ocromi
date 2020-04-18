@@ -1,6 +1,7 @@
 import StoryBuilder from '.storybook/custom/story-builder';
 import { generateRandomOptions } from '.storybook/custom/utils';
 import '.storybook/custom/story-builder.scss';
+import { boolean, text } from '@storybook/addon-knobs';
 import YForm from './YForm.vue';
 import YCheckbox from '../checkbox/YCheckbox.vue';
 import YFieldText from '../field-text/YFieldText.vue';
@@ -19,7 +20,7 @@ import YSliderRange from '../slider-range/YSliderRange.vue';
 import YFieldDate from '../field-date/YFieldDate.vue';
 import YFieldFileUpload from '../field-file-upload/YFieldFileUpload.vue';
 import YButtonSubmit from '../../buttons/button-submit/YButtonSubmit.vue';
-import { boolean, text } from '@storybook/addon-knobs';
+import YButtonReset from '../../buttons/button-reset/YButtonReset.vue';
 
 
 // generate random lists
@@ -47,6 +48,7 @@ const vue = {
       YFieldDate,
       YFieldFileUpload,
       YButtonSubmit,
+      YButtonReset,
    },
    props: {
       isMini: {
@@ -54,6 +56,9 @@ const vue = {
       },
       sideLabelWidth: {
          default: () => text('Side Label Width', ''),
+      },
+      optional: {
+         default: () => boolean('+ Optional Inputs', false),
       },
    },
    data() {
@@ -116,8 +121,13 @@ const vue = {
       };
    },
    methods: {
-      onSubmit(event: Event) {
-         console.log('Form submitted');
+      onSubmit() {
+         console.log('Submitting...');
+         setTimeout(() => {
+            console.log('Form submitted');
+            // @ts-ignore
+            this.$refs.form.onSubmitComplete();
+         }, 5000);
       },
    },
 };
@@ -129,44 +139,52 @@ const basicFormTemplate = `
    :side-label-width="sideLabelWidth"
    class="story-form-panel"
    @submit="onSubmit" 
+   ref="form"
 >
    <YFieldText
       v-model="fullName"
       label="Full name"
+      :is-optional="optional"
    />
 
    <YFieldEmail
       v-model="email"
       label="Email address"
       placeholder="email@gmail.com"
+      :is-optional="optional"
    />
 
    <YFieldPassword
       v-model="password"
       label="New password"
       has-meter
+      :is-optional="optional"
    />
    
    <YFieldPassword
       v-model="password2"
       label="Confirm password"
+      :is-optional="optional"
    />
    
    <YFieldTextArea
       v-model="description"
       label="Description"
+      :is-optional="optional"
    />
    
    <YFieldLink
       v-model="website"
       label="Website"
       placeholder="Enter your website"
+      :is-optional="optional"
    />
    
    <YFieldSelect
       v-model="jobTitle"
       :options="jobTitleList"
       label="Job title"
+      :is-optional="optional"
    />
    
    <YFieldMultiselect
@@ -176,6 +194,7 @@ const basicFormTemplate = `
       label="Hobbies"
       hint="Select 5 hobbies"
       can-add-new
+      :is-optional="optional"
    />
    
    <YFieldNumber
@@ -184,24 +203,28 @@ const basicFormTemplate = `
       :decimals="2"
       label="Budget"
       placeholder="Enter your budget"
+      :is-optional="optional"
    />
       
    <YGroupCheckbox
       v-model="jobTypes"
       :options="jobTypeList"
       label="Job preferences"
+      :is-optional="optional"
    />
    
    <YGroupRadio
       v-model="gender"
       :options="genderList"
       label="Gender"
+      :is-optional="optional"
    />
    
    <YFieldCipher
       v-model="cardNumber"
       input-mask="####  ####  ####  ####"
       label="Card number"
+      :is-optional="optional"
    />
    
    <YSlider
@@ -211,6 +234,7 @@ const basicFormTemplate = `
       :value-step="5"
       label="Success rate"
       thumb-label=" %"
+      :is-optional="optional"
    />
    
    <YSliderRange
@@ -219,43 +243,83 @@ const basicFormTemplate = `
       :max-value="100"
       label="Success range"
       thumb-label=" %"
+      :is-optional="optional"
    />
    
    <YFieldDate
       v-model="meetingDate"
       label="Meeting date"
+      :is-optional="optional"
    />
    
    <YFieldFileUpload
       v-model="documents"
-      label="Upload 3 documents"
+      label="Upload documents"
       :max-num-files="3"
-      :rules="[ (value) => (value.length === 3 || 'Please select 3 documents') ]"
       is-multiple
+      :is-optional="optional"
    />
    
    <YCheckbox 
       v-model="hasSpam"
       label="I want spam"
-      error="You must agree with our terms"
-      is-optional
+      error="You must want spam"
+      :is-optional="optional"
    />
    
    <YCheckbox 
       v-model="hasTOS"
       side-label-width=""
       error="You must agree with our terms"
+      :is-optional="optional"
    >
       I agree with terms of service
    </YCheckbox>
    
-   <YButtonSubmit	label="Validate"/>
+   <br/>
+   <br/>
+   
+   <YButtonSubmit	label="Save"/>
+   <YButtonReset label="Reset"/>
+</YForm>
+`;
+
+
+const loginFormTemplate = `
+<YForm 
+   :is-mini="isMini"
+   :side-label-width="sideLabelWidth"
+   class="story-form-panel"
+   @submit="onSubmit" 
+   ref="form"
+>
+   <YFieldEmail
+      v-model="email"
+      label="Email address"
+      placeholder="email@gmail.com"
+      :is-optional="optional"
+   />
+
+   <YFieldPassword
+      v-model="password"
+      label="New password"
+      :is-optional="optional"
+   />
+   
+   <br/>
+   
+   <YButtonSubmit	
+      label="Log In" 
+      will-be-enabled
+      style="width: 100%"
+   />
 </YForm>
 `;
 
 
 export default StoryBuilder.createDefault('Forms / Form');
 export const default_ = StoryBuilder.createBasicStory(vue, basicFormTemplate);
+export const login = StoryBuilder.createBasicStory(vue, loginFormTemplate);
 export const docs = StoryBuilder.createDocs(`
 /**
  * Used when displaying form controls.

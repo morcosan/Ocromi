@@ -1,11 +1,11 @@
+import StoryBuilder from '.storybook/custom/story-builder';
+import { propsButton } from '.storybook/custom/knob-props';
+import { text } from '@storybook/addon-knobs';
 import YButtonReset from './YButtonReset.vue';
 import YButtonSubmit from './../button-submit/YButtonSubmit.vue';
 import YForm from '../../forms/form/YForm.vue';
 import YCheckbox from '../../forms/checkbox/YCheckbox.vue';
 import YFieldText from '../../forms/field-text/YFieldText.vue';
-import StoryBuilder from '.storybook/custom/story-builder';
-import { propsButton } from '.storybook/custom/knob-props';
-import { text } from '@storybook/addon-knobs';
 
 
 const vue = {
@@ -13,8 +13,8 @@ const vue = {
       YForm,
       YCheckbox,
       YFieldText,
-      YButtonReset,
       YButtonSubmit,
+      YButtonReset,
    },
    props: {
       ...propsButton,
@@ -66,8 +66,10 @@ const basicFormTemplate = `
       I agree with terms of service
    </YCheckbox>
    
-   <YButtonSubmit label="Submit"/>
+   <br/>
+   <br/>
    
+   <YButtonSubmit label="Submit"/>
    <YButtonReset
       :label="label"
       :is-disabled="isDisabled"

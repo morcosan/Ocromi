@@ -1,7 +1,7 @@
-import YButtonConfirm from './YButtonConfirm.vue';
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
 import { propsButtonLoading } from '../../../../.storybook/custom/knob-props';
 import { text } from '@storybook/addon-knobs';
+import YButtonConfirm from './YButtonConfirm.vue';
 
 
 const vue = {

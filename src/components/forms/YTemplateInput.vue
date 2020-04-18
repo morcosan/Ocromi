@@ -22,6 +22,7 @@
          'has-side-label': sideLabelWidth,
          'has-error': error,
          'is-disabled': isDisabled,
+         'is-mini': isMini,
       }"
    >
       <div

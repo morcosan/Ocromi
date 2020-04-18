@@ -1,10 +1,10 @@
+import StoryBuilder from '.storybook/custom/story-builder';
+import { propsButtonLoading } from '.storybook/custom/knob-props';
+import { boolean, text } from '@storybook/addon-knobs';
 import YButtonSubmit from './YButtonSubmit.vue';
 import YForm from '../../forms/form/YForm.vue';
 import YCheckbox from '../../forms/checkbox/YCheckbox.vue';
 import YFieldText from '../../forms/field-text/YFieldText.vue';
-import StoryBuilder from '.storybook/custom/story-builder';
-import { propsButtonLoading } from '.storybook/custom/knob-props';
-import { boolean, text } from '@storybook/addon-knobs';
 
 
 const vue = {
@@ -72,6 +72,9 @@ const basicFormTemplate = `
    >
       I agree with terms of service
    </YCheckbox>
+   
+   <br/>
+   <br/>
    
    <YButtonSubmit
       :label="label"

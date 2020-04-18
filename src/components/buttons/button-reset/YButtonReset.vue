@@ -27,6 +27,6 @@
    // @import '../../../css/variables';
 
    .y-button-reset {
-      margin: 40px 12px 0;
+      margin: 0 12px;
    }
 </style>
