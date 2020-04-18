@@ -26,13 +26,6 @@ export default class YBaseInputSelect extends YBaseInput {
 
 
    @Override
-   public focus() {
-      // @ts-ignore
-      this.$refs.qSelect.focus();
-   }
-
-
-   @Override
    public created() {
       // set current options
       this.currOptions = this.options;

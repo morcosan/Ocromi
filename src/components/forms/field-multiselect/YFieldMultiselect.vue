@@ -34,6 +34,12 @@
       }
 
 
+      @Override
+      public created() {
+         this.initialValue = this.value;
+      }
+
+
       public onInput(value: Option[] | null) {
          // Quasar sets null on clear
          if (value === null) {
@@ -102,7 +108,7 @@
          @filter="onFilterInput"
          @new-value="onNewOption"
          @blur="onBlur"
-         ref="qSelect"
+         ref="inputRef"
       >
          <template v-slot:selected-item="scope">
             <QChip

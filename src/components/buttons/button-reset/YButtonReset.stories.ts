@@ -1,11 +1,11 @@
-import YButtonSubmit from './YButtonSubmit.vue';
+import YButtonReset from './YButtonReset.vue';
+import YButtonSubmit from './../button-submit/YButtonSubmit.vue';
 import YForm from '../../forms/form/YForm.vue';
 import YCheckbox from '../../forms/checkbox/YCheckbox.vue';
 import YFieldText from '../../forms/field-text/YFieldText.vue';
-import YButtonReset from '../button-reset/YButtonReset.vue';
 import StoryBuilder from '.storybook/custom/story-builder';
-import { propsButtonLoading } from '.storybook/custom/knob-props';
-import { boolean, text } from '@storybook/addon-knobs';
+import { propsButton } from '.storybook/custom/knob-props';
+import { text } from '@storybook/addon-knobs';
 
 
 const vue = {
@@ -13,16 +13,13 @@ const vue = {
       YForm,
       YCheckbox,
       YFieldText,
-      YButtonSubmit,
       YButtonReset,
+      YButtonSubmit,
    },
    props: {
-      ...propsButtonLoading,
+      ...propsButton,
       label: {
-         default: () => text('Label', 'Submit'),
-      },
-      isActivatable: {
-         default: () => boolean('Is Activatable', false),
+         default: () => text('Label', 'Reset'),
       },
    },
    data() {
@@ -33,8 +30,8 @@ const vue = {
       };
    },
    methods: {
-      onSubmit() {
-         console.log('form submitted');
+      onReset() {
+         console.log('form reset');
       },
    },
 };
@@ -43,18 +40,11 @@ const vue = {
 const basicFormTemplate = `
 <YForm 
    class="story-form-panel"
-   @submit="onSubmit" 
+   @reset="onReset" 
 >
    <YFieldText
       v-model="fullName"
       label="Full name"
-   />
-   
-   <YCheckbox 
-      v-model="hasSpam"
-      label="I want spam"
-      error="You must agree with our terms"
-      is-optional
    />
    
    <YCheckbox 
@@ -65,24 +55,21 @@ const basicFormTemplate = `
       I agree with terms of service
    </YCheckbox>
    
-   <YButtonSubmit
-      :label="label"
-      :is-loading="isLoading"
-      :is-disabled="isDisabled"
-      :loading-time="loadingTime"
-      :spinner="spinner"
-      :is-activatable="isActivatable"
-   />
+   <YButtonSubmit label="Submit"/>
    
-   <YButtonReset label="Reset"/>
+   <YButtonReset
+      :label="label"
+      :is-disabled="isDisabled"
+      @reset="onReset" 
+   />
 </YForm>
 `;
 
 
-export default StoryBuilder.createDefault('Buttons / Button Submit');
+export default StoryBuilder.createDefault('Buttons / Button Reset');
 export const default_ = StoryBuilder.createBasicStory(vue, basicFormTemplate);
 export const docs = StoryBuilder.createDocs(`
 /**
- * Used when user needs to take the submit action for certain data.
+ * Used when user needs to take clear the form.
  */
 `);

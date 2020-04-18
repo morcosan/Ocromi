@@ -76,6 +76,16 @@ export const propsInputField = {
 };
 
 
+export const propsButton = {
+   label: {
+      default: () => text('Label', 'Nice button'),
+   },
+   isDisabled: {
+      default: () => boolean('Is Disabled', false),
+   },
+};
+
+
 const spinners = {
    Default: 'DEFAULT',
    Bars: 'BARS',
@@ -90,18 +100,13 @@ const spinners = {
    Radio: 'RADIO',
 };
 
-export const propsButton = {
-   label: {
-      default: () => text('Label', 'Nice button'),
-   },
+export const propsButtonLoading = {
+   ...propsButton,
    isLoading: {
       default: () => boolean('Is Loading', false),
    },
-   isDisabled: {
-      default: () => boolean('Is Disabled', false),
-   },
    loadingTime: {
-      default: () => number('Loading Time', 3000),
+      default: () => number('Loading Time', 2000),
    },
    spinner: {
       default: () => select('Spinner', spinners, 'DEFAULT'),

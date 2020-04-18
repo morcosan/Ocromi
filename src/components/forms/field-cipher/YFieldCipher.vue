@@ -31,12 +31,6 @@
 
 
       @Override
-      public created() {
-         this.prepareValidation();
-      }
-
-
-      @Override
       public get rulesComputed() {
          const rules = [...this.rules];
 
@@ -58,6 +52,13 @@
          }
 
          return rules;
+      }
+
+
+      @Override
+      public created() {
+         this.initialValue = this.value;
+         this.prepareValidation();
       }
 
 
@@ -101,7 +102,7 @@
          hide-bottom-space
          @input="updateValueProp($event)"
          @blur="onBlur"
-         ref="qField"
+         ref="inputRef"
       />
 
 

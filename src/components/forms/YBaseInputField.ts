@@ -14,13 +14,6 @@ export default class YBaseInputField extends YBaseInput {
    }
 
 
-   @Override
-   public focus() {
-      // @ts-ignore
-      this.$refs.qField.focus();
-   }
-
-
    public onBlur() {
       this.isDirty = true;
       this.validate();

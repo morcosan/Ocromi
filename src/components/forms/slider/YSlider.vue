@@ -1,5 +1,5 @@
 <script lang="ts">
-   import { Component, Prop } from '../../../core/decorators';
+   import { Component, Override, Prop } from '../../../core/decorators';
    import YBaseInputSlider from '../YBaseInputSlider';
    import YTemplateInputSlider from '../YTemplateInputSlider.vue';
    import { QSlider } from 'quasar';
@@ -11,6 +11,12 @@
    export default class YSlider extends YBaseInputSlider {
 
       @Prop({ default: 0 }) public value!: number;
+
+
+      @Override
+      public created() {
+         this.initialValue = this.value;
+      }
 
 
       public onInput(value: number) {
@@ -53,7 +59,7 @@
          :readonly="isReadonly"
          :disable="isDisabledComputed"
          @input="onInput"
-         ref="qSlider"
+         ref="inputRef"
       />
    </YTemplateInputSlider>
 </template>

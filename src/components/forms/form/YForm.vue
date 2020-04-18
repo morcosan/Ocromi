@@ -15,6 +15,7 @@
    <QForm
       class="y-form"
       @submit="onSubmit"
+      @reset="$emit('reset')"
    >
       <slot/>
    </QForm>

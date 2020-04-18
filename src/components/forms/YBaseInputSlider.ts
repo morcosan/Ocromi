@@ -31,17 +31,4 @@ export default class YBaseInputSlider extends YBaseInput {
       return rules;
    }
 
-
-   @Override
-   public focus() {
-      if (this.$refs.qRange) {
-         // @ts-ignore
-         this.$refs.qRange.$el.querySelector('[tabindex]').focus();
-      }
-      else if (this.$refs.qSlider) {
-         // @ts-ignore
-         this.$refs.qSlider.$el.focus();
-      }
-   }
-
 }

@@ -31,6 +31,12 @@
          return rules;
       }
 
+
+      @Override
+      public created() {
+         this.initialValue = this.value;
+      }
+
    }
 </script>
 
@@ -58,7 +64,7 @@
          hide-bottom-space
          @input="updateValueProp($event)"
          @blur="onBlur"
-         ref="qField"
+         ref="inputRef"
       />
 
 

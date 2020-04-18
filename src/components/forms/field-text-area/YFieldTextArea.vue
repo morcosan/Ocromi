@@ -37,6 +37,12 @@
       }
 
 
+      @Override
+      public created() {
+         this.initialValue = this.value;
+      }
+
+
       public onInput(event: string) {
          if (this.nativeElem) {
             // check if scrollbar is active
@@ -80,7 +86,7 @@
          @input="onInput"
          @focus="onFocus"
          @blur="onBlur"
-         ref="qField"
+         ref="inputRef"
       />
 
 

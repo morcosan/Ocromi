@@ -42,6 +42,12 @@
       }
 
 
+      @Override
+      public created() {
+         this.initialValue = this.value;
+      }
+
+
       public onKeyDown(event: KeyboardEvent) {
          if (Utils.isSpecialKey(event)) {
             return;
@@ -81,7 +87,7 @@
          @input="updateValueProp($event)"
          @keydown="onKeyDown"
          @blur="onBlur"
-         ref="qField"
+         ref="inputRef"
       />
 
 

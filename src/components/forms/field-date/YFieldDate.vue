@@ -72,6 +72,7 @@
 
       @Override
       public created() {
+         this.initialValue = this.value;
          this.updateInputValue(this.value);
       }
 
@@ -184,7 +185,7 @@
          @input="onInput"
          @focus="() => (hasFocus = true)"
          @blur="onBlur"
-         ref="qField"
+         ref="inputRef"
       >
          <template v-slot:append>
             <QIcon

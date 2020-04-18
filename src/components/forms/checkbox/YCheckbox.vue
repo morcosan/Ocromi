@@ -13,6 +13,12 @@
       @Prop({ default: false }) public value!: boolean | null;
 
 
+      @Override
+      public get isValid() {
+         return (this.isOptional ? true : !!this.value);
+      }
+
+
       public get optionalText() {
          const hasOptional = (this.isOptional && !this.hidesOptional);
          return (hasOptional ? (this.$locale.all.optional + ' ') : '');
@@ -35,15 +41,8 @@
 
 
       @Override
-      public isValid() {
-         return (this.isOptional ? true : !!this.value);
-      }
-
-
-      @Override
-      public focus() {
-         // @ts-ignore
-         this.$refs.qCheckbox.$el.focus();
+      public created() {
+         this.initialValue = this.value;
       }
 
 
@@ -80,7 +79,7 @@
             :color="(innerError ? 'negative' : undefined)"
             :keep-color="!!innerError"
             @input="onInput"
-            ref="qCheckbox"
+            ref="inputRef"
          >
             <div v-if="!sideLabelWidthComputed">
                {{ optionalText }}

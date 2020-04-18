@@ -1,10 +1,10 @@
 import { Component, Override, Prop, Vue, Watch } from '../../core/decorators';
-import YBaseButton from './YBaseButton';
+import YBaseButtonLoading from './YBaseButtonLoading';
 import YBaseForm from '../forms/YBaseForm';
 
 
 @Component
-export default class YBaseButtonSubmit extends YBaseButton {
+export default class YBaseButtonSubmit extends YBaseButtonLoading {
 
    @Prop({ default: false, type: Boolean }) public isActivatable!: boolean;
 

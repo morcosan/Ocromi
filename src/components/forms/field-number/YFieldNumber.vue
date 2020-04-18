@@ -64,6 +64,12 @@
       }
 
 
+      @Override
+      public created() {
+         this.initialValue = this.value;
+      }
+
+
       public get decimalsHint() {
          return (this.decimals > 0 ? `Decimals: #.${ '0'.repeat(this.decimals) }` : '');
       }
@@ -196,7 +202,7 @@
          @keydown="onKeyDown"
          @keyup="onKeyUp"
          @blur="onBlur"
-         ref="qField"
+         ref="inputRef"
       >
          <template v-slot:append>
             <div class="y-field-number__control">

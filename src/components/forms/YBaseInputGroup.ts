@@ -22,9 +22,9 @@ export default class YBaseInputGroup extends YBaseInput {
 
    public get qOptionGroupChildren() {
       // compute HTML list of group's children
-      if (this.$refs.qOptionGroup) {
+      if (this.$refs.inputRef) {
          // @ts-ignore
-         return this.$refs.qOptionGroup.$el.children;
+         return this.$refs.inputRef.$el.children;
       }
 
       return [];

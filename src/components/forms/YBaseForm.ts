@@ -1,6 +1,7 @@
 import { Component, Prop, Vue, Watch } from '../../core/decorators';
 import YBaseInput from './YBaseInput';
 import YBaseButtonSubmit from '../buttons/YBaseButtonSubmit';
+import YBaseButtonReset from '../buttons/YBaseButtonReset';
 
 
 @Component
@@ -12,6 +13,7 @@ export default class YBaseForm extends Vue {
 
    private inputChildren: YBaseInput[] = [];
    private submitButton!: YBaseButtonSubmit;
+   private resetButton!: YBaseButtonReset;
 
 
    @Watch('isMini')
@@ -49,20 +51,27 @@ export default class YBaseForm extends Vue {
    }
 
 
+   public registerResetButton(button: YBaseButtonReset) {
+      this.resetButton = button;
+   }
+
+
    public emitInputChange() {
       let numValidInputs = 0;
       this.inputChildren.forEach(child => {
-         if (child.isValid()) {
+         if (child.isValid) {
             numValidInputs += 1;
          }
       });
 
-      const isComplete = numValidInputs === this.inputChildren.length;
-      if (this.submitButton && isComplete) {
-         this.submitButton.activate();
-      }
-      else {
-         this.submitButton.disable();
+      if (this.submitButton) {
+         const isComplete = numValidInputs === this.inputChildren.length;
+         if (isComplete) {
+            this.submitButton.activate();
+         }
+         else {
+            this.submitButton.disable();
+         }
       }
    }
 

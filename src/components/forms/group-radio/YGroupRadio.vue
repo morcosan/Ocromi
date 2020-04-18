@@ -14,6 +14,12 @@
 
 
       @Override
+      public get isValid() {
+         return (this.isOptional ? true : !!this.value);
+      }
+
+
+      @Override
       public getValidationError() {
          if (this.isOptional) {
             return '';
@@ -24,8 +30,8 @@
 
 
       @Override
-      public isValid() {
-         return (this.isOptional ? true : !!this.value);
+      public created() {
+         this.initialValue = this.value;
       }
 
 
@@ -59,7 +65,7 @@
          type="radio"
          @input="onInput"
          @keydown="onKeyDown"
-         ref="qOptionGroup"
+         ref="inputRef"
       />
    </YTemplateInputGroup>
 </template>

@@ -53,9 +53,15 @@
 
 
       @Override
+      public created() {
+         this.initialValue = this.value;
+      }
+
+
+      @Override
       public mounted() {
          // @ts-ignore
-         this.nativeInput = this.$refs.qField.$el.querySelector('.js-native-input');
+         this.nativeInput = this.$refs.inputRef.$el.querySelector('.js-native-input');
          if (this.nativeInput) {
             this.nativeInput.addEventListener('paste', this.onPaste);
          }
@@ -164,7 +170,7 @@
          @keydown="onKeyDown"
          @keyup="updateFinalURL"
          @blur="onBlur"
-         ref="qField"
+         ref="inputRef"
       >
          <template v-if="canShowIcon" v-slot:append>
             <a

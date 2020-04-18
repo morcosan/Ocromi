@@ -14,7 +14,7 @@
       QSpinnerPie,
       QSpinnerRadio,
    } from 'quasar';
-   import { Spinner } from './YBaseButton';
+   import { Spinner } from './YBaseButtonLoading';
 
 
    @Component({
@@ -36,13 +36,15 @@
    export default class YTemplateButton extends Vue {
 
       @Prop({ default: '' }) public label!: string;
+      @Prop({ default: 'md' }) public size!: string;
+      @Prop({ default: 0 }) public percentage!: number;
       @Prop({ default: 'button' }) public type!: string;
+      @Prop({ default: 'primary' }) public color!: string;
+      @Prop({ default: Spinner.Default }) public spinner!: Spinner;
       @Prop({ default: false, type: Boolean }) public isDisabled!: boolean;
       @Prop({ default: false, type: Boolean }) public isLoading!: boolean;
-      @Prop({ default: 0 }) public percentage!: number;
-      @Prop({ default: 'primary' }) public color!: string;
-      @Prop({ default: 'md' }) public size!: string;
-      @Prop({ default: Spinner.Default }) public spinner!: Spinner;
+      @Prop({ default: false, type: Boolean }) public isOutlined!: boolean;
+      @Prop({ default: false, type: Boolean }) public isText!: boolean;
 
    }
 </script>
@@ -50,6 +52,7 @@
 
 <template>
    <QBtn
+      :class="{ 'y-base-button': true, 'is-loading': isLoading }"
       :label="label"
       :disable="isDisabled || isLoading"
       :loading="isLoading"
@@ -57,7 +60,8 @@
       :type="type"
       :color="(isDisabled ? 'grey-6' : color)"
       :size="size"
-      :class="{ 'y-base-button': true, 'is-loading': isLoading }"
+      :flat="isText"
+      :outline="isOutlined"
       @click="$emit('click')"
    >
       <template v-slot:loading>

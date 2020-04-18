@@ -52,6 +52,12 @@
       }
 
 
+      @Override
+      public created() {
+         this.initialValue = this.value;
+      }
+
+
       public setHintOnRight({ totalSize, filesNumber }: FileData) {
          if (this.maxNumFiles > 0) {
             this.hintOnRight = `${ filesNumber } / ${ this.maxNumFiles } files (${ totalSize })`;
@@ -117,7 +123,7 @@
 
 
       public openFilePicker() {
-         (this.$refs.qField as QFile).pickFiles();
+         (this.$refs.inputRef as QFile).pickFiles();
       }
 
    }
@@ -153,7 +159,7 @@
          hide-bottom-space
          @input="onInput"
          @blur="onBlur"
-         ref="qField"
+         ref="inputRef"
       >
          <template v-slot:append>
             <QIcon

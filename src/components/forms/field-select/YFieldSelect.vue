@@ -32,6 +32,12 @@
       }
 
 
+      @Override
+      public created() {
+         this.initialValue = this.value;
+      }
+
+
       public onInput(value: Option) {
          this.isDirty = true;
          this.updateValueProp(value);
@@ -67,7 +73,7 @@
          @input="onInput"
          @filter="onFilterInput"
          @blur="onBlur"
-         ref="qSelect"
+         ref="inputRef"
       />
 
 

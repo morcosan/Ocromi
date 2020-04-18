@@ -28,6 +28,7 @@ export default class YBaseInput extends Vue {
    public formProps: FormProps = {};
    public parentForm: (YBaseForm | null) = null;
    public isActive: boolean = true;
+   public initialValue!: any;
 
 
    @Watch('value')
@@ -35,7 +36,7 @@ export default class YBaseInput extends Vue {
       if (this.parentForm) {
          this.parentForm.emitInputChange();
       }
-      
+
       if (this.isDirty) {
          this.validate();
       }
@@ -89,6 +90,11 @@ export default class YBaseInput extends Vue {
    }
 
 
+   public get isValid() {
+      return !this.getValidationError();
+   }
+
+
    @Override
    public created() {
       this.parentForm = this.getParentForm();
@@ -102,11 +108,6 @@ export default class YBaseInput extends Vue {
       this.innerError = this.getValidationError();
 
       return !this.innerError;
-   }
-
-
-   public isValid() {
-      return !this.getValidationError();
    }
 
 
@@ -125,10 +126,14 @@ export default class YBaseInput extends Vue {
    public resetValidation() {
       this.isDirty = false;
       this.innerError = '';
+      this.updateValueProp(this.initialValue);
    }
 
 
-   public focus() {}
+   public focus() {
+      // @ts-ignore
+      this.$refs.inputRef.$el.focus();
+   }
 
 
    public disable() {

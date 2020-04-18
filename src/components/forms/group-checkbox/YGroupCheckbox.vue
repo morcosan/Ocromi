@@ -14,6 +14,12 @@
 
 
       @Override
+      public get isValid() {
+         return (this.isOptional ? true : (this.value.length > 0));
+      }
+
+
+      @Override
       public getValidationError() {
          if (this.isOptional) {
             return '';
@@ -24,8 +30,8 @@
 
 
       @Override
-      public isValid() {
-         return (this.isOptional ? true : (this.value.length > 0));
+      public created() {
+         this.initialValue = this.value;
       }
 
 
@@ -58,7 +64,7 @@
          type="checkbox"
          @input="onInput"
          @keydown="onKeyDown"
-         ref="qOptionGroup"
+         ref="inputRef"
       />
    </YTemplateInputGroup>
 </template>

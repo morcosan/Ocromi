@@ -1,24 +1,23 @@
 <script lang="ts">
    import { Component } from '../../../core/decorators';
-   import YBaseButtonLoading from '../YBaseButton';
+   import YBaseButtonReset from '../YBaseButtonReset';
    import YTemplateButton from '../YTemplateButton.vue';
 
 
    @Component({
       components: { YTemplateButton },
    })
-   export default class YButtonConfirm extends YBaseButtonLoading {}
+   export default class YButtonSubmit extends YBaseButtonReset {}
 </script>
 
 
 <template>
    <YTemplateButton
-      class="y-button-confirm"
+      class="y-button-reset"
       :label="label"
       :is-disabled="isDisabledComputed"
-      :is-loading="isLoadingComputed"
-      :percentage="percentage"
-      :spinner="spinner"
+      type="reset"
+      is-outlined
       @click="$emit('click')"
    />
 </template>
@@ -26,4 +25,8 @@
 
 <style scoped lang="scss">
    // @import '../../../css/variables';
+
+   .y-button-reset {
+      margin-top: 40px;
+   }
 </style>

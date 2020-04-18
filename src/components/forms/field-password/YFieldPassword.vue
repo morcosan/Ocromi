@@ -87,6 +87,12 @@
 
 
       @Override
+      public created() {
+         this.initialValue = this.value;
+      }
+
+
+      @Override
       public mounted() {
          this.updateStrength();
       }
@@ -143,7 +149,7 @@
          @input="updateValueProp($event)"
          @keyup="updateStrength"
          @blur="onBlur"
-         ref="qField"
+         ref="inputRef"
       >
          <template v-slot:append>
             <QIcon

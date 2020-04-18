@@ -1,13 +1,19 @@
 import YButtonConfirm from './YButtonConfirm.vue';
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
-import { propsButton } from '../../../../.storybook/custom/knob-props';
+import { propsButtonLoading } from '../../../../.storybook/custom/knob-props';
+import { text } from '@storybook/addon-knobs';
 
 
 const vue = {
    components: {
       YButtonConfirm,
    },
-   props: propsButton,
+   props: {
+      ...propsButtonLoading,
+      label: {
+         default: () => text('Label', 'Confirm'),
+      },
+   },
    methods: {
       onClick() {
          console.log('clicked');
