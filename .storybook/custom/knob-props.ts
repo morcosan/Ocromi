@@ -102,9 +102,6 @@ const spinners = {
 
 export const propsButtonLoading = {
    ...propsButton,
-   isLoading: {
-      default: () => boolean('Is Loading', false),
-   },
    loadingTime: {
       default: () => number('Loading Time', 2000),
    },

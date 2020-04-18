@@ -31,16 +31,16 @@ const vue = {
    },
    methods: {
       onSubmit() {
-         console.log('submitting...');
+         console.log('Submitting...');
          setTimeout(() => {
-            console.log('form submitted');
+            console.log('Form submitted');
             // @ts-ignore
             this.$refs.form.onSubmitComplete();
          }, 2000);
       },
 
       onReset() {
-         console.log('form reset');
+         console.log('Form reset');
       },
    },
 };

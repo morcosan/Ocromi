@@ -1,6 +1,6 @@
 <script lang="ts">
    import { Component } from '../../../core/decorators';
-   import YBaseButtonLoading from '../YBaseButton';
+   import YBaseButtonLoading from '../YBaseButtonLoading';
    import YTemplateButton from '../YTemplateButton.vue';
 
 
@@ -16,10 +16,10 @@
       class="y-button-confirm"
       :label="label"
       :is-disabled="isDisabledComputed"
-      :is-loading="isLoadingComputed"
+      :is-loading="isLoading"
       :percentage="percentage"
       :spinner="spinner"
-      @click="$emit('click')"
+      @click="onClick"
    />
 </template>
 

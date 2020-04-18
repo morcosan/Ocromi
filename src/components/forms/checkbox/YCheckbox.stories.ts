@@ -24,7 +24,7 @@ const vue = {
    },
    methods: {
       onClick(event: Event) {
-         console.log('clicked link');
+         console.log('Clicked link');
          event.preventDefault();
          event.stopPropagation();
       },

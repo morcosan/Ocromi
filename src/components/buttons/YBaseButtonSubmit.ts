@@ -1,4 +1,4 @@
-import { Component, Override, Prop, Vue, Watch } from '../../core/decorators';
+import { Component, Override, Prop, Watch } from '../../core/decorators';
 import YBaseButtonLoading from './YBaseButtonLoading';
 import YBaseForm from '../forms/YBaseForm';
 
@@ -17,7 +17,6 @@ export default class YBaseButtonSubmit extends YBaseButtonLoading {
       if (this.willBeEnabled) {
          return (!this.isEnabled && !this.isLoading);
       }
-
       return (this.isDisabled && !this.isLoading);
    }
 
@@ -51,6 +50,12 @@ export default class YBaseButtonSubmit extends YBaseButtonLoading {
 
 
    public disable() {
+      this.isEnabled = false;
+   }
+
+
+   public reset() {
+      this.stopLoading();
       this.isEnabled = false;
    }
 

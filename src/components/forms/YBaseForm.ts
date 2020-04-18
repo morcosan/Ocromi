@@ -77,8 +77,8 @@ export default class YBaseForm extends Vue {
 
 
    public onSubmit() {
-      this.submitButton.disable();
-      this.resetButton.disable();
+      this.submitButton?.startLoading();
+      this.resetButton?.disable();
       this.inputChildren.forEach(child => {
          child.disable();
       });
@@ -88,8 +88,8 @@ export default class YBaseForm extends Vue {
 
 
    public onSubmitComplete() {
-      this.submitButton.enable();
-      this.resetButton.enable();
+      this.submitButton?.reset();
+      this.resetButton?.enable();
       this.inputChildren.forEach(child => {
          child.enable();
       });

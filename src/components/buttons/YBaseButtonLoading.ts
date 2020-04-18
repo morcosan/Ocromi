@@ -20,11 +20,11 @@ export enum Spinner {
 @Component
 export default class YBaseButtonLoading extends YBaseButton {
 
-   @Prop({ default: false, type: Boolean }) public isLoading!: boolean;
    @Prop({ default: 2000 }) public loadingTime!: number;
    @Prop({ default: Spinner.Default }) public spinner!: Spinner;
 
 
+   public isLoading: boolean = false;
    public percentage: number = 0;
    public intervalID!: number;
 
@@ -46,11 +46,6 @@ export default class YBaseButtonLoading extends YBaseButton {
    }
 
 
-   public get isLoadingComputed() {
-      return this.isLoading;
-   }
-
-
    @Override
    public mounted() {
       if (this.isLoading) {
@@ -59,8 +54,14 @@ export default class YBaseButtonLoading extends YBaseButton {
    }
 
 
-   private startLoading() {
-      // reset percentage
+   public onClick() {
+      this.startLoading();
+      this.$emit('click');
+   }
+
+
+   public startLoading() {
+      this.isLoading = true;
       this.percentage = 0;
 
       // calculate interval
@@ -71,6 +72,12 @@ export default class YBaseButtonLoading extends YBaseButton {
       // start loading
       // @ts-ignore
       this.intervalID = setInterval(this.onLoading, interval);
+   }
+
+
+   public stopLoading() {
+      this.isLoading = false;
+      clearInterval(this.intervalID);
    }
 
 

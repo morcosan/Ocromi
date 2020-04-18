@@ -117,7 +117,7 @@ const vue = {
    },
    methods: {
       onSubmit(event: Event) {
-         console.log('form submitted');
+         console.log('Form submitted');
       },
    },
 };

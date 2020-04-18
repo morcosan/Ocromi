@@ -2,7 +2,6 @@ import YButtonSubmit from './YButtonSubmit.vue';
 import YForm from '../../forms/form/YForm.vue';
 import YCheckbox from '../../forms/checkbox/YCheckbox.vue';
 import YFieldText from '../../forms/field-text/YFieldText.vue';
-import YButtonReset from '../button-reset/YButtonReset.vue';
 import StoryBuilder from '.storybook/custom/story-builder';
 import { propsButtonLoading } from '.storybook/custom/knob-props';
 import { boolean, text } from '@storybook/addon-knobs';
@@ -14,7 +13,6 @@ const vue = {
       YCheckbox,
       YFieldText,
       YButtonSubmit,
-      YButtonReset,
    },
    props: {
       ...propsButtonLoading,
@@ -22,7 +20,7 @@ const vue = {
          default: () => text('Label', 'Submit'),
       },
       willBeEnabled: {
-         default: () => boolean('Is Activatable', false),
+         default: () => boolean('Will Be Enabled', false),
       },
    },
    data() {
@@ -34,10 +32,10 @@ const vue = {
    },
    methods: {
       onSubmit() {
-         console.log('submitting...');
+         console.log('Submitting...');
          setTimeout(
             () => {
-               console.log('form submitted');
+               console.log('Form submitted');
                // @ts-ignore
                this.$refs.form.onSubmitComplete();
             },
@@ -77,14 +75,11 @@ const basicFormTemplate = `
    
    <YButtonSubmit
       :label="label"
-      :is-loading="isLoading"
       :is-disabled="isDisabled"
       :loading-time="loadingTime"
       :spinner="spinner"
       :will-be-enabled="willBeEnabled"
    />
-   
-   <YButtonReset label="Reset"/>
 </YForm>
 `;
 

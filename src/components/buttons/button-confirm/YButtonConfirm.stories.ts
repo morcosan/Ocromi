@@ -16,7 +16,14 @@ const vue = {
    },
    methods: {
       onClick() {
-         console.log('clicked');
+         console.log('Loading...');
+         setTimeout(
+            () => {
+               console.log('Done');
+            },
+            // @ts-ignore
+            this.loadingTime,
+         );
       },
    },
 };
@@ -28,7 +35,6 @@ const storyLines: StoryLine[] = [
       template: `
          <YButtonConfirm
             :label="label"
-            :is-loading="isLoading"
             :is-disabled="isDisabled"
             :loading-time="loadingTime"
             :spinner="spinner"

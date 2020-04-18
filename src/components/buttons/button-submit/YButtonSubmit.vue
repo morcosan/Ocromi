@@ -16,7 +16,7 @@
       class="y-button-submit"
       :label="label"
       :is-disabled="isDisabledComputed"
-      :is-loading="isLoadingComputed"
+      :is-loading="isLoading"
       :percentage="percentage"
       :spinner="spinner"
       type="submit"
