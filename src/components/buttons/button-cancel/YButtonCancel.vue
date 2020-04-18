@@ -1,22 +1,20 @@
 <script lang="ts">
    import { Component } from '../../../core/decorators';
-   import YBaseButtonReset from '../YBaseButtonReset';
+   import YBaseButton from '../YBaseButton';
    import YTemplateButton from '../YTemplateButton.vue';
 
 
    @Component({
       components: { YTemplateButton },
    })
-   export default class YButtonSubmit extends YBaseButtonReset {}
+   export default class YButtonCancel extends YBaseButton {}
 </script>
 
 
 <template>
    <YTemplateButton
-      class="y-button-reset"
+      class="y-button-cancel"
       :label="label"
-      :is-disabled="isDisabledComputed"
-      type="reset"
       is-text-only
       @click="$emit('click')"
    />
