@@ -17,7 +17,7 @@
       :label="label"
       :is-disabled="isDisabledComputed"
       type="reset"
-      is-outlined
+      is-text-only
       @click="$emit('click')"
    />
 </template>
@@ -27,6 +27,6 @@
    // @import '../../../css/variables';
 
    .y-button-reset {
-      margin-top: 40px;
+      margin: 40px 12px 0;
    }
 </style>

@@ -6,12 +6,12 @@ import YBaseForm from '../forms/YBaseForm';
 @Component
 export default class YBaseButtonReset extends YBaseButton {
 
-   public isActive: boolean = true;
+   public isEnabled: boolean = true;
 
 
    @Override
    public get isDisabledComputed() {
-      return (!this.isActive || this.isDisabled);
+      return (!this.isEnabled || this.isDisabled);
    }
 
 
@@ -35,6 +35,16 @@ export default class YBaseButtonReset extends YBaseButton {
       }
 
       return null;
+   }
+
+
+   public enable() {
+      this.isEnabled = true;
+   }
+
+
+   public disable() {
+      this.isEnabled = false;
    }
 
 }

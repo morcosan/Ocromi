@@ -30,6 +30,15 @@ const vue = {
       };
    },
    methods: {
+      onSubmit() {
+         console.log('submitting...');
+         setTimeout(() => {
+            console.log('form submitted');
+            // @ts-ignore
+            this.$refs.form.onSubmitComplete();
+         }, 2000);
+      },
+
       onReset() {
          console.log('form reset');
       },
@@ -40,7 +49,9 @@ const vue = {
 const basicFormTemplate = `
 <YForm 
    class="story-form-panel"
+   @submit="onSubmit"
    @reset="onReset" 
+   ref="form"
 >
    <YFieldText
       v-model="fullName"

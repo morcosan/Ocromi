@@ -27,7 +27,7 @@ export default class YBaseInput extends Vue {
    public innerError: string = '';
    public formProps: FormProps = {};
    public parentForm: (YBaseForm | null) = null;
-   public isActive: boolean = true;
+   public isEnabled: boolean = true;
    public initialValue!: any;
 
 
@@ -57,7 +57,7 @@ export default class YBaseInput extends Vue {
 
 
    public get isDisabledComputed(): any {
-      return (this.isDisabled || !this.isActive);
+      return (this.isDisabled || !this.isEnabled);
    }
 
 
@@ -136,8 +136,13 @@ export default class YBaseInput extends Vue {
    }
 
 
+   public enable() {
+      this.isEnabled = true;
+   }
+
+
    public disable() {
-      this.isActive = false;
+      this.isEnabled = false;
    }
 
 

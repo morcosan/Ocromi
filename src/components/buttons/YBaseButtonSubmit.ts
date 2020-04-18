@@ -6,16 +6,16 @@ import YBaseForm from '../forms/YBaseForm';
 @Component
 export default class YBaseButtonSubmit extends YBaseButtonLoading {
 
-   @Prop({ default: false, type: Boolean }) public isActivatable!: boolean;
+   @Prop({ default: false, type: Boolean }) public willBeEnabled!: boolean;
 
 
-   public isActive: boolean = false;
+   public isEnabled: boolean = false;
 
 
    @Override
    public get isDisabledComputed() {
-      if (this.isActivatable) {
-         return (!this.isActive && !this.isLoading);
+      if (this.willBeEnabled) {
+         return (!this.isEnabled && !this.isLoading);
       }
 
       return (this.isDisabled && !this.isLoading);
@@ -45,13 +45,13 @@ export default class YBaseButtonSubmit extends YBaseButtonLoading {
    }
 
 
-   public activate() {
-      this.isActive = true;
+   public enable() {
+      this.isEnabled = true;
    }
 
 
    public disable() {
-      this.isActive = false;
+      this.isEnabled = false;
    }
 
 }

@@ -21,7 +21,7 @@ const vue = {
       label: {
          default: () => text('Label', 'Submit'),
       },
-      isActivatable: {
+      willBeEnabled: {
          default: () => boolean('Is Activatable', false),
       },
    },
@@ -34,7 +34,16 @@ const vue = {
    },
    methods: {
       onSubmit() {
-         console.log('form submitted');
+         console.log('submitting...');
+         setTimeout(
+            () => {
+               console.log('form submitted');
+               // @ts-ignore
+               this.$refs.form.onSubmitComplete();
+            },
+            // @ts-ignore
+            this.loadingTime,
+         );
       },
    },
 };
@@ -43,7 +52,8 @@ const vue = {
 const basicFormTemplate = `
 <YForm 
    class="story-form-panel"
-   @submit="onSubmit" 
+   @submit="onSubmit"
+   ref="form"
 >
    <YFieldText
       v-model="fullName"
@@ -71,7 +81,7 @@ const basicFormTemplate = `
       :is-disabled="isDisabled"
       :loading-time="loadingTime"
       :spinner="spinner"
-      :is-activatable="isActivatable"
+      :will-be-enabled="willBeEnabled"
    />
    
    <YButtonReset label="Reset"/>

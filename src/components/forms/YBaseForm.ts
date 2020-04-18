@@ -67,7 +67,7 @@ export default class YBaseForm extends Vue {
       if (this.submitButton) {
          const isComplete = numValidInputs === this.inputChildren.length;
          if (isComplete) {
-            this.submitButton.activate();
+            this.submitButton.enable();
          }
          else {
             this.submitButton.disable();
@@ -77,11 +77,22 @@ export default class YBaseForm extends Vue {
 
 
    public onSubmit() {
+      this.submitButton.disable();
+      this.resetButton.disable();
       this.inputChildren.forEach(child => {
          child.disable();
       });
 
       this.$emit('submit');
+   }
+
+
+   public onSubmitComplete() {
+      this.submitButton.enable();
+      this.resetButton.enable();
+      this.inputChildren.forEach(child => {
+         child.enable();
+      });
    }
 
 }

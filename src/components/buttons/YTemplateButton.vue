@@ -44,7 +44,7 @@
       @Prop({ default: false, type: Boolean }) public isDisabled!: boolean;
       @Prop({ default: false, type: Boolean }) public isLoading!: boolean;
       @Prop({ default: false, type: Boolean }) public isOutlined!: boolean;
-      @Prop({ default: false, type: Boolean }) public isText!: boolean;
+      @Prop({ default: false, type: Boolean }) public isTextOnly!: boolean;
 
    }
 </script>
@@ -60,7 +60,7 @@
       :type="type"
       :color="(isDisabled ? 'grey-6' : color)"
       :size="size"
-      :flat="isText"
+      :flat="isTextOnly"
       :outline="isOutlined"
       @click="$emit('click')"
    >
