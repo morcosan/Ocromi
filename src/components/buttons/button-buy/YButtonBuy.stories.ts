@@ -1,18 +1,25 @@
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
 import { propsButtonLoading } from '../../../../.storybook/custom/knob-props';
-import { select, text } from '@storybook/addon-knobs';
-import YButtonConfirm from './YButtonConfirm.vue';
+import { boolean, select, text } from '@storybook/addon-knobs';
+// @ts-ignore
+import YButtonBuy, { BuyIcon } from './YButtonBuy.vue';
 import { Spinner } from '../YBaseButtonLoading';
 
 
 const vue = {
    components: {
-      YButtonConfirm,
+      YButtonBuy,
    },
    props: {
       ...propsButtonLoading,
       label: {
-         default: () => text('Label', 'Confirm'),
+         default: () => text('Label', 'Add to cart'),
+      },
+      isLarge: {
+         default: () => boolean('Is Large', false),
+      },
+      icon: {
+         default: () => select('Icon', BuyIcon, BuyIcon.Default),
       },
       spinner: {
          default: () => select('Spinner', Spinner, Spinner.Default),
@@ -24,6 +31,8 @@ const vue = {
          setTimeout(
             () => {
                console.log('Done');
+               // @ts-ignore
+               this.$refs.button.stopLoading();
             },
             // @ts-ignore
             this.loadingTime,
@@ -37,22 +46,25 @@ const storyLines: StoryLine[] = [
    {
       title: 'Default',
       template: `
-         <YButtonConfirm
+         <YButtonBuy
             :label="label"
             :is-disabled="isDisabled"
             :loading-time="loadingTime"
             :spinner="spinner"
+            :is-large="isLarge"
+            :icon="icon"
             @click="onClick"
+            ref="button"
          />
       `,
    },
 ];
 
 
-export default StoryBuilder.createDefault('Buttons / Button Confirm');
+export default StoryBuilder.createDefault('Buttons / Button Buy');
 export const default_ = StoryBuilder.createStory(vue, storyLines);
 export const docs = StoryBuilder.createDocs(`
 /**
- * Used when user needs to take an action to continue the user flow.
+ * Used when user needs a call to action.
  */
 `);

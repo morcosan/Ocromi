@@ -40,6 +40,7 @@
       @Prop({ default: 0 }) public percentage!: number;
       @Prop({ default: 'button' }) public type!: string;
       @Prop({ default: 'primary' }) public color!: string;
+      @Prop({ default: '' }) public icon!: string;
       @Prop({ default: Spinner.Default }) public spinner!: Spinner;
       @Prop({ default: false, type: Boolean }) public isDisabled!: boolean;
       @Prop({ default: false, type: Boolean }) public isLoading!: boolean;
@@ -60,6 +61,7 @@
       :type="type"
       :color="(isDisabled ? 'grey-6' : color)"
       :size="size"
+      :icon="(icon ? icon : undefined)"
       :flat="isTextOnly"
       :outline="isOutlined"
       @click="$emit('click')"

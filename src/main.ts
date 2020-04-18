@@ -32,6 +32,7 @@ import YButtonSubmit from './components/buttons/button-submit/YButtonSubmit.vue'
 import YButtonConfirm from './components/buttons/button-confirm/YButtonConfirm.vue';
 import YButtonReset from './components/buttons/button-reset/YButtonReset.vue';
 import YButtonCancel from './components/buttons/button-cancel/YButtonCancel.vue';
+import YButtonBuy from './components/buttons/button-buy/YButtonBuy.vue';
 
 
 import Vue from 'vue';
@@ -88,6 +89,7 @@ export {
    YButtonConfirm,
    YButtonReset,
    YButtonCancel,
+   YButtonBuy,
 };
 
 

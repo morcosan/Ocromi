@@ -86,26 +86,9 @@ export const propsButton = {
 };
 
 
-const spinners = {
-   Default: 'DEFAULT',
-   Bars: 'BARS',
-   Cube: 'CUBE',
-   Dots: 'DOTS',
-   Facebook: 'FACEBOOK',
-   Grid: 'GRID',
-   Hourglass: 'HOURGLASS',
-   IOS: 'IOS',
-   Circle: 'CIRCLE',
-   Pie: 'PIE',
-   Radio: 'RADIO',
-};
-
 export const propsButtonLoading = {
    ...propsButton,
    loadingTime: {
       default: () => number('Loading Time', 2000),
-   },
-   spinner: {
-      default: () => select('Spinner', spinners, 'DEFAULT'),
    },
 };

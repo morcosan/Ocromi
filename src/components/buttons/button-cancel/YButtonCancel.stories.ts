@@ -44,6 +44,6 @@ export default StoryBuilder.createDefault('Buttons / Button Cancel');
 export const default_ = StoryBuilder.createStory(vue, storyLines);
 export const docs = StoryBuilder.createDocs(`
 /**
- * Used when user needs to take an action to continue the user flow.
+ * Used when user needs to cancel the current flow.
  */
 `);

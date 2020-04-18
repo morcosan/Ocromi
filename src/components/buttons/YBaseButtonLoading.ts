@@ -1,4 +1,4 @@
-import { Component, Override, Prop, Vue, Watch } from '../../core/decorators';
+import { Component, Override, Prop, Watch } from '../../core/decorators';
 import YBaseButton from './YBaseButton';
 
 
