@@ -1,5 +1,5 @@
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
-import { propsButtonLoading } from '../../../../.storybook/custom/knob-props';
+import { groupId, propsButtonLoading } from '../../../../.storybook/custom/knob-props';
 import { boolean, select, text } from '@storybook/addon-knobs';
 // @ts-ignore
 import YButtonBuy, { BuyIcon } from './YButtonBuy.vue';
@@ -12,13 +12,25 @@ const vue = {
    props: {
       ...propsButtonLoading,
       label: {
-         default: () => text('Label', 'Add to cart'),
+         default: () => text('Label', 'Add to cart', groupId),
       },
       isLarge: {
-         default: () => boolean('Is Large', false),
+         default: () => boolean('Is Large', false, groupId),
       },
       icon: {
-         default: () => select('Icon', BuyIcon, BuyIcon.Default),
+         default: () => select('Icon', BuyIcon, BuyIcon.Default, groupId),
+      },
+   },
+   computed: {
+      settings(): any {
+         return {
+            button: {
+               // @ts-ignore
+               isUppercase: this.isUppercase,
+               // @ts-ignore
+               spinner: this.spinner,
+            },
+         };
       },
    },
    methods: {
@@ -46,9 +58,9 @@ const storyLines: StoryLine[] = [
             :label="label"
             :is-disabled="isDisabled"
             :loading-time="loadingTime"
-            :spinner="spinner"
             :is-large="isLarge"
             :icon="icon"
+            :settings="settings"
             @click="onClick"
             ref="button"
          />

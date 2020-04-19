@@ -1,5 +1,5 @@
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
-import { propsButton } from '../../../../.storybook/custom/knob-props';
+import { groupId, propsButton } from '../../../../.storybook/custom/knob-props';
 import { text } from '@storybook/addon-knobs';
 import YButtonCancel from './YButtonCancel.vue';
 import YButtonConfirm from '../button-confirm/YButtonConfirm.vue';
@@ -14,7 +14,7 @@ const vue = {
       ...propsButton,
       isDisabled: undefined,
       label: {
-         default: () => text('Label', 'Cancel'),
+         default: () => text('Label', 'Cancel', groupId),
       },
    },
    methods: {

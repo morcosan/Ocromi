@@ -1,6 +1,6 @@
 import YFieldPassword from './YFieldPassword.vue';
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
-import { propsInputField } from '.storybook/custom/knob-props';
+import { groupId, propsInputField } from '.storybook/custom/knob-props';
 import { boolean } from '@storybook/addon-knobs';
 
 
@@ -11,7 +11,7 @@ const vue = {
    props: {
       ...propsInputField,
       hasMeter: {
-         default: () => boolean('Has Meter', false),
+         default: () => boolean('Has Meter', false, groupId),
       },
    },
    data() {

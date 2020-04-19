@@ -1,5 +1,5 @@
 <script lang="ts">
-   import { Component, Prop, Vue } from '../../core/decorators';
+   import { Component, Prop, Vue, Watch } from '../../core/decorators';
    import {
       QBtn,
       QSpinner,
@@ -14,7 +14,7 @@
       QSpinnerPie,
       QSpinnerRadio,
    } from 'quasar';
-   import { Spinner } from '../../core/settings';
+   import { Settings } from '../../core/settings';
 
 
    @Component({
@@ -41,14 +41,23 @@
       @Prop({ default: 'button' }) public type!: string;
       @Prop({ default: 'primary' }) public color!: string;
       @Prop({ default: '' }) public icon!: string;
-      @Prop({ default: Spinner.Default }) public spinner!: Spinner;
+      @Prop({ default: () => {} }) public settings!: Settings;
       @Prop({ default: false, type: Boolean }) public isDisabled!: boolean;
       @Prop({ default: false, type: Boolean }) public isLoading!: boolean;
       @Prop({ default: false, type: Boolean }) public isOutlined!: boolean;
       @Prop({ default: false, type: Boolean }) public isTextOnly!: boolean;
 
-      created() {
-         console.log(this.YSettings);
+
+      public get buttonSettings() {
+         if (this.settings.button) {
+            return this.settings.button;
+         }
+         return {};
+      }
+
+
+      public get spinner() {
+         return this.buttonSettings.spinner;
       }
 
    }
@@ -66,6 +75,7 @@
       :color="(isDisabled ? 'grey-6' : color)"
       :size="size"
       :icon="(icon ? icon : undefined)"
+      :no-caps="!buttonSettings.isUppercase"
       :flat="isTextOnly"
       :outline="isOutlined"
       @click="$emit('click')"

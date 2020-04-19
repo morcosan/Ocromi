@@ -1,4 +1,5 @@
-import { Component, Override, Prop, Vue, Watch } from '../../core/decorators';
+import { Component, Override, Prop, Watch } from '../../core/decorators';
+import YBase from '../YBase';
 import YBaseForm from './YBaseForm';
 
 
@@ -9,7 +10,7 @@ type FormProps = {
 
 
 @Component
-export default class YBaseInput extends Vue {
+export default class YBaseInput extends YBase {
 
    @Prop({ default: '' }) public label!: string;
    @Prop({ default: '' }) public error!: string;

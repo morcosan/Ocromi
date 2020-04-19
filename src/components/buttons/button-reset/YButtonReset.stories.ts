@@ -1,5 +1,5 @@
 import StoryBuilder from '.storybook/custom/story-builder';
-import { propsButton } from '.storybook/custom/knob-props';
+import { groupId, propsButton } from '.storybook/custom/knob-props';
 import { text } from '@storybook/addon-knobs';
 import YButtonReset from './YButtonReset.vue';
 import YButtonSubmit from './../button-submit/YButtonSubmit.vue';
@@ -19,7 +19,7 @@ const vue = {
    props: {
       ...propsButton,
       label: {
-         default: () => text('Label', 'Reset'),
+         default: () => text('Label', 'Reset', groupId),
       },
    },
    data() {

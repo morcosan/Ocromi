@@ -1,5 +1,5 @@
 import StoryBuilder from '.storybook/custom/story-builder';
-import { propsButtonLoading } from '.storybook/custom/knob-props';
+import { groupId, propsButtonLoading } from '.storybook/custom/knob-props';
 import { boolean, select, text } from '@storybook/addon-knobs';
 import YButtonSubmit from './YButtonSubmit.vue';
 import YForm from '../../forms/form/YForm.vue';
@@ -17,10 +17,10 @@ const vue = {
    props: {
       ...propsButtonLoading,
       label: {
-         default: () => text('Label', 'Submit'),
+         default: () => text('Label', 'Submit', groupId),
       },
       willBeEnabled: {
-         default: () => boolean('Will Be Enabled', false),
+         default: () => boolean('Will Be Enabled', false, groupId),
       },
    },
    data() {

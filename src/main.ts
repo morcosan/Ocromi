@@ -59,7 +59,6 @@ export class Ocromi {
 }
 
 export {
-   Settings,
    Spinner,
 };
 

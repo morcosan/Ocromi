@@ -32,9 +32,9 @@
       :is-disabled="isDisabledComputed"
       :is-loading="isLoading"
       :percentage="percentage"
-      :spinner="spinner"
       :icon="icon"
       :size="(isLarge ? 'lg' : 'md')"
+      :settings="settingsComputed"
       @click="onClick"
    />
 </template>

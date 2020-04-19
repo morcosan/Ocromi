@@ -1,6 +1,6 @@
 import YFieldNumber from './YFieldNumber.vue';
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
-import { propsInputField } from '.storybook/custom/knob-props';
+import { groupId, propsInputField } from '.storybook/custom/knob-props';
 import { number } from '@storybook/addon-knobs';
 
 
@@ -11,16 +11,16 @@ const vue = {
    props: {
       ...propsInputField,
       minValue: {
-         default: () => number('Min Value', 0),
+         default: () => number('Min Value', 0, {}, groupId),
       },
       maxValue: {
-         default: () => number('Max Value', 100),
+         default: () => number('Max Value', 100, {}, groupId),
       },
       valueStep: {
-         default: () => number('Value Step', 1),
+         default: () => number('Value Step', 1, {}, groupId),
       },
       decimals: {
-         default: () => number('Decimals', 3),
+         default: () => number('Decimals', 3, {}, groupId),
       },
    },
    data() {

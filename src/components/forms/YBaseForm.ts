@@ -1,11 +1,12 @@
-import { Component, Prop, Vue, Watch } from '../../core/decorators';
+import { Component, Prop, Watch } from '../../core/decorators';
+import YBase from '../YBase';
 import YBaseInput from './YBaseInput';
 import YBaseButtonSubmit from '../buttons/YBaseButtonSubmit';
 import YBaseButtonReset from '../buttons/YBaseButtonReset';
 
 
 @Component
-export default class YBaseForm extends Vue {
+export default class YBaseForm extends YBase {
 
    @Prop({ default: false, type: Boolean }) public isMini!: boolean;
    @Prop({ default: '' }) public sideLabelWidth!: string;

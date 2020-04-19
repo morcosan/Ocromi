@@ -1,4 +1,4 @@
-import { extend } from 'quasar';
+import Utils from '../utils';
 
 
 export enum Spinner {
@@ -42,7 +42,7 @@ export function install(Vue: any, settings: Settings = {}) {
    Vue.mixin({
       computed: {
          YSettings(): Settings {
-            return extend(true, defaultSettings, settings);
+            return Utils.deepMerge(defaultSettings, settings);
          },
       },
    });
