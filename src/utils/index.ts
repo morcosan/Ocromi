@@ -38,7 +38,7 @@ export default class Utils {
    }
 
 
-   public static deepMerge(...args: object[]): object {
+   public static mergeObjects(...args: object[]): object {
       return extend(true, {}, ...args);
    }
 

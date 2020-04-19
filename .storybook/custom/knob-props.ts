@@ -5,12 +5,26 @@ import { Spinner } from '../../src/core/settings';
 export const groupId = 'Props';
 
 const settingsGroupId = 'Settings';
-const props = {
+const settingsProps = {
    isUppercase: {
       default: () => boolean('Is Uppercase', true, settingsGroupId),
    },
    spinner: {
       default: () => select('Spinner', Spinner, Spinner.Default, settingsGroupId),
+   },
+};
+
+
+export const settingsComputed = {
+   settings(): any {
+      return {
+         button: {
+            // @ts-ignore
+            isUppercase: this.isUppercase,
+            // @ts-ignore
+            spinner: this.spinner,
+         },
+      };
    },
 };
 
@@ -40,7 +54,7 @@ export const propsInput = {
    sideLabelWidth: {
       default: () => text('Side Label Width', '', groupId),
    },
-   ...props,
+   ...settingsProps,
 };
 
 
@@ -98,7 +112,7 @@ export const propsButton = {
    isDisabled: {
       default: () => boolean('Is Disabled', false, groupId),
    },
-   ...props,
+   ...settingsProps,
 };
 
 

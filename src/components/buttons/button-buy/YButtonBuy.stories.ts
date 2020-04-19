@@ -1,5 +1,5 @@
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
-import { groupId, propsButtonLoading } from '../../../../.storybook/custom/knob-props';
+import { groupId, propsButtonLoading, settingsComputed } from '../../../../.storybook/custom/knob-props';
 import { boolean, select, text } from '@storybook/addon-knobs';
 // @ts-ignore
 import YButtonBuy, { BuyIcon } from './YButtonBuy.vue';
@@ -21,18 +21,7 @@ const vue = {
          default: () => select('Icon', BuyIcon, BuyIcon.Default, groupId),
       },
    },
-   computed: {
-      settings(): any {
-         return {
-            button: {
-               // @ts-ignore
-               isUppercase: this.isUppercase,
-               // @ts-ignore
-               spinner: this.spinner,
-            },
-         };
-      },
-   },
+   computed: settingsComputed,
    methods: {
       onClick() {
          console.log('Loading...');

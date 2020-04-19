@@ -1,6 +1,6 @@
 import YCheckbox from './YCheckbox.vue';
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
-import { groupId, propsInput } from '.storybook/custom/knob-props';
+import { groupId, propsInput, settingsComputed } from '.storybook/custom/knob-props';
 import { text } from '@storybook/addon-knobs';
 
 
@@ -15,6 +15,7 @@ const vue = {
          default: () => text('Error', 'Custom error message', groupId),
       },
    },
+   computed: settingsComputed,
    data() {
       return {
          value: false,

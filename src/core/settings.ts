@@ -42,7 +42,7 @@ export function install(Vue: any, settings: Settings = {}) {
    Vue.mixin({
       computed: {
          YSettings(): Settings {
-            return Utils.deepMerge(defaultSettings, settings);
+            return Utils.mergeObjects(defaultSettings, settings);
          },
       },
    });

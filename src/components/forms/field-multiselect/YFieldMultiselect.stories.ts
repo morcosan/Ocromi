@@ -1,7 +1,7 @@
 import YFieldMultiselect from './YFieldMultiselect.vue';
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
 import { selectOptions } from '.storybook/custom/utils';
-import { groupId, propsInputSelect } from '.storybook/custom/knob-props';
+import { groupId, propsInputSelect, settingsComputed } from '.storybook/custom/knob-props';
 import { boolean, number } from '@storybook/addon-knobs';
 
 
@@ -33,6 +33,7 @@ const vue = {
          options,
       };
    },
+   computed: settingsComputed,
 };
 
 

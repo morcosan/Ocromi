@@ -1,5 +1,5 @@
 import StoryBuilder from '.storybook/custom/story-builder';
-import { groupId, propsButton } from '.storybook/custom/knob-props';
+import { groupId, propsButton, settingsComputed } from '.storybook/custom/knob-props';
 import { text } from '@storybook/addon-knobs';
 import YButtonReset from './YButtonReset.vue';
 import YButtonSubmit from './../button-submit/YButtonSubmit.vue';
@@ -29,6 +29,7 @@ const vue = {
          hasSpam: false,
       };
    },
+   computed: settingsComputed,
    methods: {
       onSubmit() {
          console.log('Submitting...');
@@ -73,6 +74,7 @@ const basicFormTemplate = `
    <YButtonReset
       :label="label"
       :is-disabled="isDisabled"
+      :settings="settings"
       @reset="onReset" 
    />
 </YForm>

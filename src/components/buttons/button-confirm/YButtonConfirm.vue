@@ -18,7 +18,7 @@
       :is-disabled="isDisabledComputed"
       :is-loading="isLoading"
       :percentage="percentage"
-      :spinner="spinner"
+      :settings="settingsComputed"
       @click="onClick"
    />
 </template>

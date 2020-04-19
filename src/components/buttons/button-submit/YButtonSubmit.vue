@@ -18,8 +18,8 @@
       :is-disabled="isDisabledComputed"
       :is-loading="isLoading"
       :percentage="percentage"
-      :spinner="spinner"
       type="submit"
+      :settings="settingsComputed"
       @click="$emit('click')"
    />
 </template>

@@ -18,6 +18,7 @@
       :is-disabled="isDisabledComputed"
       type="reset"
       is-text-only
+      :settings="settingsComputed"
       @click="$emit('click')"
    />
 </template>

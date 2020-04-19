@@ -10,7 +10,7 @@ export default class YBaseButton extends Vue {
 
 
    public get settingsComputed() {
-      return Utils.deepMerge(this.YSettings, this.settings);
+      return Utils.mergeObjects(this.YSettings, this.settings);
    }
 
 }

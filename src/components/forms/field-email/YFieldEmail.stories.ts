@@ -1,6 +1,6 @@
 import YFieldEmail from './YFieldEmail.vue';
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
-import { propsInputField } from '.storybook/custom/knob-props';
+import { propsInputField, settingsComputed } from '.storybook/custom/knob-props';
 
 
 const vue = {
@@ -13,6 +13,7 @@ const vue = {
          value: '',
       };
    },
+   computed: settingsComputed,
 };
 
 

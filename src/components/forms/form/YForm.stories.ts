@@ -21,6 +21,7 @@ import YFieldDate from '../field-date/YFieldDate.vue';
 import YFieldFileUpload from '../field-file-upload/YFieldFileUpload.vue';
 import YButtonSubmit from '../../buttons/button-submit/YButtonSubmit.vue';
 import YButtonReset from '../../buttons/button-reset/YButtonReset.vue';
+import { settingsComputed } from '../../../../.storybook/custom/knob-props';
 
 
 // generate random lists
@@ -120,6 +121,7 @@ const vue = {
          hobbyList,
       };
    },
+   computed: settingsComputed,
    methods: {
       onSubmit() {
          console.log('Submitting...');

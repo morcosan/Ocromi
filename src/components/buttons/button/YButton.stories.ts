@@ -1,5 +1,6 @@
 import YButton from './YButton.vue';
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
+import { settingsComputed } from '../../../../.storybook/custom/knob-props';
 
 
 const vue = {
@@ -12,6 +13,7 @@ const vue = {
          value: [],
       };
    },
+   computed: settingsComputed,
 };
 
 

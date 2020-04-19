@@ -1,6 +1,6 @@
 import YFieldNumber from './YFieldNumber.vue';
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
-import { groupId, propsInputField } from '.storybook/custom/knob-props';
+import { groupId, propsInputField, settingsComputed } from '.storybook/custom/knob-props';
 import { number } from '@storybook/addon-knobs';
 
 
@@ -28,6 +28,7 @@ const vue = {
          value: '',
       };
    },
+   computed: settingsComputed,
 };
 
 

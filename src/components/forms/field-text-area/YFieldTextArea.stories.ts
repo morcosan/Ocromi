@@ -1,6 +1,6 @@
 import YFieldTextArea from './YFieldTextArea.vue';
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
-import { groupId, propsInputField } from '.storybook/custom/knob-props';
+import { groupId, propsInputField, settingsComputed } from '.storybook/custom/knob-props';
 import { boolean } from '@storybook/addon-knobs';
 
 
@@ -19,6 +19,7 @@ const vue = {
          value: '',
       };
    },
+   computed: settingsComputed,
 };
 
 

@@ -1,5 +1,5 @@
 import StoryBuilder from '.storybook/custom/story-builder';
-import { groupId, propsButtonLoading } from '.storybook/custom/knob-props';
+import { groupId, propsButtonLoading, settingsComputed } from '.storybook/custom/knob-props';
 import { boolean, select, text } from '@storybook/addon-knobs';
 import YButtonSubmit from './YButtonSubmit.vue';
 import YForm from '../../forms/form/YForm.vue';
@@ -30,6 +30,7 @@ const vue = {
          hasSpam: false,
       };
    },
+   computed: settingsComputed,
    methods: {
       onSubmit() {
          console.log('Submitting...');
@@ -82,6 +83,7 @@ const basicFormTemplate = `
       :loading-time="loadingTime"
       :spinner="spinner"
       :will-be-enabled="willBeEnabled"
+      :settings="settings"
    />
 </YForm>
 `;

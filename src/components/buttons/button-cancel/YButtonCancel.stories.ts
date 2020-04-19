@@ -1,5 +1,5 @@
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
-import { groupId, propsButton } from '../../../../.storybook/custom/knob-props';
+import { groupId, propsButton, settingsComputed } from '../../../../.storybook/custom/knob-props';
 import { text } from '@storybook/addon-knobs';
 import YButtonCancel from './YButtonCancel.vue';
 import YButtonConfirm from '../button-confirm/YButtonConfirm.vue';
@@ -17,6 +17,7 @@ const vue = {
          default: () => text('Label', 'Cancel', groupId),
       },
    },
+   computed: settingsComputed,
    methods: {
       onClick() {
          console.log('Clicked Cancel');
@@ -31,6 +32,7 @@ const storyLines: StoryLine[] = [
       template: `
          <YButtonCancel
             :label="label"
+            :settings="settings"
             @click="onClick"
          />
          

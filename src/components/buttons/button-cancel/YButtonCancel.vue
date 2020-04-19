@@ -16,6 +16,7 @@
       class="y-button-cancel"
       :label="label"
       is-text-only
+      :settings="settingsComputed"
       @click="$emit('click')"
    />
 </template>

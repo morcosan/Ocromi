@@ -1,7 +1,7 @@
 // @ts-ignore
 import YFieldFileUpload, { File } from './YFieldFileUpload.vue';
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
-import { groupId, propsInputField } from '.storybook/custom/knob-props';
+import { groupId, propsInputField, settingsComputed } from '.storybook/custom/knob-props';
 import { array, boolean, number } from '@storybook/addon-knobs';
 
 
@@ -45,6 +45,7 @@ const vue = {
          ],
       };
    },
+   computed: settingsComputed,
    methods: {
       onClick() {
          // @ts-ignore
