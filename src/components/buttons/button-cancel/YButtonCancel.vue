@@ -15,7 +15,7 @@
    <YTemplateButton
       class="y-button-cancel"
       :label="label"
-      is-text-only
+      is-secondary
       :settings="settingsComputed"
       @click="$emit('click')"
    />

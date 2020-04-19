@@ -1,5 +1,5 @@
 import { boolean, number, select, text } from '@storybook/addon-knobs';
-import { DesignStyle, Spinner, Theme } from '../../src/core/settings';
+import { Design, DuoStyle, Spinner, Theme } from '../../src/core/settings';
 
 
 export const groupId = 'Props';
@@ -9,8 +9,8 @@ export const settingsProps = {
    theme: {
       default: () => select('Theme', Theme, Theme.Light, settingsGroupId),
    },
-   designStyle: {
-      default: () => select('Design Style', DesignStyle, DesignStyle.Material, settingsGroupId),
+   design: {
+      default: () => select('Design', Design, Design.Material, settingsGroupId),
    },
    isUppercase: {
       default: () => boolean('Button: Is Uppercase', true, settingsGroupId),
@@ -21,6 +21,9 @@ export const settingsProps = {
    spinner: {
       default: () => select('Button: Spinner', Spinner, Spinner.Default, settingsGroupId),
    },
+   duoStyle: {
+      default: () => select('Duo Style', DuoStyle, DuoStyle.FilledText, settingsGroupId),
+   },
 };
 
 
@@ -30,7 +33,7 @@ export const settingsComputed = {
          // @ts-ignore
          theme: this.theme,
          // @ts-ignore
-         designStyle: this.designStyle,
+         design: this.design,
          button: {
             // @ts-ignore
             isUppercase: this.isUppercase,
@@ -38,6 +41,8 @@ export const settingsComputed = {
             isRounded: this.isRounded,
             // @ts-ignore
             spinner: this.spinner,
+            // @ts-ignore
+            duoStyle: this.duoStyle,
          },
       };
    },

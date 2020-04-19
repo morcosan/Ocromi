@@ -17,7 +17,7 @@
       :label="label"
       :is-disabled="isDisabledComputed"
       type="reset"
-      is-text-only
+      is-secondary
       :settings="settingsComputed"
       @click="$emit('click')"
    />

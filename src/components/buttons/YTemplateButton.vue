@@ -41,14 +41,10 @@
       @Prop({ default: 'button' }) public type!: string;
       @Prop({ default: 'primary' }) public color!: string;
       @Prop({ default: '' }) public icon!: string;
-      @Prop({ default: Spinner.Default }) public spinner!: Spinner;
       @Prop({ default: () => {} }) public settings!: Settings;
       @Prop({ default: false, type: Boolean }) public isDisabled!: boolean;
       @Prop({ default: false, type: Boolean }) public isLoading!: boolean;
-      @Prop({ default: false, type: Boolean }) public isOutlined!: boolean;
-      @Prop({ default: false, type: Boolean }) public isTextOnly!: boolean;
-      @Prop({ default: false, type: Boolean }) public isUppercase!: boolean;
-      @Prop({ default: false, type: Boolean }) public isRounded!: boolean;
+      @Prop({ default: false, type: Boolean }) public isSecondary!: boolean;
 
 
       public get buttonSettings() {
@@ -73,12 +69,12 @@
       :color="(isDisabled ? 'grey-6' : color)"
       :size="size"
       :icon="(icon ? icon : undefined)"
-      :flat="isTextOnly"
-      :outline="isOutlined"
+      :flat="(isSecondary && buttonSettings.duoStyle === 'FILLED_TEXT')"
+      :outline="(isSecondary && buttonSettings.duoStyle === 'FILLED_OUTLINED')"
       :no-caps="!buttonSettings.isUppercase"
       :rounded="buttonSettings.isRounded"
-      :unelevated="settings.designStyle === 'FLAT'"
-      :ripple="settings.designStyle !== 'FLAT'"
+      :unelevated="settings.design === 'FLAT'"
+      :ripple="settings.design !== 'FLAT'"
       @click="$emit('click')"
    >
       <template v-slot:loading>

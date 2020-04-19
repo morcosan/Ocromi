@@ -22,30 +22,37 @@ export enum Theme {
 }
 
 
-export enum DesignStyle {
+export enum Design {
    Material = 'MATERIAL',
    Flat = 'FLAT',
 }
 
 
+export enum DuoStyle {
+   FilledText = 'FILLED_TEXT',
+   FilledOutlined = 'FILLED_OUTLINED',
+}
+
 export type Settings = {
    theme?: Theme,
-   designStyle?: DesignStyle,
+   design?: Design,
    button?: {
       isRounded?: boolean,
       isUppercase?: boolean,
       spinner?: Spinner,
+      duoStyle?: DuoStyle,
    },
 };
 
 
 const defaultSettings = {
    theme: Theme.Light,
-   designStyle: DesignStyle.Material,
+   design: Design.Material,
    button: {
       isRounded: false,
       isUppercase: true,
       spinner: Spinner.Default,
+      duoStyle: DuoStyle.FilledText,
    },
 };
 
