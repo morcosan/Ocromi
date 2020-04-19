@@ -14,7 +14,7 @@
       QSpinnerPie,
       QSpinnerRadio,
    } from 'quasar';
-   import { Spinner } from './YBaseButtonLoading';
+   import { Spinner } from '../../core/settings';
 
 
    @Component({

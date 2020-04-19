@@ -7,6 +7,6 @@ export default Vue;
 declare module 'vue/types/vue' {
    interface Vue {
       readonly YLocale: any;
-      YSettings: any;
+      readonly YSettings: any;
    }
 }

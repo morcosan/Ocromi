@@ -2,7 +2,6 @@ import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
 import { propsButtonLoading } from '../../../../.storybook/custom/knob-props';
 import { select, text } from '@storybook/addon-knobs';
 import YButtonConfirm from './YButtonConfirm.vue';
-import { Spinner } from '../YBaseButtonLoading';
 
 
 const vue = {
@@ -13,9 +12,6 @@ const vue = {
       ...propsButtonLoading,
       label: {
          default: () => text('Label', 'Confirm'),
-      },
-      spinner: {
-         default: () => select('Spinner', Spinner, Spinner.Default),
       },
    },
    methods: {

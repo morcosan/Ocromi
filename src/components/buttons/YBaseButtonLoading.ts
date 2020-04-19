@@ -1,20 +1,6 @@
 import { Component, Override, Prop, Watch } from '../../core/decorators';
 import YBaseButton from './YBaseButton';
-
-
-export enum Spinner {
-   Default = 'DEFAULT',
-   Bars = 'BARS',
-   Cube = 'CUBE',
-   Dots = 'DOTS',
-   Facebook = 'FACEBOOK',
-   Grid = 'GRID',
-   Hourglass = 'HOURGLASS',
-   IOS = 'IOS',
-   Circle = 'CIRCLE',
-   Pie = 'PIE',
-   Radio = 'RADIO',
-}
+import { Spinner } from '../../core/settings';
 
 
 @Component

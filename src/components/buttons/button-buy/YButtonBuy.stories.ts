@@ -3,7 +3,6 @@ import { propsButtonLoading } from '../../../../.storybook/custom/knob-props';
 import { boolean, select, text } from '@storybook/addon-knobs';
 // @ts-ignore
 import YButtonBuy, { BuyIcon } from './YButtonBuy.vue';
-import { Spinner } from '../YBaseButtonLoading';
 
 
 const vue = {
@@ -20,9 +19,6 @@ const vue = {
       },
       icon: {
          default: () => select('Icon', BuyIcon, BuyIcon.Default),
-      },
-      spinner: {
-         default: () => select('Spinner', Spinner, Spinner.Default),
       },
    },
    methods: {

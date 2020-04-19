@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import { extend } from 'quasar';
 
 
 export enum Spinner {
@@ -27,7 +27,7 @@ export type Settings = {
 };
 
 
-const defaultSettings: Settings = {
+const defaultSettings = {
    hasDarkMode: false,
    button: {
       isRounded: false,
@@ -38,15 +38,12 @@ const defaultSettings: Settings = {
 };
 
 
-export default {
-   install(Vue: any, settings: Settings = defaultSettings) {
-      // create global mixin
-      Vue.mixin({
-         computed: {
-            YSettings(): Settings {
-               return settings;
-            },
+export function install(Vue: any, settings: Settings = {}) {
+   Vue.mixin({
+      computed: {
+         YSettings(): Settings {
+            return extend(true, defaultSettings, settings);
          },
-      });
-   },
-};
+      },
+   });
+}

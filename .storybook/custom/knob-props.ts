@@ -1,4 +1,5 @@
 import { boolean, number, select, text } from '@storybook/addon-knobs';
+import { Spinner } from '../../src/core/settings';
 
 
 export const propsInput = {
@@ -90,5 +91,8 @@ export const propsButtonLoading = {
    ...propsButton,
    loadingTime: {
       default: () => number('Loading Time', 2000),
+   },
+   spinner: {
+      default: () => select('Spinner', Spinner, Spinner.Default),
    },
 };

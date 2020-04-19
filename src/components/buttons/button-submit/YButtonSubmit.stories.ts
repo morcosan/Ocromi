@@ -5,7 +5,6 @@ import YButtonSubmit from './YButtonSubmit.vue';
 import YForm from '../../forms/form/YForm.vue';
 import YCheckbox from '../../forms/checkbox/YCheckbox.vue';
 import YFieldText from '../../forms/field-text/YFieldText.vue';
-import { Spinner } from '../YBaseButtonLoading';
 
 
 const vue = {
@@ -22,9 +21,6 @@ const vue = {
       },
       willBeEnabled: {
          default: () => boolean('Will Be Enabled', false),
-      },
-      spinner: {
-         default: () => select('Spinner', Spinner, Spinner.Default),
       },
    },
    data() {
