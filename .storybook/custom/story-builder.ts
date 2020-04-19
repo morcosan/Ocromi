@@ -4,9 +4,9 @@ import './story-builder.scss';
 
 
 export type StoryLine = {
-   template: string;
-   title: string;
-   states?: string[];
+   template: string,
+   title: string,
+   states?: string[],
 }
 
 

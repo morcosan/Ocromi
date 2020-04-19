@@ -47,6 +47,10 @@
       @Prop({ default: false, type: Boolean }) public isOutlined!: boolean;
       @Prop({ default: false, type: Boolean }) public isTextOnly!: boolean;
 
+      created() {
+         console.log(this.YSettings);
+      }
+
    }
 </script>
 

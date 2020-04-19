@@ -46,13 +46,13 @@
 
          // add required rule
          if (!this.isOptional) {
-            rules.push((value: string) => (!!value || this.$locale.all.requiredError));
+            rules.push((value: string) => (!!value || this.YLocale.all.requiredError));
          }
 
          // add custom dates rule
          rules.push(() => {
             if (this.customDatesFn) {
-               return (this.customDatesFn(this.value) || this.$locale.fieldDate.customDatesError);
+               return (this.customDatesFn(this.value) || this.YLocale.fieldDate.customDatesError);
             }
             return true;
          });
@@ -61,7 +61,7 @@
          rules.push(() => {
             if (this.inputValue !== '') {
                const date = DateTime.fromFormat(this.inputValue, this.dateFormatInput);
-               return (date.isValid || this.$locale.fieldDate.maskError);
+               return (date.isValid || this.YLocale.fieldDate.maskError);
             }
             return true;
          });
@@ -205,21 +205,21 @@
                      :value="value"
                      :mask="dateFormatQuasarISO"
                      :options="customDatesAdapter"
-                     :locale="$locale.fieldDate.config"
+                     :locale="YLocale.fieldDate.config"
                      today-btn
                      @input="onDateSelect"
                      ref="qDate"
                   />
                </QPopupProxy>
 
-               <QTooltip v-if="!isReadonly">{{ $locale.fieldDate.tooltip }}</QTooltip>
+               <QTooltip v-if="!isReadonly">{{ YLocale.fieldDate.tooltip }}</QTooltip>
             </QIcon>
          </template>
       </QInput>
 
 
       <template v-slot:bottom-left>
-         <div v-if="!errorComputed">{{ $locale.fieldDate.hint }}</div>
+         <div v-if="!errorComputed">{{ YLocale.fieldDate.hint }}</div>
       </template>
 
    </YTemplateInput>

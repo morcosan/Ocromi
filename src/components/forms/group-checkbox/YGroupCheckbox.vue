@@ -25,7 +25,7 @@
             return '';
          }
 
-         return (this.value.length > 0 ? '' : this.$locale.groupCheckbox.requiredError);
+         return (this.value.length > 0 ? '' : this.YLocale.groupCheckbox.requiredError);
       }
 
 

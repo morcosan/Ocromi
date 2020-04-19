@@ -38,6 +38,30 @@ module.exports = {
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-unused-vars': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
       '@typescript-eslint/explicit-function-return-type': 'off',
+      '@typescript-eslint/member-delimiter-style': ['error', {
+         'overrides': {
+            'interface': {
+               'multiline': {
+                  'delimiter': 'semi',
+                  'requireLast': true,
+               },
+               'singleline': {
+                  'delimiter': 'semi',
+                  'requireLast': true,
+               },
+            },
+            'typeLiteral': {
+               'multiline': {
+                  'delimiter': 'comma',
+                  'requireLast': true,
+               },
+               'singleline': {
+                  'delimiter': 'comma',
+                  'requireLast': true,
+               },
+            },
+         },
+      }],
 
       'vue/html-indent': 'off',
       'vue/singleline-html-element-content-newline': 'off',

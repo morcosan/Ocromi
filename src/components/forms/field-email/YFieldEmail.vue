@@ -27,13 +27,13 @@
 
          // add required rule
          if (!this.isOptional) {
-            rules.push((value: string) => (!!value || this.$locale.all.requiredError));
+            rules.push((value: string) => (!!value || this.YLocale.all.requiredError));
          }
 
          // add email rule
          rules.push((value: string) => {
             if (value) {
-               return (Regex.isEmail(value) || this.$locale.fieldEmail.maskError);
+               return (Regex.isEmail(value) || this.YLocale.fieldEmail.maskError);
             }
             return true;
          });

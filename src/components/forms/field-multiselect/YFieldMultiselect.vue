@@ -27,7 +27,7 @@
 
          // add required rule
          if (!this.isOptional) {
-            rules.push((value: Option[]) => (value.length > 0 || this.$locale.all.requiredError));
+            rules.push((value: Option[]) => (value.length > 0 || this.YLocale.all.requiredError));
          }
 
          return rules;

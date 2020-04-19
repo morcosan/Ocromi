@@ -21,7 +21,7 @@
 
       public get optionalText() {
          const hasOptional = (this.isOptional && !this.hidesOptional);
-         return (hasOptional ? (this.$locale.all.optional + ' ') : '');
+         return (hasOptional ? (this.YLocale.all.optional + ' ') : '');
       }
 
 

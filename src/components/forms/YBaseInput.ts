@@ -3,8 +3,8 @@ import YBaseForm from './YBaseForm';
 
 
 type FormProps = {
-   isMini?: boolean;
-   sideLabelWidth?: string;
+   isMini?: boolean,
+   sideLabelWidth?: string,
 }
 
 
@@ -69,7 +69,7 @@ export default class YBaseInput extends Vue {
    public get labelComputed() {
       if (this.label !== '') {
          const hasOptional = (this.isOptional && !this.hidesOptional);
-         return (hasOptional ? (this.label + ' ' + this.$locale.all.optional) : this.label);
+         return (hasOptional ? (this.label + ' ' + this.YLocale.all.optional) : this.label);
       }
       return '';
    }

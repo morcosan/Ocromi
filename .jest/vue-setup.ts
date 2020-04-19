@@ -13,7 +13,7 @@ Vue.use(Quasar);
 // @ts-ignore
 Vue.mixin({
    computed: {
-      $locale(): any {
+      YLocale(): any {
          // @ts-ignore
          return this.$t('locale');
       },

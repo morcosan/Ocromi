@@ -32,13 +32,13 @@
 
          // add required rule
          if (!this.isOptional) {
-            rules.push((value: string) => (!!value || this.$locale.all.requiredError));
+            rules.push((value: string) => (!!value || this.YLocale.all.requiredError));
          }
 
          // add URL rule
          rules.push((value: string) => {
             if (value) {
-               return (Regex.isSimpleLink(value) || this.$locale.fieldLink.maskError);
+               return (Regex.isSimpleLink(value) || this.YLocale.fieldLink.maskError);
             }
             return true;
          });
@@ -181,7 +181,7 @@
                @keydown="onKeyDownButton"
             >
                <QIcon :class="(isReadonly ? 'cursor-not-allowed' : 'cursor-pointer')" name="open_in_new">
-                  <QTooltip v-if="!isReadonly">{{ $locale.fieldLink.tooltip }}</QTooltip>
+                  <QTooltip v-if="!isReadonly">{{ YLocale.fieldLink.tooltip }}</QTooltip>
                </QIcon>
             </a>
          </template>

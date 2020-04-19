@@ -25,7 +25,7 @@
             return '';
          }
 
-         return (this.value ? '' : this.$locale.groupRadio.requiredError);
+         return (this.value ? '' : this.YLocale.groupRadio.requiredError);
       }
 
 

@@ -6,14 +6,14 @@
 
 
    export type File = {
-      type: string;
-      name: string;
+      type: string,
+      name: string,
    }
 
 
    type FileData = {
-      totalSize: number;
-      filesNumber: number;
+      totalSize: number,
+      filesNumber: number,
    }
 
 
@@ -45,7 +45,7 @@
 
          // add required rule
          if (!this.isOptional) {
-            rules.push((value: object[]) => (value.length > 0 || this.$locale.all.requiredError));
+            rules.push((value: object[]) => (value.length > 0 || this.YLocale.all.requiredError));
          }
 
          return rules;
@@ -171,7 +171,7 @@
                @click="openFilePicker"
                @keydown="onKeyDownAttachIcon"
             >
-               <QTooltip v-if="!isReadonly">{{ $locale.fieldFileUpload.tooltipPickFiles }}</QTooltip>
+               <QTooltip v-if="!isReadonly">{{ YLocale.fieldFileUpload.tooltipPickFiles }}</QTooltip>
             </QIcon>
 
             <QIcon
@@ -180,7 +180,7 @@
                name="clear_all"
                @click="onClickRemoveFile(-1, $event)"
             >
-               <QTooltip v-if="!isReadonly">{{ $locale.fieldFileUpload.tooltipRemoveFiles }}</QTooltip>
+               <QTooltip v-if="!isReadonly">{{ YLocale.fieldFileUpload.tooltipRemoveFiles }}</QTooltip>
             </QIcon>
          </template>
 
@@ -206,11 +206,11 @@
                   @click="onClickRemoveFile(scope.index, $event)"
                >
                   <QIcon name="close" size="20px" color="grey-7"/>
-                  <QTooltip>{{ $locale.fieldFileUpload.tooltipRemoveFile }}</QTooltip>
+                  <QTooltip>{{ YLocale.fieldFileUpload.tooltipRemoveFile }}</QTooltip>
                </QAvatar>
             </QChip>
 
-            <QTooltip v-if="!isReadonly">{{ $locale.fieldFileUpload.tooltipPickFiles }}</QTooltip>
+            <QTooltip v-if="!isReadonly">{{ YLocale.fieldFileUpload.tooltipPickFiles }}</QTooltip>
          </template>
       </QFile>
 

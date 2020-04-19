@@ -3,8 +3,8 @@ import YBaseInput from './YBaseInput';
 
 
 export type Option = {
-   value: string;
-   label: string;
+   value: string,
+   label: string,
 }
 
 

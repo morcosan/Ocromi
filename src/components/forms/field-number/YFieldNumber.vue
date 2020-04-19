@@ -32,7 +32,7 @@
 
          // add required rule
          if (!this.isOptional) {
-            rules.push((value: string | number) => (value !== '' || this.$locale.all.requiredError));
+            rules.push((value: string | number) => (value !== '' || this.YLocale.all.requiredError));
          }
 
          // add min/max rule
@@ -43,16 +43,16 @@
                if (this.minValue && this.maxValue) {
                   const isOutsideLimits = (valueNum < this.minValue || valueNum > this.maxValue);
                   if (isOutsideLimits) {
-                     const error = this.$locale.fieldNumber.minMax;
+                     const error = this.YLocale.fieldNumber.minMax;
                      return error.replace('${1}', String(this.minValue)).replace('${2}', String(this.maxValue));
                   }
                }
                else if (this.minValue && valueNum < this.minValue) {
-                  const error = this.$locale.fieldNumber.min;
+                  const error = this.YLocale.fieldNumber.min;
                   return error.replace('${1}', String(this.minValue));
                }
                else if (this.maxValue && valueNum > this.maxValue) {
-                  const error = this.$locale.fieldNumber.max;
+                  const error = this.YLocale.fieldNumber.max;
                   return error.replace('${1}', String(this.maxValue));
                }
             }

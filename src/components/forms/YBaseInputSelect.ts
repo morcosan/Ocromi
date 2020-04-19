@@ -3,9 +3,9 @@ import YBaseInput from './YBaseInput';
 
 
 export type Option = {
-   value: string;
-   label: string;
-   isNew: boolean;
+   value: string,
+   label: string,
+   isNew: boolean,
 }
 
 

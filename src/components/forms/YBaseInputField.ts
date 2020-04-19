@@ -10,7 +10,7 @@ export default class YBaseInputField extends YBaseInput {
 
 
    public get finalPlaceholder() {
-      return (this.placeholder ? this.$locale.all.placeholder.replace('${1}', this.placeholder) : '');
+      return (this.placeholder ? this.YLocale.all.placeholder.replace('${1}', this.placeholder) : '');
    }
 
 

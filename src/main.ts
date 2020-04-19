@@ -42,15 +42,17 @@ import '@quasar/extras/material-icons/material-icons.css';
 import 'quasar/dist/quasar.css';
 import './css/app.scss';
 import packageJSON from '../package.json';
+import YSettings from './core/core-settings';
 
 
+Vue.use(YSettings);
 // @ts-ignore
 Vue.use(Quasar);
 
 export class Ocromi {
-   public static version: string = 'v' + packageJSON.version;
-   public static license: string = packageJSON.license;
-   public static description: string = packageJSON.description;
+   public static readonly version: string = 'v' + packageJSON.version;
+   public static readonly license: string = packageJSON.license;
+   public static readonly description: string = packageJSON.description;
 }
 
 export {
