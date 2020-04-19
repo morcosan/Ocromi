@@ -1,24 +1,25 @@
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
 import { groupId, propsButtonLoading, settingsComputed } from '../../../../.storybook/custom/knob-props';
-import { boolean, select, text } from '@storybook/addon-knobs';
-import YButtonBuy from './YButtonBuy.vue';
-import { BuyIcon } from '../../../core/enums';
+import { select, text } from '@storybook/addon-knobs';
+import YButtonIcon from './YButtonIcon.vue';
+import { IconSize, ButtonStyle } from '../../../core/enums';
 
 
 const vue = {
    components: {
-      YButtonBuy,
+      YButtonIcon,
    },
    props: {
       ...propsButtonLoading,
-      label: {
-         default: () => text('Label', 'Add to cart', groupId),
+      label: undefined,
+      iconId: {
+         default: () => text('Icon Id', 'favorite', groupId),
       },
-      isLarge: {
-         default: () => boolean('Is Large', false, groupId),
+      iconSize: {
+         default: () => select('Icon Size', IconSize, IconSize.Medium, groupId),
       },
-      icon: {
-         default: () => select('Icon', BuyIcon, BuyIcon.Default, groupId),
+      buttonStyle: {
+         default: () => select('Button Style', ButtonStyle, ButtonStyle.Filled, groupId),
       },
    },
    computed: settingsComputed,
@@ -41,12 +42,12 @@ const storyLines: StoryLine[] = [
    {
       title: 'Default',
       template: `
-         <YButtonBuy
-            :label="label"
+         <YButtonIcon
             :is-disabled="isDisabled"
             :loading-time="loadingTime"
-            :is-large="isLarge"
-            :icon="icon"
+            :icon-id="iconId"
+            :icon-size="iconSize"
+            :button-style="buttonStyle"
             :settings="settings"
             @click="onClick"
          />
@@ -55,10 +56,10 @@ const storyLines: StoryLine[] = [
 ];
 
 
-export default StoryBuilder.createDefault('Buttons / Button Buy');
+export default StoryBuilder.createDefault('Buttons / Button Icon');
 export const default_ = StoryBuilder.createStory(vue, storyLines);
 export const docs = StoryBuilder.createDocs(`
 /**
- * Used when user needs a call to action.
+ * Used when buttons need to be subtle or displayed in a toolbar.
  */
 `);

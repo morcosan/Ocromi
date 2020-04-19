@@ -1,3 +1,4 @@
+import { ButtonStyle } from '../../core/enums';
 <script lang="ts">
    import { Component, Prop, Vue } from '../../core/decorators';
    import {
@@ -14,7 +15,8 @@
       QSpinnerPie,
       QSpinnerRadio,
    } from 'quasar';
-   import { Settings, Spinner } from '../../core/settings';
+   import { Settings } from '../../core/settings';
+   import { ButtonStyle, DuoStyle } from '../../core/enums';
 
 
    @Component({
@@ -41,10 +43,12 @@
       @Prop({ default: 'button' }) public type!: string;
       @Prop({ default: 'primary' }) public color!: string;
       @Prop({ default: '' }) public icon!: string;
+      @Prop({ default: null }) public buttonStyle!: ButtonStyle | null;
       @Prop({ default: () => {} }) public settings!: Settings;
       @Prop({ default: false, type: Boolean }) public isDisabled!: boolean;
       @Prop({ default: false, type: Boolean }) public isLoading!: boolean;
       @Prop({ default: false, type: Boolean }) public isSecondary!: boolean;
+      @Prop({ default: false, type: Boolean }) public isRound!: boolean;
 
 
       public get button() {
@@ -52,6 +56,22 @@
             return this.settings.button;
          }
          return {};
+      }
+
+
+      public get isText() {
+         if (this.buttonStyle === ButtonStyle.Text) {
+            return true;
+         }
+         return (this.isSecondary && this.button.duoStyle === DuoStyle.FilledText);
+      }
+
+
+      public get isOutlined() {
+         if (this.buttonStyle === ButtonStyle.Outlined) {
+            return true;
+         }
+         return (this.isSecondary && this.button.duoStyle === DuoStyle.FilledOutlined);
       }
 
    }
@@ -69,10 +89,11 @@
       :color="(isDisabled ? 'grey-6' : color)"
       :size="size"
       :icon="(icon ? icon : undefined)"
-      :flat="(isSecondary && button.duoStyle === YDuoStyle.FilledText)"
-      :outline="(isSecondary && button.duoStyle === YDuoStyle.FilledOutlined)"
+      :flat="isText"
+      :outline="isOutlined"
       :no-caps="!button.isUppercase"
       :rounded="button.isRounded"
+      :round="isRound"
       :unelevated="settings.design === YDesign.Flat"
       :ripple="settings.design === YDesign.Material"
       @click="$emit('click')"

@@ -33,6 +33,7 @@ import YButtonConfirm from './components/buttons/button-confirm/YButtonConfirm.v
 import YButtonReset from './components/buttons/button-reset/YButtonReset.vue';
 import YButtonCancel from './components/buttons/button-cancel/YButtonCancel.vue';
 import YButtonBuy from './components/buttons/button-buy/YButtonBuy.vue';
+import YButtonIcon from './components/buttons/button-icon/YButtonIcon.vue';
 
 
 import Vue from 'vue';
@@ -42,7 +43,7 @@ import '@quasar/extras/material-icons/material-icons.css';
 import 'quasar/dist/quasar.css';
 import './css/app.scss';
 import packageJSON from '../package.json';
-import { Design, DuoStyle, install, Settings, Spinner, Theme } from './core/settings';
+import { install, Settings } from './core/settings';
 
 
 // @ts-ignore
@@ -58,13 +59,7 @@ export class Ocromi {
    }
 }
 
-export {
-   Design,
-   DuoStyle,
-   Spinner,
-   Theme,
-};
-
+export * from './core/enums';
 export {
    // forms
    YBaseInput,
@@ -102,6 +97,7 @@ export {
    YButtonReset,
    YButtonCancel,
    YButtonBuy,
+   YButtonIcon,
 };
 
 

@@ -1,34 +1,5 @@
 import Utils from '../utils';
-
-
-export enum Theme {
-   Light = 'LIGHT',
-   Dark = 'DARK',
-}
-
-export enum Design {
-   Material = 'MATERIAL',
-   Flat = 'FLAT',
-}
-
-export enum DuoStyle {
-   FilledText = 'FILLED_TEXT',
-   FilledOutlined = 'FILLED_OUTLINED',
-}
-
-export enum Spinner {
-   Default = 'DEFAULT',
-   Bars = 'BARS',
-   Cube = 'CUBE',
-   Dots = 'DOTS',
-   Facebook = 'FACEBOOK',
-   Grid = 'GRID',
-   Hourglass = 'HOURGLASS',
-   IOS = 'IOS',
-   Circle = 'CIRCLE',
-   Pie = 'PIE',
-   Radio = 'RADIO',
-}
+import { Design, DuoStyle, Spinner, Theme } from './enums';
 
 
 export type Settings = {
@@ -59,18 +30,6 @@ export function install(Vue: any, settings: Settings = {}) {
       computed: {
          YSettings(): Settings {
             return Utils.mergeObjects(defaultSettings, settings);
-         },
-         YTheme(): typeof Theme {
-            return Theme;
-         },
-         YDesign(): typeof Design {
-            return Design;
-         },
-         YDuoStyle(): typeof DuoStyle {
-            return DuoStyle;
-         },
-         YSpinner(): typeof Spinner {
-            return Spinner;
          },
       },
    });

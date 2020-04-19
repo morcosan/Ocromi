@@ -1,5 +1,5 @@
 import { boolean, number, select, text } from '@storybook/addon-knobs';
-import { Design, DuoStyle, Spinner, Theme } from '../../src/core/settings';
+import { Design, DuoStyle, Spinner, Theme } from '../../src/core/enums';
 
 
 export const groupId = 'Props';
@@ -139,6 +139,6 @@ export const propsButton = {
 export const propsButtonLoading = {
    ...propsButton,
    loadingTime: {
-      default: () => number('Loading Time', 2000, {}, groupId),
+      default: () => number('Loading Time', 1000, {}, groupId),
    },
 };

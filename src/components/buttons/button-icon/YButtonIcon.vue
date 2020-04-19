@@ -2,16 +2,17 @@
    import { Component, Prop } from '../../../core/decorators';
    import YBaseButtonLoading from '../YBaseButtonLoading';
    import YTemplateButton from '../YTemplateButton.vue';
-   import { BuyIcon } from '../../../core/enums';
+   import { ButtonStyle, IconSize } from '../../../core/enums';
 
 
    @Component({
       components: { YTemplateButton },
    })
-   export default class YButtonBuy extends YBaseButtonLoading {
+   export default class YButtonIcon extends YBaseButtonLoading {
 
-      @Prop({ default: BuyIcon.Default }) public icon!: BuyIcon;
-      @Prop({ default: false, type: Boolean }) public isLarge!: boolean;
+      @Prop({ default: 'favorite' }) public iconId!: string;
+      @Prop({ default: IconSize.Medium }) public iconSize!: IconSize;
+      @Prop({ default: ButtonStyle.Filled }) public buttonStyle!: ButtonStyle;
 
    }
 </script>
@@ -19,13 +20,14 @@
 
 <template>
    <YTemplateButton
-      class="y-button-icon"
-      :label="label"
+      class="y-button-confirm"
       :is-disabled="isDisabledComputed"
       :is-loading="isLoading"
       :percentage="percentage"
-      :icon="icon"
-      :size="(isLarge ? 'lg' : 'md')"
+      :icon="iconId"
+      :size="iconSize"
+      :button-style="buttonStyle"
+      is-round
       :settings="settingsComputed"
       @click="onClick"
    />
