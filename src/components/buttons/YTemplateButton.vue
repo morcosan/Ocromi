@@ -47,7 +47,7 @@
       @Prop({ default: false, type: Boolean }) public isSecondary!: boolean;
 
 
-      public get buttonSettings() {
+      public get button() {
          if (this.settings.button) {
             return this.settings.button;
          }
@@ -69,26 +69,26 @@
       :color="(isDisabled ? 'grey-6' : color)"
       :size="size"
       :icon="(icon ? icon : undefined)"
-      :flat="(isSecondary && buttonSettings.duoStyle === 'FILLED_TEXT')"
-      :outline="(isSecondary && buttonSettings.duoStyle === 'FILLED_OUTLINED')"
-      :no-caps="!buttonSettings.isUppercase"
-      :rounded="buttonSettings.isRounded"
-      :unelevated="settings.design === 'FLAT'"
-      :ripple="settings.design !== 'FLAT'"
+      :flat="(isSecondary && button.duoStyle === YDuoStyle.FilledText)"
+      :outline="(isSecondary && button.duoStyle === YDuoStyle.FilledOutlined)"
+      :no-caps="!button.isUppercase"
+      :rounded="button.isRounded"
+      :unelevated="settings.design === YDesign.Flat"
+      :ripple="settings.design === YDesign.Material"
       @click="$emit('click')"
    >
       <template v-slot:loading>
-         <QSpinner v-if="buttonSettings.spinner === 'DEFAULT'"/>
-         <QSpinnerBars v-if="buttonSettings.spinner === 'BARS'"/>
-         <QSpinnerCube v-if="buttonSettings.spinner === 'CUBE'"/>
-         <QSpinnerDots v-if="buttonSettings.spinner === 'DOTS'"/>
-         <QSpinnerFacebook v-if="buttonSettings.spinner === 'FACEBOOK'"/>
-         <QSpinnerGrid v-if="buttonSettings.spinner === 'GRID'"/>
-         <QSpinnerHourglass v-if="buttonSettings.spinner === 'HOURGLASS'"/>
-         <QSpinnerIos v-if="buttonSettings.spinner === 'IOS'"/>
-         <QSpinnerOval v-if="buttonSettings.spinner === 'CIRCLE'"/>
-         <QSpinnerPie v-if="buttonSettings.spinner === 'PIE'"/>
-         <QSpinnerRadio v-if="buttonSettings.spinner === 'RADIO'"/>
+         <QSpinner v-if="button.spinner === YSpinner.Default"/>
+         <QSpinnerBars v-if="button.spinner === YSpinner.Bars"/>
+         <QSpinnerCube v-if="button.spinner === YSpinner.Cube"/>
+         <QSpinnerDots v-if="button.spinner === YSpinner.Dots"/>
+         <QSpinnerFacebook v-if="button.spinner === YSpinner.Facebook"/>
+         <QSpinnerGrid v-if="button.spinner === YSpinner.Grid"/>
+         <QSpinnerHourglass v-if="button.spinner === YSpinner.Hourglass"/>
+         <QSpinnerIos v-if="button.spinner === YSpinner.IOS"/>
+         <QSpinnerOval v-if="button.spinner === YSpinner.Circle"/>
+         <QSpinnerPie v-if="button.spinner === YSpinner.Pie"/>
+         <QSpinnerRadio v-if="button.spinner === YSpinner.Radio"/>
       </template>
    </QBtn>
 </template>

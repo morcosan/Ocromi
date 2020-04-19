@@ -42,7 +42,7 @@ import '@quasar/extras/material-icons/material-icons.css';
 import 'quasar/dist/quasar.css';
 import './css/app.scss';
 import packageJSON from '../package.json';
-import { install, Settings, Spinner } from './core/settings';
+import { Design, DuoStyle, install, Settings, Spinner, Theme } from './core/settings';
 
 
 // @ts-ignore
@@ -59,7 +59,10 @@ export class Ocromi {
 }
 
 export {
+   Design,
+   DuoStyle,
    Spinner,
+   Theme,
 };
 
 export {

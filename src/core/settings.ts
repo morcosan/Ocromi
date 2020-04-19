@@ -1,6 +1,21 @@
 import Utils from '../utils';
 
 
+export enum Theme {
+   Light = 'LIGHT',
+   Dark = 'DARK',
+}
+
+export enum Design {
+   Material = 'MATERIAL',
+   Flat = 'FLAT',
+}
+
+export enum DuoStyle {
+   FilledText = 'FILLED_TEXT',
+   FilledOutlined = 'FILLED_OUTLINED',
+}
+
 export enum Spinner {
    Default = 'DEFAULT',
    Bars = 'BARS',
@@ -16,23 +31,6 @@ export enum Spinner {
 }
 
 
-export enum Theme {
-   Light = 'LIGHT',
-   Dark = 'DARK',
-}
-
-
-export enum Design {
-   Material = 'MATERIAL',
-   Flat = 'FLAT',
-}
-
-
-export enum DuoStyle {
-   FilledText = 'FILLED_TEXT',
-   FilledOutlined = 'FILLED_OUTLINED',
-}
-
 export type Settings = {
    theme?: Theme,
    design?: Design,
@@ -43,7 +41,6 @@ export type Settings = {
       duoStyle?: DuoStyle,
    },
 };
-
 
 const defaultSettings = {
    theme: Theme.Light,
@@ -62,6 +59,18 @@ export function install(Vue: any, settings: Settings = {}) {
       computed: {
          YSettings(): Settings {
             return Utils.mergeObjects(defaultSettings, settings);
+         },
+         YTheme(): typeof Theme {
+            return Theme;
+         },
+         YDesign(): typeof Design {
+            return Design;
+         },
+         YDuoStyle(): typeof DuoStyle {
+            return DuoStyle;
+         },
+         YSpinner(): typeof Spinner {
+            return Spinner;
          },
       },
    });
