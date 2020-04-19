@@ -1,5 +1,5 @@
 <script lang="ts">
-   import { Component, Prop, Vue, Watch } from '../../core/decorators';
+   import { Component, Prop, Vue } from '../../core/decorators';
    import {
       QBtn,
       QSpinner,
@@ -14,7 +14,7 @@
       QSpinnerPie,
       QSpinnerRadio,
    } from 'quasar';
-   import { Settings } from '../../core/settings';
+   import { Settings, Spinner } from '../../core/settings';
 
 
    @Component({
@@ -41,11 +41,14 @@
       @Prop({ default: 'button' }) public type!: string;
       @Prop({ default: 'primary' }) public color!: string;
       @Prop({ default: '' }) public icon!: string;
+      @Prop({ default: Spinner.Default }) public spinner!: Spinner;
       @Prop({ default: () => {} }) public settings!: Settings;
       @Prop({ default: false, type: Boolean }) public isDisabled!: boolean;
       @Prop({ default: false, type: Boolean }) public isLoading!: boolean;
       @Prop({ default: false, type: Boolean }) public isOutlined!: boolean;
       @Prop({ default: false, type: Boolean }) public isTextOnly!: boolean;
+      @Prop({ default: false, type: Boolean }) public isUppercase!: boolean;
+      @Prop({ default: false, type: Boolean }) public isRounded!: boolean;
 
 
       public get buttonSettings() {
@@ -53,11 +56,6 @@
             return this.settings.button;
          }
          return {};
-      }
-
-
-      public get spinner() {
-         return this.buttonSettings.spinner;
       }
 
    }
@@ -75,23 +73,26 @@
       :color="(isDisabled ? 'grey-6' : color)"
       :size="size"
       :icon="(icon ? icon : undefined)"
-      :no-caps="!buttonSettings.isUppercase"
       :flat="isTextOnly"
       :outline="isOutlined"
+      :no-caps="!buttonSettings.isUppercase"
+      :rounded="buttonSettings.isRounded"
+      :unelevated="settings.designStyle === 'FLAT'"
+      :ripple="settings.designStyle !== 'FLAT'"
       @click="$emit('click')"
    >
       <template v-slot:loading>
-         <QSpinner v-if="spinner === 'DEFAULT'"/>
-         <QSpinnerBars v-if="spinner === 'BARS'"/>
-         <QSpinnerCube v-if="spinner === 'CUBE'"/>
-         <QSpinnerDots v-if="spinner === 'DOTS'"/>
-         <QSpinnerFacebook v-if="spinner === 'FACEBOOK'"/>
-         <QSpinnerGrid v-if="spinner === 'GRID'"/>
-         <QSpinnerHourglass v-if="spinner === 'HOURGLASS'"/>
-         <QSpinnerIos v-if="spinner === 'IOS'"/>
-         <QSpinnerOval v-if="spinner === 'CIRCLE'"/>
-         <QSpinnerPie v-if="spinner === 'PIE'"/>
-         <QSpinnerRadio v-if="spinner === 'RADIO'"/>
+         <QSpinner v-if="buttonSettings.spinner === 'DEFAULT'"/>
+         <QSpinnerBars v-if="buttonSettings.spinner === 'BARS'"/>
+         <QSpinnerCube v-if="buttonSettings.spinner === 'CUBE'"/>
+         <QSpinnerDots v-if="buttonSettings.spinner === 'DOTS'"/>
+         <QSpinnerFacebook v-if="buttonSettings.spinner === 'FACEBOOK'"/>
+         <QSpinnerGrid v-if="buttonSettings.spinner === 'GRID'"/>
+         <QSpinnerHourglass v-if="buttonSettings.spinner === 'HOURGLASS'"/>
+         <QSpinnerIos v-if="buttonSettings.spinner === 'IOS'"/>
+         <QSpinnerOval v-if="buttonSettings.spinner === 'CIRCLE'"/>
+         <QSpinnerPie v-if="buttonSettings.spinner === 'PIE'"/>
+         <QSpinnerRadio v-if="buttonSettings.spinner === 'RADIO'"/>
       </template>
    </QBtn>
 </template>

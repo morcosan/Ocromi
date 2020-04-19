@@ -1,16 +1,25 @@
 import { boolean, number, select, text } from '@storybook/addon-knobs';
-import { Spinner } from '../../src/core/settings';
+import { DesignStyle, Spinner, Theme } from '../../src/core/settings';
 
 
 export const groupId = 'Props';
 
 const settingsGroupId = 'Settings';
-const settingsProps = {
+export const settingsProps = {
+   theme: {
+      default: () => select('Theme', Theme, Theme.Light, settingsGroupId),
+   },
+   designStyle: {
+      default: () => select('Design Style', DesignStyle, DesignStyle.Material, settingsGroupId),
+   },
    isUppercase: {
-      default: () => boolean('Is Uppercase', true, settingsGroupId),
+      default: () => boolean('Button: Is Uppercase', true, settingsGroupId),
+   },
+   isRounded: {
+      default: () => boolean('Button: Is Rounded', false, settingsGroupId),
    },
    spinner: {
-      default: () => select('Spinner', Spinner, Spinner.Default, settingsGroupId),
+      default: () => select('Button: Spinner', Spinner, Spinner.Default, settingsGroupId),
    },
 };
 
@@ -18,9 +27,15 @@ const settingsProps = {
 export const settingsComputed = {
    settings(): any {
       return {
+         // @ts-ignore
+         theme: this.theme,
+         // @ts-ignore
+         designStyle: this.designStyle,
          button: {
             // @ts-ignore
             isUppercase: this.isUppercase,
+            // @ts-ignore
+            isRounded: this.isRounded,
             // @ts-ignore
             spinner: this.spinner,
          },

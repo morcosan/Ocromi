@@ -21,7 +21,7 @@ import YFieldDate from '../field-date/YFieldDate.vue';
 import YFieldFileUpload from '../field-file-upload/YFieldFileUpload.vue';
 import YButtonSubmit from '../../buttons/button-submit/YButtonSubmit.vue';
 import YButtonReset from '../../buttons/button-reset/YButtonReset.vue';
-import { settingsComputed } from '../../../../.storybook/custom/knob-props';
+import { groupId, settingsComputed, settingsProps } from '../../../../.storybook/custom/knob-props';
 
 
 // generate random lists
@@ -53,14 +53,15 @@ const vue = {
    },
    props: {
       isMini: {
-         default: () => boolean('Is Mini', false),
+         default: () => boolean('Is Mini', false, groupId),
       },
       sideLabelWidth: {
-         default: () => text('Side Label Width', ''),
+         default: () => text('Side Label Width', '', groupId),
       },
       optional: {
-         default: () => boolean('+ Optional Inputs', false),
+         default: () => boolean('Inputs: Is Optional', false),
       },
+      ...settingsProps,
    },
    data() {
       return {
@@ -140,6 +141,7 @@ const basicFormTemplate = `
    :is-mini="isMini"
    :side-label-width="sideLabelWidth"
    class="story-form-panel"
+   :settings="settings"
    @submit="onSubmit" 
    ref="form"
 >
@@ -292,6 +294,7 @@ const loginFormTemplate = `
    :is-mini="isMini"
    :side-label-width="sideLabelWidth"
    class="story-form-panel"
+   :settings="settings"
    @submit="onSubmit" 
    ref="form"
 >

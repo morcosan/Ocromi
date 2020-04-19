@@ -16,11 +16,23 @@ export enum Spinner {
 }
 
 
+export enum Theme {
+   Light = 'LIGHT',
+   Dark = 'DARK',
+}
+
+
+export enum DesignStyle {
+   Material = 'MATERIAL',
+   Flat = 'FLAT',
+}
+
+
 export type Settings = {
-   hasDarkMode?: boolean,
+   theme?: Theme,
+   designStyle?: DesignStyle,
    button?: {
       isRounded?: boolean,
-      hasFlatDesign?: boolean,
       isUppercase?: boolean,
       spinner?: Spinner,
    },
@@ -28,10 +40,10 @@ export type Settings = {
 
 
 const defaultSettings = {
-   hasDarkMode: false,
+   theme: Theme.Light,
+   designStyle: DesignStyle.Material,
    button: {
       isRounded: false,
-      hasFlatDesign: false,
       isUppercase: true,
       spinner: Spinner.Default,
    },

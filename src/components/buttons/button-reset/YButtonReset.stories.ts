@@ -50,6 +50,7 @@ const vue = {
 const basicFormTemplate = `
 <YForm 
    class="story-form-panel"
+   :settings="settings"
    @submit="onSubmit"
    @reset="onReset" 
    ref="form"
@@ -74,7 +75,6 @@ const basicFormTemplate = `
    <YButtonReset
       :label="label"
       :is-disabled="isDisabled"
-      :settings="settings"
       @reset="onReset" 
    />
 </YForm>
