@@ -1,0 +1,27 @@
+// center text vertically
+.q-btn {
+   line-height: initial;
+}
+
+.q-btn:not(.q-btn--round) {
+   // put the icon closer
+   .q-icon {
+      margin-right: 8px;
+   }
+
+   // remove useless space
+   .q-btn__wrapper {
+      padding: 4px 12px;
+   }
+}
+
+// put the icon closer
+.q-btn .q-icon.on-right {
+   margin-right: 0;
+   margin-left: 8px;
+}
+
+// make text more obvious for links
+a.q-btn {
+   font-weight: 500;
+}

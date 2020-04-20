@@ -1,4 +1,4 @@
-import { Component, Override, Prop } from '../../core/decorators';
+import { Component, Prop } from '../../core/decorators';
 import YBaseInput from './YBaseInput';
 
 

@@ -1,6 +1,6 @@
 import StoryBuilder from '.storybook/custom/story-builder';
 import { groupId, propsButtonLoading, settingsComputed } from '.storybook/custom/knob-props';
-import { boolean, select, text } from '@storybook/addon-knobs';
+import { boolean, text } from '@storybook/addon-knobs';
 import YButtonSubmit from './YButtonSubmit.vue';
 import YForm from '../../forms/form/YForm.vue';
 import YCheckbox from '../../forms/checkbox/YCheckbox.vue';

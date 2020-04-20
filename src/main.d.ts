@@ -27,6 +27,7 @@ export interface YButtonCancel extends Vue {}
 export interface YButtonBuy extends Vue {}
 export interface YButtonIcon extends Vue {}
 export interface YButtonBack extends Vue {}
+export interface YButtonLink extends Vue {}
 
 
 // forms
@@ -55,6 +56,7 @@ export const YButtonCancel: VueConstructor<YButtonCancel>;
 export const YButtonBuy: VueConstructor<YButtonBuy>;
 export const YButtonIcon: VueConstructor<YButtonIcon>;
 export const YButtonBack: VueConstructor<YButtonBack>;
+export const YButtonLink: VueConstructor<YButtonLink>;
 
 
 export interface Ocromi {}

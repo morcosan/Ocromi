@@ -1,6 +1,6 @@
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
 import { groupId, propsButtonLoading, settingsComputed } from '../../../../.storybook/custom/knob-props';
-import { select, text } from '@storybook/addon-knobs';
+import { text } from '@storybook/addon-knobs';
 import YButtonConfirm from './YButtonConfirm.vue';
 
 

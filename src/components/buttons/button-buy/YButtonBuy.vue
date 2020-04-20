@@ -19,7 +19,7 @@
 
 <template>
    <YTemplateButton
-      class="y-button-icon"
+      class="y-button-buy"
       :label="label"
       :is-disabled="isDisabledComputed"
       :is-loading="isLoading"

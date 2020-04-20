@@ -52,10 +52,6 @@
             margin-right: -0.3em;
          }
 
-         /deep/ .q-btn__wrapper {
-            padding: 4px 12px;
-         }
-
          &.is-small /deep/ .q-btn__wrapper {
             padding: 4px 8px;
          }

@@ -1,5 +1,5 @@
 import YButton from './YButton.vue';
-import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
+import { StoryLine } from '.storybook/custom/story-builder';
 import { settingsComputed } from '../../../../.storybook/custom/knob-props';
 
 

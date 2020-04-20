@@ -35,6 +35,7 @@ import YButtonCancel from './components/buttons/button-cancel/YButtonCancel.vue'
 import YButtonBuy from './components/buttons/button-buy/YButtonBuy.vue';
 import YButtonIcon from './components/buttons/button-icon/YButtonIcon.vue';
 import YButtonBack from './components/buttons/button-back/YButtonBack.vue';
+import YButtonLink from './components/buttons/button-link/YButtonLink.vue';
 
 
 import Vue from 'vue';
@@ -100,6 +101,7 @@ export {
    YButtonBuy,
    YButtonIcon,
    YButtonBack,
+   YButtonLink,
 };
 
 

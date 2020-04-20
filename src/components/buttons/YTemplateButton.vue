@@ -42,8 +42,9 @@ import { ButtonStyle } from '../../core/enums';
       @Prop({ default: 0 }) public percentage!: number;
       @Prop({ default: 'button' }) public type!: string;
       @Prop({ default: 'primary' }) public color!: string;
-      @Prop({ default: 'white' }) public textColor!: string;
+      @Prop({ default: '' }) public textColor!: string;
       @Prop({ default: '' }) public icon!: string;
+      @Prop({ default: '' }) public iconOnRight!: string;
       @Prop({ default: null }) public buttonStyle!: ButtonStyle | null;
       @Prop({ default: () => {} }) public settings!: Settings;
       @Prop({ default: false, type: Boolean }) public isDisabled!: boolean;
@@ -91,6 +92,7 @@ import { ButtonStyle } from '../../core/enums';
       :text-color="textColor"
       :size="size"
       :icon="(icon ? icon : undefined)"
+      :icon-right="(iconOnRight ? iconOnRight : undefined)"
       :flat="isText"
       :outline="isOutlined"
       :no-caps="!button.isUppercase"

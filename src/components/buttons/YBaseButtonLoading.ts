@@ -1,4 +1,4 @@
-import { Component, Override, Prop, Watch } from '../../core/decorators';
+import { Component, Override, Prop } from '../../core/decorators';
 import YBaseButton from './YBaseButton';
 import { Spinner } from '../../core/enums';
 

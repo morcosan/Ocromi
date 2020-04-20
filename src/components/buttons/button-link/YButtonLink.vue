@@ -2,16 +2,15 @@
    import { Component, Prop } from '../../../core/decorators';
    import YBaseButtonLoading from '../YBaseButtonLoading';
    import YTemplateButton from '../YTemplateButton.vue';
-   import { ButtonStyle, IconSize } from '../../../core/enums';
+   import { ButtonStyle } from '../../../core/enums';
 
 
    @Component({
       components: { YTemplateButton },
    })
-   export default class YButtonIcon extends YBaseButtonLoading {
+   export default class YButtonLink extends YBaseButtonLoading {
 
-      @Prop({ default: 'favorite' }) public iconId!: string;
-      @Prop({ default: IconSize.Medium }) public iconSize!: IconSize;
+      @Prop({ default: '' }) public url!: string;
       @Prop({ default: ButtonStyle.Filled }) public buttonStyle!: ButtonStyle;
 
    }
@@ -20,14 +19,15 @@
 
 <template>
    <YTemplateButton
-      class="y-button-icon"
+      class="y-button-link"
+      :label="label"
       :is-disabled="isDisabledComputed"
-      :is-loading="isLoading"
-      :percentage="percentage"
-      :icon="iconId"
-      :size="iconSize"
+      icon-on-right="open_in_new"
       :button-style="buttonStyle"
-      is-round
+      :href="url"
+      type="a"
+      rel="noopener"
+      target="_blank"
       :settings="settingsComputed"
       @click="onClick"
    />
@@ -36,4 +36,9 @@
 
 <style scoped lang="scss">
    // @import '../../../css/variables';
+
+   // make it fit with text
+   .y-button-link.q-btn--flat /deep/ .q-btn__wrapper {
+      padding: 4px 8px;
+   }
 </style>

@@ -1,6 +1,6 @@
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
 import { groupId, propsButtonLoading, settingsComputed } from '../../../../.storybook/custom/knob-props';
-import { boolean, select, text } from '@storybook/addon-knobs';
+import { boolean, select } from '@storybook/addon-knobs';
 import YButtonBack from './YButtonBack.vue';
 import { BackIcon, ButtonStyle } from '../../../core/enums';
 
