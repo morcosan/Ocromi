@@ -58,4 +58,8 @@ export default {
    slider: {
       requiredError: 'A value must be selected',
    },
+
+   buttonBack: {
+      label: 'Back',
+   },
 };

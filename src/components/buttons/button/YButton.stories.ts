@@ -30,11 +30,11 @@ const storyLines: StoryLine[] = [
 ];
 
 
-export default StoryBuilder.createDefault('Buttons / Button');
-export const default_ = StoryBuilder.createStory(vue, storyLines);
-export const docs = StoryBuilder.createDocs(`
-/**
- * Used when user needs to take an action.
- * This type of button is colored and draws attention.
- */
-`);
+// export default StoryBuilder.createDefault('Buttons / Button');
+// export const default_ = StoryBuilder.createStory(vue, storyLines);
+// export const docs = StoryBuilder.createDocs(`
+// /**
+//  * Used when user needs to take an action.
+//  * This type of button is colored and draws attention.
+//  */
+// `);

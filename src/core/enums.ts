@@ -52,6 +52,12 @@ export enum BuyIcon {
    None = '',
 }
 
+export enum BackIcon {
+   Android = 'arrow_back',
+   IOS = 'arrow_back_ios',
+   Chevron = 'chevron_left',
+}
+
 
 Vue.mixin({
    computed: {
@@ -75,6 +81,9 @@ Vue.mixin({
       },
       YBuyIcon(): typeof BuyIcon {
          return BuyIcon;
+      },
+      YBackIcon(): typeof BackIcon {
+         return BackIcon;
       },
    },
 });
