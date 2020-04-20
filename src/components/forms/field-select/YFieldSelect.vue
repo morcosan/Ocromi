@@ -25,10 +25,16 @@
 
          // add required rule
          if (!this.isOptional) {
-            rules.push((value: Option | null) => (!!value || this.$locale.all.requiredError));
+            rules.push((value: Option | null) => (!!value || this.YLocale.all.requiredError));
          }
 
          return rules;
+      }
+
+
+      @Override
+      public created() {
+         this.initialValue = this.value;
       }
 
 
@@ -45,6 +51,7 @@
    <YTemplateInput
       class="y-field-select"
       :is-mini="isMiniComputed"
+      :is-disabled="isDisabledComputed"
       :side-label-width="sideLabelWidthComputed"
       :label="labelComputed"
       :error="errorComputed"
@@ -54,7 +61,7 @@
          :options="currOptions"
          :label="(isMiniComputed ? labelComputed : undefined)"
          :readonly="isReadonly"
-         :disable="isDisabled"
+         :disable="isDisabledComputed"
          :error="!!errorComputed"
          :bg-color="bgColor"
          input-debounce="0"
@@ -66,7 +73,7 @@
          @input="onInput"
          @filter="onFilterInput"
          @blur="onBlur"
-         ref="qSelect"
+         ref="inputRef"
       />
 
 

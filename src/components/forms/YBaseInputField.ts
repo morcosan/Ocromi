@@ -1,4 +1,4 @@
-import { Component, Override, Prop } from '../../core/decorators';
+import { Component, Prop } from '../../core/decorators';
 import YBaseInput from './YBaseInput';
 
 
@@ -10,14 +10,7 @@ export default class YBaseInputField extends YBaseInput {
 
 
    public get finalPlaceholder() {
-      return (this.placeholder ? this.$locale.all.placeholder.replace('${1}', this.placeholder) : '');
-   }
-
-
-   @Override
-   public focus() {
-      // @ts-ignore
-      this.$refs.qField.focus();
+      return (this.placeholder ? this.YLocale.all.placeholder.replace('${1}', this.placeholder) : '');
    }
 
 

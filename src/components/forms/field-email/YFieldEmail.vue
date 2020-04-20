@@ -27,18 +27,24 @@
 
          // add required rule
          if (!this.isOptional) {
-            rules.push((value: string) => (!!value || this.$locale.all.requiredError));
+            rules.push((value: string) => (!!value || this.YLocale.all.requiredError));
          }
 
          // add email rule
          rules.push((value: string) => {
             if (value) {
-               return (Regex.isEmail(value) || this.$locale.fieldEmail.maskError);
+               return (Regex.isEmail(value) || this.YLocale.fieldEmail.maskError);
             }
             return true;
          });
 
          return rules;
+      }
+
+
+      @Override
+      public created() {
+         this.initialValue = this.value;
       }
 
 
@@ -61,6 +67,7 @@
    <YTemplateInput
       class="y-field-email"
       :is-mini="isMiniComputed"
+      :is-disabled="isDisabledComputed"
       :side-label-width="sideLabelWidthComputed"
       :label="labelComputed"
       :error="errorComputed"
@@ -71,7 +78,7 @@
          :placeholder="finalPlaceholder"
          :bg-color="bgColor"
          :readonly="isReadonly"
-         :disable="isDisabled"
+         :disable="isDisabledComputed"
          :error="!!errorComputed"
          type="email"
          outlined
@@ -80,7 +87,7 @@
          @input="updateValueProp($event)"
          @keydown="onKeyDown"
          @blur="onBlur"
-         ref="qField"
+         ref="inputRef"
       />
 
 

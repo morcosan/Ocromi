@@ -1,6 +1,6 @@
 import YCheckbox from './YCheckbox.vue';
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
-import { propsInput } from '.storybook/custom/knob-props';
+import { groupId, propsInput, settingsComputed } from '.storybook/custom/knob-props';
 import { text } from '@storybook/addon-knobs';
 
 
@@ -12,9 +12,10 @@ const vue = {
       ...propsInput,
       isMini: undefined,
       error: {
-         default: () => text('Error', 'Custom error message'),
+         default: () => text('Error', 'Custom error message', groupId),
       },
    },
+   computed: settingsComputed,
    data() {
       return {
          value: false,
@@ -24,7 +25,7 @@ const vue = {
    },
    methods: {
       onClick(event: Event) {
-         console.log('clicked link');
+         console.log('Clicked link');
          event.preventDefault();
          event.stopPropagation();
       },

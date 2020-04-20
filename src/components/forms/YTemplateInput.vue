@@ -8,6 +8,7 @@
       @Prop({ default: '' }) public label!: string;
       @Prop({ default: '' }) public error!: string;
       @Prop({ default: '' }) public sideLabelWidth!: string;
+      @Prop({ default: false, type: Boolean }) public isDisabled!: boolean;
       @Prop({ default: false, type: Boolean }) public isMini!: boolean;
 
    }
@@ -20,6 +21,8 @@
          'y-base-input': true,
          'has-side-label': sideLabelWidth,
          'has-error': error,
+         'is-disabled': isDisabled,
+         'is-mini': isMini,
       }"
    >
       <div

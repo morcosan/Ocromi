@@ -1,3 +1,6 @@
+import { extend } from 'quasar';
+
+
 export default class Utils {
 
    public static isSpecialKey(event: KeyboardEvent) {
@@ -32,6 +35,11 @@ export default class Utils {
          newWindow.opener = null;
          newWindow.location.href = url;
       }
+   }
+
+
+   public static mergeObjects(...args: object[]): object {
+      return extend(true, {}, ...args);
    }
 
 }

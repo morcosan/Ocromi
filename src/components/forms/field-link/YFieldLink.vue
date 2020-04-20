@@ -32,13 +32,13 @@
 
          // add required rule
          if (!this.isOptional) {
-            rules.push((value: string) => (!!value || this.$locale.all.requiredError));
+            rules.push((value: string) => (!!value || this.YLocale.all.requiredError));
          }
 
          // add URL rule
          rules.push((value: string) => {
             if (value) {
-               return (Regex.isSimpleLink(value) || this.$locale.fieldLink.maskError);
+               return (Regex.isSimpleLink(value) || this.YLocale.fieldLink.maskError);
             }
             return true;
          });
@@ -53,9 +53,15 @@
 
 
       @Override
+      public created() {
+         this.initialValue = this.value;
+      }
+
+
+      @Override
       public mounted() {
          // @ts-ignore
-         this.nativeInput = this.$refs.qField.$el.querySelector('.js-native-input');
+         this.nativeInput = this.$refs.inputRef.$el.querySelector('.js-native-input');
          if (this.nativeInput) {
             this.nativeInput.addEventListener('paste', this.onPaste);
          }
@@ -142,6 +148,7 @@
    <YTemplateInput
       class="y-field-link"
       :is-mini="isMiniComputed"
+      :is-disabled="isDisabledComputed"
       :side-label-width="sideLabelWidthComputed"
       :label="labelComputed"
       :error="errorComputed"
@@ -151,7 +158,7 @@
          :label="(isMiniComputed ? labelComputed : undefined)"
          :placeholder="finalPlaceholder"
          :readonly="isReadonly"
-         :disable="isDisabled"
+         :disable="isDisabledComputed"
          :bg-color="bgColor"
          :error="!!errorComputed"
          :prefix="prefix"
@@ -163,7 +170,7 @@
          @keydown="onKeyDown"
          @keyup="updateFinalURL"
          @blur="onBlur"
-         ref="qField"
+         ref="inputRef"
       >
          <template v-if="canShowIcon" v-slot:append>
             <a
@@ -174,7 +181,7 @@
                @keydown="onKeyDownButton"
             >
                <QIcon :class="(isReadonly ? 'cursor-not-allowed' : 'cursor-pointer')" name="open_in_new">
-                  <QTooltip v-if="!isReadonly">{{ $locale.fieldLink.tooltip }}</QTooltip>
+                  <QTooltip v-if="!isReadonly">{{ YLocale.fieldLink.tooltip }}</QTooltip>
                </QIcon>
             </a>
          </template>

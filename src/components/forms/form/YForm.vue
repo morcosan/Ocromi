@@ -14,8 +14,8 @@
 <template>
    <QForm
       class="y-form"
-      greedy
-      @submit="$emit('submit')"
+      @submit="onSubmit"
+      @reset="$emit('reset')"
    >
       <slot/>
    </QForm>

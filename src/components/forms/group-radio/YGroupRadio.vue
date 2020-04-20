@@ -14,12 +14,24 @@
 
 
       @Override
-      public validate() {
-         if (!this.isOptional) {
-            this.innerError = (this.value ? '' : this.$locale.groupRadio.requiredError);
+      public get isValid() {
+         return (this.isOptional ? true : !!this.value);
+      }
+
+
+      @Override
+      public getValidationError() {
+         if (this.isOptional) {
+            return '';
          }
 
-         return !this.innerError;
+         return (this.value ? '' : this.YLocale.groupRadio.requiredError);
+      }
+
+
+      @Override
+      public created() {
+         this.initialValue = this.value;
       }
 
 
@@ -40,20 +52,20 @@
       :side-label-width="sideLabelWidthComputed"
       :label="labelComputed"
       :error="errorComputed"
-      :is-disabled="isDisabled"
+      :is-disabled="isDisabledComputed"
       :is-readonly="isReadonly"
       :bg-color="bgColor"
    >
       <QOptionGroup
          :value="value"
          :options="options"
-         :disable="isDisabled"
+         :disable="isDisabledComputed"
          :color="(errorComputed ? 'negative' : undefined)"
          :keep-color="!!errorComputed"
          type="radio"
          @input="onInput"
          @keydown="onKeyDown"
-         ref="qOptionGroup"
+         ref="inputRef"
       />
    </YTemplateInputGroup>
 </template>
@@ -61,4 +73,8 @@
 
 <style scoped lang="scss">
    // @import '../../../css/variables';
+
+   .y-group-radio.is-disabled /deep/ .q-radio__inner {
+      opacity: 0.6;
+   }
 </style>

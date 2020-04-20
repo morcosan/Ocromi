@@ -47,37 +47,12 @@
       }
    }
 
-   &.has-error {
-      color: $negative;
-
-      .y-base-input__bottom {
-         position: relative;
-         box-sizing: border-box;
-         height: 20px;
-         color: $negative;
-      }
-   }
-
-   &.has-side-label {
-      display: flex;
-      width: 100%;
-
-      .y-base-input__label {
-         width: 50%;
-         padding-top: 8px;
-      }
-   }
-
    .y-base-input__fieldset {
       position: relative;
       border: 1px solid rgba(0, 0, 0, 0.24);
       padding: 1px 2px;
       border-radius: 4px;
       transition: border-color 0.36s cubic-bezier(0.4, 0, 0.2, 1);
-
-      &:hover:not(.is-disabled) {
-         border-color: #000;
-      }
 
       .y-base-input__fieldset-label {
          position: absolute;
@@ -90,12 +65,6 @@
          color: #555;
 
          @include text-subtitle1;
-      }
-
-      &.is-disabled {
-         .y-base-input__fieldset-label {
-            color: rgba(85, 85, 85, 0.6);
-         }
       }
 
       &.is-readonly {
@@ -111,34 +80,85 @@
          }
       }
 
-      &.has-error {
-         .y-base-input__fieldset-label {
-            color: $negative;
-         }
-
-         &:before {
-            content: '';
-            position: absolute;
-            top: -1px;
-            left: -1px;
-
-            width: calc(100% + 2px);
-            height: calc(100% + 2px);
-            border: 2px solid $negative;
-
-            border-radius: 4px;
-
-            pointer-events: none;
-         }
-      }
-
       &.has-label {
          padding-top: 10px;
       }
    }
 
+
+   &.has-error {
+      color: $negative;
+
+      .y-base-input__fieldset-label {
+         color: $negative;
+      }
+
+      .y-base-input__fieldset:before {
+         content: '';
+         position: absolute;
+         top: -1px;
+         left: -1px;
+
+         width: calc(100% + 2px);
+         height: calc(100% + 2px);
+         border: 2px solid $negative;
+
+         border-radius: 4px;
+
+         pointer-events: none;
+      }
+
+      .y-base-input__bottom {
+         position: relative;
+         box-sizing: border-box;
+         height: 20px;
+         color: $negative;
+      }
+   }
+
+
+   &.has-side-label {
+      display: flex;
+      width: 100%;
+
+      .y-base-input__label {
+         width: 50%;
+         padding-top: 8px;
+      }
+   }
+
+
+   &.is-disabled {
+      .y-base-input__label,
+      .y-base-input__bottom {
+         opacity: 0.6;
+      }
+
+      .y-base-input__fieldset:before {
+         opacity: 0.3;
+      }
+
+      .y-base-input__fieldset-label {
+         color: rgba(85, 85, 85, 0.6);
+      }
+   }
+
+   &:not(.is-disabled) .y-base-input__fieldset:hover {
+      border-color: #000;
+   }
+
+
    .y-form & {
-      margin-bottom: 25px;
+      margin-bottom: 20px;
+
+      &.is-mini,
+      &.has-side-label {
+         margin-bottom: 16px;
+      }
+
+      &.y-checkbox:not(.has-side-label) {
+         margin-bottom: 0;
+      }
    }
 }
 

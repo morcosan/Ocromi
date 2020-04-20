@@ -25,10 +25,16 @@
 
          // add required rule
          if (!this.isOptional) {
-            rules.push((value: string) => (!!value || this.$locale.all.requiredError));
+            rules.push((value: string) => (!!value || this.YLocale.all.requiredError));
          }
 
          return rules;
+      }
+
+
+      @Override
+      public created() {
+         this.initialValue = this.value;
       }
 
    }
@@ -39,6 +45,7 @@
    <YTemplateInput
       class="y-field-text"
       :is-mini="isMiniComputed"
+      :is-disabled="isDisabledComputed"
       :side-label-width="sideLabelWidthComputed"
       :label="labelComputed"
       :error="errorComputed"
@@ -48,7 +55,7 @@
          :label="(isMiniComputed ? labelComputed : undefined)"
          :placeholder="finalPlaceholder"
          :readonly="isReadonly"
-         :disable="isDisabled"
+         :disable="isDisabledComputed"
          :bg-color="bgColor"
          :error="!!errorComputed"
          type="text"
@@ -57,7 +64,7 @@
          hide-bottom-space
          @input="updateValueProp($event)"
          @blur="onBlur"
-         ref="qField"
+         ref="inputRef"
       />
 
 

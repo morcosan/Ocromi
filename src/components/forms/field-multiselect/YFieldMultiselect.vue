@@ -27,10 +27,16 @@
 
          // add required rule
          if (!this.isOptional) {
-            rules.push((value: Option[]) => (value.length > 0 || this.$locale.all.requiredError));
+            rules.push((value: Option[]) => (value.length > 0 || this.YLocale.all.requiredError));
          }
 
          return rules;
+      }
+
+
+      @Override
+      public created() {
+         this.initialValue = this.value;
       }
 
 
@@ -76,6 +82,7 @@
    <YTemplateInput
       class="y-field-multiselect"
       :is-mini="isMiniComputed"
+      :is-disabled="isDisabledComputed"
       :side-label-width="sideLabelWidthComputed"
       :label="labelComputed"
       :error="errorComputed"
@@ -85,7 +92,7 @@
          :options="currOptions"
          :label="(isMiniComputed ? labelComputed : undefined)"
          :readonly="isReadonly"
-         :disable="isDisabled"
+         :disable="isDisabledComputed"
          :error="!!errorComputed"
          :bg-color="bgColor"
          :new-value-mode="canAddNew ? 'add-unique' : undefined"
@@ -101,7 +108,7 @@
          @filter="onFilterInput"
          @new-value="onNewOption"
          @blur="onBlur"
-         ref="qSelect"
+         ref="inputRef"
       >
          <template v-slot:selected-item="scope">
             <QChip

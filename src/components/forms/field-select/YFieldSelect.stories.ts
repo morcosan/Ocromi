@@ -1,7 +1,7 @@
 import YFieldSelect from './YFieldSelect.vue';
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
 import { selectOptions } from '.storybook/custom/utils';
-import { propsInputSelect } from '.storybook/custom/knob-props';
+import { propsInputSelect, settingsComputed } from '.storybook/custom/knob-props';
 
 
 const vue = {
@@ -15,6 +15,7 @@ const vue = {
          options: selectOptions,
       };
    },
+   computed: settingsComputed,
 };
 
 

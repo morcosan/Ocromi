@@ -13,9 +13,15 @@
       @Prop({ default: false }) public value!: boolean | null;
 
 
+      @Override
+      public get isValid() {
+         return (this.isOptional ? true : !!this.value);
+      }
+
+
       public get optionalText() {
          const hasOptional = (this.isOptional && !this.hidesOptional);
-         return (hasOptional ? (this.$locale.all.optional + ' ') : '');
+         return (hasOptional ? (this.YLocale.all.optional + ' ') : '');
       }
 
 
@@ -25,25 +31,23 @@
 
 
       @Override
-      public validate() {
-         if (!this.isOptional) {
-            this.innerError = (this.value ? '' : this.error);
+      public getValidationError() {
+         if (this.isOptional) {
+            return '';
          }
 
-         return !this.innerError;
+         return (this.value ? '' : this.error);
       }
 
 
       @Override
-      public focus() {
-         // @ts-ignore
-         this.$refs.qCheckbox.$el.focus();
+      public created() {
+         this.initialValue = this.value;
       }
 
 
       public onInput(value: boolean) {
          this.isDirty = true;
-         this.validate();
          this.updateValueProp(value);
       }
 
@@ -57,6 +61,7 @@
          'y-base-input y-checkbox': true,
          'has-side-label': sideLabelWidthComputed,
          'has-error': innerError,
+         'is-disabled': isDisabledComputed,
       }"
    >
       <div
@@ -70,11 +75,11 @@
       <div class="y-base-input__control-box">
          <QCheckbox
             :value="value"
-            :disable="isDisabled"
+            :disable="isDisabledComputed"
             :color="(innerError ? 'negative' : undefined)"
             :keep-color="!!innerError"
             @input="onInput"
-            ref="qCheckbox"
+            ref="inputRef"
          >
             <div v-if="!sideLabelWidthComputed">
                {{ optionalText }}
@@ -115,6 +120,10 @@
       /deep/ a {
          color: initial;
          text-decoration: underline;
+      }
+
+      &.is-disabled /deep/ .q-checkbox__inner {
+         opacity: 0.5;
       }
    }
 </style>

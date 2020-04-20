@@ -1,6 +1,6 @@
 import YFieldDate from './YFieldDate.vue';
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
-import { propsInputField } from '.storybook/custom/knob-props';
+import { propsInputField, settingsComputed } from '.storybook/custom/knob-props';
 
 
 const vue = {
@@ -18,6 +18,7 @@ const vue = {
          value1: '',
       };
    },
+   computed: settingsComputed,
    methods: {
       customDates(date: string) {
          return (date >= '2020-04-19' && date <= '2020-05-03');

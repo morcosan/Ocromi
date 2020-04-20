@@ -14,18 +14,31 @@
       @Prop({ default: false, type: Boolean }) public isFixed!: number;
 
 
-      public labelElems: HTMLElement[] = []; // bug: Range labels are different from model
+      public labelElements: HTMLElement[] = []; // bug: Range labels are different from model
+
+
+      @Override
+      public created() {
+         this.initialValue = this.value;
+      }
 
 
       @Override
       public mounted() {
-         if (this.$refs.qRange) {
+         if (this.$refs.inputRef) {
             // @ts-ignore
-            if (this.$refs.qRange.$el.querySelectorAll) {
+            if (this.$refs.inputRef.$el.querySelectorAll) {
                // @ts-ignore
-               this.labelElems = this.$refs.qRange.$el.querySelectorAll('.q-slider__pin-text');
+               this.labelElements = this.$refs.inputRef.$el.querySelectorAll('.q-slider__pin-text');
             }
          }
+      }
+
+
+      @Override
+      public focus() {
+         // @ts-ignore
+         this.$refs.inputRef.$el.querySelector('[tabindex]').focus();
       }
 
 
@@ -37,9 +50,9 @@
             value.max = Math.round(value.max * tens) / tens;
 
             // bug fix: update text manually, fail gracefully
-            if (this.labelElems.length === 2) {
-               this.labelElems[0].innerHTML = String(value.min);
-               this.labelElems[1].innerHTML = String(value.max);
+            if (this.labelElements.length === 2) {
+               this.labelElements[0].innerHTML = String(value.min);
+               this.labelElements[1].innerHTML = String(value.max);
             }
          }
 
@@ -59,7 +72,7 @@
       :side-label-width="sideLabelWidthComputed"
       :label="labelComputed"
       :error="errorComputed"
-      :is-disabled="isDisabled"
+      :is-disabled="isDisabledComputed"
       :is-readonly="isReadonly"
       :min-value="minValue"
       :max-value="maxValue"
@@ -74,12 +87,12 @@
          :right-label-value="value.max + thumbSuffix"
          :markers="hasMarkers"
          :readonly="isReadonly"
-         :disable="isDisabled"
-         :label-always="isDirty || isDisabled || isReadonly"
+         :disable="isDisabledComputed"
+         :label-always="isDirty || isDisabledComputed || isReadonly"
          :drag-only-range="isFixed"
          drag-range
          @input="onInput"
-         ref="qRange"
+         ref="inputRef"
       />
    </YTemplateInputSlider>
 </template>
