@@ -27,6 +27,7 @@ export interface YButtonCancel extends Vue {}
 export interface YButtonBuy extends Vue {}
 export interface YButtonIcon extends Vue {}
 export interface YButtonBack extends Vue {}
+export interface YButtonLink extends Vue {}
 export interface YToggleSwitch extends Vue {}
 
 
