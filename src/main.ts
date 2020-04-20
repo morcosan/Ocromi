@@ -36,6 +36,7 @@ import YButtonBuy from './components/buttons/button-buy/YButtonBuy.vue';
 import YButtonIcon from './components/buttons/button-icon/YButtonIcon.vue';
 import YButtonBack from './components/buttons/button-back/YButtonBack.vue';
 import YButtonLink from './components/buttons/button-link/YButtonLink.vue';
+import YToggleSwitch from './components/buttons/toggle-switch/YToggleSwitch.vue';
 
 
 import Vue from 'vue';
@@ -102,6 +103,7 @@ export {
    YButtonIcon,
    YButtonBack,
    YButtonLink,
+   YToggleSwitch,
 };
 
 
