@@ -22,7 +22,7 @@ export const settingsProps = {
       default: () => select('Button: Spinner', Spinner, Spinner.Default, settingsGroupId),
    },
    duoStyle: {
-      default: () => select('Duo Style', DuoStyle, DuoStyle.FilledText, settingsGroupId),
+      default: () => select('Button: Duo Style', DuoStyle, DuoStyle.FilledText, settingsGroupId),
    },
 };
 

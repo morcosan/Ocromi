@@ -58,6 +58,12 @@ export enum BackIcon {
    Chevron = 'chevron_left',
 }
 
+export enum ToggleSize {
+   Small = 'md',
+   Medium = 'lg',
+   Large = 'xl',
+}
+
 
 Vue.mixin({
    computed: {
@@ -84,6 +90,9 @@ Vue.mixin({
       },
       YBackIcon(): typeof BackIcon {
          return BackIcon;
+      },
+      YToggleSize(): typeof ToggleSize {
+         return ToggleSize;
       },
    },
 });
