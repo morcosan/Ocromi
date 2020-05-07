@@ -25,7 +25,7 @@
 
          // add required rule
          if (!this.isOptional) {
-            rules.push((value: Option | null) => (!!value || this.YLocale.all.requiredError));
+            rules.push((value: Option | null) => (Boolean(value) || this.YLocale.all.requiredError));
          }
 
          return rules;
@@ -62,7 +62,7 @@
          :label="(isMiniComputed ? labelComputed : undefined)"
          :readonly="isReadonly"
          :disable="isDisabledComputed"
-         :error="!!errorComputed"
+         :error="Boolean(errorComputed)"
          :bg-color="bgColor"
          input-debounce="0"
          outlined

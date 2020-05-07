@@ -15,7 +15,7 @@
 
       @Override
       public get isValid() {
-         return (this.isOptional ? true : !!this.value);
+         return (this.isOptional ? true : Boolean(this.value));
       }
 
 
@@ -61,7 +61,7 @@
          :options="options"
          :disable="isDisabledComputed"
          :color="(errorComputed ? 'negative' : undefined)"
-         :keep-color="!!errorComputed"
+         :keep-color="Boolean(errorComputed)"
          type="radio"
          @input="onInput"
          @keydown="onKeyDown"

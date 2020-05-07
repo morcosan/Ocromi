@@ -150,7 +150,7 @@
          :max-files="maxNumFiles > 0 ? maxNumFiles : undefined"
          :readonly="isReadonly"
          :disable="isDisabledComputed"
-         :error="!!errorComputed"
+         :error="Boolean(errorComputed)"
          :bg-color="bgColor"
          :counter-label="setHintOnRight"
          counter

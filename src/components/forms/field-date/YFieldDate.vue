@@ -46,7 +46,7 @@
 
          // add required rule
          if (!this.isOptional) {
-            rules.push((value: string) => (!!value || this.YLocale.all.requiredError));
+            rules.push((value: string) => (Boolean(value) || this.YLocale.all.requiredError));
          }
 
          // add custom dates rule
@@ -172,7 +172,7 @@
          v-model="inputValue"
          :label="(isMiniComputed ? labelComputed : undefined)"
          :bg-color="bgColor"
-         :error="!!errorComputed"
+         :error="Boolean(errorComputed)"
          :disable="isDisabledComputed"
          :readonly="isReadonly"
          :mask="(inputValue || hasFocus ? inputMask : '')"

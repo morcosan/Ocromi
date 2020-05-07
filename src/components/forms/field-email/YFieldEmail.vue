@@ -27,7 +27,7 @@
 
          // add required rule
          if (!this.isOptional) {
-            rules.push((value: string) => (!!value || this.YLocale.all.requiredError));
+            rules.push((value: string) => (Boolean(value) || this.YLocale.all.requiredError));
          }
 
          // add email rule
@@ -79,7 +79,7 @@
          :bg-color="bgColor"
          :readonly="isReadonly"
          :disable="isDisabledComputed"
-         :error="!!errorComputed"
+         :error="Boolean(errorComputed)"
          type="email"
          outlined
          lazy-rules

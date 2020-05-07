@@ -60,7 +60,7 @@
          :options="options"
          :disable="isDisabledComputed"
          :color="(errorComputed ? 'negative' : undefined)"
-         :keep-color="!!errorComputed"
+         :keep-color="Boolean(errorComputed)"
          type="checkbox"
          @input="onInput"
          @keydown="onKeyDown"

@@ -61,9 +61,9 @@
          if (this.canAddNew && !isFull) {
             // validate
             const newValue = inputValue.toLowerCase();
-            const exists = !!this.value.find((e: Option) => (e.value === newValue));
+            const previous = this.value.find((e: Option) => (e.value === newValue));
 
-            if (!exists) {
+            if (!previous) {
                // add to selection
                doneFn({
                   label: inputValue,
@@ -93,7 +93,7 @@
          :label="(isMiniComputed ? labelComputed : undefined)"
          :readonly="isReadonly"
          :disable="isDisabledComputed"
-         :error="!!errorComputed"
+         :error="Boolean(errorComputed)"
          :bg-color="bgColor"
          :new-value-mode="canAddNew ? 'add-unique' : undefined"
          input-debounce="0"

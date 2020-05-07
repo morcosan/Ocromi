@@ -191,7 +191,7 @@
          :readonly="isReadonly"
          :disable="isDisabledComputed"
          :bg-color="bgColor"
-         :error="!!errorComputed"
+         :error="Boolean(errorComputed)"
          :step="valueStep"
          :bottom-slots="decimals > 0"
          type="text"

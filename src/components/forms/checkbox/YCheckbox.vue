@@ -15,7 +15,7 @@
 
       @Override
       public get isValid() {
-         return (this.isOptional ? true : !!this.value);
+         return (this.isOptional ? true : Boolean(this.value));
       }
 
 
@@ -77,7 +77,7 @@
             :value="value"
             :disable="isDisabledComputed"
             :color="(innerError ? 'negative' : undefined)"
-            :keep-color="!!innerError"
+            :keep-color="Boolean(innerError)"
             @input="onInput"
             ref="inputRef"
          >

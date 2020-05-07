@@ -33,7 +33,7 @@
       class="y-toggle-switch"
       :value="value"
       :label="labelComputed"
-      :left-label="!!label"
+      :left-label="Boolean(label)"
       color="primary"
       :checked-icon="iconIdTrue"
       :unchecked-icon="iconIdFalse"

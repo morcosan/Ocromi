@@ -36,7 +36,7 @@
 
          // add required rule
          if (!this.isOptional) {
-            rules.push((value: string) => (!!value || this.YLocale.all.requiredError));
+            rules.push((value: string) => (Boolean(value) || this.YLocale.all.requiredError));
          }
 
          // add mask validation rule
@@ -94,7 +94,7 @@
          :readonly="isReadonly"
          :disable="isDisabledComputed"
          :bg-color="bgColor"
-         :error="!!errorComputed"
+         :error="Boolean(errorComputed)"
          type="text"
          unmasked-value
          outlined
