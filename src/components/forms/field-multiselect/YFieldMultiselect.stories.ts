@@ -6,7 +6,7 @@ import { boolean, number } from '@storybook/addon-knobs';
 
 
 const options = [...selectOptions];
-for (let i = 0; i < 10; i += 1) {
+for (let i = 0; i < 10; i++) {
    options.push({
       label: 'Other ' + i,
       value: 'other_' + i,

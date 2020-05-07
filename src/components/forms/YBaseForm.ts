@@ -61,7 +61,7 @@ export default class YBaseForm extends YBase {
       let numValidInputs = 0;
       this.inputChildren.forEach(child => {
          if (child.isValid) {
-            numValidInputs += 1;
+            numValidInputs++;
          }
       });
 
