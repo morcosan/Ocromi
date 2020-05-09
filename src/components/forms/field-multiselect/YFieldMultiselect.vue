@@ -123,6 +123,7 @@
                <QCheckbox
                   :value="isOptionChecked(scope.opt.value)"
                   class="no-pointer-events"
+                  dense
                >
                   {{ scope.opt.label }}
                </QCheckbox>
