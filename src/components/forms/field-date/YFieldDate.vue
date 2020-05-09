@@ -167,6 +167,7 @@
       :side-label-width="sideLabelWidthComputed"
       :label="labelComputed"
       :error="errorComputed"
+      :input-id="inputId"
    >
       <QInput
          v-model="inputValue"
@@ -176,6 +177,7 @@
          :disable="isDisabledComputed"
          :readonly="isReadonly"
          :mask="(inputValue || hasFocus ? inputMask : '')"
+         :for="inputId"
          fill-mask="_"
          type="text"
          unmasked-value

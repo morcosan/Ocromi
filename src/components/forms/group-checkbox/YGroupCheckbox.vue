@@ -56,6 +56,7 @@
       :is-disabled="isDisabledComputed"
       :is-readonly="isReadonly"
       :bg-color="bgColor"
+      :input-id="inputId"
    >
       <QOptionGroup
          :value="value"
@@ -63,6 +64,7 @@
          :disable="isDisabledComputed"
          :color="(errorComputed ? 'negative' : undefined)"
          :keep-color="Boolean(errorComputed)"
+         :id="inputId"
          type="checkbox"
          @input="onInput"
          @keydown="onKeyDown"

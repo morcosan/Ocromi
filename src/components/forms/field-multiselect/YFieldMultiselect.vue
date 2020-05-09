@@ -91,6 +91,7 @@
       :side-label-width="sideLabelWidthComputed"
       :label="labelComputed"
       :error="errorComputed"
+      :input-id="inputId"
    >
       <QSelect
          :value="value"
@@ -101,6 +102,7 @@
          :error="Boolean(errorComputed)"
          :bg-color="bgColor"
          :new-value-mode="canAddNew ? 'add-unique' : undefined"
+         :for="inputId"
          input-debounce="0"
          lazy-rules
          clearable

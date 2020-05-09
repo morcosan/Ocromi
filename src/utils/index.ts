@@ -1,4 +1,4 @@
-import { extend } from 'quasar';
+import { extend, uid } from 'quasar';
 
 
 export default class Utils {
@@ -40,6 +40,11 @@ export default class Utils {
 
    public static mergeObjects(...args: object[]): object {
       return extend(true, {}, ...args);
+   }
+
+
+   public static generateUid() {
+      return uid();
    }
 
 }

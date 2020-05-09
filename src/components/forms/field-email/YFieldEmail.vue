@@ -71,6 +71,7 @@
       :side-label-width="sideLabelWidthComputed"
       :label="labelComputed"
       :error="errorComputed"
+      :input-id="inputId"
    >
       <QInput
          :value="value"
@@ -80,6 +81,7 @@
          :readonly="isReadonly"
          :disable="isDisabledComputed"
          :error="Boolean(errorComputed)"
+         :for="inputId"
          type="email"
          outlined
          lazy-rules

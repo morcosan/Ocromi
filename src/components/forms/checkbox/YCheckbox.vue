@@ -66,19 +66,29 @@
          }
       }
 
+
+      public onClickLabel() {
+         if (!this.isReadonly && !this.isDisabledComputed) {
+            this.isDirty = true;
+            this.updateValueProp(!this.value);
+         }
+      }
+
    }
 </script>
 
 
 <template>
    <div :class="classComputed">
-      <div
+      <label
          v-if="!isMiniComputed && sideLabelWidthComputed"
          :style="(!isMiniComputed ? `width: ${ sideLabelWidthComputed }` : undefined)"
          class="y-base-input__label"
+         :for="inputId"
+         @click="onClickLabel"
       >
          {{ labelComputed }}
-      </div>
+      </label>
 
       <div class="y-base-input__control-box">
          <QCheckbox
@@ -86,6 +96,7 @@
             :disable="isDisabledComputed"
             :color="(innerError ? 'negative' : undefined)"
             :keep-color="Boolean(innerError)"
+            :id="inputId"
             @input="onInput"
             ref="inputRef"
          >

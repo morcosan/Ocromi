@@ -11,6 +11,7 @@
       @Prop({ default: '' }) public label!: string;
       @Prop({ default: '' }) public error!: string;
       @Prop({ default: '' }) public sideLabelWidth!: string;
+      @Prop({ default: '' }) public inputId!: string;
       @Prop({ default: false, type: Boolean }) public isDisabled!: boolean;
       @Prop({ default: false, type: Boolean }) public isMini!: boolean;
 
@@ -30,13 +31,13 @@
 
 
 <template>
-   <label :class="classComputed">
+   <div :class="classComputed">
       <div
          v-if="!isMini && label"
          class="y-base-input__label"
          :style="(!isMini ? `width: ${ sideLabelWidth }` : undefined)"
       >
-         {{ label }}
+         <label :for="inputId">{{ label }}</label>
       </div>
 
       <div class="y-base-input__control-box">
@@ -55,7 +56,7 @@
             <slot name="bottom-right"/>
          </div>
       </div>
-   </label>
+   </div>
 </template>
 
 

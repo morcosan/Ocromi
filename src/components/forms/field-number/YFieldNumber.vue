@@ -183,6 +183,7 @@
       :side-label-width="sideLabelWidthComputed"
       :label="labelComputed"
       :error="errorComputed"
+      :input-id="inputId"
    >
       <QInput
          :value="value"
@@ -194,6 +195,7 @@
          :error="Boolean(errorComputed)"
          :step="valueStep"
          :bottom-slots="decimals > 0"
+         :for="inputId"
          type="text"
          outlined
          lazy-rules

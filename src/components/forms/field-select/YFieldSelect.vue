@@ -55,6 +55,7 @@
       :side-label-width="sideLabelWidthComputed"
       :label="labelComputed"
       :error="errorComputed"
+      :input-id="inputId"
    >
       <QSelect
          :value="value"
@@ -64,6 +65,7 @@
          :disable="isDisabledComputed"
          :error="Boolean(errorComputed)"
          :bg-color="bgColor"
+         :for="inputId"
          input-debounce="0"
          outlined
          lazy-rules

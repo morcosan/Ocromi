@@ -2,6 +2,7 @@ import { Component, Override, Prop, Watch } from '../../core/decorators';
 import YBase from '../YBase';
 import YBaseForm from './YBaseForm';
 import Regex from '../../utils/regex';
+import Utils from '../../utils';
 
 
 @Component
@@ -90,6 +91,11 @@ export default class YBaseInput extends YBase {
 
    public get isValid() {
       return !this.getValidationError();
+   }
+
+
+   public get inputId() {
+      return Utils.generateUid();
    }
 
 

@@ -148,6 +148,7 @@
       :side-label-width="sideLabelWidthComputed"
       :label="labelComputed"
       :error="errorComputed"
+      :input-id="inputId"
    >
       <QInput
          :value="value"
@@ -158,6 +159,7 @@
          :bg-color="bgColor"
          :error="Boolean(errorComputed)"
          :prefix="prefix"
+         :for="inputId"
          type="text"
          input-class="js-native-input"
          outlined

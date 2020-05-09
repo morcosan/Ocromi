@@ -85,6 +85,7 @@
       :side-label-width="sideLabelWidthComputed"
       :label="labelComputed"
       :error="errorComputed"
+      :input-id="inputId"
    >
       <QInput
          :value="value"
@@ -95,6 +96,7 @@
          :disable="isDisabledComputed"
          :bg-color="bgColor"
          :error="Boolean(errorComputed)"
+         :for="inputId"
          type="text"
          unmasked-value
          outlined

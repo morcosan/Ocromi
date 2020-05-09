@@ -157,6 +157,7 @@
       :side-label-width="sideLabelWidthComputed"
       :label="labelComputed"
       :error="errorComputed"
+      :input-id="inputId"
    >
       <QFile
          :value="value"
@@ -172,6 +173,7 @@
          :error="Boolean(errorComputed)"
          :bg-color="bgColor"
          :counter-label="setHintOnRight"
+         :for="inputId"
          counter
          outlined
          lazy-rules

@@ -47,6 +47,7 @@
       :min-value="minValue"
       :max-value="maxValue"
       :bg-color="bgColor"
+      :input-id="inputId"
    >
       <QSlider
          :value="value"
@@ -58,6 +59,7 @@
          :markers="hasMarkers"
          :readonly="isReadonly"
          :disable="isDisabledComputed"
+         :id="inputId"
          @input="onInput"
          ref="inputRef"
       />

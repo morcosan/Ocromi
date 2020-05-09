@@ -69,6 +69,7 @@
       :side-label-width="sideLabelWidthComputed"
       :label="labelComputed"
       :error="errorComputed"
+      :input-id="inputId"
    >
       <QInput
          :value="value"
@@ -79,6 +80,7 @@
          :autogrow="isDynamic"
          :bg-color="bgColor"
          :error="Boolean(errorComputed)"
+         :for="inputId"
          type="textarea"
          outlined
          lazy-rules
