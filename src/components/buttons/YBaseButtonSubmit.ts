@@ -10,10 +10,14 @@ export default class YBaseButtonSubmit extends YBaseButtonLoading {
 
 
    public isEnabled: boolean = false;
+   public parentForm: (YBaseForm | null) = null;
 
 
    @Override
    public get isDisabledComputed() {
+      if (this.parentForm?.isDisabled) {
+         return true;
+      }
       if (this.willBeEnabled) {
          return (!this.isEnabled && !this.isLoading);
       }
@@ -23,10 +27,8 @@ export default class YBaseButtonSubmit extends YBaseButtonLoading {
 
    @Override
    public created() {
-      const form: (YBaseForm | null) = this.getParentForm();
-      if (form) {
-         form.registerSubmitButton(this);
-      }
+      this.parentForm = this.getParentForm();
+      this.parentForm?.registerSubmitButton(this);
    }
 
 

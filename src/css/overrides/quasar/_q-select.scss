@@ -20,8 +20,9 @@ $newHeight: 56px - (24px - $newPaddingTop);
 }
 
 // when disabled, affect textarea, but not label
-.q-select.q-field--disabled .q-field__native {
-   opacity: 0.6 !important;
+.q-select.q-field--disabled .q-field__native,
+.q-select.q-field--disabled .q-select__dropdown-icon {
+   opacity: $opacity-disabled !important;
 }
 
 // make the icon on right align correctly

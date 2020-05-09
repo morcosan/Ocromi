@@ -101,7 +101,7 @@
 
 
 <style scoped lang="scss">
-   //@import '../../../css/variables';
+   @import '../../../css/variables';
 
    .y-checkbox {
       /deep/ .y-base-input__control-box {
@@ -123,7 +123,7 @@
       }
 
       &.is-disabled /deep/ .q-checkbox__inner {
-         opacity: 0.5;
+         opacity: $opacity-disabled;
       }
    }
 </style>

@@ -6,6 +6,7 @@ import Regex from '../../utils/regex';
 
 type FormProps = {
    isMini?: boolean,
+   isDisabled?: boolean,
    sideLabelWidth?: string,
 }
 
@@ -59,7 +60,7 @@ export default class YBaseInput extends YBase {
 
 
    public get isDisabledComputed(): any {
-      return (this.isDisabled || !this.isEnabled);
+      return (this.formProps.isDisabled || this.isDisabled || !this.isEnabled);
    }
 
 

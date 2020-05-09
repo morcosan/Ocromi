@@ -9,6 +9,7 @@ import YBaseButtonReset from '../buttons/YBaseButtonReset';
 export default class YBaseForm extends YBase {
 
    @Prop({ default: false, type: Boolean }) public isMini!: boolean;
+   @Prop({ default: false, type: Boolean }) public isDisabled!: boolean;
    @Prop({ default: '' }) public sideLabelWidth!: string;
 
 
@@ -21,6 +22,14 @@ export default class YBaseForm extends YBase {
    public onChange_isMini() {
       this.inputChildren.forEach(child => {
          child.formProps.isMini = this.isMini;
+      });
+   }
+
+
+   @Watch('isDisabled')
+   public onChange_isDisabled() {
+      this.inputChildren.forEach(child => {
+         child.formProps.isDisabled = this.isDisabled;
       });
    }
 
@@ -42,12 +51,14 @@ export default class YBaseForm extends YBase {
 
       child.formProps = {
          isMini: this.isMini,
+         isDisabled: this.isDisabled,
          sideLabelWidth: this.sideLabelWidth,
       };
    }
 
 
    public registerSubmitButton(button: YBaseButtonSubmit) {
+      console.log('reg submit');
       this.submitButton = button;
    }
 

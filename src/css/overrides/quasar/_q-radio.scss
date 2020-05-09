@@ -1,0 +1,4 @@
+// make the disabled text dimmer
+.q-radio.disabled {
+   opacity: $opacity-disabled !important;
+}
