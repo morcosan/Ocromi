@@ -25,11 +25,6 @@
       }
 
 
-      public get labelFinal() {
-         return (this.sideLabelWidthComputed ? this.labelComputed : undefined);
-      }
-
-
       @Override
       public getValidationError() {
          if (this.isOptional) {
@@ -65,11 +60,11 @@
       }"
    >
       <div
-         v-if="!isMiniComputed && labelFinal"
+         v-if="!isMiniComputed && sideLabelWidthComputed"
          :style="(!isMiniComputed ? `width: ${ sideLabelWidthComputed }` : undefined)"
          class="y-base-input__label"
       >
-         {{ labelFinal }}
+         {{ labelComputed }}
       </div>
 
       <div class="y-base-input__control-box">
@@ -81,7 +76,7 @@
             @input="onInput"
             ref="inputRef"
          >
-            <div v-if="!sideLabelWidthComputed">
+            <div v-if="isMiniComputed || !sideLabelWidthComputed">
                {{ optionalText }}
                {{ label }}
                <slot/>

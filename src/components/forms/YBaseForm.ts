@@ -18,47 +18,16 @@ export default class YBaseForm extends YBase {
    private resetButton!: YBaseButtonReset;
 
 
-   @Watch('isMini')
-   public onChange_isMini() {
-      this.inputChildren.forEach(child => {
-         child.formProps.isMini = this.isMini;
-      });
-   }
-
-
-   @Watch('isDisabled')
-   public onChange_isDisabled() {
-      this.inputChildren.forEach(child => {
-         child.formProps.isDisabled = this.isDisabled;
-      });
-   }
-
-
-   @Watch('sideLabelWidth')
-   public onChange_sideLabelWidth() {
-      this.inputChildren.forEach(child => {
-         child.formProps.sideLabelWidth = this.sideLabelWidth;
-      });
-   }
-
-
    public registerInputChild(child: YBaseInput) {
       if (this.inputChildren.includes(child)) {
          return;
       }
 
       this.inputChildren.push(child);
-
-      child.formProps = {
-         isMini: this.isMini,
-         isDisabled: this.isDisabled,
-         sideLabelWidth: this.sideLabelWidth,
-      };
    }
 
 
    public registerSubmitButton(button: YBaseButtonSubmit) {
-      console.log('reg submit');
       this.submitButton = button;
    }
 

@@ -89,38 +89,26 @@ export default class YBaseInputGroup extends YBaseInput {
 
    private enableCurrOption() {
       const target: Target = this.getTarget(this.currOptionIndex);
-      if (target) {
-         target.setAttribute('tabindex', '0');
-      }
+      target?.setAttribute('tabindex', '0');
    }
 
 
    private disableCurrOption() {
       const target: Target = this.getTarget(this.currOptionIndex);
-      if (target) {
-         target.setAttribute('tabindex', '-1');
-      }
+      target?.setAttribute('tabindex', '-1');
    }
 
 
    private focusCurrOption() {
       const target: Target = this.getTarget(this.currOptionIndex);
-      if (target) {
-         target.focus();
-      }
+      target?.focus();
    }
 
 
    private getTarget(index: number) {
       const elem: (HTMLElement | undefined) = this.qOptionGroupChildren[index];
-      if (elem) {
-         const target: Target = elem.querySelector('[tabindex]');
-         if (target) {
-            return target;
-         }
-      }
-
-      return null;
+      const target: (Target | undefined) = elem?.querySelector('[tabindex]');
+      return (target ? target : null);
    }
 
 }

@@ -88,7 +88,7 @@
          :markers="hasMarkers"
          :readonly="isReadonly"
          :disable="isDisabledComputed"
-         :label-always="isDirty || isDisabledComputed || isReadonly"
+         :label-always="isDirty || isReadonly"
          :drag-only-range="isFixed"
          drag-range
          @input="onInput"

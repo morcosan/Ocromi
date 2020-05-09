@@ -62,17 +62,13 @@
       public mounted() {
          // @ts-ignore
          this.nativeInput = this.$refs.inputRef.$el.querySelector('.js-native-input');
-         if (this.nativeInput) {
-            this.nativeInput.addEventListener('paste', this.onPaste);
-         }
+         this.nativeInput?.addEventListener('paste', this.onPaste);
       }
 
 
       @Override
       public destroyed() {
-         if (this.nativeInput) {
-            this.nativeInput.removeEventListener('paste', this.onPaste);
-         }
+         this.nativeInput?.removeEventListener('paste', this.onPaste);
       }
 
 

@@ -54,7 +54,7 @@
          :max="maxValue"
          :step="valueStep"
          :label-value="value + thumbSuffix"
-         :label-always="isDirty || isDisabledComputed || isReadonly"
+         :label-always="isDirty || isReadonly"
          :markers="hasMarkers"
          :readonly="isReadonly"
          :disable="isDisabledComputed"
