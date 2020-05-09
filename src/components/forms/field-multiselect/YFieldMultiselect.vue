@@ -2,11 +2,11 @@
    import { Component, Override, Prop } from '../../../core/decorators';
    import YBaseInputSelect, { Option } from '../YBaseInputSelect';
    import YTemplateInput from '../YTemplateInput.vue';
-   import { QChip, QSelect } from 'quasar';
+   import { QCheckbox, QChip, QItem, QItemSection, QSelect } from 'quasar';
 
 
    @Component({
-      components: { QSelect, QChip, YTemplateInput },
+      components: { YTemplateInput, QCheckbox, QChip, QItem, QItemSection, QSelect },
    })
    export default class YFieldMultiselect extends YBaseInputSelect {
 
@@ -74,6 +74,11 @@
          }
       }
 
+
+      public isOptionChecked(optionValue: string) {
+         return this.value.some((e: Option) => (e.value === optionValue));
+      }
+
    }
 </script>
 
@@ -110,6 +115,20 @@
          @blur="onBlur"
          ref="inputRef"
       >
+         <template v-slot:option="scope">
+            <QItem
+               v-bind="scope.itemProps"
+               v-on="scope.itemEvents"
+            >
+               <QCheckbox
+                  :value="isOptionChecked(scope.opt.value)"
+                  class="no-pointer-events"
+               >
+                  {{ scope.opt.label }}
+               </QCheckbox>
+            </QItem>
+         </template>
+
          <template v-slot:selected-item="scope">
             <QChip
                :color="(scope && scope.opt.isNew) ? 'primary' : undefined"
