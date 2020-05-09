@@ -139,7 +139,8 @@
                :color="(scope && scope.opt.isNew) ? 'primary' : undefined"
                :tabindex="scope ? scope.tabindex : -1"
                :removable="!isReadonly"
-               outline
+               :outline="scope && !scope.opt.isNew"
+               :dark="scope && scope.opt.isNew"
                square
                dense
                @remove="scope.removeAtIndex(scope.index)"
