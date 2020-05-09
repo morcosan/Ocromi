@@ -1,43 +1,96 @@
+import StoryBuilder from '.storybook/custom/story-builder';
+import { groupId, propsButtonLoading, settingsComputed } from '.storybook/custom/knob-props';
+import { boolean, text } from '@storybook/addon-knobs';
 import YButtonSubmit from './YButtonSubmit.vue';
-import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
-import { propsButton } from '.storybook/custom/knob-props';
-import { boolean, number } from '@storybook/addon-knobs';
+import YForm from '../../forms/form/YForm.vue';
+import YCheckbox from '../../forms/checkbox/YCheckbox.vue';
+import YFieldText from '../../forms/field-text/YFieldText.vue';
 
 
 const vue = {
    components: {
+      YForm,
+      YCheckbox,
+      YFieldText,
       YButtonSubmit,
    },
    props: {
-      ...propsButton,
-      isLoading: {
-         default: () => boolean('Is Loading', false),
+      ...propsButtonLoading,
+      label: {
+         default: () => text('Label', 'Submit', groupId),
       },
-      loadingTime: {
-         default: () => number('Loading Time', 3000),
+      willBeEnabled: {
+         default: () => boolean('Will Be Enabled', false, groupId),
+      },
+   },
+   data() {
+      return {
+         fullName: '',
+         hasTOS: false,
+         hasSpam: false,
+      };
+   },
+   computed: settingsComputed,
+   methods: {
+      onSubmit() {
+         console.log('Submitting...');
+         setTimeout(
+            () => {
+               console.log('Form submitted');
+               // @ts-ignore
+               this.$refs.form.onSubmitComplete();
+            },
+            // @ts-ignore
+            this.loadingTime,
+         );
       },
    },
 };
 
 
-const storyLines: StoryLine[] = [
-   {
-      title: 'Default',
-      template: `
-         <YButtonSubmit
-            :label="label"
-            :is-disabled="isDisabled"
-            :is-loading="isLoading"
-            :loading-time="loadingTime"
-         />
-      `,
-      states: [],
-   },
-];
+const basicFormTemplate = `
+<YForm 
+   class="story-form-panel"
+   @submit="onSubmit"
+   ref="form"
+>
+   <YFieldText
+      v-model="fullName"
+      label="Full name"
+   />
+   
+   <YCheckbox 
+      v-model="hasSpam"
+      label="I want spam"
+      error="You must agree with our terms"
+      is-optional
+   />
+   
+   <YCheckbox 
+      v-model="hasTOS"
+      side-label-width=""
+      error="You must agree with our terms"
+   >
+      I agree with terms of service
+   </YCheckbox>
+   
+   <br/>
+   <br/>
+   
+   <YButtonSubmit
+      :label="label"
+      :is-disabled="isDisabled"
+      :loading-time="loadingTime"
+      :spinner="spinner"
+      :will-be-enabled="willBeEnabled"
+      :settings="settings"
+   />
+</YForm>
+`;
 
 
 export default StoryBuilder.createDefault('Buttons / Button Submit');
-export const default_ = StoryBuilder.createStory(vue, storyLines);
+export const default_ = StoryBuilder.createBasicStory(vue, basicFormTemplate);
 export const docs = StoryBuilder.createDocs(`
 /**
  * Used when user needs to take the submit action for certain data.

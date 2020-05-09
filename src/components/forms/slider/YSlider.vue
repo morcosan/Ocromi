@@ -1,5 +1,5 @@
 <script lang="ts">
-   import { Component, Prop } from '../../../core/decorators';
+   import { Component, Override, Prop } from '../../../core/decorators';
    import YBaseInputSlider from '../YBaseInputSlider';
    import YTemplateInputSlider from '../YTemplateInputSlider.vue';
    import { QSlider } from 'quasar';
@@ -11,6 +11,12 @@
    export default class YSlider extends YBaseInputSlider {
 
       @Prop({ default: 0 }) public value!: number;
+
+
+      @Override
+      public created() {
+         this.initialValue = this.value;
+      }
 
 
       public onInput(value: number) {
@@ -36,11 +42,12 @@
       :side-label-width="sideLabelWidthComputed"
       :label="labelComputed"
       :error="errorComputed"
-      :is-disabled="isDisabled"
+      :is-disabled="isDisabledComputed"
       :is-readonly="isReadonly"
       :min-value="minValue"
       :max-value="maxValue"
       :bg-color="bgColor"
+      :input-id="inputId"
    >
       <QSlider
          :value="value"
@@ -48,12 +55,13 @@
          :max="maxValue"
          :step="valueStep"
          :label-value="value + thumbSuffix"
-         :label-always="isDirty || isDisabled || isReadonly"
+         :label-always="isDirty || isReadonly"
          :markers="hasMarkers"
          :readonly="isReadonly"
-         :disable="isDisabled"
+         :disable="isDisabledComputed"
+         :id="inputId"
          @input="onInput"
-         ref="qSlider"
+         ref="inputRef"
       />
    </YTemplateInputSlider>
 </template>

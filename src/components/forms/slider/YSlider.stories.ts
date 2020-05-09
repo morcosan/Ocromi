@@ -1,6 +1,6 @@
 import YSlider from './YSlider.vue';
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
-import { propsInputSlider } from '.storybook/custom/knob-props';
+import { propsInputSlider, settingsComputed } from '.storybook/custom/knob-props';
 
 
 const vue = {
@@ -13,6 +13,7 @@ const vue = {
          value: 50,
       };
    },
+   computed: settingsComputed,
    methods: {
       onClick() {
          // @ts-ignore

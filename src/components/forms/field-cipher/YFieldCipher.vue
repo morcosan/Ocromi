@@ -31,24 +31,18 @@
 
 
       @Override
-      public created() {
-         this.prepareValidation();
-      }
-
-
-      @Override
       public get rulesComputed() {
          const rules = [...this.rules];
 
          // add required rule
          if (!this.isOptional) {
-            rules.push((value: string) => (!!value || this.$locale.all.requiredError));
+            rules.push((value: string) => (Boolean(value) || this.YLocale.all.requiredError));
          }
 
          // add mask validation rule
          const hasMask = (this.inputMask !== '' && this.numCharsRequired > 0);
          if (hasMask) {
-            const error = this.$locale.fieldCipher.maskError.replace('${1}', String(this.numCharsRequired));
+            const error = this.YLocale.fieldCipher.maskError.replace('${1}', String(this.numCharsRequired));
             rules.push((value: string) => {
                if (value !== '') {
                   return (value.length === this.numCharsRequired || error);
@@ -58,6 +52,13 @@
          }
 
          return rules;
+      }
+
+
+      @Override
+      public created() {
+         this.initialValue = this.value;
+         this.prepareValidation();
       }
 
 
@@ -80,9 +81,11 @@
    <YTemplateInput
       class="y-field-cipher"
       :is-mini="isMiniComputed"
+      :is-disabled="isDisabledComputed"
       :side-label-width="sideLabelWidthComputed"
       :label="labelComputed"
       :error="errorComputed"
+      :input-id="inputId"
    >
       <QInput
          :value="value"
@@ -90,9 +93,10 @@
          :label="(isMiniComputed ? labelComputed : undefined)"
          :placeholder="finalPlaceholder"
          :readonly="isReadonly"
-         :disable="isDisabled"
+         :disable="isDisabledComputed"
          :bg-color="bgColor"
-         :error="!!errorComputed"
+         :error="Boolean(errorComputed)"
+         :for="inputId"
          type="text"
          unmasked-value
          outlined
@@ -100,7 +104,7 @@
          hide-bottom-space
          @input="updateValueProp($event)"
          @blur="onBlur"
-         ref="qField"
+         ref="inputRef"
       />
 
 

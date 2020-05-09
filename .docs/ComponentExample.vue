@@ -5,13 +5,13 @@
    @Component({
       components: {},
    })
-   export default class ExampleMixin extends Vue {}
+   export default class MixinExample extends Vue {}
 
 
    @Component({
       components: {},
    })
-   export default class ExampleComponent extends Mixins(ExampleMixin) {
+   export default class ComponentExample extends Mixins(MixinExample) {
 
       @Prop({ default: '' }) public prop1!: string;
       @Prop({ default: 0 }) public prop2!: number;

@@ -3,9 +3,9 @@ import YBaseInput from './YBaseInput';
 
 
 export type Option = {
-   value: string;
-   label: string;
-   isNew: boolean;
+   value: string,
+   label: string,
+   isNew: boolean,
 }
 
 
@@ -17,18 +17,12 @@ export default class YBaseInputSelect extends YBaseInput {
 
 
    public currOptions: Option[] = [];
+   public isMenuActive: boolean = false;
 
 
    @Watch('options')
    public onChange_options() {
       this.currOptions = this.options;
-   }
-
-
-   @Override
-   public focus() {
-      // @ts-ignore
-      this.$refs.qSelect.focus();
    }
 
 

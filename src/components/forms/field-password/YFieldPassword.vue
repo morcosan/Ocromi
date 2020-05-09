@@ -40,7 +40,7 @@
 
          // add required rule
          if (!this.isOptional) {
-            rules.push((value: string) => (!!value || this.$locale.all.requiredError));
+            rules.push((value: string) => (Boolean(value) || this.YLocale.all.requiredError));
          }
 
          return rules;
@@ -51,38 +51,44 @@
          switch (this.strength) {
             case StrengthLevel.Weak:
                return {
-                  text: this.$locale.fieldPassword.strength.weak,
+                  text: this.YLocale.fieldPassword.strength.weak,
                   progress: 0.25,
                   color: 'red-13',
                };
 
             case StrengthLevel.Good:
                return {
-                  text: this.$locale.fieldPassword.strength.good,
+                  text: this.YLocale.fieldPassword.strength.good,
                   progress: 0.5,
                   color: 'amber-14',
                };
 
             case StrengthLevel.Strong:
                return {
-                  text: this.$locale.fieldPassword.strength.strong,
+                  text: this.YLocale.fieldPassword.strength.strong,
                   progress: 0.75,
                   color: 'light-green-14',
                };
 
             case StrengthLevel.Secure:
                return {
-                  text: this.$locale.fieldPassword.strength.secure,
+                  text: this.YLocale.fieldPassword.strength.secure,
                   progress: 1,
                   color: 'green-14',
                };
          }
 
          return {
-            text: this.$locale.fieldPassword.strength.none,
+            text: this.YLocale.fieldPassword.strength.none,
             progress: 0,
             color: 'red-13',
          };
+      }
+
+
+      @Override
+      public created() {
+         this.initialValue = this.value;
       }
 
 
@@ -123,36 +129,39 @@
    <YTemplateInput
       :class="'y-field-password ' + (hasMeter ? 'has-meter' : '')"
       :is-mini="isMiniComputed"
+      :is-disabled="isDisabledComputed"
       :side-label-width="sideLabelWidthComputed"
       :label="labelComputed"
       :error="errorComputed"
+      :input-id="inputId"
    >
       <QInput
          :value="value"
          :label="(isMiniComputed ? labelComputed : undefined)"
          :placeholder="finalPlaceholder"
          :readonly="isReadonly"
-         :disable="isDisabled"
+         :disable="isDisabledComputed"
          :bg-color="bgColor"
-         :error="!!errorComputed"
+         :error="Boolean(errorComputed)"
          :type="(showsPassword ? 'text' : 'password')"
+         :for="inputId"
          outlined
          lazy-rules
          hide-bottom-space
          @input="updateValueProp($event)"
          @keyup="updateStrength"
          @blur="onBlur"
-         ref="qField"
+         ref="inputRef"
       >
          <template v-slot:append>
             <QIcon
                :name="showsPassword ? 'visibility' : 'visibility_off'"
                :class="(isReadonly ? 'cursor-not-allowed' : 'cursor-pointer')"
-               :tabindex="isReadonly ? -1 : 0"
+               :tabindex="(isReadonly || isDisabledComputed) ? -1 : 0"
                @click="onClickEyeIcon"
                @keydown="onKeyDownIcon"
             >
-               <QTooltip v-if="!isReadonly">{{ $locale.fieldPassword.tooltip }}</QTooltip>
+               <QTooltip v-if="!isReadonly">{{ YLocale.fieldPassword.tooltip }}</QTooltip>
             </QIcon>
          </template>
 
@@ -221,8 +230,8 @@
       margin-bottom: 30px;
    }
 
-   // place the error icon before the date icon
-   .y-field-password.q-field /deep/ .q-field__append.q-anchor--skip {
+   // place the error icon before the eye icon
+   .y-field-password /deep/ .q-field__append.q-anchor--skip {
       position: absolute;
       right: 36px;
       padding-right: 0;

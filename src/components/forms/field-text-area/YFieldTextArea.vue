@@ -30,10 +30,16 @@
 
          // add required rule
          if (!this.isOptional) {
-            rules.push((value: string) => (!!value || this.$locale.all.requiredError));
+            rules.push((value: string) => (Boolean(value) || this.YLocale.all.requiredError));
          }
 
          return rules;
+      }
+
+
+      @Override
+      public created() {
+         this.initialValue = this.value;
       }
 
 
@@ -59,19 +65,22 @@
    <YTemplateInput
       :class="'y-field-text-area ' + (hasScrollbar ? 'has-scrollbar' : '')"
       :is-mini="isMiniComputed"
+      :is-disabled="isDisabledComputed"
       :side-label-width="sideLabelWidthComputed"
       :label="labelComputed"
       :error="errorComputed"
+      :input-id="inputId"
    >
       <QInput
          :value="value"
          :label="(isMiniComputed ? labelComputed : undefined)"
          :placeholder="finalPlaceholder"
          :readonly="isReadonly"
-         :disable="isDisabled"
+         :disable="isDisabledComputed"
          :autogrow="isDynamic"
          :bg-color="bgColor"
-         :error="!!errorComputed"
+         :error="Boolean(errorComputed)"
+         :for="inputId"
          type="textarea"
          outlined
          lazy-rules
@@ -79,7 +88,7 @@
          @input="onInput"
          @focus="onFocus"
          @blur="onBlur"
-         ref="qField"
+         ref="inputRef"
       />
 
 

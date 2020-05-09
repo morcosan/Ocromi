@@ -1,15 +1,12 @@
-import { Component, Override, Prop, Vue, Watch } from '../../core/decorators';
+import { Component, Override, Prop, Watch } from '../../core/decorators';
+import YBase from '../YBase';
 import YBaseForm from './YBaseForm';
-
-
-type FormProps = {
-   isMini?: boolean;
-   sideLabelWidth?: string;
-}
+import Regex from '../../utils/regex';
+import Utils from '../../utils';
 
 
 @Component
-export default class YBaseInput extends Vue {
+export default class YBaseInput extends YBase {
 
    @Prop({ default: '' }) public label!: string;
    @Prop({ default: '' }) public error!: string;
@@ -25,11 +22,15 @@ export default class YBaseInput extends Vue {
 
    public isDirty: boolean = false;
    public innerError: string = '';
-   public formProps: FormProps = {};
+   public parentForm: (YBaseForm | null) = null;
+   public isEnabled: boolean = true;
+   public initialValue!: any;
 
 
    @Watch('value')
    public onChange_value() {
+      this.parentForm?.emitInputChange();
+
       if (this.isDirty) {
          this.validate();
       }
@@ -49,6 +50,11 @@ export default class YBaseInput extends Vue {
    }
 
 
+   public get isDisabledComputed(): any {
+      return (this.parentForm?.isDisabled || this.isDisabled || !this.isEnabled);
+   }
+
+
    public get rulesComputed() {
       return this.rules;
    }
@@ -57,7 +63,7 @@ export default class YBaseInput extends Vue {
    public get labelComputed() {
       if (this.label !== '') {
          const hasOptional = (this.isOptional && !this.hidesOptional);
-         return (hasOptional ? (this.label + ' ' + this.$locale.all.optional) : this.label);
+         return (hasOptional ? (this.label + ' ' + this.YLocale.all.optional) : this.label);
       }
       return '';
    }
@@ -69,44 +75,76 @@ export default class YBaseInput extends Vue {
 
 
    public get isMiniComputed() {
-      return (this.isMini !== null ? this.isMini : this.formProps.isMini);
+      return (this.isMini !== null ? this.isMini : this.parentForm?.isMini);
    }
 
 
    public get sideLabelWidthComputed() {
-      return (this.sideLabelWidth !== null ? this.sideLabelWidth : this.formProps.sideLabelWidth);
+      const width = (this.sideLabelWidth !== null ? this.sideLabelWidth : this.parentForm?.sideLabelWidth);
+      if (width) {
+         const hasUnits = !Regex.isNumber(width);
+         return (hasUnits ? width : (width + '%'));
+      }
+      return null;
+   }
+
+
+   public get isValid() {
+      return !this.getValidationError();
+   }
+
+
+   public get inputId() {
+      return Utils.generateUid();
    }
 
 
    @Override
    public created() {
-      this.findParentForm();
+      this.parentForm = this.getParentForm();
+      this.parentForm?.registerInputChild(this);
    }
 
 
    public validate() {
+      this.innerError = this.getValidationError();
+      return !this.innerError;
+   }
+
+
+   public getValidationError() {
       for (let i = 0; i < this.rulesComputed.length; i++) {
          const result: (boolean | string) = this.rulesComputed[i](this.valueComputed);
-         if (result === true) {
-            this.innerError = '';
-         }
-         else {
-            this.innerError = (result as string);
-            break;
+         if (result !== true) {
+            return (result as string);
          }
       }
 
-      return !this.innerError;
+      return '';
    }
 
 
    public resetValidation() {
       this.isDirty = false;
       this.innerError = '';
+      this.updateValueProp(this.initialValue);
    }
 
 
-   public focus() {}
+   public focus() {
+      // @ts-ignore
+      this.$refs.inputRef.$el.focus();
+   }
+
+
+   public enable() {
+      this.isEnabled = true;
+   }
+
+
+   public disable() {
+      this.isEnabled = false;
+   }
 
 
    public updateValueProp(value: any) {
@@ -114,16 +152,17 @@ export default class YBaseInput extends Vue {
    }
 
 
-   public findParentForm() {
+   private getParentForm() {
       let parent = this.$parent;
       while (parent) {
          if (parent instanceof YBaseForm) {
-            parent.registerInputChild(this);
-            break;
+            return parent;
          }
 
          parent = parent.$parent;
       }
+
+      return null;
    }
 
 }

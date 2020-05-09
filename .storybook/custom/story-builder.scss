@@ -5,12 +5,12 @@ $colorGrey: #bbb;
 
 html {
    height: 100vh;
+   background-color: #eee;
 }
 
 .story-display {
    min-height: 100vh;
    padding: 20px;
-   background-color: #eee;
 
    .story {
       margin: 0 0 30px 0;
@@ -49,7 +49,6 @@ html {
 }
 
 .story-form-panel {
-   max-width: 1000px;
    min-width: 300px;
    padding: 30px;
    background: white;

@@ -1,4 +1,4 @@
-import * as VerEx from 'verbal-expressions';
+import VerEx from 'verbal-expressions';
 
 
 // validate email addresses: https://emailregex.com/

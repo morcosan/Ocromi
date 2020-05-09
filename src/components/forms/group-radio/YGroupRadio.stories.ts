@@ -1,6 +1,6 @@
 import YGroupRadio from './YGroupRadio.vue';
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
-import { propsInputGroup } from '.storybook/custom/knob-props';
+import { propsInputGroup, settingsComputed } from '.storybook/custom/knob-props';
 
 
 const options = [
@@ -29,6 +29,7 @@ const vue = {
          options,
       };
    },
+   computed: settingsComputed,
    methods: {
       onClick() {
          // @ts-ignore
@@ -47,6 +48,7 @@ const storyLines: StoryLine[] = [
             :options="options"
             :label="label"
             :is-disabled="isDisabled"
+            :is-readonly="isReadonly"
             :is-optional="isOptional"
             :hides-optional="hidesOptional"
             :is-readonly="isReadonly"

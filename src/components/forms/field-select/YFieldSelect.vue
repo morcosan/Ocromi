@@ -25,10 +25,16 @@
 
          // add required rule
          if (!this.isOptional) {
-            rules.push((value: Option | null) => (!!value || this.$locale.all.requiredError));
+            rules.push((value: Option | null) => (Boolean(value) || this.YLocale.all.requiredError));
          }
 
          return rules;
+      }
+
+
+      @Override
+      public created() {
+         this.initialValue = this.value;
       }
 
 
@@ -43,31 +49,41 @@
 
 <template>
    <YTemplateInput
-      class="y-field-select"
+      :class="{ 'y-base-select y-field-select': true, 'is-menu-active': isMenuActive }"
       :is-mini="isMiniComputed"
+      :is-disabled="isDisabledComputed"
       :side-label-width="sideLabelWidthComputed"
       :label="labelComputed"
       :error="errorComputed"
+      :input-id="inputId"
    >
       <QSelect
          :value="value"
          :options="currOptions"
          :label="(isMiniComputed ? labelComputed : undefined)"
          :readonly="isReadonly"
-         :disable="isDisabled"
-         :error="!!errorComputed"
+         :disable="isDisabledComputed"
+         :error="Boolean(errorComputed)"
          :bg-color="bgColor"
+         :for="inputId"
          input-debounce="0"
          outlined
          lazy-rules
          clearable
          use-input
          hide-bottom-space
+         hide-dropdown-icon
          @input="onInput"
-         @filter="onFilterInput"
          @blur="onBlur"
-         ref="qSelect"
-      />
+         @filter="onFilterInput"
+         @popup-show="isMenuActive = true"
+         @popup-hide="isMenuActive = false"
+         ref="inputRef"
+      >
+         <template v-slot:append>
+            <QIcon class="y-base-select__icon" name="arrow_drop_down"/>
+         </template>
+      </QSelect>
 
 
       <template v-slot:bottom-left>

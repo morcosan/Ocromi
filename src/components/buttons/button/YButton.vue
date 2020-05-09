@@ -7,7 +7,7 @@
    @Component({
       components: { QBtn },
    })
-   export default class YButtonLv3 extends YBaseButton {
+   export default class YButton extends YBaseButton {
 
       @Prop({ default: false, type: Boolean }) public isStacked!: boolean;
       @Prop({ default: false, type: Boolean }) public isRounded!: boolean;

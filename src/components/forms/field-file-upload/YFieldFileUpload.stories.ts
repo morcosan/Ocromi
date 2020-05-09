@@ -1,7 +1,7 @@
 // @ts-ignore
 import YFieldFileUpload, { File } from './YFieldFileUpload.vue';
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
-import { propsInputField } from '.storybook/custom/knob-props';
+import { groupId, propsInputField, settingsComputed } from '.storybook/custom/knob-props';
 import { array, boolean, number } from '@storybook/addon-knobs';
 
 
@@ -13,19 +13,19 @@ const vue = {
       ...propsInputField,
       placeholder: undefined,
       isMultiple: {
-         default: () => boolean('Is Multiple', false),
+         default: () => boolean('Is Multiple', false, groupId),
       },
       maxFileSize: {
-         default: () => number('Max File Size (KB)', 0),
+         default: () => number('Max File Size (KB)', 0, {}, groupId),
       },
       maxTotalSize: {
-         default: () => number('Max Total Size (KB)', 0),
+         default: () => number('Max Total Size (KB)', 0, {}, groupId),
       },
       maxNumFiles: {
-         default: () => number('Max Num Files', 0),
+         default: () => number('Max Num Files', 0, {}, groupId),
       },
       fileFormats: {
-         default: () => array('File Formats', [], '\n'),
+         default: () => array('File Formats', [], '\n', groupId),
       },
    },
    data() {
@@ -45,6 +45,7 @@ const vue = {
          ],
       };
    },
+   computed: settingsComputed,
    methods: {
       onClick() {
          // @ts-ignore

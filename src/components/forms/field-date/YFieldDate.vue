@@ -46,13 +46,13 @@
 
          // add required rule
          if (!this.isOptional) {
-            rules.push((value: string) => (!!value || this.$locale.all.requiredError));
+            rules.push((value: string) => (Boolean(value) || this.YLocale.all.requiredError));
          }
 
          // add custom dates rule
          rules.push(() => {
             if (this.customDatesFn) {
-               return (this.customDatesFn(this.value) || this.$locale.fieldDate.customDatesError);
+               return (this.customDatesFn(this.value) || this.YLocale.fieldDate.customDatesError);
             }
             return true;
          });
@@ -61,7 +61,7 @@
          rules.push(() => {
             if (this.inputValue !== '') {
                const date = DateTime.fromFormat(this.inputValue, this.dateFormatInput);
-               return (date.isValid || this.$locale.fieldDate.maskError);
+               return (date.isValid || this.YLocale.fieldDate.maskError);
             }
             return true;
          });
@@ -72,6 +72,7 @@
 
       @Override
       public created() {
+         this.initialValue = this.value;
          this.updateInputValue(this.value);
       }
 
@@ -162,18 +163,21 @@
    <YTemplateInput
       class="y-field-date"
       :is-mini="isMiniComputed"
+      :is-disabled="isDisabledComputed"
       :side-label-width="sideLabelWidthComputed"
       :label="labelComputed"
       :error="errorComputed"
+      :input-id="inputId"
    >
       <QInput
          v-model="inputValue"
          :label="(isMiniComputed ? labelComputed : undefined)"
          :bg-color="bgColor"
-         :error="!!errorComputed"
-         :disable="isDisabled"
+         :error="Boolean(errorComputed)"
+         :disable="isDisabledComputed"
          :readonly="isReadonly"
          :mask="(inputValue || hasFocus ? inputMask : '')"
+         :for="inputId"
          fill-mask="_"
          type="text"
          unmasked-value
@@ -183,12 +187,12 @@
          @input="onInput"
          @focus="() => (hasFocus = true)"
          @blur="onBlur"
-         ref="qField"
+         ref="inputRef"
       >
          <template v-slot:append>
             <QIcon
                :class="(isReadonly ? 'cursor-not-allowed' : 'cursor-pointer')"
-               :tabindex="isReadonly ? -1 : 0"
+               :tabindex="(isReadonly || isDisabledComputed) ? -1 : 0"
                name="event"
                @click="onClickDateIcon"
                @keydown="onKeyDownIcon"
@@ -203,21 +207,21 @@
                      :value="value"
                      :mask="dateFormatQuasarISO"
                      :options="customDatesAdapter"
-                     :locale="$locale.fieldDate.config"
+                     :locale="YLocale.fieldDate.config"
                      today-btn
                      @input="onDateSelect"
                      ref="qDate"
                   />
                </QPopupProxy>
 
-               <QTooltip v-if="!isReadonly">{{ $locale.fieldDate.tooltip }}</QTooltip>
+               <QTooltip v-if="!isReadonly">{{ YLocale.fieldDate.tooltip }}</QTooltip>
             </QIcon>
          </template>
       </QInput>
 
 
       <template v-slot:bottom-left>
-         <div v-if="!errorComputed">{{ $locale.fieldDate.hint }}</div>
+         <div v-if="!errorComputed">{{ YLocale.fieldDate.hint }}</div>
       </template>
 
    </YTemplateInput>

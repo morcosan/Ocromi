@@ -1,7 +1,7 @@
 import YGroupCheckbox from './YGroupCheckbox.vue';
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
 import { selectOptions } from '.storybook/custom/utils';
-import { propsInputGroup } from '.storybook/custom/knob-props';
+import { propsInputGroup, settingsComputed } from '.storybook/custom/knob-props';
 
 
 const vue = {
@@ -15,6 +15,7 @@ const vue = {
          options: selectOptions.splice(0, 4),
       };
    },
+   computed: settingsComputed,
    methods: {
       onClick() {
          // @ts-ignore
@@ -33,6 +34,7 @@ const storyLines: StoryLine[] = [
             :options="options"
             :label="label"
             :is-disabled="isDisabled"
+            :is-readonly="isReadonly"
             :is-optional="isOptional"
             :hides-optional="hidesOptional"
             :is-readonly="isReadonly"

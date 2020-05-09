@@ -12,9 +12,19 @@
       @Prop({ default: '' }) public error!: string;
       @Prop({ default: '' }) public sideLabelWidth!: string;
       @Prop({ default: '' }) public bgColor!: string;
+      @Prop({ default: '' }) public inputId!: string;
       @Prop({ default: false, type: Boolean }) public isMini!: boolean;
       @Prop({ default: false, type: Boolean }) public isDisabled!: boolean;
       @Prop({ default: false, type: Boolean }) public isReadonly!: boolean;
+
+
+      public get classComputed() {
+         return {
+            ['y-base-input__fieldset bg-' + this.bgColor]: true,
+            'has-label': (this.isMini && this.label),
+            'is-readonly': this.isReadonly,
+         };
+      }
 
    }
 </script>
@@ -23,20 +33,14 @@
 <template>
    <YTemplateInput
       :is-mini="isMini"
+      :is-disabled="isDisabled"
       :side-label-width="sideLabelWidth"
       :label="label"
       :error="error"
+      :input-id="inputId"
    >
-      <div
-         :class="{
-            ['y-base-input__fieldset bg-' + bgColor]: true,
-            'has-error': error,
-            'has-label': (isMini && label),
-            'is-disabled': isDisabled,
-            'is-readonly': isReadonly,
-         }"
-      >
-         <div v-if="isMini && label" :class="{ ['y-base-input__fieldset-label bg-' + bgColor]: true }">
+      <div :class="classComputed">
+         <div v-if="isMini && label" :class="['y-base-input__fieldset-label bg-' + bgColor]">
             {{ label }}
          </div>
 

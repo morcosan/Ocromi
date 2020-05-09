@@ -6,14 +6,14 @@
 
 
    export type File = {
-      type: string;
-      name: string;
+      type: string,
+      name: string,
    }
 
 
    type FileData = {
-      totalSize: number;
-      filesNumber: number;
+      totalSize: number,
+      filesNumber: number,
    }
 
 
@@ -31,6 +31,7 @@
 
 
       public hintOnRight: string = '';
+      private qNative: (HTMLElement | null) = null;
 
 
       @Override
@@ -45,10 +46,34 @@
 
          // add required rule
          if (!this.isOptional) {
-            rules.push((value: object[]) => (value.length > 0 || this.$locale.all.requiredError));
+            rules.push((value: object[]) => (value.length > 0 || this.YLocale.all.requiredError));
          }
 
          return rules;
+      }
+
+
+      @Override
+      public created() {
+         this.initialValue = this.value;
+      }
+
+
+      @Override
+      public mounted() {
+         // @ts-ignore
+         this.qNative = this.$refs.inputRef.$el.querySelector('.q-field__native[tabindex]');
+      }
+
+
+      @Override
+      public updated() {
+         if (this.isReadonly || this.isDisabledComputed) {
+            this.qNative?.setAttribute('tabindex', '-1');
+         }
+         else {
+            this.qNative?.setAttribute('tabindex', '0');
+         }
       }
 
 
@@ -91,7 +116,7 @@
       public onClickRemoveFile(index: number, event: Event) {
          event.preventDefault();
 
-         if (!this.isReadonly && !this.isDisabled) {
+         if (!this.isReadonly && !this.isDisabledComputed) {
             if (index > -1) {
                // remove file at index
                this.value.splice(index, 1);
@@ -117,7 +142,7 @@
 
 
       public openFilePicker() {
-         (this.$refs.qField as QFile).pickFiles();
+         (this.$refs.inputRef as QFile).pickFiles();
       }
 
    }
@@ -128,9 +153,11 @@
    <YTemplateInput
       :class="'y-field-file-upload ' + (value.length === 0 ? 'is-empty' : '')"
       :is-mini="isMiniComputed"
+      :is-disabled="isDisabledComputed"
       :side-label-width="sideLabelWidthComputed"
       :label="labelComputed"
       :error="errorComputed"
+      :input-id="inputId"
    >
       <QFile
          :value="value"
@@ -142,38 +169,39 @@
          :max-total-size="maxTotalSize > 0 ? (maxTotalSize * 1024) : undefined"
          :max-files="maxNumFiles > 0 ? maxNumFiles : undefined"
          :readonly="isReadonly"
-         :disable="isDisabled"
-         :error="!!errorComputed"
+         :disable="isDisabledComputed"
+         :error="Boolean(errorComputed)"
          :bg-color="bgColor"
          :counter-label="setHintOnRight"
+         :for="inputId"
          counter
          outlined
          lazy-rules
          hide-bottom-space
          @input="onInput"
          @blur="onBlur"
-         ref="qField"
+         ref="inputRef"
       >
          <template v-slot:append>
             <QIcon
                v-if="value.length === 0"
                :class="(isReadonly ? 'cursor-not-allowed' : 'cursor-pointer')"
-               :tabindex="isReadonly ? -1 : 0"
+               :tabindex="(isReadonly || isDisabledComputed) ? -1 : 0"
                name="attach_file"
                color="grey-8"
                @click="openFilePicker"
                @keydown="onKeyDownAttachIcon"
             >
-               <QTooltip v-if="!isReadonly">{{ $locale.fieldFileUpload.tooltipPickFiles }}</QTooltip>
+               <QTooltip v-if="!isReadonly">{{ YLocale.fieldFileUpload.tooltipPickFiles }}</QTooltip>
             </QIcon>
 
             <QIcon
-               v-if="value.length > 1 && !isReadonly && !isDisabled"
+               v-if="value.length > 1 && !isReadonly && !isDisabledComputed"
                :class="(isReadonly ? 'cursor-not-allowed' : 'cursor-pointer')"
                name="clear_all"
                @click="onClickRemoveFile(-1, $event)"
             >
-               <QTooltip v-if="!isReadonly">{{ $locale.fieldFileUpload.tooltipRemoveFiles }}</QTooltip>
+               <QTooltip v-if="!isReadonly">{{ YLocale.fieldFileUpload.tooltipRemoveFiles }}</QTooltip>
             </QIcon>
          </template>
 
@@ -194,16 +222,16 @@
                <div class="ellipsis relative-position col"> {{ scope ? scope.file.name : '' }}</div>
 
                <QAvatar
-                  v-if="!isReadonly && !isDisabled"
+                  v-if="!isReadonly && !isDisabledComputed"
                   class="y-chip__button cursor-pointer"
                   @click="onClickRemoveFile(scope.index, $event)"
                >
                   <QIcon name="close" size="20px" color="grey-7"/>
-                  <QTooltip>{{ $locale.fieldFileUpload.tooltipRemoveFile }}</QTooltip>
+                  <QTooltip>{{ YLocale.fieldFileUpload.tooltipRemoveFile }}</QTooltip>
                </QAvatar>
             </QChip>
 
-            <QTooltip v-if="!isReadonly">{{ $locale.fieldFileUpload.tooltipPickFiles }}</QTooltip>
+            <QTooltip v-if="!isReadonly">{{ YLocale.fieldFileUpload.tooltipPickFiles }}</QTooltip>
          </template>
       </QFile>
 

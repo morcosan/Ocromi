@@ -3,8 +3,8 @@ import YBaseInput from './YBaseInput';
 
 
 export type Range = {
-   min: number;
-   max: number;
+   min: number,
+   max: number,
 }
 
 
@@ -25,23 +25,10 @@ export default class YBaseInputSlider extends YBaseInput {
 
       // add required rule
       if (!this.isOptional) {
-         rules.push(() => (this.isDirty || this.$locale.slider.requiredError));
+         rules.push(() => (this.isDirty || this.YLocale.slider.requiredError));
       }
 
       return rules;
-   }
-
-
-   @Override
-   public focus() {
-      if (this.$refs.qRange) {
-         // @ts-ignore
-         this.$refs.qRange.$el.querySelector('[tabindex]').focus();
-      }
-      else if (this.$refs.qSlider) {
-         // @ts-ignore
-         this.$refs.qSlider.$el.focus();
-      }
    }
 
 }

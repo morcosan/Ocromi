@@ -59,8 +59,7 @@ export default {
       requiredError: 'A value must be selected',
    },
 
-
-   buttonSubmit: {
-      loading: 'Sending...',
+   buttonBack: {
+      label: 'Back',
    },
 };

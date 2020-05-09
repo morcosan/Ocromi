@@ -14,19 +14,32 @@
 
 
       @Override
-      public validate() {
-         if (!this.isOptional) {
-            this.innerError = (this.value.length > 0 ? '' : this.$locale.groupCheckbox.requiredError);
+      public get isValid() {
+         return (this.isOptional ? true : (this.value.length > 0));
+      }
+
+
+      @Override
+      public getValidationError() {
+         if (this.isOptional) {
+            return '';
          }
 
-         return !this.innerError;
+         return (this.value.length > 0 ? '' : this.YLocale.groupCheckbox.requiredError);
+      }
+
+
+      @Override
+      public created() {
+         this.initialValue = this.value;
       }
 
 
       public onInput(value: string[]) {
-         this.isDirty = true;
-         this.validate();
-         this.updateValueProp(value);
+         if (!this.isReadonly) {
+            this.isDirty = true;
+            this.updateValueProp(value);
+         }
       }
 
    }
@@ -40,25 +53,31 @@
       :side-label-width="sideLabelWidthComputed"
       :label="labelComputed"
       :error="errorComputed"
-      :is-disabled="isDisabled"
+      :is-disabled="isDisabledComputed"
       :is-readonly="isReadonly"
       :bg-color="bgColor"
+      :input-id="inputId"
    >
       <QOptionGroup
          :value="value"
          :options="options"
-         :disable="isDisabled"
+         :disable="isDisabledComputed"
          :color="(errorComputed ? 'negative' : undefined)"
-         :keep-color="!!errorComputed"
+         :keep-color="Boolean(errorComputed)"
+         :id="inputId"
          type="checkbox"
          @input="onInput"
          @keydown="onKeyDown"
-         ref="qOptionGroup"
+         ref="inputRef"
       />
    </YTemplateInputGroup>
 </template>
 
 
 <style scoped lang="scss">
-   // @import '../../../css/variables';
+   @import '../../../css/variables';
+
+   .y-group-checkbox.is-disabled /deep/ .q-checkbox__inner {
+      opacity: $opacity-disabled;
+   }
 </style>

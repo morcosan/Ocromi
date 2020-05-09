@@ -1,12 +1,12 @@
 import YFieldMultiselect from './YFieldMultiselect.vue';
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
 import { selectOptions } from '.storybook/custom/utils';
-import { propsInputSelect } from '.storybook/custom/knob-props';
+import { groupId, propsInputSelect, settingsComputed } from '.storybook/custom/knob-props';
 import { boolean, number } from '@storybook/addon-knobs';
 
 
 const options = [...selectOptions];
-for (let i = 0; i < 10; i += 1) {
+for (let i = 0; i < 10; i++) {
    options.push({
       label: 'Other ' + i,
       value: 'other_' + i,
@@ -21,10 +21,10 @@ const vue = {
    props: {
       ...propsInputSelect,
       selectionLimit: {
-         default: () => number('Selection Limit', 0),
+         default: () => number('Selection Limit', 0, {}, groupId),
       },
       canAddNew: {
-         default: () => boolean('Can Add New', false),
+         default: () => boolean('Can Add New', false, groupId),
       },
    },
    data() {
@@ -33,6 +33,7 @@ const vue = {
          options,
       };
    },
+   computed: settingsComputed,
 };
 
 
