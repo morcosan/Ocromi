@@ -52,6 +52,9 @@ const vue = {
       YButtonReset,
    },
    props: {
+      isDisabled: {
+         default: () => boolean('Is Disabled', false, groupId),
+      },
       isMini: {
          default: () => boolean('Is Mini', false, groupId),
       },
@@ -139,6 +142,7 @@ const vue = {
 const basicFormTemplate = `
 <YForm 
    :is-mini="isMini"
+   :is-disabled="isDisabled"
    :side-label-width="sideLabelWidth"
    class="story-form-panel"
    :settings="settings"

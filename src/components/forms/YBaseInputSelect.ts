@@ -17,6 +17,7 @@ export default class YBaseInputSelect extends YBaseInput {
 
 
    public currOptions: Option[] = [];
+   public isMenuActive: boolean = false;
 
 
    @Watch('options')

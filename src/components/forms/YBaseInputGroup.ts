@@ -1,4 +1,4 @@
-import { Component, Override, Prop } from '../../core/decorators';
+import { Component, Override, Prop, Watch } from '../../core/decorators';
 import YBaseInput from './YBaseInput';
 
 
@@ -18,6 +18,17 @@ export default class YBaseInputGroup extends YBaseInput {
 
 
    public currOptionIndex: number = 0;
+
+
+   @Watch('isReadonly')
+   public onChange_isReadonly() {
+      if (this.isReadonly) {
+         this.disableCurrOption();
+      }
+      else {
+         this.enableCurrOption();
+      }
+   }
 
 
    public get qOptionGroupChildren() {
@@ -89,38 +100,26 @@ export default class YBaseInputGroup extends YBaseInput {
 
    private enableCurrOption() {
       const target: Target = this.getTarget(this.currOptionIndex);
-      if (target) {
-         target.setAttribute('tabindex', '0');
-      }
+      target?.setAttribute('tabindex', '0');
    }
 
 
    private disableCurrOption() {
       const target: Target = this.getTarget(this.currOptionIndex);
-      if (target) {
-         target.setAttribute('tabindex', '-1');
-      }
+      target?.setAttribute('tabindex', '-1');
    }
 
 
    private focusCurrOption() {
       const target: Target = this.getTarget(this.currOptionIndex);
-      if (target) {
-         target.focus();
-      }
+      target?.focus();
    }
 
 
    private getTarget(index: number) {
       const elem: (HTMLElement | undefined) = this.qOptionGroupChildren[index];
-      if (elem) {
-         const target: Target = elem.querySelector('[tabindex]');
-         if (target) {
-            return target;
-         }
-      }
-
-      return null;
+      const target: (Target | undefined) = elem?.querySelector('[tabindex]');
+      return (target ? target : null);
    }
 
 }

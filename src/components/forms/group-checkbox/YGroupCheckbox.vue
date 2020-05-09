@@ -36,8 +36,10 @@
 
 
       public onInput(value: string[]) {
-         this.isDirty = true;
-         this.updateValueProp(value);
+         if (!this.isReadonly) {
+            this.isDirty = true;
+            this.updateValueProp(value);
+         }
       }
 
    }
@@ -54,13 +56,15 @@
       :is-disabled="isDisabledComputed"
       :is-readonly="isReadonly"
       :bg-color="bgColor"
+      :input-id="inputId"
    >
       <QOptionGroup
          :value="value"
          :options="options"
          :disable="isDisabledComputed"
          :color="(errorComputed ? 'negative' : undefined)"
-         :keep-color="!!errorComputed"
+         :keep-color="Boolean(errorComputed)"
+         :id="inputId"
          type="checkbox"
          @input="onInput"
          @keydown="onKeyDown"
@@ -71,9 +75,9 @@
 
 
 <style scoped lang="scss">
-   // @import '../../../css/variables';
+   @import '../../../css/variables';
 
    .y-group-checkbox.is-disabled /deep/ .q-checkbox__inner {
-      opacity: 0.5;
+      opacity: $opacity-disabled;
    }
 </style>

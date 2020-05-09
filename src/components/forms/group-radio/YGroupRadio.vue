@@ -15,7 +15,7 @@
 
       @Override
       public get isValid() {
-         return (this.isOptional ? true : !!this.value);
+         return (this.isOptional ? true : Boolean(this.value));
       }
 
 
@@ -36,9 +36,11 @@
 
 
       public onInput(value: string) {
-         this.isDirty = true;
-         this.innerError = '';
-         this.updateValueProp(value);
+         if (!this.isReadonly) {
+            this.isDirty = true;
+            this.innerError = '';
+            this.updateValueProp(value);
+         }
       }
 
    }
@@ -55,13 +57,15 @@
       :is-disabled="isDisabledComputed"
       :is-readonly="isReadonly"
       :bg-color="bgColor"
+      :input-id="inputId"
    >
       <QOptionGroup
          :value="value"
          :options="options"
          :disable="isDisabledComputed"
          :color="(errorComputed ? 'negative' : undefined)"
-         :keep-color="!!errorComputed"
+         :keep-color="Boolean(errorComputed)"
+         :id="inputId"
          type="radio"
          @input="onInput"
          @keydown="onKeyDown"
@@ -72,9 +76,9 @@
 
 
 <style scoped lang="scss">
-   // @import '../../../css/variables';
+   @import '../../../css/variables';
 
    .y-group-radio.is-disabled /deep/ .q-radio__inner {
-      opacity: 0.6;
+      opacity: $opacity-disabled;
    }
 </style>

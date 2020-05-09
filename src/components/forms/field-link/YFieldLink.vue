@@ -32,7 +32,7 @@
 
          // add required rule
          if (!this.isOptional) {
-            rules.push((value: string) => (!!value || this.YLocale.all.requiredError));
+            rules.push((value: string) => (Boolean(value) || this.YLocale.all.requiredError));
          }
 
          // add URL rule
@@ -62,17 +62,13 @@
       public mounted() {
          // @ts-ignore
          this.nativeInput = this.$refs.inputRef.$el.querySelector('.js-native-input');
-         if (this.nativeInput) {
-            this.nativeInput.addEventListener('paste', this.onPaste);
-         }
+         this.nativeInput?.addEventListener('paste', this.onPaste);
       }
 
 
       @Override
       public destroyed() {
-         if (this.nativeInput) {
-            this.nativeInput.removeEventListener('paste', this.onPaste);
-         }
+         this.nativeInput?.removeEventListener('paste', this.onPaste);
       }
 
 
@@ -152,6 +148,7 @@
       :side-label-width="sideLabelWidthComputed"
       :label="labelComputed"
       :error="errorComputed"
+      :input-id="inputId"
    >
       <QInput
          :value="value"
@@ -160,8 +157,9 @@
          :readonly="isReadonly"
          :disable="isDisabledComputed"
          :bg-color="bgColor"
-         :error="!!errorComputed"
+         :error="Boolean(errorComputed)"
          :prefix="prefix"
+         :for="inputId"
          type="text"
          input-class="js-native-input"
          outlined
@@ -175,7 +173,7 @@
          <template v-if="canShowIcon" v-slot:append>
             <a
                :href="finalURL"
-               :tabindex="isReadonly ? -1 : 0"
+               :tabindex="(isReadonly || isDisabledComputed) ? -1 : 0"
                class="y-field-link__anchor"
                @click="openURL"
                @keydown="onKeyDownButton"

@@ -47,6 +47,7 @@
       :min-value="minValue"
       :max-value="maxValue"
       :bg-color="bgColor"
+      :input-id="inputId"
    >
       <QSlider
          :value="value"
@@ -54,10 +55,11 @@
          :max="maxValue"
          :step="valueStep"
          :label-value="value + thumbSuffix"
-         :label-always="isDirty || isDisabledComputed || isReadonly"
+         :label-always="isDirty || isReadonly"
          :markers="hasMarkers"
          :readonly="isReadonly"
          :disable="isDisabledComputed"
+         :id="inputId"
          @input="onInput"
          ref="inputRef"
       />

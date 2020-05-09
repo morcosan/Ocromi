@@ -36,7 +36,7 @@
 
          // add required rule
          if (!this.isOptional) {
-            rules.push((value: string) => (!!value || this.YLocale.all.requiredError));
+            rules.push((value: string) => (Boolean(value) || this.YLocale.all.requiredError));
          }
 
          // add mask validation rule
@@ -85,6 +85,7 @@
       :side-label-width="sideLabelWidthComputed"
       :label="labelComputed"
       :error="errorComputed"
+      :input-id="inputId"
    >
       <QInput
          :value="value"
@@ -94,7 +95,8 @@
          :readonly="isReadonly"
          :disable="isDisabledComputed"
          :bg-color="bgColor"
-         :error="!!errorComputed"
+         :error="Boolean(errorComputed)"
+         :for="inputId"
          type="text"
          unmasked-value
          outlined

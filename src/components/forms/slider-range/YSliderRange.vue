@@ -77,6 +77,7 @@
       :min-value="minValue"
       :max-value="maxValue"
       :bg-color="bgColor"
+      :input-id="inputId"
    >
       <QRange
          :value="value"
@@ -88,8 +89,9 @@
          :markers="hasMarkers"
          :readonly="isReadonly"
          :disable="isDisabledComputed"
-         :label-always="isDirty || isDisabledComputed || isReadonly"
+         :label-always="isDirty || isReadonly"
          :drag-only-range="isFixed"
+         :id="inputId"
          drag-range
          @input="onInput"
          ref="inputRef"

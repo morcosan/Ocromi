@@ -40,7 +40,7 @@
 
          // add required rule
          if (!this.isOptional) {
-            rules.push((value: string) => (!!value || this.YLocale.all.requiredError));
+            rules.push((value: string) => (Boolean(value) || this.YLocale.all.requiredError));
          }
 
          return rules;
@@ -133,6 +133,7 @@
       :side-label-width="sideLabelWidthComputed"
       :label="labelComputed"
       :error="errorComputed"
+      :input-id="inputId"
    >
       <QInput
          :value="value"
@@ -141,8 +142,9 @@
          :readonly="isReadonly"
          :disable="isDisabledComputed"
          :bg-color="bgColor"
-         :error="!!errorComputed"
+         :error="Boolean(errorComputed)"
          :type="(showsPassword ? 'text' : 'password')"
+         :for="inputId"
          outlined
          lazy-rules
          hide-bottom-space
@@ -155,7 +157,7 @@
             <QIcon
                :name="showsPassword ? 'visibility' : 'visibility_off'"
                :class="(isReadonly ? 'cursor-not-allowed' : 'cursor-pointer')"
-               :tabindex="isReadonly ? -1 : 0"
+               :tabindex="(isReadonly || isDisabledComputed) ? -1 : 0"
                @click="onClickEyeIcon"
                @keydown="onKeyDownIcon"
             >
@@ -228,8 +230,8 @@
       margin-bottom: 30px;
    }
 
-   // place the error icon before the date icon
-   .y-field-password.q-field /deep/ .q-field__append.q-anchor--skip {
+   // place the error icon before the eye icon
+   .y-field-password /deep/ .q-field__append.q-anchor--skip {
       position: absolute;
       right: 36px;
       padding-right: 0;

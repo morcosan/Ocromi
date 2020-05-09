@@ -7,20 +7,22 @@ import YBaseForm from '../forms/YBaseForm';
 export default class YBaseButtonReset extends YBaseButton {
 
    public isEnabled: boolean = true;
+   public parentForm: (YBaseForm | null) = null;
 
 
    @Override
    public get isDisabledComputed() {
+      if (this.parentForm?.isDisabled) {
+         return true;
+      }
       return (!this.isEnabled || this.isDisabled);
    }
 
 
    @Override
    public created() {
-      const form: (YBaseForm | null) = this.getParentForm();
-      if (form) {
-         form.registerResetButton(this);
-      }
+      this.parentForm = this.getParentForm();
+      this.parentForm?.registerResetButton(this);
    }
 
 

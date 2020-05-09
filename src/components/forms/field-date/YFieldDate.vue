@@ -46,7 +46,7 @@
 
          // add required rule
          if (!this.isOptional) {
-            rules.push((value: string) => (!!value || this.YLocale.all.requiredError));
+            rules.push((value: string) => (Boolean(value) || this.YLocale.all.requiredError));
          }
 
          // add custom dates rule
@@ -167,15 +167,17 @@
       :side-label-width="sideLabelWidthComputed"
       :label="labelComputed"
       :error="errorComputed"
+      :input-id="inputId"
    >
       <QInput
          v-model="inputValue"
          :label="(isMiniComputed ? labelComputed : undefined)"
          :bg-color="bgColor"
-         :error="!!errorComputed"
+         :error="Boolean(errorComputed)"
          :disable="isDisabledComputed"
          :readonly="isReadonly"
          :mask="(inputValue || hasFocus ? inputMask : '')"
+         :for="inputId"
          fill-mask="_"
          type="text"
          unmasked-value
@@ -190,7 +192,7 @@
          <template v-slot:append>
             <QIcon
                :class="(isReadonly ? 'cursor-not-allowed' : 'cursor-pointer')"
-               :tabindex="isReadonly ? -1 : 0"
+               :tabindex="(isReadonly || isDisabledComputed) ? -1 : 0"
                name="event"
                @click="onClickDateIcon"
                @keydown="onKeyDownIcon"

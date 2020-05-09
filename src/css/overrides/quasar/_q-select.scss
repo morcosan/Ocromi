@@ -21,13 +21,17 @@ $newHeight: 56px - (24px - $newPaddingTop);
 
 // when disabled, affect textarea, but not label
 .q-select.q-field--disabled .q-field__native {
-   opacity: 0.6 !important;
+   opacity: $opacity-disabled !important;
 }
 
 // make the icon on right align correctly
 .q-select.q-field .q-field__append {
-   padding: 0 4px;
+   padding: 0 4px 0 0;
 }
-.q-select.q-field .q-field__append + .q-field__append {
-   padding-left: 0;
+
+// place the error icon before the arrow icon
+.q-select .q-field__append.q-anchor--skip {
+   position: absolute;
+   right: 28px;
+   padding: 0;
 }

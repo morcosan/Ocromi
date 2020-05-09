@@ -30,7 +30,7 @@
 
          // add required rule
          if (!this.isOptional) {
-            rules.push((value: string) => (!!value || this.YLocale.all.requiredError));
+            rules.push((value: string) => (Boolean(value) || this.YLocale.all.requiredError));
          }
 
          return rules;
@@ -69,6 +69,7 @@
       :side-label-width="sideLabelWidthComputed"
       :label="labelComputed"
       :error="errorComputed"
+      :input-id="inputId"
    >
       <QInput
          :value="value"
@@ -78,7 +79,8 @@
          :disable="isDisabledComputed"
          :autogrow="isDynamic"
          :bg-color="bgColor"
-         :error="!!errorComputed"
+         :error="Boolean(errorComputed)"
+         :for="inputId"
          type="textarea"
          outlined
          lazy-rules

@@ -48,6 +48,7 @@ const storyLines: StoryLine[] = [
             :options="options"
             :label="label"
             :is-disabled="isDisabled"
+            :is-readonly="isReadonly"
             :is-optional="isOptional"
             :hides-optional="hidesOptional"
             :is-readonly="isReadonly"

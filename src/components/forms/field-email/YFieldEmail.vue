@@ -27,7 +27,7 @@
 
          // add required rule
          if (!this.isOptional) {
-            rules.push((value: string) => (!!value || this.YLocale.all.requiredError));
+            rules.push((value: string) => (Boolean(value) || this.YLocale.all.requiredError));
          }
 
          // add email rule
@@ -71,6 +71,7 @@
       :side-label-width="sideLabelWidthComputed"
       :label="labelComputed"
       :error="errorComputed"
+      :input-id="inputId"
    >
       <QInput
          :value="value"
@@ -79,7 +80,8 @@
          :bg-color="bgColor"
          :readonly="isReadonly"
          :disable="isDisabledComputed"
-         :error="!!errorComputed"
+         :error="Boolean(errorComputed)"
+         :for="inputId"
          type="email"
          outlined
          lazy-rules

@@ -14,6 +14,7 @@
 <template>
    <QForm
       class="y-form"
+      novalidate
       @submit="onSubmit"
       @reset="$emit('reset')"
    >

@@ -77,11 +77,12 @@ $newHeight: 56px - (24px - $newPaddingTop);
    opacity: 1 !important;
 }
 .q-field--disabled .q-field__control:before,
-.q-field--disabled .q-placeholder {
-   opacity: 0.6 !important;
+.q-field--disabled .q-placeholder,
+.q-field--disabled .q-icon {
+   opacity: $opacity-disabled !important;
 }
 .q-field--disabled .q-field__label {
-   color: rgba(85, 85, 85, 0.6);
+   color: rgba(85, 85, 85, $opacity-disabled);
 }
 
 

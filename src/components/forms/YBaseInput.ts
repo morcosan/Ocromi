@@ -1,12 +1,8 @@
 import { Component, Override, Prop, Watch } from '../../core/decorators';
 import YBase from '../YBase';
 import YBaseForm from './YBaseForm';
-
-
-type FormProps = {
-   isMini?: boolean,
-   sideLabelWidth?: string,
-}
+import Regex from '../../utils/regex';
+import Utils from '../../utils';
 
 
 @Component
@@ -26,7 +22,6 @@ export default class YBaseInput extends YBase {
 
    public isDirty: boolean = false;
    public innerError: string = '';
-   public formProps: FormProps = {};
    public parentForm: (YBaseForm | null) = null;
    public isEnabled: boolean = true;
    public initialValue!: any;
@@ -34,9 +29,7 @@ export default class YBaseInput extends YBase {
 
    @Watch('value')
    public onChange_value() {
-      if (this.parentForm) {
-         this.parentForm.emitInputChange();
-      }
+      this.parentForm?.emitInputChange();
 
       if (this.isDirty) {
          this.validate();
@@ -58,7 +51,7 @@ export default class YBaseInput extends YBase {
 
 
    public get isDisabledComputed(): any {
-      return (this.isDisabled || !this.isEnabled);
+      return (this.parentForm?.isDisabled || this.isDisabled || !this.isEnabled);
    }
 
 
@@ -82,12 +75,17 @@ export default class YBaseInput extends YBase {
 
 
    public get isMiniComputed() {
-      return (this.isMini !== null ? this.isMini : this.formProps.isMini);
+      return (this.isMini !== null ? this.isMini : this.parentForm?.isMini);
    }
 
 
    public get sideLabelWidthComputed() {
-      return (this.sideLabelWidth !== null ? this.sideLabelWidth : this.formProps.sideLabelWidth);
+      const width = (this.sideLabelWidth !== null ? this.sideLabelWidth : this.parentForm?.sideLabelWidth);
+      if (width) {
+         const hasUnits = !Regex.isNumber(width);
+         return (hasUnits ? width : (width + '%'));
+      }
+      return null;
    }
 
 
@@ -96,12 +94,15 @@ export default class YBaseInput extends YBase {
    }
 
 
+   public get inputId() {
+      return Utils.generateUid();
+   }
+
+
    @Override
    public created() {
       this.parentForm = this.getParentForm();
-      if (this.parentForm) {
-         this.parentForm.registerInputChild(this);
-      }
+      this.parentForm?.registerInputChild(this);
    }
 
 
