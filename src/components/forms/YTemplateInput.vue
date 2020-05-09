@@ -1,8 +1,11 @@
 <script lang="ts">
    import { Component, Prop, Vue } from '../../core/decorators';
+   import { QIcon } from 'quasar';
 
 
-   @Component
+   @Component({
+      components: { QIcon },
+   })
    export default class YTemplateInput extends Vue {
 
       @Prop({ default: '' }) public label!: string;
@@ -39,6 +42,7 @@
          <div class="y-base-input__bottom">
             <div class="y-base-input__bottom-left">
                <div :class="{ 'y-base-input__error': true, 'is-visible': error }">
+                  <QIcon class="y-base-input__error-icon" name="error" size="16px"/>
                   {{ error }}
                </div>
 

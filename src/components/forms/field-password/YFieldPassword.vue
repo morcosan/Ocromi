@@ -228,8 +228,8 @@
       margin-bottom: 30px;
    }
 
-   // place the error icon before the date icon
-   .y-field-password.q-field /deep/ .q-field__append.q-anchor--skip {
+   // place the error icon before the eye icon
+   .y-field-password /deep/ .q-field__append.q-anchor--skip {
       position: absolute;
       right: 36px;
       padding-right: 0;

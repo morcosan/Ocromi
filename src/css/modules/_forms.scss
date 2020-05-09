@@ -38,6 +38,10 @@
                   bottom: 0;
                   opacity: 1;
                }
+
+               .y-base-input__error-icon {
+                  vertical-align: text-bottom;
+               }
             }
          }
 
@@ -111,7 +115,8 @@
       .y-base-input__bottom {
          position: relative;
          box-sizing: border-box;
-         height: 20px;
+         height: 8px + 16px;
+         line-height: 16px;
          color: $negative;
       }
    }

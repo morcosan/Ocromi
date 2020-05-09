@@ -1,12 +1,12 @@
 <script lang="ts">
    import { Component, Override, Prop, Watch } from '../../../core/decorators';
-   import { QCheckbox } from 'quasar';
    import YBaseInput from '../YBaseInput';
    import YTemplateInput from '../YTemplateInput.vue';
+   import { QCheckbox, QIcon } from 'quasar';
 
 
    @Component({
-      components: { QCheckbox, YTemplateInput },
+      components: { YTemplateInput, QCheckbox, QIcon },
    })
    export default class YCheckbox extends YBaseInput {
 
@@ -96,6 +96,12 @@
          <div class="y-base-input__bottom">
             <div class="y-base-input__bottom-left">
                <div :class="{ 'y-base-input__error': true, 'is-visible': innerError }">
+                  <QIcon
+                     v-if="innerError"
+                     class="y-base-input__error-icon"
+                     name="error"
+                     size="16px"
+                  />
                   {{ innerError }}
                </div>
             </div>
@@ -118,8 +124,8 @@
          padding-bottom: 18px;
       }
 
-      /deep/ .y-base-input__control-box .y-base-input__bottom {
-         padding-top: 4px;
+      .y-base-input__control-box .y-base-input__bottom {
+         padding: 0 20px 0
       }
 
       /deep/ a {
