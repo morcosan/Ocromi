@@ -18,6 +18,15 @@
       @Prop({ default: 0 }) public minValue!: number;
       @Prop({ default: 0 }) public maxValue!: number;
 
+
+      public get classComputed() {
+         return {
+            ['y-base-input__fieldset bg-' + this.bgColor]: true,
+            'has-label': (this.isMini && this.label),
+            'is-readonly': this.isReadonly,
+         };
+      }
+
    }
 </script>
 
@@ -31,14 +40,8 @@
       :label="label"
       :error="error"
    >
-      <div
-         :class="{
-            ['y-base-input__fieldset bg-' + bgColor]: true,
-            'has-label': (isMini && label),
-            'is-readonly': isReadonly,
-         }"
-      >
-         <div v-if="isMini && label" :class="{ ['y-base-input__fieldset-label bg-' + bgColor]: true }">
+      <div :class="classComputed">
+         <div v-if="isMini && label" :class="['y-base-input__fieldset-label bg-' + bgColor]">
             {{ label }}
          </div>
 

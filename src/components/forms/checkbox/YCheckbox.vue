@@ -32,6 +32,17 @@
       }
 
 
+      public get classComputed() {
+         return {
+            'y-base-input y-checkbox': true,
+            'has-side-label': this.sideLabelWidthComputed,
+            'has-error': this.innerError,
+            'is-disabled': this.isDisabledComputed,
+            'is-readonly': this.isReadonly,
+         };
+      }
+
+
       @Override
       public getValidationError() {
          if (this.isOptional) {
@@ -60,15 +71,7 @@
 
 
 <template>
-   <div
-      :class="{
-         'y-base-input y-checkbox': true,
-         'has-side-label': sideLabelWidthComputed,
-         'has-error': innerError,
-         'is-disabled': isDisabledComputed,
-         'is-readonly': isReadonly,
-      }"
-   >
+   <div :class="classComputed">
       <div
          v-if="!isMiniComputed && sideLabelWidthComputed"
          :style="(!isMiniComputed ? `width: ${ sideLabelWidthComputed }` : undefined)"

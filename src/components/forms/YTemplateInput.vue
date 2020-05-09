@@ -14,24 +14,27 @@
       @Prop({ default: false, type: Boolean }) public isDisabled!: boolean;
       @Prop({ default: false, type: Boolean }) public isMini!: boolean;
 
+
+      public get classComputed() {
+         return {
+            'y-base-input': true,
+            'has-side-label': this.sideLabelWidth,
+            'has-error': this.error,
+            'is-disabled': this.isDisabled,
+            'is-mini': this.isMini,
+         };
+      }
+
    }
 </script>
 
 
 <template>
-   <label
-      :class="{
-         'y-base-input': true,
-         'has-side-label': sideLabelWidth,
-         'has-error': error,
-         'is-disabled': isDisabled,
-         'is-mini': isMini,
-      }"
-   >
+   <label :class="classComputed">
       <div
          v-if="!isMini && label"
-         :style="(!isMini ? `width: ${ sideLabelWidth }` : undefined)"
          class="y-base-input__label"
+         :style="(!isMini ? `width: ${ sideLabelWidth }` : undefined)"
       >
          {{ label }}
       </div>

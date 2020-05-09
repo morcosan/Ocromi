@@ -14,17 +14,22 @@
       @Prop({ default: ButtonStyle.Filled }) public buttonStyle!: ButtonStyle;
       @Prop({ default: false, type: Boolean }) public isSmall!: boolean;
 
+
+      public get classComputed() {
+         return {
+            'y-button-back': true,
+            'is-ios': (this.backIcon === BackIcon.IOS),
+            'is-small': this.isSmall,
+         };
+      }
+
    }
 </script>
 
 
 <template>
    <YTemplateButton
-      :class="{
-         'y-button-back': true,
-         'is-ios': (backIcon === YBackIcon.IOS),
-         'is-small': isSmall,
-      }"
+      :class="classComputed"
       :label="(backIcon === YBackIcon.IOS ? YLocale.buttonBack.label : undefined)"
       :is-round="(backIcon !== YBackIcon.IOS)"
       :is-disabled="isDisabledComputed"
