@@ -1,4 +1,4 @@
-import { Component, Override, Prop } from '../../core/decorators';
+import { Component, Override, Prop, Watch } from '../../core/decorators';
 import YBaseInput from './YBaseInput';
 
 
@@ -18,6 +18,17 @@ export default class YBaseInputGroup extends YBaseInput {
 
 
    public currOptionIndex: number = 0;
+
+
+   @Watch('isReadonly')
+   public onChange_isReadonly() {
+      if (this.isReadonly) {
+         this.disableCurrOption();
+      }
+      else {
+         this.enableCurrOption();
+      }
+   }
 
 
    public get qOptionGroupChildren() {

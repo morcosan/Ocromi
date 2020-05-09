@@ -31,6 +31,7 @@
 
 
       public hintOnRight: string = '';
+      private qNative: (HTMLElement | null) = null;
 
 
       @Override
@@ -55,6 +56,24 @@
       @Override
       public created() {
          this.initialValue = this.value;
+      }
+
+
+      @Override
+      public mounted() {
+         // @ts-ignore
+         this.qNative = this.$refs.inputRef.$el.querySelector('.q-field__native[tabindex]');
+      }
+
+
+      @Override
+      public updated() {
+         if (this.isReadonly || this.isDisabledComputed) {
+            this.qNative?.setAttribute('tabindex', '-1');
+         }
+         else {
+            this.qNative?.setAttribute('tabindex', '0');
+         }
       }
 
 
@@ -165,7 +184,7 @@
             <QIcon
                v-if="value.length === 0"
                :class="(isReadonly ? 'cursor-not-allowed' : 'cursor-pointer')"
-               :tabindex="isReadonly ? -1 : 0"
+               :tabindex="(isReadonly || isDisabledComputed) ? -1 : 0"
                name="attach_file"
                color="grey-8"
                @click="openFilePicker"

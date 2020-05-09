@@ -36,8 +36,10 @@
 
 
       public onInput(value: string[]) {
-         this.isDirty = true;
-         this.updateValueProp(value);
+         if (!this.isReadonly) {
+            this.isDirty = true;
+            this.updateValueProp(value);
+         }
       }
 
    }

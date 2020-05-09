@@ -171,7 +171,7 @@
          <template v-if="canShowIcon" v-slot:append>
             <a
                :href="finalURL"
-               :tabindex="isReadonly ? -1 : 0"
+               :tabindex="(isReadonly || isDisabledComputed) ? -1 : 0"
                class="y-field-link__anchor"
                @click="openURL"
                @keydown="onKeyDownButton"

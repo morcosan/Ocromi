@@ -190,7 +190,7 @@
          <template v-slot:append>
             <QIcon
                :class="(isReadonly ? 'cursor-not-allowed' : 'cursor-pointer')"
-               :tabindex="isReadonly ? -1 : 0"
+               :tabindex="(isReadonly || isDisabledComputed) ? -1 : 0"
                name="event"
                @click="onClickDateIcon"
                @keydown="onKeyDownIcon"

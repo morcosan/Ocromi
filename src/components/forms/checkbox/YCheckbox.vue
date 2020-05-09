@@ -1,5 +1,5 @@
 <script lang="ts">
-   import { Component, Override, Prop } from '../../../core/decorators';
+   import { Component, Override, Prop, Watch } from '../../../core/decorators';
    import { QCheckbox } from 'quasar';
    import YBaseInput from '../YBaseInput';
    import YTemplateInput from '../YTemplateInput.vue';
@@ -11,6 +11,13 @@
    export default class YCheckbox extends YBaseInput {
 
       @Prop({ default: false }) public value!: boolean | null;
+
+
+      @Watch('isReadonly')
+      public onChange_isReadonly() {
+         // @ts-ignore
+         this.$refs.inputRef.$el.setAttribute('tabindex', (this.isReadonly ? '-1' : '0'));
+      }
 
 
       @Override
@@ -42,8 +49,10 @@
 
 
       public onInput(value: boolean) {
-         this.isDirty = true;
-         this.updateValueProp(value);
+         if (!this.isReadonly) {
+            this.isDirty = true;
+            this.updateValueProp(value);
+         }
       }
 
    }
@@ -57,6 +66,7 @@
          'has-side-label': sideLabelWidthComputed,
          'has-error': innerError,
          'is-disabled': isDisabledComputed,
+         'is-readonly': isReadonly,
       }"
    >
       <div
@@ -119,6 +129,10 @@
 
       &.is-disabled /deep/ .q-checkbox__inner {
          opacity: $opacity-disabled;
+      }
+
+      &.is-readonly {
+         pointer-events: none;
       }
    }
 </style>

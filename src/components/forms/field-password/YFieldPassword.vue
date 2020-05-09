@@ -155,7 +155,7 @@
             <QIcon
                :name="showsPassword ? 'visibility' : 'visibility_off'"
                :class="(isReadonly ? 'cursor-not-allowed' : 'cursor-pointer')"
-               :tabindex="isReadonly ? -1 : 0"
+               :tabindex="(isReadonly || isDisabledComputed) ? -1 : 0"
                @click="onClickEyeIcon"
                @keydown="onKeyDownIcon"
             >
