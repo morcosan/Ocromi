@@ -1,6 +1,7 @@
 import { Component, Override, Prop, Watch } from '../../core/decorators';
 import YBase from '../YBase';
 import YBaseForm from './YBaseForm';
+import Regex from '../../utils/regex';
 
 
 type FormProps = {
@@ -87,7 +88,12 @@ export default class YBaseInput extends YBase {
 
 
    public get sideLabelWidthComputed() {
-      return (this.sideLabelWidth !== null ? this.sideLabelWidth : this.formProps.sideLabelWidth);
+      const width = (this.sideLabelWidth !== null ? this.sideLabelWidth : this.formProps.sideLabelWidth);
+      if (width) {
+         const hasUnits = !Regex.isNumber(width);
+         return (hasUnits ? width : (width + '%'));
+      }
+      return null;
    }
 
 
