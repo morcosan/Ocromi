@@ -197,3 +197,21 @@ $paddingSide: 12px;
       }
    }
 }
+
+
+
+
+
+/**
+ * Form slider
+ */
+
+.y-base-select {
+   .y-base-select__icon {
+      transition: 0.3s ease;
+   }
+
+   &.is-menu-active .y-base-select__icon {
+      transform: rotate(180deg);
+   }
+}

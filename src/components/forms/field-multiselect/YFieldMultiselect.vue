@@ -2,11 +2,11 @@
    import { Component, Override, Prop } from '../../../core/decorators';
    import YBaseInputSelect, { Option } from '../YBaseInputSelect';
    import YTemplateInput from '../YTemplateInput.vue';
-   import { QCheckbox, QChip, QItem, QItemSection, QSelect } from 'quasar';
+   import { QCheckbox, QChip, QItem, QItemSection, QSelect, QIcon } from 'quasar';
 
 
    @Component({
-      components: { YTemplateInput, QCheckbox, QChip, QItem, QItemSection, QSelect },
+      components: { YTemplateInput, QCheckbox, QChip, QItem, QItemSection, QSelect, QIcon },
    })
    export default class YFieldMultiselect extends YBaseInputSelect {
 
@@ -85,7 +85,7 @@
 
 <template>
    <YTemplateInput
-      class="y-field-multiselect"
+      :class="{ 'y-base-select y-field-multiselect': true, 'is-menu-active': isMenuActive }"
       :is-mini="isMiniComputed"
       :is-disabled="isDisabledComputed"
       :side-label-width="sideLabelWidthComputed"
@@ -109,10 +109,13 @@
          use-input
          outlined
          hide-bottom-space
+         hide-dropdown-icon
          @input="onInput"
+         @blur="onBlur"
          @filter="onFilterInput"
          @new-value="onNewOption"
-         @blur="onBlur"
+         @popup-show="isMenuActive = true"
+         @popup-hide="isMenuActive = false"
          ref="inputRef"
       >
          <template v-slot:option="scope">
@@ -130,6 +133,7 @@
             </QItem>
          </template>
 
+
          <template v-slot:selected-item="scope">
             <QChip
                :color="(scope && scope.opt.isNew) ? 'primary' : undefined"
@@ -143,6 +147,12 @@
                {{ scope ? scope.opt.label : '' }}
             </QChip>
          </template>
+
+
+         <template v-slot:append>
+            <QIcon class="y-base-select__icon" name="arrow_drop_down"/>
+         </template>
+
 
          <template v-if="selectionLimit > 0" v-slot:counter>
             <div :class="{ 'text-weight-bold': (value.length >= selectionLimit) }">
