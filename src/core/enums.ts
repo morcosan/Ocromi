@@ -64,6 +64,12 @@ export enum ToggleSize {
    Large = 'xl',
 }
 
+export enum PageAlign {
+   Center = 'center',
+   Left = 'left',
+   Right = 'right'
+}
+
 
 Vue.mixin({
    computed: {
@@ -93,6 +99,9 @@ Vue.mixin({
       },
       YToggleSize(): typeof ToggleSize {
          return ToggleSize;
+      },
+      YPageAlign(): typeof PageAlign {
+         return PageAlign;
       },
    },
 });
