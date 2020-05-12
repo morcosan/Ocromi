@@ -1,15 +1,14 @@
 <script lang="ts">
-   import { Component, Prop, Vue } from '../../../core/decorators';
+   import { Component, Prop } from '../../../core/decorators';
    import { PageAlign } from '../../../core/enums';
+   import YBase from '../../YBase';
 
 
    @Component
-   export default class YLayout extends Vue {
+   export default class YLayout extends YBase {
 
       @Prop({ default: '1024px' }) public width!: string;
       @Prop({ default: PageAlign.Center }) public align!: PageAlign;
-
-
 
    }
 </script>

@@ -15,3 +15,17 @@
 @import 'mixins/quasar-classes';
 
 @import 'modules/forms';
+
+
+:root {
+   --q-color-primary: #{$primary};
+   --q-color-secondary: #{$secondary};
+   --q-color-accent: #{$accent};
+
+   --q-color-dark: #{$dark};
+
+   --q-color-positive: #{$positive};
+   --q-color-negative: #{$negative};
+   --q-color-info: #{$info};
+   --q-color-warning: #{$warning};
+}

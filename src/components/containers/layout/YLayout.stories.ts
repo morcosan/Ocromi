@@ -2,7 +2,8 @@ import StoryBuilder from '.storybook/custom/story-builder';
 import '.storybook/custom/story-builder.scss';
 import YLayout from './YLayout.vue';
 import YPage from '../page/YPage.vue';
-import { settingsComputed } from '../../../../.storybook/custom/knob-props';
+import { settingsComputed, settingsProps } from '../../../../.storybook/custom/knob-props';
+import faker from 'faker';
 
 
 const vue = {
@@ -10,17 +11,19 @@ const vue = {
       YLayout,
       YPage,
    },
-   props: {},
+   props: {
+      ...settingsProps,
+   },
    computed: settingsComputed,
 };
 
 
 const basicFormTemplate = `
 <YLayout 
-   :settings="settingsComputed"
+   :settings="settings"
 >
    <YPage>
-      Hello world.
+      ${ faker.lorem.paragraphs(25, '<br/>') }
    </YPage>
 </YLayout>
 `;
