@@ -29,6 +29,9 @@ export interface YButtonIcon extends Vue {}
 export interface YButtonBack extends Vue {}
 export interface YButtonLink extends Vue {}
 export interface YToggleSwitch extends Vue {}
+// containers
+export interface YLayout extends Vue {}
+export interface YPage extends Vue {}
 
 
 // forms
@@ -59,6 +62,9 @@ export const YButtonIcon: VueConstructor<YButtonIcon>;
 export const YButtonBack: VueConstructor<YButtonBack>;
 export const YButtonLink: VueConstructor<YButtonLink>;
 export const YToggleSwitch: VueConstructor<YToggleSwitch>;
+// containers
+export const YLayout: VueConstructor<YLayout>;
+export const YPage: VueConstructor<YPage>;
 
 
 export interface Ocromi {}

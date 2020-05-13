@@ -37,6 +37,9 @@ import YButtonIcon from './components/buttons/button-icon/YButtonIcon.vue';
 import YButtonBack from './components/buttons/button-back/YButtonBack.vue';
 import YButtonLink from './components/buttons/button-link/YButtonLink.vue';
 import YToggleSwitch from './components/buttons/toggle-switch/YToggleSwitch.vue';
+// containers
+import YLayout from './components/containers/layout/YLayout.vue';
+import YPage from './components/containers/page/YPage.vue';
 
 
 import Vue from 'vue';
@@ -62,6 +65,7 @@ export class Ocromi {
    }
 }
 
+export * from './core/decorators';
 export * from './core/enums';
 export {
    // forms
@@ -104,6 +108,10 @@ export {
    YButtonBack,
    YButtonLink,
    YToggleSwitch,
+
+   // containers
+   YLayout,
+   YPage,
 };
 
 
