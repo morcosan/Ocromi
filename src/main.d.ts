@@ -1,6 +1,10 @@
 import Vue, { VueConstructor } from 'vue';
 
 
+export const Ocromi: any;
+
+export * from './core/enums';
+
 // forms
 export interface YForm extends Vue {}
 export interface YCheckbox extends Vue {}
@@ -65,7 +69,3 @@ export const YToggleSwitch: VueConstructor<YToggleSwitch>;
 // containers
 export const YLayout: VueConstructor<YLayout>;
 export const YPage: VueConstructor<YPage>;
-
-
-export interface Ocromi {}
-export const Ocromi;
