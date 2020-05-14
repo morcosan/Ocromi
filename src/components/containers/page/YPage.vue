@@ -36,6 +36,7 @@
 
       .y-page__content {
          max-width: 100%;
+         min-height: 100%;
          padding: 16px;
          background-color: #fff;
 
