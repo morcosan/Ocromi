@@ -1,5 +1,5 @@
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
-import { groupId, propsButton, settingsComputed } from '../../../../.storybook/custom/knob-props';
+import { groupId, propsButton, settingsComputed } from '.storybook/custom/knob-props';
 import { select, text } from '@storybook/addon-knobs';
 import YButtonLink from './YButtonLink.vue';
 import { ButtonStyle } from '../../../core/enums';

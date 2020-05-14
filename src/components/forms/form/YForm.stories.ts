@@ -21,7 +21,7 @@ import YFieldDate from '../field-date/YFieldDate.vue';
 import YFieldFileUpload from '../field-file-upload/YFieldFileUpload.vue';
 import YButtonSubmit from '../../buttons/button-submit/YButtonSubmit.vue';
 import YButtonReset from '../../buttons/button-reset/YButtonReset.vue';
-import { groupId, settingsComputed, settingsProps } from '../../../../.storybook/custom/knob-props';
+import { groupId, settingsComputed, settingsProps } from '.storybook/custom/knob-props';
 
 
 // generate random lists

@@ -2,7 +2,7 @@ import StoryBuilder from '.storybook/custom/story-builder';
 import '.storybook/custom/story-builder.scss';
 import YPage from './YPage.vue';
 import YLayout from '../layout/YLayout.vue';
-import { groupId, settingsComputed, settingsProps } from '../../../../.storybook/custom/knob-props';
+import { groupId, settingsComputed, settingsProps } from '.storybook/custom/knob-props';
 import { select, text } from '@storybook/addon-knobs';
 import { PageAlign } from '../../../core/enums';
 import faker from 'faker';

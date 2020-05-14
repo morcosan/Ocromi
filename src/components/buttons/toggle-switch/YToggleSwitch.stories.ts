@@ -1,6 +1,6 @@
 import YToggleSwitch from './YToggleSwitch.vue';
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
-import { groupId, propsButton, settingsComputed } from '../../../../.storybook/custom/knob-props';
+import { groupId, propsButton, settingsComputed } from '.storybook/custom/knob-props';
 import { boolean, select, text } from '@storybook/addon-knobs';
 import { DuoStyle, ToggleSize } from '../../../core/enums';
 
