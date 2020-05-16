@@ -66,3 +66,8 @@ export enum PageAlign {
    Left = 'left',
    Right = 'right'
 }
+
+export enum LayoutType {
+   Vertical = 'vertical',
+   Horizontal = 'horizontal',
+}

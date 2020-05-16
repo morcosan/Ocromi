@@ -2,6 +2,7 @@ import StoryBuilder from '.storybook/custom/story-builder';
 import '.storybook/custom/story-builder.scss';
 import YPage from './YPage.vue';
 import YLayout from '../layout/YLayout.vue';
+import YFieldTextArea from '../../forms/field-text-area/YFieldTextArea.vue';
 import { groupId, settingsComputed, settingsProps } from '.storybook/custom/knob-props';
 import { select, text } from '@storybook/addon-knobs';
 import { PageAlign } from '../../../core/enums';
@@ -12,6 +13,7 @@ const vue = {
    components: {
       YPage,
       YLayout,
+      YFieldTextArea,
    },
    props: {
       width: {
@@ -21,6 +23,11 @@ const vue = {
          default: () => select('Align', PageAlign, PageAlign.Center, groupId),
       },
       ...settingsProps,
+   },
+   data() {
+      return {
+         value: [],
+      };
    },
    computed: settingsComputed,
 };
@@ -33,7 +40,13 @@ const basicFormTemplate = `
       :width="width"
       :align="align"
    >
-      ${ faker.lorem.paragraphs(25, '<br>') }
+      ${ faker.lorem.paragraphs(8, '<br>') }
+      
+      <YFieldTextArea 
+         v-model="value" 
+         is-dynamic 
+         is-optional
+      />
    </YPage>
 </YLayout>
 `;
