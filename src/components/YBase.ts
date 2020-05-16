@@ -1,5 +1,5 @@
 import { Component, Override, Prop, Vue } from '../core/decorators';
-import { Settings } from '../core/settings';
+import { defaultSettings, Settings } from '../core/settings';
 import Utils from '../utils';
 
 
@@ -12,11 +12,17 @@ export default class YBase extends Vue {
    private parent!: YBase;
 
 
+   public get YLocale(): any {
+      // @ts-ignore
+      return this.$t('locale');
+   }
+
+
    public get settingsComputed(): Settings {
       if (this.parent) {
          return Utils.mergeObjects(this.parent.settingsComputed, this.settings);
       }
-      return Utils.mergeObjects(this.YSettings, this.settings);
+      return Utils.mergeObjects(defaultSettings, this.settings);
    }
 
 

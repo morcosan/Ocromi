@@ -38,7 +38,7 @@ export default class Utils {
    }
 
 
-   public static mergeObjects(...args: object[]): object {
+   public static mergeObjects(...args: object[]): any {
       return extend(true, {}, ...args);
    }
 

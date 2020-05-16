@@ -1,6 +1,3 @@
-import Vue from 'vue';
-
-
 export enum Theme {
    Light = 'LIGHT',
    Dark = 'DARK',
@@ -69,39 +66,3 @@ export enum PageAlign {
    Left = 'left',
    Right = 'right'
 }
-
-
-Vue.mixin({
-   computed: {
-      YTheme(): typeof Theme {
-         return Theme;
-      },
-      YDesign(): typeof Design {
-         return Design;
-      },
-      YDuoStyle(): typeof DuoStyle {
-         return DuoStyle;
-      },
-      YSpinner(): typeof Spinner {
-         return Spinner;
-      },
-      YButtonStyle(): typeof ButtonStyle {
-         return ButtonStyle;
-      },
-      YIconSize(): typeof IconSize {
-         return IconSize;
-      },
-      YBuyIcon(): typeof BuyIcon {
-         return BuyIcon;
-      },
-      YBackIcon(): typeof BackIcon {
-         return BackIcon;
-      },
-      YToggleSize(): typeof ToggleSize {
-         return ToggleSize;
-      },
-      YPageAlign(): typeof PageAlign {
-         return PageAlign;
-      },
-   },
-});

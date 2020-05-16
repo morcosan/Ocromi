@@ -16,7 +16,7 @@ import { ButtonStyle } from '../../core/enums';
       QSpinnerRadio,
    } from 'quasar';
    import { Settings } from '../../core/settings';
-   import { ButtonStyle, DuoStyle } from '../../core/enums';
+   import { ButtonStyle, Design, DuoStyle, Spinner } from '../../core/enums';
 
 
    @Component({
@@ -58,6 +58,16 @@ import { ButtonStyle } from '../../core/enums';
             return this.settings.button;
          }
          return {};
+      }
+
+
+      public get YDesign(): typeof Design {
+         return Design;
+      }
+
+
+      public get YSpinner(): typeof Spinner {
+         return Spinner;
       }
 
 

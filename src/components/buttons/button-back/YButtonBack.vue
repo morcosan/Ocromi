@@ -15,6 +15,11 @@
       @Prop({ default: false, type: Boolean }) public isSmall!: boolean;
 
 
+      public get YBackIcon(): typeof BackIcon {
+         return BackIcon;
+      }
+
+
       public get classComputed() {
          return {
             'y-button-back': true,
