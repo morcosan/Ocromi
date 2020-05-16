@@ -3,6 +3,7 @@ import Vue, { VueConstructor } from 'vue';
 
 export const Ocromi: any;
 
+export * from './core/decorators';
 export * from './core/enums';
 
 // forms
