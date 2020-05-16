@@ -23,6 +23,9 @@ import YGroupCheckbox from './components/forms/group-checkbox/YGroupCheckbox.vue
 import YGroupRadio from './components/forms/group-radio/YGroupRadio.vue';
 import YSlider from './components/forms/slider/YSlider.vue';
 import YSliderRange from './components/forms/slider-range/YSliderRange.vue';
+import YTemplateInput from './components/forms/YTemplateInput.vue';
+import YTemplateInputGroup from './components/forms/YTemplateInputGroup.vue';
+import YTemplateInputSlider from './components/forms/YTemplateInputSlider.vue';
 // buttons
 import YBaseButton from './components/buttons/YBaseButton';
 import YBaseButtonLoading from './components/buttons/YBaseButtonLoading';
@@ -42,13 +45,15 @@ import YToggleSwitch from './components/buttons/toggle-switch/YToggleSwitch.vue'
 import YLayout from './components/containers/layout/YLayout.vue';
 import YPage from './components/containers/page/YPage.vue';
 
-
-import Vue from 'vue';
-import Quasar from 'quasar';
+// css
 import '@quasar/extras/roboto-font/roboto-font.css';
 import '@quasar/extras/material-icons/material-icons.css';
 import 'quasar/dist/quasar.css';
-import './css/app.scss';
+import './css/app/index.scss';
+
+
+import Vue from 'vue';
+import Quasar from 'quasar';
 import packageJSON from '../package.json';
 import { install, Settings } from './core/settings';
 
@@ -65,7 +70,6 @@ export class Ocromi {
       install(Vue, settings);
    }
 }
-
 export * from './core/decorators';
 export * from './core/enums';
 export {
@@ -95,6 +99,9 @@ export {
    YGroupRadio,
    YSlider,
    YSliderRange,
+   YTemplateInput,
+   YTemplateInputGroup,
+   YTemplateInputSlider,
 
    // buttons
    YBaseButton,

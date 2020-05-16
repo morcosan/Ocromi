@@ -101,8 +101,6 @@
 
 
 <style scoped lang="scss">
-   // @import '../../../css/variables';
-
    // place the icon with javascript
    .y-field-text-area.has-scrollbar /deep/ .q-field__append {
       right: 12px;

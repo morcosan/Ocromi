@@ -22,8 +22,6 @@
 
 
 <style scoped lang="scss">
-   @import '../../../css/variables';
-
    .y-layout {
       width: 100vw;
       height: 100vh;

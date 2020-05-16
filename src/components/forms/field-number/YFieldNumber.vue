@@ -246,8 +246,6 @@
 
 
 <style scoped lang="scss">
-   @import '../../../css/variables';
-
    .y-field-number__control {
       height: 100%;
       box-sizing: border-box;

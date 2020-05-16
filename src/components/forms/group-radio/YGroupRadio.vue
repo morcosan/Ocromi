@@ -76,8 +76,6 @@
 
 
 <style scoped lang="scss">
-   @import '../../../css/variables';
-
    .y-group-radio.is-disabled /deep/ .q-radio__inner {
       opacity: $opacity-disabled;
    }

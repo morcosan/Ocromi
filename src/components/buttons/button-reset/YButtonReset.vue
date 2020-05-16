@@ -25,5 +25,5 @@
 
 
 <style scoped lang="scss">
-   // @import '../../../css/variables';
+   // no css yet
 </style>

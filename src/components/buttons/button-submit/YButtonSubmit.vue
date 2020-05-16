@@ -26,8 +26,6 @@
 
 
 <style scoped lang="scss">
-   // @import '../../../css/variables';
-
    .y-button-submit {
       min-width: 80px;
    }

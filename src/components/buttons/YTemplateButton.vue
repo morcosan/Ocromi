@@ -130,8 +130,6 @@ import { ButtonStyle } from '../../core/enums';
 
 
 <style scoped lang="scss">
-   // @import '../../../css/variables';
-
    // when loading, button should look normal
    .y-base-button.is-loading {
       opacity: 1 !important;

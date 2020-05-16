@@ -50,8 +50,6 @@
 
 
 <style scoped lang="scss">
-   // @import '../../../css/variables';
-
    .y-button-back {
       /deep/ .q-icon {
          margin-right: 0;

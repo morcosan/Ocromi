@@ -1,0 +1,20 @@
+@import 'colors';
+@import 'mixins/quasar-classes';
+
+
+$primary: $blue-8 !default;
+$secondary: #26a69a !default;
+$accent: #9c27b0 !default;
+
+$dark: #1d1d1d !default;
+
+$positive: #21ba45 !default;
+$negative: #c10015 !default;
+$info: #31ccec !default;
+$warning: #f2c037 !default;
+
+
+$opacity-disabled: 0.6 !default;
+
+
+@import '~quasar/src/css/variables';

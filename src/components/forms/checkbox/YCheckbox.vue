@@ -126,8 +126,6 @@
 
 
 <style scoped lang="scss">
-   @import '../../../css/variables';
-
    .y-checkbox {
       /deep/ .y-base-input__control-box {
          margin-left: -10px;

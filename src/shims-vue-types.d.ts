@@ -5,5 +5,5 @@ export default Vue;
 
 // TS typing for custom variables
 declare module 'vue/types/vue' {
-   interface Vue {}
+   // interface Vue {}
 }

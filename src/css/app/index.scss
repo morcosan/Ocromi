@@ -1,4 +1,4 @@
-@import 'variables';
+@import '../variables';
 
 @import 'overrides/native-html';
 
@@ -12,9 +12,7 @@
 @import 'overrides/quasar/q-slider';
 @import 'overrides/quasar/q-tooltip';
 
-@import 'mixins/quasar-classes';
-
-@import 'modules/forms';
+@import 'components/forms';
 
 
 :root {
