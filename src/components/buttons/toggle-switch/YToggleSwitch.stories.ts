@@ -1,6 +1,6 @@
 import YToggleSwitch from './YToggleSwitch.vue';
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
-import { groupId, propsButton, settingsComputed } from '.storybook/custom/knob-props';
+import { propsGroupId, propsButton, settingsComputed } from '.storybook/custom/knob-props';
 import { boolean, select, text } from '@storybook/addon-knobs';
 import { DuoStyle, ToggleSize } from '../../../core/enums';
 
@@ -12,19 +12,19 @@ const vue = {
    props: {
       ...propsButton,
       label: {
-         default: () => text('Label', 'Nice toggle', groupId),
+         default: () => text('Label', 'Nice toggle', propsGroupId),
       },
       labelOnRight: {
-         default: () => text('Label On Right', '', groupId),
+         default: () => text('Label On Right', '', propsGroupId),
       },
       iconIdTrue: {
-         default: () => text('Icon Id True', 'done', groupId),
+         default: () => text('Icon Id True', 'done', propsGroupId),
       },
       iconIdFalse: {
-         default: () => text('Icon Id False', '', groupId),
+         default: () => text('Icon Id False', '', propsGroupId),
       },
       size: {
-         default: () => select('Size', ToggleSize, ToggleSize.Medium, groupId),
+         default: () => select('Size', ToggleSize, ToggleSize.Medium, propsGroupId),
       },
    },
    data() {

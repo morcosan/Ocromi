@@ -1,5 +1,5 @@
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
-import { groupId, propsButton, settingsComputed } from '.storybook/custom/knob-props';
+import { propsGroupId, propsButton, settingsComputed } from '.storybook/custom/knob-props';
 import { select, text } from '@storybook/addon-knobs';
 import YButtonLink from './YButtonLink.vue';
 import { ButtonStyle } from '../../../core/enums';
@@ -12,13 +12,13 @@ const vue = {
    props: {
       ...propsButton,
       label: {
-         default: () => text('Label', 'Go to google.com', groupId),
+         default: () => text('Label', 'Go to google.com', propsGroupId),
       },
       url: {
-         default: () => text('URL', 'https://google.com', groupId),
+         default: () => text('URL', 'https://google.com', propsGroupId),
       },
       buttonStyle: {
-         default: () => select('Button Style', ButtonStyle, ButtonStyle.Filled, groupId),
+         default: () => select('Button Style', ButtonStyle, ButtonStyle.Filled, propsGroupId),
       },
    },
    computed: settingsComputed,

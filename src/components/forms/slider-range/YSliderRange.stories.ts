@@ -1,6 +1,6 @@
 import YSliderRange from './YSliderRange.vue';
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
-import { groupId, propsInputSlider, settingsComputed } from '.storybook/custom/knob-props';
+import { propsGroupId, propsInputSlider, settingsComputed } from '.storybook/custom/knob-props';
 import { boolean } from '@storybook/addon-knobs';
 
 
@@ -11,7 +11,7 @@ const vue = {
    props: {
       ...propsInputSlider,
       isFixed: {
-         default: () => boolean('Is Fixed', false, groupId),
+         default: () => boolean('Is Fixed', false, propsGroupId),
       },
    },
    data() {

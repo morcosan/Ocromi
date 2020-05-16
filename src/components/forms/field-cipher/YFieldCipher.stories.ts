@@ -1,6 +1,6 @@
 import YFieldCipher from './YFieldCipher.vue';
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
-import { groupId, propsInputField, settingsComputed } from '.storybook/custom/knob-props';
+import { propsGroupId, propsInputField, settingsComputed } from '.storybook/custom/knob-props';
 import { text } from '@storybook/addon-knobs';
 
 
@@ -11,7 +11,7 @@ const vue = {
    props: {
       ...propsInputField,
       inputMask: {
-         default: () => text('Input Mask', '####  ####  ####  ####', groupId),
+         default: () => text('Input Mask', '####  ####  ####  ####', propsGroupId),
       },
    },
    data() {

@@ -21,7 +21,7 @@ import YFieldDate from '../field-date/YFieldDate.vue';
 import YFieldFileUpload from '../field-file-upload/YFieldFileUpload.vue';
 import YButtonSubmit from '../../buttons/button-submit/YButtonSubmit.vue';
 import YButtonReset from '../../buttons/button-reset/YButtonReset.vue';
-import { groupId, settingsComputed, settingsProps } from '.storybook/custom/knob-props';
+import { propsGroupId, settingsComputed, settingsProps, storyGroupId } from '.storybook/custom/knob-props';
 
 
 // generate random lists
@@ -53,16 +53,16 @@ const vue = {
    },
    props: {
       isDisabled: {
-         default: () => boolean('Is Disabled', false, groupId),
+         default: () => boolean('Is Disabled', false, propsGroupId),
       },
       isMini: {
-         default: () => boolean('Is Mini', false, groupId),
+         default: () => boolean('Is Mini', false, propsGroupId),
       },
       sideLabelWidth: {
-         default: () => text('Side Label Width', '', groupId),
+         default: () => text('Side Label Width', '', propsGroupId),
       },
       optional: {
-         default: () => boolean('Inputs: Is Optional', false),
+         default: () => boolean('Inputs: Is Optional', false, storyGroupId),
       },
       ...settingsProps,
    },

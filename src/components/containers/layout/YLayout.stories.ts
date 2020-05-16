@@ -3,9 +3,9 @@ import '.storybook/custom/story-builder.scss';
 import YLayout from './YLayout.vue';
 import YPage from '../page/YPage.vue';
 import YFieldTextArea from '../../forms/field-text-area/YFieldTextArea.vue';
-import { groupId, settingsComputed, settingsProps } from '.storybook/custom/knob-props';
+import { propsGroupId, settingsComputed, settingsProps, storyGroupId } from '.storybook/custom/knob-props';
 import faker from 'faker';
-import { select } from '@storybook/addon-knobs';
+import { boolean, select } from '@storybook/addon-knobs';
 import { LayoutType } from '../../../core/enums';
 
 
@@ -17,7 +17,19 @@ const vue = {
    },
    props: {
       type: {
-         default: () => select('Type', LayoutType, LayoutType.Vertical, groupId),
+         default: () => select('Type', LayoutType, LayoutType.Vertical, propsGroupId),
+      },
+      displayTop: {
+         default: () => boolean('Display: Top', true, storyGroupId),
+      },
+      displayLeft: {
+         default: () => boolean('Display: Left', true, storyGroupId),
+      },
+      displayRight: {
+         default: () => boolean('Display: Right', true, storyGroupId),
+      },
+      displayBottom: {
+         default: () => boolean('Display: Bottom', true, storyGroupId),
       },
       ...settingsProps,
    },
@@ -35,11 +47,11 @@ const basicFormTemplate = `
    :type="type"
    :settings="settings"
 >
-   <template v-slot:top>
+   <template v-slot:top v-if="displayTop">
       <div style="background: #99f; height: 50px;"/>
    </template>
    
-   <template v-slot:left>
+   <template v-slot:left v-if="displayLeft">
       <div style="background: #f99; width: 100px; height: 100%;"/>
    </template>
    
@@ -52,11 +64,11 @@ const basicFormTemplate = `
       />
    </template>
 
-   <template v-slot:right>
+   <template v-slot:right v-if="displayRight">
       <div style="background: #9f9; width: 100px; height: 100%;"/>
    </template>
    
-   <template v-slot:bottom>
+   <template v-slot:bottom v-if="displayBottom">
       <div style="background: #999; height: 50px;"/>
    </template>
 </YLayout>

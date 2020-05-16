@@ -2,9 +2,10 @@ import { boolean, number, select, text } from '@storybook/addon-knobs';
 import { Design, DuoStyle, Spinner, Theme } from '../../src/core/enums';
 
 
-export const groupId = 'Props';
+export const propsGroupId = 'Props';
+export const storyGroupId = '@Storybook';
 
-const settingsGroupId = 'Settings';
+const settingsGroupId = 'YSettings';
 export const settingsProps = {
    theme: {
       default: () => select('Theme', Theme, Theme.Light, settingsGroupId),
@@ -51,28 +52,28 @@ export const settingsComputed = {
 
 export const propsInput = {
    label: {
-      default: () => text('Label', 'Nice label', groupId),
+      default: () => text('Label', 'Nice label', propsGroupId),
    },
    error: {
-      default: () => text('Error', '', groupId),
+      default: () => text('Error', '', propsGroupId),
    },
    isDisabled: {
-      default: () => boolean('Is Disabled', false, groupId),
+      default: () => boolean('Is Disabled', false, propsGroupId),
    },
    isOptional: {
-      default: () => boolean('Is Optional', false, groupId),
+      default: () => boolean('Is Optional', false, propsGroupId),
    },
    hidesOptional: {
-      default: () => boolean('Hides Optional', false, groupId),
+      default: () => boolean('Hides Optional', false, propsGroupId),
    },
    isReadonly: {
-      default: () => boolean('Is Readonly', false, groupId),
+      default: () => boolean('Is Readonly', false, propsGroupId),
    },
    isMini: {
-      default: () => boolean('Is Mini', false, groupId),
+      default: () => boolean('Is Mini', false, propsGroupId),
    },
    sideLabelWidth: {
-      default: () => text('Side Label Width', '', groupId),
+      default: () => text('Side Label Width', '', propsGroupId),
    },
    ...settingsProps,
 };
@@ -81,7 +82,7 @@ export const propsInput = {
 export const propsInputSelect = {
    ...propsInput,
    hint: {
-      default: () => text('Hint', 'Nice hint', groupId),
+      default: () => text('Hint', 'Nice hint', propsGroupId),
    },
 };
 
@@ -94,22 +95,22 @@ export const propsInputGroup = {
 export const propsInputSlider = {
    ...propsInput,
    thumbSuffix: {
-      default: () => text('Thumb Suffix', ' %', groupId),
+      default: () => text('Thumb Suffix', ' %', propsGroupId),
    },
    minValue: {
-      default: () => number('Min Value', 0, {}, groupId),
+      default: () => number('Min Value', 0, {}, propsGroupId),
    },
    maxValue: {
-      default: () => number('Max Value', 100, {}, groupId),
+      default: () => number('Max Value', 100, {}, propsGroupId),
    },
    valueStep: {
-      default: () => number('Value Step', 1, {}, groupId),
+      default: () => number('Value Step', 1, {}, propsGroupId),
    },
    stepDecimals: {
-      default: () => number('Step Decimals', 2, {}, groupId),
+      default: () => number('Step Decimals', 2, {}, propsGroupId),
    },
    hasMarkers: {
-      default: () => boolean('Has Markers', false, groupId),
+      default: () => boolean('Has Markers', false, propsGroupId),
    },
 };
 
@@ -117,20 +118,20 @@ export const propsInputSlider = {
 export const propsInputField = {
    ...propsInput,
    placeholder: {
-      default: () => text('Placeholder', 'Nice placeholder', groupId),
+      default: () => text('Placeholder', 'Nice placeholder', propsGroupId),
    },
    hint: {
-      default: () => text('Hint', 'Nice hint', groupId),
+      default: () => text('Hint', 'Nice hint', propsGroupId),
    },
 };
 
 
 export const propsButton = {
    label: {
-      default: () => text('Label', 'Nice button', groupId),
+      default: () => text('Label', 'Nice button', propsGroupId),
    },
    isDisabled: {
-      default: () => boolean('Is Disabled', false, groupId),
+      default: () => boolean('Is Disabled', false, propsGroupId),
    },
    ...settingsProps,
 };
@@ -139,6 +140,6 @@ export const propsButton = {
 export const propsButtonLoading = {
    ...propsButton,
    loadingTime: {
-      default: () => number('Loading Time', 1000, {}, groupId),
+      default: () => number('Loading Time', 1000, {}, propsGroupId),
    },
 };

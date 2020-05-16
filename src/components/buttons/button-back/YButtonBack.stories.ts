@@ -1,5 +1,5 @@
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
-import { groupId, propsButtonLoading, settingsComputed } from '.storybook/custom/knob-props';
+import { propsGroupId, propsButtonLoading, settingsComputed } from '.storybook/custom/knob-props';
 import { boolean, select } from '@storybook/addon-knobs';
 import YButtonBack from './YButtonBack.vue';
 import { BackIcon, ButtonStyle } from '../../../core/enums';
@@ -14,13 +14,13 @@ const vue = {
       loadingTime: undefined,
       label: undefined,
       backIcon: {
-         default: () => select('Back Icon', BackIcon, BackIcon.Android, groupId),
+         default: () => select('Back Icon', BackIcon, BackIcon.Android, propsGroupId),
       },
       buttonStyle: {
-         default: () => select('Button Style', ButtonStyle, ButtonStyle.Filled, groupId),
+         default: () => select('Button Style', ButtonStyle, ButtonStyle.Filled, propsGroupId),
       },
       isSmall: {
-         default: () => boolean('Is Small', false, groupId),
+         default: () => boolean('Is Small', false, propsGroupId),
       },
    },
    computed: settingsComputed,

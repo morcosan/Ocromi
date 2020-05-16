@@ -1,5 +1,5 @@
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
-import { groupId, propsButtonLoading, settingsComputed } from '.storybook/custom/knob-props';
+import { propsGroupId, propsButtonLoading, settingsComputed } from '.storybook/custom/knob-props';
 import { select, text } from '@storybook/addon-knobs';
 import YButtonIcon from './YButtonIcon.vue';
 import { ButtonStyle, IconSize } from '../../../core/enums';
@@ -13,13 +13,13 @@ const vue = {
       ...propsButtonLoading,
       label: undefined,
       iconId: {
-         default: () => text('Icon Id', 'favorite', groupId),
+         default: () => text('Icon Id', 'favorite', propsGroupId),
       },
       iconSize: {
-         default: () => select('Icon Size', IconSize, IconSize.Medium, groupId),
+         default: () => select('Icon Size', IconSize, IconSize.Medium, propsGroupId),
       },
       buttonStyle: {
-         default: () => select('Button Style', ButtonStyle, ButtonStyle.Filled, groupId),
+         default: () => select('Button Style', ButtonStyle, ButtonStyle.Filled, propsGroupId),
       },
    },
    computed: settingsComputed,
