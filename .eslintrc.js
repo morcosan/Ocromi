@@ -121,6 +121,15 @@ module.exports = {
       'vue/multiline-html-element-content-newline': ['warn', {
          'allowEmptyLines': true,
       }],
+      'vue/html-self-closing': ['error', {
+         'html': {
+            'void': 'never',
+            'normal': 'always',
+            'component': 'always',
+         },
+         'svg': 'always',
+         'math': 'always',
+      }],
    },
    ignorePatterns: [
       'docs/',

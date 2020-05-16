@@ -82,7 +82,7 @@ const storyLines: StoryLine[] = [
             :side-label-width="sideLabelWidth"
             ref="fieldFileUpload"
          />
-         <br/>
+         <br>
          <button class="story-button" @click="onClick">Validate</button>
       `,
       states: ['value', 'typeof value', 'fileFormats'],
@@ -108,7 +108,7 @@ const storyLines: StoryLine[] = [
             :side-label-width="sideLabelWidth"
             ref="fieldFileUpload2"
          />
-         <br/>
+         <br>
          <button class="story-button" @click="onClick2">Validate</button>
       `,
       states: ['value1'],

@@ -57,7 +57,7 @@ const storyLines: StoryLine[] = [
             :side-label-width="sideLabelWidth"
             ref="groupRadio"
          />
-         <br/>
+         <br>
          <button class="story-button" @click="onClick">Validate</button>
       `,
       states: ['value'],

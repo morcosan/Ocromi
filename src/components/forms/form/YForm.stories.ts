@@ -284,8 +284,8 @@ const basicFormTemplate = `
       I agree with terms of service
    </YCheckbox>
    
-   <br/>
-   <br/>
+   <br>
+   <br>
    
    <YButtonSubmit	label="Save"/>
    <YButtonReset label="Reset"/>
@@ -315,7 +315,7 @@ const loginFormTemplate = `
       :is-optional="optional"
    />
    
-   <br/>
+   <br>
    
    <YButtonSubmit	
       label="Log In" 

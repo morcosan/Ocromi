@@ -23,7 +23,7 @@ const basicFormTemplate = `
    :settings="settings"
 >
    <YPage>
-      ${ faker.lorem.paragraphs(25, '<br/>') }
+      ${ faker.lorem.paragraphs(25, '<br>') }
    </YPage>
 </YLayout>
 `;

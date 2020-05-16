@@ -74,8 +74,8 @@ const basicFormTemplate = `
       I agree with terms of service
    </YCheckbox>
    
-   <br/>
-   <br/>
+   <br>
+   <br>
    
    <YButtonSubmit
       :label="label"
