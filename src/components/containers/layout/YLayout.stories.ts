@@ -42,7 +42,7 @@ const vue = {
 };
 
 
-const basicFormTemplate = `
+const defaultTemplate = `
 <YLayout 
    :type="type"
    :settings="settings"
@@ -85,7 +85,7 @@ const basicFormTemplate = `
 
 
 export default StoryBuilder.createDefault('Containers / Layout');
-export const default_ = StoryBuilder.createBasicStory(vue, basicFormTemplate);
+export const default_ = StoryBuilder.createBasicStory(vue, defaultTemplate);
 export const docs = StoryBuilder.createDocs(`
 /**
  * Used as the top level container for a web page.

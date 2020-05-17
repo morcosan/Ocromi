@@ -47,7 +47,7 @@ const vue = {
 };
 
 
-const basicFormTemplate = `
+const defaultTemplate = `
 <YForm 
    class="story-form-panel"
    :settings="settings"
@@ -82,7 +82,7 @@ const basicFormTemplate = `
 
 
 export default StoryBuilder.createDefault('Buttons / Button Reset');
-export const default_ = StoryBuilder.createBasicStory(vue, basicFormTemplate);
+export const default_ = StoryBuilder.createBasicStory(vue, defaultTemplate);
 export const docs = StoryBuilder.createDocs(`
 /**
  * Used when user needs to take clear the form.

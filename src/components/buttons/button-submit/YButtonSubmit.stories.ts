@@ -48,7 +48,7 @@ const vue = {
 };
 
 
-const basicFormTemplate = `
+const defaultTemplate = `
 <YForm 
    class="story-form-panel"
    @submit="onSubmit"
@@ -90,7 +90,7 @@ const basicFormTemplate = `
 
 
 export default StoryBuilder.createDefault('Buttons / Button Submit');
-export const default_ = StoryBuilder.createBasicStory(vue, basicFormTemplate);
+export const default_ = StoryBuilder.createBasicStory(vue, defaultTemplate);
 export const docs = StoryBuilder.createDocs(`
 /**
  * Used when user needs to take the submit action for certain data.

@@ -7,7 +7,6 @@
    @Component
    export default class YPage extends YBase {
 
-      @Prop({ default: '1024px' }) public width!: string;
       @Prop({ default: PageAlign.Center }) public align!: PageAlign;
 
    }
@@ -16,10 +15,7 @@
 
 <template>
    <div class="y-page">
-      <div
-         :class="('y-page__content has-align-' + align)"
-         :style="{ width: width }"
-      >
+      <div :class="('y-page__content has-align-' + align)">
          <slot/>
       </div>
    </div>
@@ -37,8 +33,7 @@
          min-height: 100%;
          box-sizing: border-box;
          padding: 16px;
-
-         background-color: #fff;
+         background-color: $page-background;
 
          &.has-align-center {
             margin: 0 auto;

@@ -16,9 +16,6 @@ const vue = {
       YFieldTextArea,
    },
    props: {
-      width: {
-         default: () => text('Width', '600px', propsGroupId),
-      },
       align: {
          default: () => select('Align', PageAlign, PageAlign.Center, propsGroupId),
       },
@@ -33,11 +30,26 @@ const vue = {
 };
 
 
-const basicFormTemplate = `
+const defaultTemplate = `
+<YPage 
+   :settings="settings"
+   :align="align"
+>
+   ${ faker.lorem.paragraphs(4, '<br>') }
+   <YFieldTextArea 
+      v-model="value" 
+      is-dynamic 
+      is-optional
+   />
+   ${ faker.lorem.paragraphs(4, '<br>') }
+</YPage>
+`;
+
+
+const withLayouTemplate = `
 <YLayout>
-   <YPage 
+   <YPage
       :settings="settings"
-      :width="width"
       :align="align"
    >
       ${ faker.lorem.paragraphs(4, '<br>') }
@@ -53,7 +65,8 @@ const basicFormTemplate = `
 
 
 export default StoryBuilder.createDefault('Containers / Page');
-export const default_ = StoryBuilder.createBasicStory(vue, basicFormTemplate);
+export const default_ = StoryBuilder.createBasicStory(vue, defaultTemplate);
+export const withLayout = StoryBuilder.createBasicStory(vue, withLayouTemplate);
 export const docs = StoryBuilder.createDocs(`
 /**
  * Used as the top level container for page content. It must be placed inside a layout.
