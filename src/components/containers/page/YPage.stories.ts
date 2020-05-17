@@ -31,22 +31,6 @@ const vue = {
 
 
 const defaultTemplate = `
-<YPage 
-   :settings="settings"
-   :align="align"
->
-   ${ faker.lorem.paragraphs(4, '<br>') }
-   <YFieldTextArea 
-      v-model="value" 
-      is-dynamic 
-      is-optional
-   />
-   ${ faker.lorem.paragraphs(4, '<br>') }
-</YPage>
-`;
-
-
-const withLayouTemplate = `
 <YLayout>
    <YPage
       :settings="settings"
@@ -64,9 +48,25 @@ const withLayouTemplate = `
 `;
 
 
+const noLayoutTemplate = `
+<YPage 
+   :settings="settings"
+   :align="align"
+>
+   ${ faker.lorem.paragraphs(4, '<br>') }
+   <YFieldTextArea 
+      v-model="value" 
+      is-dynamic 
+      is-optional
+   />
+   ${ faker.lorem.paragraphs(4, '<br>') }
+</YPage>
+`;
+
+
 export default StoryBuilder.createDefault('Containers / Page');
 export const default_ = StoryBuilder.createBasicStory(vue, defaultTemplate);
-export const withLayout = StoryBuilder.createBasicStory(vue, withLayouTemplate);
+export const noLayout = StoryBuilder.createBasicStory(vue, noLayoutTemplate);
 export const docs = StoryBuilder.createDocs(`
 /**
  * Used as the top level container for page content. It must be placed inside a layout.

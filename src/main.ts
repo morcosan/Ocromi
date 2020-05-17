@@ -44,7 +44,8 @@ import YToggleSwitch from './components/buttons/toggle-switch/YToggleSwitch.vue'
 // containers
 import YLayout from './components/containers/layout/YLayout.vue';
 import YPage from './components/containers/page/YPage.vue';
-
+// navigation
+import YNavBarApp from './components/navigation/nav-bar-app/YNavBarApp.vue';
 // css
 import '@quasar/extras/roboto-font/roboto-font.css';
 import '@quasar/extras/material-icons/material-icons.css';
@@ -122,6 +123,9 @@ export {
    // containers
    YLayout,
    YPage,
+
+   // navigation
+   YNavBarApp,
 };
 
 
