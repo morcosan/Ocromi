@@ -27,3 +27,7 @@
    --q-color-info: #{$info};
    --q-color-warning: #{$warning};
 }
+
+body {
+   background-color: $grey-3;
+}

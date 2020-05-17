@@ -5,8 +5,8 @@ $colorGrey: #bbb;
 
 html {
    height: 100vh;
-   background-color: #eee;
 }
+
 
 .story-display {
    min-height: 100vh;
@@ -66,6 +66,7 @@ html {
 
 $margin: 1px;
 $stripe-size: 5px;
+$stripe-color: rgba(255, 255, 255, 0.6);
 
 .story-block {
    position: relative;
@@ -79,8 +80,8 @@ $stripe-size: 5px;
    border-radius: 10px;
    background: repeating-linear-gradient(
          -45deg,
-         rgba(0, 0, 0, 0.05),
-         rgba(0, 0, 0, 0.05) $stripe-size,
+         $stripe-color,
+         $stripe-color $stripe-size,
          transparent $stripe-size,
          transparent 2 * $stripe-size
    );

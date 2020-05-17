@@ -162,7 +162,6 @@
       height: 100vh;
       box-sizing: border-box;
       overflow: hidden;
-      background-color: $grey-1;
 
       .y-layout-box {
          width: 100%;

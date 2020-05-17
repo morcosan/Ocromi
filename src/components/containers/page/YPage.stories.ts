@@ -40,13 +40,13 @@ const basicFormTemplate = `
       :width="width"
       :align="align"
    >
-      ${ faker.lorem.paragraphs(8, '<br>') }
-      
+      ${ faker.lorem.paragraphs(4, '<br>') }
       <YFieldTextArea 
          v-model="value" 
          is-dynamic 
          is-optional
       />
+      ${ faker.lorem.paragraphs(4, '<br>') }
    </YPage>
 </YLayout>
 `;
