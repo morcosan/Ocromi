@@ -48,15 +48,19 @@ const basicFormTemplate = `
    :settings="settings"
 >
    <template v-slot:top v-if="displayTop">
-      <div style="background: #99f; height: 50px;"/>
+      <div class="story-block" style="height: 50px;">
+         <span>TOP</span>
+      </div>
    </template>
    
    <template v-slot:left v-if="displayLeft">
-      <div style="background: #f99; width: 100px; height: 100%;"/>
+      <div class="story-block" style="width: 100px;">
+         <span>LEFT</span>
+      </div>
    </template>
    
    <template>
-      ${ faker.lorem.paragraphs(7, '<br>') }
+      ${ faker.lorem.paragraphs(5, '<br>') }
       <YFieldTextArea 
          v-model="value" 
          is-dynamic 
@@ -65,11 +69,15 @@ const basicFormTemplate = `
    </template>
 
    <template v-slot:right v-if="displayRight">
-      <div style="background: #9f9; width: 100px; height: 100%;"/>
+      <div class="story-block" style="width: 100px;">
+         <span>RIGHT</span>
+      </div>
    </template>
    
    <template v-slot:bottom v-if="displayBottom">
-      <div style="background: #999; height: 50px;"/>
+      <div class="story-block" style="height: 50px;">
+         <span>BOTTOM</span>
+      </div>
    </template>
 </YLayout>
 `;

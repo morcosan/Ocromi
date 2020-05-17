@@ -62,3 +62,37 @@ html {
       background: #bbb;
    }
 }
+
+
+$margin: 2px;
+$stripe-size: 5px;
+
+.story-block {
+   position: relative;
+
+   width: calc(100% - #{2 * $margin});
+   height: calc(100% - #{2 * $margin});
+   box-sizing: border-box;
+   border: 2px solid #333;
+   margin: $margin;
+
+   border-radius: 10px;
+   background: repeating-linear-gradient(
+         -45deg,
+         rgba(0, 0, 0, 0.05),
+         rgba(0, 0, 0, 0.05) $stripe-size,
+         transparent $stripe-size,
+         transparent 2 * $stripe-size
+   );
+
+   text-align: center;
+   font-weight: bold;
+   color: #555;
+
+   span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+   }
+}
