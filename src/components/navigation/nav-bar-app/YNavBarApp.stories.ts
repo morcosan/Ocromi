@@ -5,7 +5,7 @@ import YLayout from '../../containers/layout/YLayout.vue';
 import YPage from '../../containers/page/YPage.vue';
 import { propsGroupId, settingsComputed, settingsProps } from '.storybook/custom/knob-props';
 import faker from 'faker';
-import { text } from '@storybook/addon-knobs';
+import { boolean } from '@storybook/addon-knobs';
 
 
 const vue = {
@@ -15,8 +15,8 @@ const vue = {
       YPage,
    },
    props: {
-      title: {
-         default: () => text('Title', 'Title example', propsGroupId),
+      isScrollable: {
+         default: () => boolean('Is Scrollable', false, propsGroupId),
       },
       ...settingsProps,
    },
@@ -28,9 +28,11 @@ const defaultTemplate = `
 <YLayout>
    <template v-slot:top>
       <YNavBarApp 
-         :title="title"
+         :is-scrollable="isScrollable"
          :settings="settings"
-      />
+      >
+         Title example
+      </YNavBarApp>
    </template>
    
    <template>

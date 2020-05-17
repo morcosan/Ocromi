@@ -1,26 +1,49 @@
 <script lang="ts">
-   import { Component, Prop } from '../../../core/decorators';
+   import { Component, Override, Prop } from '../../../core/decorators';
    import YBase from '../../YBase';
-   import { QToolbar, QToolbarTitle } from 'quasar';
+   import { QResizeObserver, QToolbar, QToolbarTitle } from 'quasar';
 
 
    @Component({
-      components: { QToolbar, QToolbarTitle },
+      components: { QToolbar, QToolbarTitle, QResizeObserver },
    })
    export default class YNavBarApp extends YBase {
 
-      @Prop({ default: '' }) public title!: string;
       @Prop({ default: false, type: Boolean }) public isScrollable!: boolean;
+
+
+      @Override
+      public mounted() {
+         this.correctWidth();
+      }
+
+
+      public onResize() {
+         this.correctWidth();
+      }
+
+
+      private correctWidth() {
+         this.$refs.innerBar.$el.style.width = `${ this.$refs.domOuterBar.offsetWidth }px`;
+      }
 
    }
 </script>
 
 
 <template>
-   <div class="y-nav-bar-app">
-      <QToolbar class="y-nav-bar-app__bar shadow-2">
-         <QToolbarTitle>{{ title }}</QToolbarTitle>
+   <div
+      :class="{ 'y-nav-bar-app': true, 'is-scrollable': isScrollable }"
+      ref="domOuterBar"
+   >
+      <QToolbar
+         :class="{ 'y-nav-bar-app__bar': true, 'shadow-2': !isScrollable }"
+         ref="innerBar"
+      >
+         <slot/>
       </QToolbar>
+
+      <QResizeObserver @resize="onResize"/>
    </div>
 </template>
 
@@ -39,6 +62,10 @@
 
          background-color: $primary;
          color: #fff;
+      }
+
+      &.is-scrollable .y-nav-bar-app__bar {
+         position: relative;
       }
    }
 </style>
