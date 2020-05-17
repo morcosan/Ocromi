@@ -17,7 +17,7 @@ const vue = {
    },
    props: {
       type: {
-         default: () => select('Type', LayoutType, LayoutType.Vertical, propsGroupId),
+         default: () => select('Type', LayoutType, LayoutType.ToBoLeRi, propsGroupId),
       },
       displayTop: {
          default: () => boolean('Display: Top', true, storyGroupId),
@@ -54,22 +54,23 @@ const basicFormTemplate = `
    </template>
    
    <template v-slot:left v-if="displayLeft">
-      <div class="story-block" style="width: 100px;">
+      <div class="story-block" style="width: 150px;">
          <span>LEFT</span>
       </div>
    </template>
    
    <template>
-      ${ faker.lorem.paragraphs(5, '<br>') }
+      ${ faker.lorem.paragraphs(2, '<br>') }
       <YFieldTextArea 
          v-model="value" 
          is-dynamic 
          is-optional
       />
+      ${ faker.lorem.paragraphs(2, '<br>') }
    </template>
 
    <template v-slot:right v-if="displayRight">
-      <div class="story-block" style="width: 100px;">
+      <div class="story-block" style="width: 150px;">
          <span>RIGHT</span>
       </div>
    </template>

@@ -7,7 +7,7 @@
    @Component
    export default class YLayout extends YBase {
 
-      @Prop({ default: LayoutType.Vertical }) public type!: LayoutType;
+      @Prop({ default: LayoutType.ToBoLeRi }) public type!: LayoutType;
 
 
       public get YLayoutType(): typeof LayoutType {
@@ -21,34 +21,135 @@
 <template>
    <div class="y-layout">
 
-      <div
-         v-if="type === YLayoutType.Vertical"
-         class="y-layout-content y-layout-content--vertical"
-      >
-         <slot name="top"/>
-         <div class="y-layout-content__middle">
-            <slot name="left"/>
-            <div class="y-layout-content__center">
-               <slot/>
+      <div v-if="type === YLayoutType.ToBoLeRi" class="y-layout-box y-layout-box--toboleri">
+         <div class="y-layout-box__content">
+
+            <div>
+               <slot name="top"/>
             </div>
-            <slot name="right"/>
+
+            <div class="y-layout-box__middle-huge">
+               <div class="y-layout-box__middle-big">
+                  <div class="y-layout-box__middle">
+                     <div>
+                        <slot name="left"/>
+                     </div>
+
+                     <div class="y-layout-box__center">
+                        <slot/>
+                     </div>
+
+                     <div>
+                        <slot name="right"/>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <div>
+               <slot name="bottom"/>
+            </div>
+
          </div>
-         <slot name="bottom"/>
       </div>
 
-      <div
-         v-if="type === YLayoutType.Horizontal"
-         class="y-layout-content y-layout-content--horizontal"
-      >
-         <slot name="left"/>
-         <div class="y-layout-content__middle">
-            <slot name="top"/>
-            <div class="y-layout-content__center">
-               <slot/>
+
+      <div v-if="type === YLayoutType.LeRiToBo" class="y-layout-box y-layout-box--leritobo">
+         <div class="y-layout-box__content">
+
+            <div>
+               <slot name="left"/>
             </div>
-            <slot name="bottom"/>
+
+            <div class="y-layout-box__middle-huge">
+               <div class="y-layout-box__middle-big">
+                  <div class="y-layout-box__middle">
+                     <div>
+                        <slot name="top"/>
+                     </div>
+
+                     <div class="y-layout-box__center">
+                        <slot/>
+                     </div>
+
+                     <div>
+                        <slot name="bottom"/>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <div>
+               <slot name="right"/>
+            </div>
+
          </div>
-         <slot name="right"/>
+      </div>
+
+
+      <div v-if="type === YLayoutType.ToLeRiBo" class="y-layout-box y-layout-box--toleribo">
+         <div class="y-layout-box__content">
+
+            <div>
+               <slot name="top"/>
+            </div>
+
+            <div class="y-layout-box__middle-huge">
+               <div class="y-layout-box__middle-big">
+                  <div>
+                     <slot name="left"/>
+                  </div>
+
+                  <div class="y-layout-box__middle">
+                     <div class="y-layout-box__center">
+                        <slot/>
+                     </div>
+
+                     <div>
+                        <slot name="bottom"/>
+                     </div>
+                  </div>
+
+                  <div>
+                     <slot name="right"/>
+                  </div>
+               </div>
+            </div>
+
+         </div>
+      </div>
+
+
+      <div v-if="type === YLayoutType.ToLeBoRI" class="y-layout-box y-layout-box--tolebori">
+         <div class="y-layout-box__content">
+
+            <div>
+               <slot name="top"/>
+            </div>
+
+            <div class="y-layout-box__middle-huge">
+               <div>
+                  <slot name="left"/>
+               </div>
+
+               <div class="y-layout-box__middle-big">
+                  <div class="y-layout-box__middle">
+                     <div class="y-layout-box__center">
+                        <slot/>
+                     </div>
+
+                     <div>
+                        <slot name="right"/>
+                     </div>
+                  </div>
+
+                  <div>
+                     <slot name="bottom"/>
+                  </div>
+               </div>
+            </div>
+
+         </div>
       </div>
 
    </div>
@@ -63,35 +164,95 @@
       overflow: hidden;
       background-color: $grey-1;
 
-      .y-layout-content {
+      .y-layout-box {
          width: 100%;
          height: 100%;
-         display: flex;
          box-sizing: border-box;
+         overflow-y: scroll;
+         overflow-x: hidden;
 
-         .y-layout-content__middle {
+         .y-layout-box__content {
+            width: 100%;
+            min-height: 100%;
             display: flex;
-            flex: 1;
+            flex-direction: column;
+            box-sizing: border-box;
+         }
 
-            .y-layout-content__center {
+         .y-layout-box__middle-huge {
+            flex: 1;
+            display: flex;
+
+            .y-layout-box__middle-big {
                flex: 1;
+               display: flex;
+
+               .y-layout-box__middle {
+                  flex: 1;
+                  display: flex;
+                  align-items: stretch;
+
+                  .y-layout-box__center {
+                     flex: 1;
+                  }
+               }
             }
          }
-      }
 
-      .y-layout-content--vertical {
-         flex-direction: column;
 
-         .y-layout-content__middle {
-            flex-direction: row;
+         &.y-layout-box--toboleri {
+            .y-layout-box__content {
+               flex-direction: column;
+
+               .y-layout-box__middle {
+                  flex-direction: row;
+               }
+            }
          }
-      }
 
-      .y-layout-content--horizontal {
-         flex-direction: row;
 
-         .y-layout-content__middle {
-            flex-direction: column;
+         &.y-layout-box--leritobo {
+            .y-layout-box__content {
+               flex-direction: row;
+
+               .y-layout-box__middle {
+                  flex-direction: column;
+               }
+            }
+         }
+
+
+         &.y-layout-box--toleribo {
+            .y-layout-box__content {
+               flex-direction: column;
+
+               .y-layout-box__middle-big {
+                  flex-direction: row;
+
+                  .y-layout-box__middle {
+                     flex-direction: column;
+                  }
+               }
+            }
+         }
+
+
+         &.y-layout-box--tolebori {
+            .y-layout-box__content {
+               flex-direction: column;
+
+               .y-layout-box__middle-huge {
+                  flex-direction: row;
+
+                  .y-layout-box__middle-big {
+                     flex-direction: column;
+
+                     .y-layout-box__middle {
+                        flex-direction: row;
+                     }
+                  }
+               }
+            }
          }
       }
    }

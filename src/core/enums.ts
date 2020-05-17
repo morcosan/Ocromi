@@ -68,6 +68,8 @@ export enum PageAlign {
 }
 
 export enum LayoutType {
-   Vertical = 'vertical',
-   Horizontal = 'horizontal',
+   ToBoLeRi = 'ToBoLeRi',
+   LeRiToBo = 'LeRiToBo',
+   ToLeRiBo = 'ToLeRiBo',
+   ToLeBoRI = 'ToLeBoRI',
 }
