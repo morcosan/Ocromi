@@ -7,7 +7,7 @@
    @Component({
       components: { QToolbar, QToolbarTitle, QResizeObserver },
    })
-   export default class YNavBarApp extends YBase {
+   export default class YNavBar extends YBase {
 
       @Prop({ default: false, type: Boolean }) public isScrollable!: boolean;
 
@@ -33,11 +33,11 @@
 
 <template>
    <div
-      :class="{ 'y-nav-bar-app': true, 'is-scrollable': isScrollable }"
+      :class="{ 'y-nav-bar': true, 'is-scrollable': isScrollable }"
       ref="domOuterBar"
    >
       <QToolbar
-         :class="{ 'y-nav-bar-app__bar': true, 'shadow-2': !isScrollable }"
+         :class="{ 'y-nav-bar__content': true, 'shadow-2': !isScrollable }"
          ref="innerBar"
       >
          <slot/>
@@ -51,11 +51,11 @@
 <style scoped lang="scss">
    $bar-height: 50px;
 
-   .y-nav-bar-app {
+   .y-nav-bar {
       width: 100%;
       height: $bar-height;
 
-      .y-nav-bar-app__bar {
+      .y-nav-bar__content {
          position: fixed;
          top: 0;
          left: 0;
@@ -64,7 +64,7 @@
          color: #fff;
       }
 
-      &.is-scrollable .y-nav-bar-app__bar {
+      &.is-scrollable .y-nav-bar__content {
          position: relative;
       }
    }

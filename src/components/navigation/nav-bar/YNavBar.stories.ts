@@ -1,6 +1,6 @@
 import StoryBuilder from '.storybook/custom/story-builder';
 import '.storybook/custom/story-builder.scss';
-import YNavBarApp from './YNavBarApp.vue';
+import YNavBar from './YNavBar.vue';
 import YLayout from '../../containers/layout/YLayout.vue';
 import YPage from '../../containers/page/YPage.vue';
 import { propsGroupId, settingsComputed, settingsProps } from '.storybook/custom/knob-props';
@@ -10,7 +10,7 @@ import { boolean } from '@storybook/addon-knobs';
 
 const vue = {
    components: {
-      YNavBarApp,
+      YNavBar,
       YLayout,
       YPage,
    },
@@ -27,12 +27,12 @@ const vue = {
 const defaultTemplate = `
 <YLayout>
    <template v-slot:top>
-      <YNavBarApp 
+      <YNavBar 
          :is-scrollable="isScrollable"
          :settings="settings"
       >
          Title example
-      </YNavBarApp>
+      </YNavBar>
    </template>
    
    <template>
