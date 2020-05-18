@@ -1,19 +1,19 @@
 .y-page__content {
-   width: $page-width-xs;
+   width: $y-page-width-xs;
 
    @media only screen and (min-width: $breakpoint-xs) {
-      width: $page-width-sm;
+      width: $y-page-width-sm;
    }
 
    @media only screen and (min-width: $breakpoint-sm) {
-      width: $page-width-md;
+      width: $y-page-width-md;
    }
 
    @media only screen and (min-width: $breakpoint-md) {
-      width: $page-width-lg;
+      width: $y-page-width-lg;
    }
 
    @media only screen and (min-width: $breakpoint-lg) {
-      width: $page-width-xl;
+      width: $y-page-width-xl;
    }
 }

@@ -253,26 +253,26 @@
       display: flex;
       flex-direction: column;
       text-align: center;
+   }
 
-      .y-field-number__down,
-      .y-field-number__up {
-         position: relative;
-         width: 24px;
-         height: 50%;
-         box-sizing: border-box;
-         outline: none;
-         overflow: hidden;
+   .y-field-number__down,
+   .y-field-number__up {
+      position: relative;
+      width: 24px;
+      height: 50%;
+      box-sizing: border-box;
+      outline: none;
+      overflow: hidden;
 
-         &.cursor-pointer:hover {
-            background-color: $grey-3;
-         }
+      &.cursor-pointer:hover {
+         background-color: $grey-3;
+      }
 
-         & > * {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-         }
+      & > * {
+         position: absolute;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
       }
    }
 

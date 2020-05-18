@@ -211,16 +211,16 @@
       display: flex;
       margin-top: -2px;
       align-items: flex-end;
+   }
 
-      .y-strength-meter__progress {
-         flex: 1;
-      }
+   .y-strength-meter__progress {
+      flex: 1;
+   }
 
-      .y-strength-meter__level {
-         padding-left: 10px;
-         text-align: right;
-         font-weight: bold;
-      }
+   .y-strength-meter__level {
+      padding-left: 10px;
+      text-align: right;
+      font-weight: bold;
    }
 
    .y-field-password.has-meter {

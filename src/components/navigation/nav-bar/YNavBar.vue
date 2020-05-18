@@ -1,11 +1,11 @@
 <script lang="ts">
    import { Component, Override, Prop } from '../../../core/decorators';
    import YBase from '../../YBase';
-   import { QResizeObserver, QToolbar, QToolbarTitle } from 'quasar';
+   import { QResizeObserver } from 'quasar';
 
 
    @Component({
-      components: { QToolbar, QToolbarTitle, QResizeObserver },
+      components: { QResizeObserver },
    })
    export default class YNavBar extends YBase {
 
@@ -24,7 +24,8 @@
 
 
       private correctWidth() {
-         this.$refs.innerBar.$el.style.width = `${ this.$refs.domOuterBar.offsetWidth }px`;
+         const width = (this.$refs.domOuterBar as HTMLElement).offsetWidth;
+         (this.$refs.domInnerBar as HTMLElement).style.width = `${ width }px`;
       }
 
    }
@@ -32,40 +33,60 @@
 
 
 <template>
-   <div
-      :class="{ 'y-nav-bar': true, 'is-scrollable': isScrollable }"
+   <nav
+      :class="{ 'y-nav-bar print-hide': true, 'is-scrollable': isScrollable }"
       ref="domOuterBar"
    >
-      <QToolbar
-         :class="{ 'y-nav-bar__content': true, 'shadow-2': !isScrollable }"
-         ref="innerBar"
+      <div
+         :class="{ 'y-nav-bar__container': true, 'shadow-2': !isScrollable }"
+         ref="domInnerBar"
       >
-         <slot/>
-      </QToolbar>
+         <div class="y-nav-bar__logo">
+            <slot name="logo"/>
+         </div>
+
+         <div class="y-nav-bar__title">
+            <slot name="title"/>
+         </div>
+      </div>
 
       <QResizeObserver @resize="onResize"/>
-   </div>
+   </nav>
 </template>
 
 
 <style scoped lang="scss">
-   $bar-height: 50px;
+   $bar-height: $y-nav-bar-content-height + 2 * $y-nav-bar-padding;
 
    .y-nav-bar {
       width: 100%;
       height: $bar-height;
+   }
 
-      .y-nav-bar__content {
-         position: fixed;
-         top: 0;
-         left: 0;
+   .y-nav-bar__container {
+      position: fixed;
+      top: 0;
+      left: 0;
 
-         background-color: $primary;
-         color: #fff;
-      }
+      box-sizing: border-box;
+      display: flex;
+      padding: $y-nav-bar-padding;
 
-      &.is-scrollable .y-nav-bar__content {
+      background-color: $primary;
+
+      line-height: $y-nav-bar-content-height;
+      color: #fff;
+
+      flex-direction: row;
+      align-items: center;
+
+      .y-nav-bar.is-scrollable & {
          position: relative;
       }
+   }
+
+   .y-nav-bar__logo {
+      width: $y-nav-bar-content-height;
+      height: $y-nav-bar-content-height;
    }
 </style>

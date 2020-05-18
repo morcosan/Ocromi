@@ -136,10 +136,6 @@
          padding-bottom: 18px;
       }
 
-      .y-base-input__control-box .y-base-input__bottom {
-         padding: 0 20px 0
-      }
-
       /deep/ a {
          color: initial;
          text-decoration: underline;
@@ -152,5 +148,9 @@
       &.is-readonly {
          pointer-events: none;
       }
+   }
+
+   .y-base-input__bottom {
+      padding: 0 20px 0
    }
 </style>
