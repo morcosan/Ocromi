@@ -74,10 +74,10 @@ module.exports = {
             'TWO_WAY_BINDING',
             'OTHER_DIRECTIVES',
             'OTHER_ATTR',
+            'GLOBAL',
             'EVENTS',
             'CONTENT',
             'UNIQUE',
-            'GLOBAL',
          ],
          'alphabetical': false,
       }],
@@ -120,6 +120,15 @@ module.exports = {
       }],
       'vue/multiline-html-element-content-newline': ['warn', {
          'allowEmptyLines': true,
+      }],
+      'vue/html-self-closing': ['error', {
+         'html': {
+            'void': 'never',
+            'normal': 'always',
+            'component': 'always',
+         },
+         'svg': 'always',
+         'math': 'always',
       }],
    },
    ignorePatterns: [

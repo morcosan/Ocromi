@@ -229,8 +229,6 @@
 
 
 <style scoped lang="scss">
-   // @import '../../../css/variables';
-
    // place the error icon before the date icon
    .y-field-date /deep/ .q-field .q-field__append.q-anchor--skip {
       position: absolute;

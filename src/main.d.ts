@@ -1,6 +1,11 @@
 import Vue, { VueConstructor } from 'vue';
 
 
+export const Ocromi: any;
+
+export * from './core/decorators';
+export * from './core/enums';
+
 // forms
 export interface YForm extends Vue {}
 export interface YCheckbox extends Vue {}
@@ -29,6 +34,9 @@ export interface YButtonIcon extends Vue {}
 export interface YButtonBack extends Vue {}
 export interface YButtonLink extends Vue {}
 export interface YToggleSwitch extends Vue {}
+// containers
+export interface YLayout extends Vue {}
+export interface YPage extends Vue {}
 
 
 // forms
@@ -59,7 +67,6 @@ export const YButtonIcon: VueConstructor<YButtonIcon>;
 export const YButtonBack: VueConstructor<YButtonBack>;
 export const YButtonLink: VueConstructor<YButtonLink>;
 export const YToggleSwitch: VueConstructor<YToggleSwitch>;
-
-
-export interface Ocromi {}
-export const Ocromi;
+// containers
+export const YLayout: VueConstructor<YLayout>;
+export const YPage: VueConstructor<YPage>;

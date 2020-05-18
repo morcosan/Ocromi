@@ -14,14 +14,4 @@ const i18n = new VueI18n({
    },
 });
 
-Vue.mixin({
-   computed: {
-      YLocale(): any {
-         // @ts-ignore
-         return this.$t('locale');
-      },
-   },
-});
-
-
 export default i18n;

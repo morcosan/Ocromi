@@ -1,0 +1,34 @@
+@import '../variables';
+
+@import 'overrides/native-html';
+
+@import 'overrides/quasar/q-btn';
+@import 'overrides/quasar/q-checkbox';
+@import 'overrides/quasar/q-date';
+@import 'overrides/quasar/q-field';
+@import 'overrides/quasar/q-file';
+@import 'overrides/quasar/q-radio';
+@import 'overrides/quasar/q-select';
+@import 'overrides/quasar/q-slider';
+@import 'overrides/quasar/q-tooltip';
+
+@import 'components/forms';
+@import 'components/containers';
+
+
+:root {
+   --q-color-primary: #{$primary};
+   --q-color-secondary: #{$secondary};
+   --q-color-accent: #{$accent};
+
+   --q-color-dark: #{$dark};
+
+   --q-color-positive: #{$positive};
+   --q-color-negative: #{$negative};
+   --q-color-info: #{$info};
+   --q-color-warning: #{$warning};
+}
+
+body {
+   background-color: $grey-3;
+}

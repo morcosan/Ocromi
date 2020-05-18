@@ -65,8 +65,8 @@
          :disable="isDisabledComputed"
          :color="(errorComputed ? 'negative' : undefined)"
          :keep-color="Boolean(errorComputed)"
-         :id="inputId"
          type="radio"
+         :id="inputId"
          @input="onInput"
          @keydown="onKeyDown"
          ref="inputRef"
@@ -76,8 +76,6 @@
 
 
 <style scoped lang="scss">
-   @import '../../../css/variables';
-
    .y-group-radio.is-disabled /deep/ .q-radio__inner {
       opacity: $opacity-disabled;
    }

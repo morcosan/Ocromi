@@ -1,5 +1,5 @@
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
-import { groupId, propsButtonLoading, settingsComputed } from '../../../../.storybook/custom/knob-props';
+import { propsGroupId, propsButtonLoading, settingsComputed } from '.storybook/custom/knob-props';
 import { boolean, select, text } from '@storybook/addon-knobs';
 import YButtonBuy from './YButtonBuy.vue';
 import { BuyIcon } from '../../../core/enums';
@@ -12,13 +12,13 @@ const vue = {
    props: {
       ...propsButtonLoading,
       label: {
-         default: () => text('Label', 'Add to cart', groupId),
+         default: () => text('Label', 'Add to cart', propsGroupId),
       },
       isLarge: {
-         default: () => boolean('Is Large', false, groupId),
+         default: () => boolean('Is Large', false, propsGroupId),
       },
       icon: {
-         default: () => select('Icon', BuyIcon, BuyIcon.Default, groupId),
+         default: () => select('Icon', BuyIcon, BuyIcon.Default, propsGroupId),
       },
    },
    computed: settingsComputed,

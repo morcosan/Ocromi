@@ -91,8 +91,8 @@
          :disable="isDisabledComputed"
          :label-always="isDirty || isReadonly"
          :drag-only-range="isFixed"
-         :id="inputId"
          drag-range
+         :id="inputId"
          @input="onInput"
          ref="inputRef"
       />
@@ -101,5 +101,5 @@
 
 
 <style scoped lang="scss">
-   //@import '../../../css/variables';
+   // no css yet
 </style>

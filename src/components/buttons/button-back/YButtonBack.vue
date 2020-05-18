@@ -15,6 +15,11 @@
       @Prop({ default: false, type: Boolean }) public isSmall!: boolean;
 
 
+      public get YBackIcon(): typeof BackIcon {
+         return BackIcon;
+      }
+
+
       public get classComputed() {
          return {
             'y-button-back': true,
@@ -45,8 +50,6 @@
 
 
 <style scoped lang="scss">
-   // @import '../../../css/variables';
-
    .y-button-back {
       /deep/ .q-icon {
          margin-right: 0;

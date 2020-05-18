@@ -1,6 +1,6 @@
 import YFieldTextArea from './YFieldTextArea.vue';
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
-import { groupId, propsInputField, settingsComputed } from '.storybook/custom/knob-props';
+import { propsGroupId, propsInputField, settingsComputed } from '.storybook/custom/knob-props';
 import { boolean } from '@storybook/addon-knobs';
 
 
@@ -11,7 +11,7 @@ const vue = {
    props: {
       ...propsInputField,
       isDynamic: {
-         default: () => boolean('Is Dynamic', false, groupId),
+         default: () => boolean('Is Dynamic', false, propsGroupId),
       },
    },
    data() {

@@ -195,8 +195,6 @@
 
 
 <style scoped lang="scss">
-   // @import '../../../css/variables';
-
    .y-field-link__anchor {
       display: flex;
       height: fit-content;

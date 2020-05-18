@@ -1,5 +1,5 @@
 import StoryBuilder, { StoryLine } from '.storybook/custom/story-builder';
-import { groupId, propsButtonLoading, settingsComputed } from '../../../../.storybook/custom/knob-props';
+import { propsGroupId, propsButtonLoading, settingsComputed } from '.storybook/custom/knob-props';
 import { text } from '@storybook/addon-knobs';
 import YButtonConfirm from './YButtonConfirm.vue';
 
@@ -11,7 +11,7 @@ const vue = {
    props: {
       ...propsButtonLoading,
       label: {
-         default: () => text('Label', 'Confirm', groupId),
+         default: () => text('Label', 'Confirm', propsGroupId),
       },
    },
    computed: settingsComputed,

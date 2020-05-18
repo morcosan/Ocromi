@@ -61,8 +61,6 @@
 
 
 <style scoped lang="scss">
-   // @import '../../../css/variables';
-
    .y-base-input /deep/ .q-field__bottom {
       display: none;
    }

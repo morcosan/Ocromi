@@ -1,5 +1,5 @@
 import StoryBuilder from '.storybook/custom/story-builder';
-import { groupId, propsButton, settingsComputed } from '.storybook/custom/knob-props';
+import { propsGroupId, propsButton, settingsComputed } from '.storybook/custom/knob-props';
 import { text } from '@storybook/addon-knobs';
 import YButtonReset from './YButtonReset.vue';
 import YButtonSubmit from './../button-submit/YButtonSubmit.vue';
@@ -19,7 +19,7 @@ const vue = {
    props: {
       ...propsButton,
       label: {
-         default: () => text('Label', 'Reset', groupId),
+         default: () => text('Label', 'Reset', propsGroupId),
       },
    },
    data() {
@@ -47,7 +47,7 @@ const vue = {
 };
 
 
-const basicFormTemplate = `
+const defaultTemplate = `
 <YForm 
    class="story-form-panel"
    :settings="settings"
@@ -68,8 +68,8 @@ const basicFormTemplate = `
       I agree with terms of service
    </YCheckbox>
    
-   <br/>
-   <br/>
+   <br>
+   <br>
    
    <YButtonSubmit label="Submit"/>
    <YButtonReset
@@ -82,7 +82,7 @@ const basicFormTemplate = `
 
 
 export default StoryBuilder.createDefault('Buttons / Button Reset');
-export const default_ = StoryBuilder.createBasicStory(vue, basicFormTemplate);
+export const default_ = StoryBuilder.createBasicStory(vue, defaultTemplate);
 export const docs = StoryBuilder.createDocs(`
 /**
  * Used when user needs to take clear the form.

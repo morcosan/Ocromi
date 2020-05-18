@@ -250,8 +250,6 @@
 
 
 <style scoped lang="scss">
-   @import '../../../css/variables';
-
    // change color of close button on hover
    .y-chip__button.cursor-pointer:hover {
       background-color: $grey-5;

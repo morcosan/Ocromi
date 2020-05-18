@@ -64,8 +64,8 @@
          :disable="isDisabledComputed"
          :color="(errorComputed ? 'negative' : undefined)"
          :keep-color="Boolean(errorComputed)"
-         :id="inputId"
          type="checkbox"
+         :id="inputId"
          @input="onInput"
          @keydown="onKeyDown"
          ref="inputRef"
@@ -75,8 +75,6 @@
 
 
 <style scoped lang="scss">
-   @import '../../../css/variables';
-
    .y-group-checkbox.is-disabled /deep/ .q-checkbox__inner {
       opacity: $opacity-disabled;
    }

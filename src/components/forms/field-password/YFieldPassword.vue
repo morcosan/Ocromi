@@ -207,8 +207,6 @@
 
 
 <style scoped lang="scss">
-   //@import '../../../css/variables';
-
    .y-strength-meter {
       display: flex;
       margin-top: -2px;

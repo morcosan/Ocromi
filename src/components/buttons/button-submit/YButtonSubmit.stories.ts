@@ -1,5 +1,5 @@
 import StoryBuilder from '.storybook/custom/story-builder';
-import { groupId, propsButtonLoading, settingsComputed } from '.storybook/custom/knob-props';
+import { propsGroupId, propsButtonLoading, settingsComputed } from '.storybook/custom/knob-props';
 import { boolean, text } from '@storybook/addon-knobs';
 import YButtonSubmit from './YButtonSubmit.vue';
 import YForm from '../../forms/form/YForm.vue';
@@ -17,10 +17,10 @@ const vue = {
    props: {
       ...propsButtonLoading,
       label: {
-         default: () => text('Label', 'Submit', groupId),
+         default: () => text('Label', 'Submit', propsGroupId),
       },
       willBeEnabled: {
-         default: () => boolean('Will Be Enabled', false, groupId),
+         default: () => boolean('Will Be Enabled', false, propsGroupId),
       },
    },
    data() {
@@ -48,7 +48,7 @@ const vue = {
 };
 
 
-const basicFormTemplate = `
+const defaultTemplate = `
 <YForm 
    class="story-form-panel"
    @submit="onSubmit"
@@ -74,8 +74,8 @@ const basicFormTemplate = `
       I agree with terms of service
    </YCheckbox>
    
-   <br/>
-   <br/>
+   <br>
+   <br>
    
    <YButtonSubmit
       :label="label"
@@ -90,7 +90,7 @@ const basicFormTemplate = `
 
 
 export default StoryBuilder.createDefault('Buttons / Button Submit');
-export const default_ = StoryBuilder.createBasicStory(vue, basicFormTemplate);
+export const default_ = StoryBuilder.createBasicStory(vue, defaultTemplate);
 export const docs = StoryBuilder.createDocs(`
 /**
  * Used when user needs to take the submit action for certain data.

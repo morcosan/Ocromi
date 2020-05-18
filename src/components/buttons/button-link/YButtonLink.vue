@@ -35,8 +35,6 @@
 
 
 <style scoped lang="scss">
-   // @import '../../../css/variables';
-
    // make it fit with text
    .y-button-link.q-btn--flat /deep/ .q-btn__wrapper {
       padding: 4px 8px;

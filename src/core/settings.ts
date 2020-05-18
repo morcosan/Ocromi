@@ -13,7 +13,7 @@ export type Settings = {
    },
 };
 
-const defaultSettings = {
+export const defaultSettings = {
    theme: Theme.Light,
    design: Design.Material,
    button: {
@@ -26,11 +26,7 @@ const defaultSettings = {
 
 
 export function install(Vue: any, settings: Settings = {}) {
-   Vue.mixin({
-      computed: {
-         YSettings(): Settings {
-            return Utils.mergeObjects(defaultSettings, settings);
-         },
-      },
-   });
+   settings.theme && (defaultSettings.theme = settings.theme);
+   settings.design && (defaultSettings.design = settings.design);
+   settings.button && (defaultSettings.button = Utils.mergeObjects(defaultSettings.button, settings.button));
 }

@@ -5,8 +5,8 @@ $colorGrey: #bbb;
 
 html {
    height: 100vh;
-   background-color: #eee;
 }
+
 
 .story-display {
    min-height: 100vh;
@@ -60,5 +60,40 @@ html {
 
    &:hover {
       background: #bbb;
+   }
+}
+
+
+$margin: 1px;
+$stripe-size: 5px;
+$stripe-color: rgba(255, 255, 255, 0.6);
+
+.story-block {
+   position: relative;
+
+   width: calc(100% - #{2 * $margin});
+   height: calc(100% - #{2 * $margin});
+   box-sizing: border-box;
+   border: 2px solid #555;
+   margin: $margin;
+
+   border-radius: 10px;
+   background: repeating-linear-gradient(
+         -45deg,
+         $stripe-color,
+         $stripe-color $stripe-size,
+         transparent $stripe-size,
+         transparent 2 * $stripe-size
+   );
+
+   text-align: center;
+   font-weight: bold;
+   color: #555;
+
+   span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
    }
 }

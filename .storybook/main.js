@@ -25,7 +25,12 @@ module.exports = {
                   plugins: () => [require('autoprefixer')],
                },
             },
-            'sass-loader',
+            {
+               loader: 'sass-loader',
+               options: {
+                  prependData: '@import "~src/css/variables";',
+               },
+            },
          ],
          include: path.resolve(__dirname, '../'),
       });
