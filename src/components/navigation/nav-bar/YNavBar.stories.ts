@@ -3,7 +3,7 @@ import '.storybook/custom/story-builder.scss';
 import YNavBar from './YNavBar.vue';
 import YLayout from '../../containers/layout/YLayout.vue';
 import YPage from '../../containers/page/YPage.vue';
-import { propsGroupId, storyGroupId, settingsComputed, settingsProps } from '.storybook/custom/knob-props';
+import { propsGroupId, settingsComputed, settingsProps, storyGroupId } from '.storybook/custom/knob-props';
 import faker from 'faker';
 import { boolean } from '@storybook/addon-knobs';
 
@@ -26,7 +26,12 @@ const vue = {
       },
       ...settingsProps,
    },
-   computed: settingsComputed,
+   computed: {
+      ...settingsComputed,
+      logoURL() {
+         return require('../../../assets/node-js.svg');
+      },
+   },
 };
 
 
@@ -38,12 +43,7 @@ const defaultTemplate = `
          :settings="settings"
       >
          <template v-slot:logo v-if="hasLogo">
-            <img 
-               src="https://unfoldedinquiry.files.wordpress.com/2019/07/wp-header.png?w=656&h=210" 
-               width="100%"
-               height="100%"
-               alt=""
-            >
+            <img :src="logoURL" alt="" style="height: 1.6rem;">
          </template>
          
          <template v-slot:title v-if="hasTitle">

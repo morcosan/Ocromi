@@ -41,9 +41,9 @@
          :class="{ 'y-nav-bar__container': true, 'shadow-2': !isScrollable }"
          ref="domInnerBar"
       >
-         <div class="y-nav-bar__logo">
+         <a class="y-nav-bar__logo" href="/">
             <slot name="logo"/>
-         </div>
+         </a>
 
          <div class="y-nav-bar__title">
             <slot name="title"/>
@@ -56,7 +56,7 @@
 
 
 <style scoped lang="scss">
-   $bar-height: $y-nav-bar-content-height + 2 * $y-nav-bar-padding;
+   $bar-height: calc(#{$y-nav-bar-content-height} + 2 * #{$y-nav-bar-padding});
 
    .y-nav-bar {
       width: 100%;
@@ -68,13 +68,13 @@
       top: 0;
       left: 0;
 
+      height: $bar-height;
       box-sizing: border-box;
       display: flex;
-      padding: $y-nav-bar-padding;
+      padding: $y-nav-bar-padding 0;
 
-      background-color: $primary;
+      background-color: $y-nav-bar-color;
 
-      line-height: $y-nav-bar-content-height;
       color: #fff;
 
       flex-direction: row;
@@ -86,7 +86,13 @@
    }
 
    .y-nav-bar__logo {
-      width: $y-nav-bar-content-height;
-      height: $y-nav-bar-content-height;
+      display: block;
+      padding-left: $y-nav-bar-padding;
+      text-decoration: none;
+   }
+
+   .y-nav-bar__title {
+      padding-left: $y-nav-bar-padding;
+      font-size: 1.3rem;
    }
 </style>

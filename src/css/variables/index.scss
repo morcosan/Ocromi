@@ -1,7 +1,4 @@
 @import 'colors';
-@import 'mixins/quasar-classes';
-@import 'components/y-page';
-@import 'components/y-nav-bar';
 
 
 $primary: $blue-8 !default;
@@ -23,4 +20,7 @@ $breakpoint-lg: 1920px !default;
 $opacity-disabled: 0.6 !default;
 
 
+@import 'mixins/quasar-classes';
+@import 'components/y-page';
+@import 'components/y-nav-bar';
 @import '~quasar/src/css/variables';
