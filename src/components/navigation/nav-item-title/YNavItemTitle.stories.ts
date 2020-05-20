@@ -1,6 +1,6 @@
 import StoryBuilder from '.storybook/custom/story-builder';
 import '.storybook/custom/story-builder.scss';
-import YNavItemLogo from './YNavItemLogo.vue';
+import YNavItemTitle from './YNavItemTitle.vue';
 import YNavBar from '../../navigation/nav-bar/YNavBar.vue';
 import { propsGroupId, settingsComputed, settingsProps } from '.storybook/custom/knob-props';
 import { text } from '@storybook/addon-knobs';
@@ -8,12 +8,12 @@ import { text } from '@storybook/addon-knobs';
 
 const vue = {
    components: {
-      YNavItemLogo,
+      YNavItemTitle,
       YNavBar,
    },
    props: {
-      imageUrl: {
-         default: () => text('Image URL', '/node-js.svg', propsGroupId),
+      value: {
+         default: () => text('Value', 'Title Example', propsGroupId),
       },
       ...settingsProps,
    },
@@ -25,18 +25,18 @@ const vue = {
 
 const defaultTemplate = `
 <YNavBar>
-   <YNavItemLogo 
-      :image-url="imageUrl"
+   <YNavItemTitle 
+      :value="value"
       :settings="settings"
    />
 </YNavBar>
 `;
 
 
-export default StoryBuilder.createDefault('Navigation / Nav Item Logo');
+export default StoryBuilder.createDefault('Navigation / Nav Item Title');
 export const default_ = StoryBuilder.createBasicStory(vue, defaultTemplate);
 export const docs = StoryBuilder.createDocs(`
 /**
- * Used to display product logo in nav bar.
+ * Used to display page title in nav bar.
  */
 `);

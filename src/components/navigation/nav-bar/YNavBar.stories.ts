@@ -3,9 +3,12 @@ import '.storybook/custom/story-builder.scss';
 import YNavBar from './YNavBar.vue';
 import YLayout from '../../containers/layout/YLayout.vue';
 import YPage from '../../containers/page/YPage.vue';
+import YNavItemLogo from '../nav-item-logo/YNavItemLogo.vue';
+import YNavItemTitle from '../nav-item-title/YNavItemTitle.vue';
 import { propsGroupId, settingsComputed, settingsProps, storyGroupId } from '.storybook/custom/knob-props';
 import faker from 'faker';
-import { boolean } from '@storybook/addon-knobs';
+import { boolean, select } from '@storybook/addon-knobs';
+import { PageSnapAlign, PageAlign } from '../../../core/enums';
 
 
 const vue = {
@@ -13,10 +16,18 @@ const vue = {
       YNavBar,
       YLayout,
       YPage,
+      YNavItemLogo,
+      YNavItemTitle,
    },
    props: {
       isScrollable: {
          default: () => boolean('Is Scrollable', false, propsGroupId),
+      },
+      pageSnapAlign: {
+         default: () => select('Page Snap Align', PageSnapAlign, PageSnapAlign.Center, propsGroupId),
+      },
+      pageAlign: {
+         default: () => select('Page Align', PageAlign, PageAlign.Center, storyGroupId),
       },
       hasLogo: {
          default: () => boolean('Has Logo', true, storyGroupId),
@@ -37,14 +48,23 @@ const defaultTemplate = `
    <template v-slot:top>
       <YNavBar 
          :is-scrollable="isScrollable"
+         :page-snap-align="pageSnapAlign"
          :settings="settings"
       >
-      
+         <template v-slot:left>
+            <YNavItemLogo v-if="hasLogo" image-url="/node-js.svg" style="height: 1.4rem;"/>
+         </template>
+         
+         <YNavItemTitle v-if="hasTitle" value="Title Example"/>
+         
+         <template v-slot:right>
+            <YNavItemLogo image-url="/node-js.svg" style="height: 1.4rem;"/>
+         </template>
       </YNavBar>
    </template>
    
    <template>
-      <YPage>
+      <YPage :align="pageAlign">
          ${ faker.lorem.paragraphs(20, '<br>') }
       </YPage>
    </template>

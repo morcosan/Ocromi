@@ -2,6 +2,7 @@
    import { Component, Override, Prop } from '../../../core/decorators';
    import YBase from '../../YBase';
    import { QResizeObserver } from 'quasar';
+   import { PageSnapAlign } from '../../../core/enums';
 
 
    @Component({
@@ -10,6 +11,12 @@
    export default class YNavBar extends YBase {
 
       @Prop({ default: false, type: Boolean }) public isScrollable!: boolean;
+      @Prop({ default: PageSnapAlign.None }) public pageSnapAlign!: PageSnapAlign;
+
+
+      public get YPageSnapAlign(): typeof PageSnapAlign {
+         return PageSnapAlign;
+      }
 
 
       @Override
@@ -38,21 +45,27 @@
       ref="domOuterBar"
    >
       <div
-         :class="{ 'y-nav-bar__container': true, 'shadow-2': !isScrollable }"
+         :class="{ ['y-nav-bar__container has-page-snap-align-' + pageSnapAlign]: true, 'shadow-2': !isScrollable }"
          ref="domInnerBar"
       >
-         <slot/>
-
-         <div class="y-nav-bar__page-sync">
-            <slot name="page-sync"/>
+         <div v-if="pageSnapAlign !== YPageSnapAlign.Left" class="y-nav-bar__content-left">
+            <slot name="left"/>
          </div>
 
-         <a class="y-nav-bar__logo" href="/">
-            <slot name="logo"/>
-         </a>
+         <div class="y-nav-bar__content-middle">
+            <div v-if="pageSnapAlign === YPageSnapAlign.Left" class="y-nav-bar__content-left">
+               <slot name="left"/>
+            </div>
 
-         <div class="y-nav-bar__title">
-            <slot name="title"/>
+            <slot/>
+
+            <div v-if="pageSnapAlign === YPageSnapAlign.Right" class="y-nav-bar__content-right">
+               <slot name="right"/>
+            </div>
+         </div>
+
+         <div v-if="pageSnapAlign !== YPageSnapAlign.Right" class="y-nav-bar__content-right">
+            <slot name="right"/>
          </div>
       </div>
 
@@ -77,22 +90,54 @@
       height: $bar-height;
       box-sizing: border-box;
       display: flex;
-      padding: $y-nav-bar-padding 0;
+      padding: $y-nav-bar-padding;
 
       background-color: $y-nav-bar-color;
 
       color: #fff;
 
       flex-direction: row;
-      align-items: center;
 
       .y-nav-bar.is-scrollable & {
          position: relative;
       }
+
+      &.has-page-snap-align-center {
+         .y-nav-bar__content-middle {
+            padding: 0 $y-page-padding;
+         }
+
+         .y-nav-bar__content-left,
+         .y-nav-bar__content-right {
+            flex: 1;
+         }
+      }
+
+      &.has-page-snap-align-right {
+         .y-nav-bar__content-left {
+            flex: 1;
+         }
+      }
    }
 
-   .y-nav-bar__title {
-      padding-left: $y-nav-bar-padding;
-      font-size: 1.3rem;
+   .y-nav-bar__content-left,
+   .y-nav-bar__content-middle,
+   .y-nav-bar__content-right {
+      display: flex;
+      box-sizing: border-box;
+      align-items: center;
+   }
+
+   .y-nav-bar__content-left > * {
+      padding-right: $y-nav-bar-padding;
+   }
+
+   .y-nav-bar__content-right {
+      flex: 1;
+      justify-content: flex-end;
+
+      & > * {
+         padding-left: $y-nav-bar-padding;
+      }
    }
 </style>

@@ -1,0 +1,19 @@
+.y-nav-bar__container:not(.has-page-snap-align-none) .y-nav-bar__content-middle {
+   width: $y-page-width-xs;
+
+   @media only screen and (min-width: $breakpoint-xs) {
+      width: $y-page-width-sm;
+   }
+
+   @media only screen and (min-width: $breakpoint-sm) {
+      width: $y-page-width-md;
+   }
+
+   @media only screen and (min-width: $breakpoint-md) {
+      width: $y-page-width-lg;
+   }
+
+   @media only screen and (min-width: $breakpoint-lg) {
+      width: $y-page-width-xl;
+   }
+}

@@ -21,8 +21,8 @@
 
 <style scoped lang="scss">
    .y-nav-item-logo {
-      display: block;
-      padding-left: $y-nav-bar-padding;
+      display: inline-block;
+      height: 100%;
       text-decoration: none;
    }
 

@@ -67,6 +67,13 @@ export enum PageAlign {
    Right = 'right'
 }
 
+export enum PageSnapAlign {
+   None = 'none',
+   Center = 'center',
+   Left = 'left',
+   Right = 'right'
+}
+
 export enum LayoutType {
    ToBoLeRi = 'ToBoLeRi',
    LeRiToBo = 'LeRiToBo',

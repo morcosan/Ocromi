@@ -33,7 +33,7 @@
       max-width: 100%;
       min-height: 100%;
       box-sizing: border-box;
-      padding: 16px;
+      padding: $y-page-padding;
       background-color: $y-page-background;
 
       &.has-align-center {
