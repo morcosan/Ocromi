@@ -46,6 +46,8 @@ import YLayout from './components/containers/layout/YLayout.vue';
 import YPage from './components/containers/page/YPage.vue';
 // navigation
 import YNavBar from './components/navigation/nav-bar/YNavBar.vue';
+import YNavItemLogo from './components/navigation/nav-item-logo/YNavItemLogo.vue';
+import YNavItemTitle from './components/navigation/nav-item-title/YNavItemTitle.vue';
 // css
 import '@quasar/extras/roboto-font/roboto-font.css';
 import '@quasar/extras/material-icons/material-icons.css';
@@ -126,6 +128,8 @@ export {
 
    // navigation
    YNavBar,
+   YNavItemLogo,
+   YNavItemTitle,
 };
 
 
