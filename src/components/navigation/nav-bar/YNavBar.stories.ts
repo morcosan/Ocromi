@@ -28,9 +28,6 @@ const vue = {
    },
    computed: {
       ...settingsComputed,
-      logoURL() {
-         return require('../../../assets/node-js.svg');
-      },
    },
 };
 
@@ -42,13 +39,7 @@ const defaultTemplate = `
          :is-scrollable="isScrollable"
          :settings="settings"
       >
-         <template v-slot:logo v-if="hasLogo">
-            <img :src="logoURL" alt="" style="height: 1.6rem;">
-         </template>
-         
-         <template v-slot:title v-if="hasTitle">
-            Title example
-         </template>
+      
       </YNavBar>
    </template>
    

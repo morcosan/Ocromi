@@ -12,6 +12,8 @@
 @import 'overrides/quasar/q-slider';
 @import 'overrides/quasar/q-tooltip';
 
+@import 'breakpoints';
+
 @import 'components/forms';
 @import 'components/containers';
 
@@ -32,3 +34,5 @@
 body {
    background-color: $grey-3;
 }
+
+

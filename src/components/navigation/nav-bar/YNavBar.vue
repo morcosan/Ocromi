@@ -41,6 +41,12 @@
          :class="{ 'y-nav-bar__container': true, 'shadow-2': !isScrollable }"
          ref="domInnerBar"
       >
+         <slot/>
+
+         <div class="y-nav-bar__page-sync">
+            <slot name="page-sync"/>
+         </div>
+
          <a class="y-nav-bar__logo" href="/">
             <slot name="logo"/>
          </a>
@@ -83,12 +89,6 @@
       .y-nav-bar.is-scrollable & {
          position: relative;
       }
-   }
-
-   .y-nav-bar__logo {
-      display: block;
-      padding-left: $y-nav-bar-padding;
-      text-decoration: none;
    }
 
    .y-nav-bar__title {
